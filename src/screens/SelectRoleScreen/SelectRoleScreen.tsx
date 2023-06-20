@@ -1,50 +1,52 @@
-import React from "react";
-import { Pressable, SafeAreaView, TouchableOpacity } from "react-native";
-import { Container, Text } from "~components";
+import { useNavigation } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { Container, Pressable, Text } from "~components";
+import { UserTypesEnum } from "~enums";
+import { AuthenticationNavigationProp } from "~navigation";
+import { setUserType, useAppDispatch } from "~store";
 
 const SelectRoleScreen = () => {
+  const navigation =
+    useNavigation<AuthenticationNavigationProp<"SelectRoleScreen">>();
+  const dispatch = useAppDispatch();
+
+  const onUserSelectPress = useCallback((userType: UserTypesEnum) => {
+    dispatch(setUserType(userType));
+    navigation.navigate("SignInScreen", { mode: userType });
+  }, []);
+
   return (
-    <SafeAreaView
-      style={{
-        justifyContent: "space-between",
-        flex: 1,
-        // backgroundColor: "#000",
-      }}
+    <Container
+      flex={1}
+      backgroundColor={"white"}
+      paddingHorizontal={20}
+      justifyContent={"space-between"}
     >
-      <Container paddingHorizontal={"x"}>
-        <Text color={"gray"}>Hello There</Text>
+      <Container marginTop={35}>
+        <Text color={"black"} variant={"h1"} textAlign={"left"}>
+          Who would you like to continue as?
+        </Text>
       </Container>
-      <Container paddingHorizontal={"x"} marginBottom={"l"}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#11145A",
-            alignItems: "center",
-            justifyContent: "center",
-            height: 60,
-            borderRadius: 15,
-            marginBottom: 20,
-          }}
+      <Container marginBottom={15}>
+        <Pressable
+          marginBottom={15}
+          variant={"defaultBlue"}
+          onPress={() => onUserSelectPress(UserTypesEnum.Client)}
         >
           <Text style={{ fontWeight: "bold", fontSize: 20, color: "#fff" }}>
-            Client
+            I'm client
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            borderWidth: 4,
-            height: 60,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 15,
-            borderColor: "#11145A",
-          }}
+        </Pressable>
+        <Pressable
+          variant={"defaultBordered"}
+          onPress={() => onUserSelectPress(UserTypesEnum.Barber)}
         >
           <Text style={{ color: "#11145A", fontWeight: "bold", fontSize: 20 }}>
-            Barber
+            I'm barber
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </Container>
-    </SafeAreaView>
+    </Container>
   );
 };
 
