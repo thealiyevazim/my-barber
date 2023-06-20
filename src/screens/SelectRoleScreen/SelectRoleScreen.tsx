@@ -23,7 +23,7 @@ const SelectRoleScreen = () => {
       justifyContent={"space-between"}
     >
       <Container marginTop={35}>
-        <Text color={"black"} variant={"h1"} textAlign={"left"}>
+        <Text color={"white"} variant={"h1"} textAlign={"left"}>
           Who would you like to continue as?
         </Text>
       </Container>
