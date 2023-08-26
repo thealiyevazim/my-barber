@@ -1,9 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
+import { Dimensions } from "react-native";
 import { Container, Pressable, Text } from "~components";
 import { UserTypesEnum } from "~enums";
 import { AuthenticationNavigationProp } from "~navigation";
 import { setUserType, useAppDispatch } from "~store";
+
+const windowHalf = Dimensions.get("window").height / 2;
 
 const SelectRoleScreen = () => {
   const navigation =
@@ -18,31 +21,29 @@ const SelectRoleScreen = () => {
   return (
     <Container
       flex={1}
-      backgroundColor={"white"}
-      paddingHorizontal={20}
-      justifyContent={"space-between"}
+      paddingHorizontal={15}
+      paddingVertical={25}
+      justifyContent={"flex-end"}
     >
-      <Container marginTop={35}>
-        <Text color={"white"} variant={"h1"} textAlign={"left"}>
-          Who would you like to continue as?
+      <Container height={windowHalf}>
+        <Text bold variant={"h1"}>
+          Hush kelibsiz!
         </Text>
-      </Container>
-      <Container marginBottom={15}>
-        <Pressable
-          marginBottom={15}
-          variant={"defaultBlue"}
-          onPress={() => onUserSelectPress(UserTypesEnum.Client)}
-        >
-          <Text style={{ fontWeight: "bold", fontSize: 20, color: "#fff" }}>
-            I'm client
+        <Text variant={"h4"} color={"gray"}>
+          Kim bo’lib davom etishingizni belgilang.
+        </Text>
+        <Pressable onPress={() => undefined} variant={"defaultWhite"}>
+          <Text color={"defaultBlue"} bold variant={"h2"}>
+            Mijoz
           </Text>
         </Pressable>
         <Pressable
-          variant={"defaultBordered"}
-          onPress={() => onUserSelectPress(UserTypesEnum.Barber)}
+          onPress={() => undefined}
+          variant={"defaultBlue"}
+          marginTop={25}
         >
-          <Text style={{ color: "#11145A", fontWeight: "bold", fontSize: 20 }}>
-            I'm barber
+          <Text bold variant={"h2"}>
+            Barber
           </Text>
         </Pressable>
       </Container>

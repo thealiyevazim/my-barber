@@ -4,7 +4,6 @@ const palette = {
   white: "#fff",
   black: "#000",
   gray: "#808080",
-  pressableColor: "#EB7640",
   defaultBlue: "#11145A",
   defaultGreen: "#f9f7be",
 };
@@ -22,11 +21,8 @@ const Spacing = {
   35: 35,
 };
 
-const MediumTextVariant = {
-  color: "black",
-};
 const RegularTextVariant = {
-  color: "black",
+  color: "white",
 };
 
 const BastInputVariant = {
@@ -36,18 +32,20 @@ const BastInputVariant = {
 };
 
 const BaseButtonVariant = {
-  backgroundColor: "pressableColor",
-  borderRadius: Spacing[15],
-  paddingVertical: Spacing[15],
-  paddingHorizontal: Spacing[15],
-};
-
-const BasicPressableVariant = {
-  backgroundColor: "transparent",
+  backgroundColor: "white",
+  borderRadius: 15,
+  height: 60,
 };
 
 const DefaultBlueButton = {
   backgroundColor: "defaultBlue",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: 15,
+  height: 60,
+};
+const DefaultWhiteButton = {
+  backgroundColor: "white",
   alignItems: "center",
   justifyContent: "center",
   borderRadius: 15,
@@ -81,13 +79,19 @@ const theme = createTheme({
     defaults: {
       ...BaseButtonVariant,
     },
-    basicPressable: {
-      ...BasicPressableVariant,
-    },
+
     none: {},
+
     defaultBlue: {
       ...DefaultBlueButton,
+      borderWidth: 3,
+      borderColor: "white",
     },
+
+    defaultWhite: {
+      ...DefaultWhiteButton,
+    },
+
     defaultBordered: {
       ...DefaultBorderedButton,
     },

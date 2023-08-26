@@ -2,19 +2,20 @@ import React from "react";
 import { createText } from "@shopify/restyle";
 import { ComponentProps } from "react";
 import { Theme } from "~utils";
+import { FONT_TYPES } from "~assets/fonts/types";
 
 const ThemeText = createText<Theme>();
 
 type Props = ComponentProps<typeof ThemeText> & {
-  medium?: boolean;
+  bold?: boolean;
   regular?: boolean;
 };
 
-const Text = ({ children, medium, regular, ...props }: Props) => {
+const Text = ({ children, bold, regular, ...props }: Props) => {
   const themeTextProps: ComponentProps<typeof ThemeText> = {
     ...props,
-    // ...(medium ? { fontFamily: FONT_TYPES.MEDIUM } : {}),
-    // ...(regular ? { fontFamily: FONT_TYPES.REGULAR } : {}),
+    ...(bold ? { fontFamily: FONT_TYPES.BOLD } : {}),
+    ...(regular ? { fontFamily: FONT_TYPES.REGULAR } : {}),
   };
   return <ThemeText {...themeTextProps}>{children}</ThemeText>;
 };
