@@ -8,7 +8,7 @@ const SignInScreen = () => {
     <Container
       flex={1}
       alignItems={"center"}
-      backgroundColor={"white"}
+      backgroundColor={"black"}
       justifyContent={"center"}
     >
       <Text>Please register as {userType.toUpperCase()}</Text>

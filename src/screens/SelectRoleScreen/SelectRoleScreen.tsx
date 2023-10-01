@@ -5,12 +5,12 @@ import { Container, Pressable, Text } from "~components";
 import { UserTypesEnum } from "~enums";
 import { AuthenticationNavigationProp } from "~navigation";
 import { setUserType, useAppDispatch } from "~store";
-
-const windowHalf = Dimensions.get("window").height / 2;
+import { SelectRoleTemplate } from "~templates";
 
 const SelectRoleScreen = () => {
   const navigation =
     useNavigation<AuthenticationNavigationProp<"SelectRoleScreen">>();
+
   const dispatch = useAppDispatch();
 
   const onUserSelectPress = useCallback((userType: UserTypesEnum) => {
@@ -19,35 +19,10 @@ const SelectRoleScreen = () => {
   }, []);
 
   return (
-    <Container
-      flex={1}
-      paddingHorizontal={15}
-      paddingVertical={25}
-      justifyContent={"flex-end"}
-    >
-      <Container height={windowHalf}>
-        <Text bold variant={"h1"}>
-          Hush kelibsiz!
-        </Text>
-        <Text variant={"h4"} color={"gray"}>
-          Kim bo’lib davom etishingizni belgilang.
-        </Text>
-        <Pressable onPress={() => undefined} variant={"defaultWhite"}>
-          <Text color={"defaultBlue"} bold variant={"h2"}>
-            Mijoz
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => undefined}
-          variant={"defaultBlue"}
-          marginTop={25}
-        >
-          <Text bold variant={"h2"}>
-            Barber
-          </Text>
-        </Pressable>
-      </Container>
-    </Container>
+    <SelectRoleTemplate
+      onBarberPress={() => onUserSelectPress(UserTypesEnum.Barber)}
+      onClientPress={() => onUserSelectPress(UserTypesEnum.Client)}
+    />
   );
 };
 
