@@ -1,50 +1,28 @@
-import React from "react";
-import { Pressable, SafeAreaView, TouchableOpacity } from "react-native";
-import { Container, Text } from "~components";
+import { useNavigation } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { Dimensions } from "react-native";
+import { Container, Pressable, Text } from "~components";
+import { UserTypesEnum } from "~enums";
+import { AuthenticationNavigationProp } from "~navigation";
+import { setUserType, useAppDispatch } from "~store";
+import { SelectRoleTemplate } from "~templates";
 
 const SelectRoleScreen = () => {
+  const navigation =
+    useNavigation<AuthenticationNavigationProp<"SelectRoleScreen">>();
+
+  const dispatch = useAppDispatch();
+
+  const onUserSelectPress = useCallback((userType: UserTypesEnum) => {
+    dispatch(setUserType(userType));
+    navigation.navigate("SignInScreen", { mode: userType });
+  }, []);
+
   return (
-    <SafeAreaView
-      style={{
-        justifyContent: "space-between",
-        flex: 1,
-        // backgroundColor: "#000",
-      }}
-    >
-      <Container paddingHorizontal={"x"}>
-        <Text color={"gray"}>Hello There</Text>
-      </Container>
-      <Container paddingHorizontal={"x"} marginBottom={"l"}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#11145A",
-            alignItems: "center",
-            justifyContent: "center",
-            height: 60,
-            borderRadius: 15,
-            marginBottom: 20,
-          }}
-        >
-          <Text style={{ fontWeight: "bold", fontSize: 20, color: "#fff" }}>
-            Client
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            borderWidth: 4,
-            height: 60,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 15,
-            borderColor: "#11145A",
-          }}
-        >
-          <Text style={{ color: "#11145A", fontWeight: "bold", fontSize: 20 }}>
-            Barber
-          </Text>
-        </TouchableOpacity>
-      </Container>
-    </SafeAreaView>
+    <SelectRoleTemplate
+      onBarberPress={() => onUserSelectPress(UserTypesEnum.Barber)}
+      onClientPress={() => onUserSelectPress(UserTypesEnum.Client)}
+    />
   );
 };
 
