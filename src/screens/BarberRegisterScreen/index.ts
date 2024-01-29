@@ -1,0 +1,1 @@
+export { default as BarberRegister } from "./BarberRegister";

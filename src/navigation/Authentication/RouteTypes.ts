@@ -7,6 +7,9 @@ export type AuthenticationRouteList = {
   SignInScreen: {
     mode: UserTypesEnum;
   };
+  RegisterScreen: undefined;
+  RegisterNumberScreen: undefined;
+  EnterMessagePassword: undefined;
 };
 
 export type AuthenticationNavigationProp<

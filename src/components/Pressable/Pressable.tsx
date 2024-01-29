@@ -1,22 +1,17 @@
 import { createRestyleComponent, createVariant, VariantProps } from '@shopify/restyle';
 import React, { ComponentProps, PropsWithChildren, useCallback } from 'react';
-import { Pressable, TouchableOpacity, TouchableWithoutFeedbackProps } from 'react-native';
+import { Pressable, TouchableOpacity, TouchableWithoutFeedbackProps, View } from 'react-native';
 import { Theme } from '~utils';
 import { Container } from '../Container';
 
 type BaseButtonProps = ComponentProps<typeof Container> & VariantProps<Theme, 'buttonVariants'>;
-
-const BaseButton = createRestyleComponent<BaseButtonProps, Theme>(
-  [createVariant({ themeKey: 'buttonVariants' })],
-  Container,
-);
 
 export type ButtonOnPressType = () => void;
 
 type ButtonMode = 'withFeedback' | 'withoutFeedback';
 
 type Props = PropsWithChildren<
-  ComponentProps<typeof BaseButton> &
+  ComponentProps<typeof View> &
     TouchableWithoutFeedbackProps & {
       onPress: ButtonOnPressType;
       buttonProps?: ComponentProps<typeof TouchableOpacity>;
@@ -35,7 +30,7 @@ export default ({
   ...props
 }: Props) => {
   const renderButtonChildren = useCallback(() => {
-    return <BaseButton {...props}>{children}</BaseButton>;
+    return <View {...props}>{children}</View>;
   }, [props, children]);
 
   if (mode === 'withoutFeedback') {
