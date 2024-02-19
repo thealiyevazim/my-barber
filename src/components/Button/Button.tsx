@@ -5,9 +5,9 @@ import { Container, Pressable } from "~components";
 import { palette } from "~utils/theme";
 
 type IProps = {
-  text: string;
-  textColor: string;
-  fontWeight: "bold"|"regular";
+  text?: string;
+  textColor?: string;
+  fontWeight?: "bold"|"regular";
   onPress: () => void;
 };
 type IButton = PropsWithChildren<ComponentProps<typeof Container> & IProps>;

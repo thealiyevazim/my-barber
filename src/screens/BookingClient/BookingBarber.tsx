@@ -108,19 +108,19 @@ const BookingBarber: React.FC = () => {
               width: 20,
               height: 20,
               // position: "absolute",
-              
+
             }}
             useIsoWeekday={true}
           />
         </View>
         <Text style={styles.miniText}>Vaqtni tanlash</Text>
         <View style={styles.bookingTime}>
-          <TimeDropDownSelect  style={styles.timeDropdownTimeStyle}/>
-          <BottomDropdownSelect style={styles.timeDropdownStyle}/>
+          <TimeDropDownSelect style={styles.timeDropdownTimeStyle} />
+          <BottomDropdownSelect style={styles.timeDropdownStyle} />
         </View>
         <Text style={styles.miniTextService}>Servis</Text>
         <View style={styles.servisesStyle}>
-          <ServiceComponent  style={styles.seviseViewStyle}/>
+          <ServiceComponent style={styles.seviseViewStyle} />
         </View>
         <Text style={styles.miniTextPerson}>Necha Kishi?</Text>
         <View style={styles.peopleStyleBox}>
@@ -146,42 +146,42 @@ const BookingBarber: React.FC = () => {
         isVisible={modalVisible}
       >
         <View style={styles.modalBody}>
-          <TouchableOpacity style={styles.backButtonStyle} hitSlop={{left:10,top:10,bottom:10,right:10}} onPress={closeModal}>
+          <TouchableOpacity style={styles.backButtonStyle} hitSlop={{ left: 10, top: 10, bottom: 10, right: 10 }} onPress={closeModal}>
             <LeftBack color="#181818" />
           </TouchableOpacity>
-            <View style={styles.confrimTopDiv}>
-              <View style={styles.textCenter}> 
-                <Text style={styles.leftGrayText}>Service</Text>
-                <Text style={styles.rightBlackText}>Shaving</Text>
-              </View>
-              <View style={styles.textCenter}> 
-                <Text style={styles.leftGrayText}>Quantity</Text>
-                <Text style={styles.rightBlackText}>1 person</Text>
-              </View>
-              <View style={styles.textCenter}> 
-                <Text style={styles.leftGrayText}>Address</Text>
-                <Text style={styles.rightBlackText}>Uchtepa tumani,Mahorat 23</Text>
-              </View>
-              <View style={styles.textCenter}> 
-                <Text style={styles.leftGrayText}>Booking date</Text>
-                <Text style={styles.rightBlackText}>Monday,12 June 2024</Text>
-              </View>
-              <View style={styles.textCenter}> 
-                <Text style={styles.leftGrayText}>Booking time</Text>
-                <Text style={styles.rightBlackText}>11:30 AM</Text>
-              </View>
+          <View style={styles.confrimTopDiv}>
+            <View style={styles.textCenter}>
+              <Text style={styles.leftGrayText}>Service</Text>
+              <Text style={styles.rightBlackText}>Shaving</Text>
             </View>
-            <View style={styles.confrimBottomDiv}>
-              <View style={styles.totalStyle}>
-                <Text style={styles.totalText}>Total</Text>
-                <Text style={styles.totalSum}>80 000</Text>
-              </View>
+            <View style={styles.textCenter}>
+              <Text style={styles.leftGrayText}>Quantity</Text>
+              <Text style={styles.rightBlackText}>1 person</Text>
             </View>
-            <View style={styles.confrimButtonDiv}>
+            <View style={styles.textCenter}>
+              <Text style={styles.leftGrayText}>Address</Text>
+              <Text style={styles.rightBlackText}>Uchtepa tumani,Mahorat 23</Text>
+            </View>
+            <View style={styles.textCenter}>
+              <Text style={styles.leftGrayText}>Booking date</Text>
+              <Text style={styles.rightBlackText}>Monday,12 June 2024</Text>
+            </View>
+            <View style={styles.textCenter}>
+              <Text style={styles.leftGrayText}>Booking time</Text>
+              <Text style={styles.rightBlackText}>11:30 AM</Text>
+            </View>
+          </View>
+          <View style={styles.confrimBottomDiv}>
+            <View style={styles.totalStyle}>
+              <Text style={styles.totalText}>Total</Text>
+              <Text style={styles.totalSum}>80 000</Text>
+            </View>
+          </View>
+          <View style={styles.confrimButtonDiv}>
             <TouchableOpacity style={styles.confrimButton} onPress={closeModal}>
               <Text style={styles.confrimText}>Confrim</Text>
             </TouchableOpacity>
-            </View>
+          </View>
         </View>
       </Modal>
     </View>
@@ -191,33 +191,33 @@ const BookingBarber: React.FC = () => {
 export default BookingBarber;
 
 const styles = StyleSheet.create({
-  seviseViewStyle:{
-    zIndex:-90,
-    position:'absolute',
-    top:-40,
+  seviseViewStyle: {
+    zIndex: -90,
+    position: 'absolute',
+    top: -40,
   },
-  miniTextService:{
+  miniTextService: {
     fontSize: 16,
     fontWeight: "500",
     marginTop: 55,
     color: palette.mainBlack,
-    zIndex:-90,
+    zIndex: -90,
 
   },
-  timeDropdownTimeStyle:{
-    position:'absolute',
-    left:10,
-    zIndex:-10,
+  timeDropdownTimeStyle: {
+    position: 'absolute',
+    left: 10,
+    zIndex: -10,
   },
-  timeDropdownStyle:{
-    position:'absolute',
-    right:10,
-    zIndex:-10,
+  timeDropdownStyle: {
+    position: 'absolute',
+    right: 10,
+    zIndex: -10,
   },
   container: {
     paddingTop: 45,
     paddingHorizontal: 15,
-    zIndex:-100,
+    zIndex: -100,
   },
   mainContainer: {
     flexDirection: "column",
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   appoinment: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 42,
+    gap: 20
   },
   bronText: {
     fontSize: 22,
@@ -236,31 +236,31 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginVertical: 10,
     color: palette.mainBlack,
-    zIndex:-90,
+    zIndex: -90,
   },
-  miniTextPerson:{
+  miniTextPerson: {
     fontSize: 16,
     fontWeight: "500",
     marginVertical: 10,
     color: palette.mainBlack,
-    zIndex:-91,
+    zIndex: -91,
   },
   calendarStyle: {
-    width: 330,
+    width: "100%",
     height: 120,
     marginBottom: 20,
   },
   bookingTime: {
     flexDirection: "row",
-    position:'relative'
+    position: 'relative'
   },
   selectPicker: {
     color: "red",
   },
   servisesStyle: {
-    marginTop:48,
-    zIndex:-90,
-    marginBottom:8,
+    marginTop: 48,
+    zIndex: -90,
+    marginBottom: 8,
   },
   peopleStyleBox: {
     width: 332,
@@ -271,8 +271,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    zIndex:-91,
-    marginTop:10,
+    zIndex: -91,
+    marginTop: 10,
   },
   personBox: {
     flexDirection: "row",
@@ -315,72 +315,72 @@ const styles = StyleSheet.create({
     height: 562,
     borderRadius: 8,
     backgroundColor: palette.white,
-    flexDirection:'column',
-    paddingVertical:15,
-    justifyContent:'center',
+    flexDirection: 'column',
+    paddingVertical: 15,
+    justifyContent: 'center',
   },
-  confrimButton:{
-    width:305,
-    height:52,
-    borderRadius:8,
-    backgroundColor:palette.mainBlack,
-    textAlign:'center',
-    alignItems:'center',
-    justifyContent:'center',
-    marginHorizontal:10,
+  confrimButton: {
+    width: 305,
+    height: 52,
+    borderRadius: 8,
+    backgroundColor: palette.mainBlack,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 10,
   },
-  confrimText:{
-    color:palette.white,
-    fontSize:20,
-    fontWeight:'700',
+  confrimText: {
+    color: palette.white,
+    fontSize: 20,
+    fontWeight: '700',
   },
-  confrimTopDiv:{
-    flexDirection:'column',
-    borderBottomColor:palette.personGray,
-    borderBottomWidth:1,
-    gap:20,
-    paddingHorizontal:15,
-    paddingBottom:24,
+  confrimTopDiv: {
+    flexDirection: 'column',
+    borderBottomColor: palette.personGray,
+    borderBottomWidth: 1,
+    gap: 20,
+    paddingHorizontal: 15,
+    paddingBottom: 24,
   },
-  textCenter:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
+  textCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  leftGrayText:{
-    fontSize:14,
-    fontWeight:'400',
-    color:palette.totalGray,
+  leftGrayText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: palette.totalGray,
   },
-  rightBlackText:{
-    fontSize:16,
-    fontWeight:'400',
-    color:palette.mainBlack,
+  rightBlackText: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: palette.mainBlack,
   },
-  backButtonStyle:{
-    marginHorizontal:15,
-    marginBottom:15,
+  backButtonStyle: {
+    marginHorizontal: 15,
+    marginBottom: 15,
   },
-  confrimBottomDiv:{
-    marginTop:24,
-    paddingHorizontal:15,
+  confrimBottomDiv: {
+    marginTop: 24,
+    paddingHorizontal: 15,
   },
-  totalStyle:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
+  totalStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  totalText:{
-    fontSize:16,
-    fontWeight:'400',
-    color:palette.totalGray,
+  totalText: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: palette.totalGray,
   },
-  totalSum:{
-    fontSize:18,
-    fontWeight:'500',
-    color:palette.mainBlack,
+  totalSum: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: palette.mainBlack,
   },
-  confrimButtonDiv:{
-    marginTop:165,
+  confrimButtonDiv: {
+    marginTop: 165,
   },
 });

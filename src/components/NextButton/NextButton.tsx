@@ -27,7 +27,7 @@ const NextButton = ({btnTitle,handleClick }:ButtonProps) => {
 
 const styles = StyleSheet.create({
     nextButtonStyle:{
-        width:328,
+        width: "100%",
         height:52,
         borderRadius:8,
         backgroundColor:palette.mainBlack,

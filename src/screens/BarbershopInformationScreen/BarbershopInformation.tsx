@@ -5,6 +5,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -22,13 +23,14 @@ import { ServicesFlatList } from "~components/ServicesFlatLIst";
 import TimeLine from "~assets/icons/TimeLine";
 import ClockTimer from "~assets/icons/ClockTimer";
 import { NextButton } from "~components";
+
 const BarbershopInformation = () => {
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
   };
   const goNextPage = () => {
-   navigation.navigate("bookingbarber" as never)
+    navigation.navigate("bookingbarber" as never)
   }
   return (
     <View style={styles.container}>
@@ -36,9 +38,9 @@ const BarbershopInformation = () => {
         <ImageBackground source={SliderImage} style={styles.backImage} />
       </View>
       <TouchableOpacity style={styles.leftBack} onPress={goBack}>
-        <LeftBack color="#ffff"/>
+        <LeftBack color="#ffff" />
       </TouchableOpacity>
-      <View style={styles.barberService}>
+      <ScrollView style={styles.barberService}>
         <View style={styles.topCard}>
           <Text style={styles.bigTitle}>The Face Factory</Text>
           <View style={styles.reviewBox}>
@@ -68,18 +70,17 @@ const BarbershopInformation = () => {
           <Text style={styles.mainText}>Services</Text>
           <ServicesFlatList />
         </View>
-          <View style={styles.galleryContainer}>
+        <View style={styles.galleryContainer}>
           <Text style={styles.mainText}>Gallery</Text>
-            <TouchableOpacity style={styles.touchableImage}>
-              <Image source={PlusImage}  style={styles.conutimageStyle}/>
-              <Text style={styles.plusText}>+3</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonStyle}>
-
+          <TouchableOpacity style={styles.touchableImage}>
+            <Image source={PlusImage} style={styles.conutimageStyle} />
+            <Text style={styles.plusText}>+3</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonStyle}>
           <NextButton btnTitle="Next" handleClick={goNextPage} />
-          </View>
-      </View>
+        </View>
+      </ScrollView>
       {/* service slider componet */}
       {/* gallery componet */}
       {/* button componet */}
@@ -92,8 +93,8 @@ export default BarbershopInformation;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
-    flexDirection: "column",
+    // position: "relative",
+    // flexDirection: "column",
   },
   backImage: {
     height: 257,
@@ -103,13 +104,11 @@ const styles = StyleSheet.create({
   },
   barberService: {
     width: "100%",
-    flex: 1,
     backgroundColor: palette.mainWhite,
-    top: 194,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     padding: 16,
-    flexDirection: "column",
+    marginTop: 200,
   },
   leftBack: {
     alignItems: "flex-start",
@@ -180,34 +179,35 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     color: palette.mainBlack,
-    marginVertical:10,
+    marginVertical: 10,
   },
-  galleryContainer:{
-    flexDirection:'column',
-    alignItems:'flex-start',
+  galleryContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
 
   },
-  touchableImage:{
-    width:328,
-    height:170,
-    borderRadius:8,
+  touchableImage: {
+    width: "100%",
+    height: 170,
+    borderRadius: 8,
   },
-  conutimageStyle:{
-    width:'100%',
-    height:'100%',
-    borderRadius:8,
-    resizeMode:'cover',
-    zIndex:-1,
+  conutimageStyle: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+    resizeMode: 'cover',
+    zIndex: -1,
   },
-  plusText:{
-    zIndex:1,
-    color:palette.mainWhite,
-    fontSize:32,
-    fontWeight:'700',
-    top:-110,
-    left:150,
+  plusText: {
+    zIndex: 1,
+    color: palette.mainWhite,
+    fontSize: 32,
+    fontWeight: '700',
+    top: -110,
+    left: 150,
   },
-  buttonStyle:{
-    marginTop:50,
+  buttonStyle: {
+    marginTop: 50,
+    marginBottom: 20
   },
 });

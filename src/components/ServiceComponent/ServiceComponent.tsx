@@ -16,14 +16,13 @@ import { ViewStyle } from "react-native";
 interface Option {
   label: string;
   value: string;
-  price?: string;
+  price?: any;
 }
 type Props = {
   style: ViewStyle
-
 }
 
-const ServiceComponent: React.FC<Props> = ({style}) => {
+const ServiceComponent: React.FC<Props> = ({ style }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [priceValue, setPriceValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
@@ -82,15 +81,15 @@ const ServiceComponent: React.FC<Props> = ({style}) => {
           editable={false}
         />
         <View style={styles.rightArrowContainer}>
-        {/* <Text style={styles.priceShowBox}>454554</Text> */}
-        <TextInput 
-         style={styles.priceShowBox}
-         onChangeText={handleInputPriceChange}
-         value={priceValue}
-         placeholder="80 000"
-         editable={false}
-        />
-            {!dropdownVisible ? <BottomDirectionArrow color="#181818" style={styles.arrowStyle}/> : <TopDirectionArrow color="#181818"/> }
+          {/* <Text style={styles.priceShowBox}>454554</Text> */}
+          <TextInput
+            style={styles.priceShowBox}
+            onChangeText={handleInputPriceChange}
+            value={priceValue}
+            placeholder="80 000"
+            editable={false}
+          />
+          {!dropdownVisible ? <BottomDirectionArrow color="#181818" style={styles.arrowStyle} /> : <TopDirectionArrow color="#181818" />}
         </View>
       </TouchableOpacity>
 
@@ -111,7 +110,6 @@ const styles = StyleSheet.create({
   input: {
     width: 87,
     height: 23,
- 
     textAlign: "left",
     color: palette.mainBlack,
     fontSize: 18,
@@ -122,17 +120,17 @@ const styles = StyleSheet.create({
     width: 332,
     backgroundColor: palette.backWhite,
     color: palette.totalGray,
-    borderTopColor:'#EDEEF1',
-    borderTopWidth:1,
-    borderTopLeftRadius:4,
-    borderTopRightRadius:4,
+    borderTopColor: '#EDEEF1',
+    borderTopWidth: 1,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
     // marginTop:-17,
   },
   optionItem: {
     flexDirection: "column",
     paddingHorizontal: 10,
-    marginVertical:5,
-    
+    marginVertical: 5,
+
   },
   selectedText: {
     fontSize: 18,
@@ -144,46 +142,46 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   priceStyle: {
-    fontSize:14,
-    fontWeight:'500',
-    color:palette.mainBlack,
+    fontSize: 14,
+    fontWeight: '500',
+    color: palette.mainBlack,
   },
   labelPriceContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:'space-between',
-    height:28,
-    borderRadius:4,
-    paddingHorizontal:10,
+    justifyContent: 'space-between',
+    height: 28,
+    borderRadius: 4,
+    paddingHorizontal: 10,
   },
-  inputBox:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingHorizontal:10,
+  inputBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
     width: 332,
     height: 52,
     borderRadius: 4,
     backgroundColor: palette.backWhite,
   },
-  rightArrowContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:10,
+  rightArrowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
 
   },
-  priceShowBox:{
-    width:71,
-    height:30,
-    borderRadius:4,
-    backgroundColor:palette.labelGray,
-    textAlign:'center',
-    verticalAlign:'middle',
-    color:palette.mainBlack,
-    fontSize:14,
-    fontWeight:'400',
+  priceShowBox: {
+    width: 71,
+    height: 30,
+    borderRadius: 4,
+    backgroundColor: palette.labelGray,
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    color: palette.mainBlack,
+    fontSize: 14,
+    fontWeight: '400',
   },
-  arrowStyle:{
+  arrowStyle: {
     // width:20,
     // height:20,
     // fontSize:20,

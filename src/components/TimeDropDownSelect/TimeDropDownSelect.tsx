@@ -12,7 +12,7 @@ type Props = {
 
 }
 
-const TimeDropDownSelect: React.FC<Props> = ({style}) => {
+const TimeDropDownSelect: React.FC<Props> = ({ style }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -92,8 +92,6 @@ const TimeDropDownSelect: React.FC<Props> = ({style}) => {
           style={styles.dropdown}
         />
       )}
-
-     
     </View>
   );
 };
@@ -110,18 +108,18 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: palette.backWhite,
     textAlign: "center",
-    color:palette.mainBlack,
-    fontSize:18,
-    fontWeight:'500',
+    color: palette.mainBlack,
+    fontSize: 18,
+    fontWeight: '500',
 
   },
   dropdown: {
     height: 200,
     width: 140,
-    backgroundColor:palette.backWhite,
-    borderBottomLeftRadius:10,
-    borderBottomRightRadius:10,
-    color:palette.totalGray,
+    backgroundColor: palette.backWhite,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    color: palette.totalGray,
   },
   optionItem: {
     // padding: 10,
@@ -129,11 +127,11 @@ const styles = StyleSheet.create({
   selectedText: {
     fontSize: 18,
   },
-  labelStyle:{
-    color:palette.totalGray,
-    textAlign:'center',
-    fontSize:16,
-    fontWeight:'400',
+  labelStyle: {
+    color: palette.totalGray,
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '400',
   },
 });
 

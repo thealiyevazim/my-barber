@@ -54,24 +54,21 @@ const renderItem = ({
 
 const ServicesFlatList = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        style={styles.flatlistStyle}
         horizontal
+        showsHorizontalScrollIndicator={false}
       />
-    </ScrollView>
   );
 };
 
 export default ServicesFlatList;
 
 const styles = StyleSheet.create({
-  container: {},
   itemContainer: {
-    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
     marginRight: 25,
   },
@@ -81,7 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     resizeMode: "cover",
   },
-  flatlistStyle: {},
   circleTitle: {
     fontSize: 12,
     color: palette.mainBlack,

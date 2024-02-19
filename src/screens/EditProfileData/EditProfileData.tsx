@@ -23,10 +23,9 @@ const Gallery = require("../../assets/images/MyCamera.png");
 const CameraIcon = require("../../assets/images/cameraCircle.png");
 // ----- SVG ----- //
 import LocationIcon from "~assets/icons/LocationIcon";
-import { PermissionsAndroid } from "react-native/Libraries/PermissionsAndroid/PermissionsAndroid";
 import { GOOGLE_MAPS_API_KEY } from "~config/constants";
-import { err } from "react-native-svg/lib/typescript/xml";
-import GooglePlacesAutocomplete from "react-native-google-places-autocomplete"
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
 
 interface LocationCoordinates {
   latitude: number;
@@ -162,14 +161,14 @@ const EditProfileData: React.FC = () => {
   });
 
   const navigation = useNavigation();
-  const [image, setImage] = useState(null);
-  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const [image, setImage] = useState("");
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(false);
   const [isMOdalVisible, setIsModalVisible] = useState(false);
   const [locationMdalVisible, setLocationModalVisible] = useState(false);
   // const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const CameraRef = useRef(null);
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -353,7 +352,8 @@ const EditProfileData: React.FC = () => {
             fontWeight={"bold"}
             // onPress={goNextPage}
             style={styles.saveButton}
-          ></Button>
+            onPress={()=> navigation.navigate}
+          />
         </Container>
       </Container>
 
@@ -469,7 +469,7 @@ const EditProfileData: React.FC = () => {
                 longitudeDelta: 0.0421,
               }}
               onPress={(e) => handleMapRegionChange(e.nativeEvent.coordinate)}
-            ></MapView>
+            />
           )}
           <View style={styles.coupleButton}>
             <TouchableOpacity
