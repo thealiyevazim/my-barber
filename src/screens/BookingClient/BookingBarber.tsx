@@ -96,32 +96,33 @@ const BookingBarber: React.FC = () => {
             disabledDateNameStyle={{ color: "grey" }}
             disabledDateNumberStyle={{ color: "grey" }}
             iconLeftStyle={{
-              top: -50,
-              left: 15,
+              // top: -50,
+              // left: 15,
               width: 20,
               height: 20,
               // position: "absolute",
             }}
             iconRightStyle={{
-              top: -50,
-              right: 15,
+              // top: -50,
+              // right: 15,
               width: 20,
               height: 20,
               // position: "absolute",
+              
             }}
             useIsoWeekday={true}
           />
         </View>
         <Text style={styles.miniText}>Vaqtni tanlash</Text>
         <View style={styles.bookingTime}>
-          <TimeDropDownSelect />
-          <BottomDropdownSelect />
+          <TimeDropDownSelect  style={styles.timeDropdownTimeStyle}/>
+          <BottomDropdownSelect style={styles.timeDropdownStyle}/>
         </View>
-        <Text style={styles.miniText}>Servis</Text>
+        <Text style={styles.miniTextService}>Servis</Text>
         <View style={styles.servisesStyle}>
-          <ServiceComponent />
+          <ServiceComponent  style={styles.seviseViewStyle}/>
         </View>
-        <Text style={styles.miniText}>Necha Kishi?</Text>
+        <Text style={styles.miniTextPerson}>Necha Kishi?</Text>
         <View style={styles.peopleStyleBox}>
           <View style={styles.personBox}>
             <Text style={styles.personCount}>0</Text>
@@ -190,9 +191,33 @@ const BookingBarber: React.FC = () => {
 export default BookingBarber;
 
 const styles = StyleSheet.create({
+  seviseViewStyle:{
+    zIndex:-90,
+    position:'absolute',
+    top:-40,
+  },
+  miniTextService:{
+    fontSize: 16,
+    fontWeight: "500",
+    marginTop: 55,
+    color: palette.mainBlack,
+    zIndex:-90,
+
+  },
+  timeDropdownTimeStyle:{
+    position:'absolute',
+    left:10,
+    zIndex:-10,
+  },
+  timeDropdownStyle:{
+    position:'absolute',
+    right:10,
+    zIndex:-10,
+  },
   container: {
     paddingTop: 45,
     paddingHorizontal: 15,
+    zIndex:-100,
   },
   mainContainer: {
     flexDirection: "column",
@@ -211,6 +236,14 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginVertical: 10,
     color: palette.mainBlack,
+    zIndex:-90,
+  },
+  miniTextPerson:{
+    fontSize: 16,
+    fontWeight: "500",
+    marginVertical: 10,
+    color: palette.mainBlack,
+    zIndex:-91,
   },
   calendarStyle: {
     width: 330,
@@ -219,12 +252,16 @@ const styles = StyleSheet.create({
   },
   bookingTime: {
     flexDirection: "row",
-    gap: 10,
+    position:'relative'
   },
   selectPicker: {
     color: "red",
   },
-  servisesStyle: {},
+  servisesStyle: {
+    marginTop:48,
+    zIndex:-90,
+    marginBottom:8,
+  },
   peopleStyleBox: {
     width: 332,
     height: 52,
@@ -234,6 +271,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
+    zIndex:-91,
+    marginTop:10,
   },
   personBox: {
     flexDirection: "row",
@@ -276,8 +315,6 @@ const styles = StyleSheet.create({
     height: 562,
     borderRadius: 8,
     backgroundColor: palette.white,
-    // top:70,
-    // marginHorizontal:15,
     flexDirection:'column',
     paddingVertical:15,
     justifyContent:'center',

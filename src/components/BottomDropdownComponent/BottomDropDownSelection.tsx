@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ViewStyle } from "react-native";
 import { View, Text, TouchableOpacity, TextInput, FlatList, StyleSheet } from "react-native";
 import { palette } from "~utils/theme";
 
@@ -7,7 +8,13 @@ interface Option {
   value: string;
 }
 
-const BottomDropdownSelect: React.FC = () => {
+
+type Props = {
+  style: ViewStyle
+
+}
+
+const BottomDropdownSelect: React.FC<Props> = ({style}) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -39,7 +46,7 @@ const BottomDropdownSelect: React.FC = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <View  style={[styles.container, style]}>
       <TouchableOpacity onPress={handleInputPress}>
         <TextInput
           style={styles.input}
@@ -70,7 +77,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
   },
   input: {
-    width: 162,
+    width: 100,
     height: 42,
     borderRadius: 4,
     backgroundColor: palette.backWhite,
@@ -82,11 +89,12 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     maxHeight: 80,
-    width: 162,
+    width: 100,
     backgroundColor:palette.backWhite,
     borderBottomLeftRadius:10,
     borderBottomRightRadius:10,
     color:palette.totalGray,
+    zIndex:1,
   },
   optionItem: {
     padding: 10,

@@ -4,8 +4,9 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Dimensions  
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import React, { useState, useRef, useEffect } from "react";
 import { palette } from "~utils/theme";
 import { Container, Text, Button, Input } from "~components";
@@ -23,13 +24,22 @@ const CameraIcon = require("../../assets/images/cameraCircle.png");
 // ----- SVG ----- //
 import LocationIcon from "~assets/icons/LocationIcon";
 import { PermissionsAndroid } from "react-native/Libraries/PermissionsAndroid/PermissionsAndroid";
+import { GOOGLE_MAPS_API_KEY } from "~config/constants";
+import { err } from "react-native-svg/lib/typescript/xml";
+import GooglePlacesAutocomplete from "react-native-google-places-autocomplete"
 
 interface LocationCoordinates {
   latitude: number;
   longitude: number;
 }
+const { height, width } = Dimensions.get('window');
 
 const EditProfileData: React.FC = () => {
+
+
+  // marker properties //
+  const [markersList, setMarkersList] = useState("");
+
   const [modalVisible, setModalVisible] = useState(false);
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
@@ -140,6 +150,11 @@ const EditProfileData: React.FC = () => {
   };
 
   const [mapRegion, setMapRegion] = useState({
+    // latitude: 41.30317369162860,
+    // latitudeDelta: 0.5677638700757441,
+    // longitude: 69.24751281738281,
+    // longitudeDelta: 0.3291258215904236,
+
     latitude: 41.32831126787846,
     latitudeDelta: 0.5677638700757441,
     longitude: 69.24751281738281,
@@ -160,8 +175,6 @@ const EditProfileData: React.FC = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   // ------ Camera Permission ------- //
- 
- 
 
   useEffect(() => {
     (async () => {
@@ -194,35 +207,33 @@ const EditProfileData: React.FC = () => {
     }
   };
 
-  const goNextPage = () => {
-    navigation.navigate("testScreen");
-  };
+  // const goNextPage = () => {
+  //   navigation.navigate("testScreen");
+  // };
 
-  
-
-  const requestCameraPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: "Cool Photo App Camera Permission",
-          message:
-            "Cool Photo App needs access to your camera " +
-            "so you can take awesome pictures.",
-          buttonNeutral: "Ask Me Later",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK",
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera");
-      } else {
-        console.log("Camera permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
+  // const requestCameraPermission = async () => {
+  //   try {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.CAMERA,
+  //       {
+  //         title: "Cool Photo App Camera Permission",
+  //         message:
+  //           "Cool Photo App needs access to your camera " +
+  //           "so you can take awesome pictures.",
+  //         buttonNeutral: "Ask Me Later",
+  //         buttonNegative: "Cancel",
+  //         buttonPositive: "OK",
+  //       }
+  //     );
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //       console.log("You can use the camera");
+  //     } else {
+  //       console.log("Camera permission denied");
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   }
+  // };
 
   return (
     <Container style={styles.mainContainer}>
@@ -233,19 +244,10 @@ const EditProfileData: React.FC = () => {
           <TouchableOpacity
             style={styles.cameraPressOpacity}
             // press Camera change avatar photo //
-            onPress={() => setIsModalVisible(true)}
+            onPress={() => pickImage()}
           >
             <View style={styles.imageOutlineView}>
               <View style={styles.imageInnerView}>
-                {/* <Image 
-              source={LightCamera}
-              style={{
-                height:32,
-                width:32,
-                resizeMode:'contain',
-                position:'absolute'
-              }}
-            /> */}
                 {image && (
                   <Image
                     source={{ uri: image }}
@@ -349,14 +351,14 @@ const EditProfileData: React.FC = () => {
             text={"Saqlash"}
             textColor={palette.white}
             fontWeight={"bold"}
-            onPress={goNextPage}
+            // onPress={goNextPage}
             style={styles.saveButton}
           ></Button>
         </Container>
       </Container>
 
       {/* MODAL section  */}
-      <Modal
+      {/* <Modal
         isVisible={isMOdalVisible}
         style={{}}
       >
@@ -368,7 +370,6 @@ const EditProfileData: React.FC = () => {
             <Text style={styles.closeText}>Chiqish</Text>
           </TouchableOpacity>
           <View style={styles.galleryImageButtonStyle}>
-            {/* Camera touchable part */}
             <TouchableOpacity
               style={styles.imagePressContainer}
               onPress={() => requestCameraPermission()}
@@ -381,19 +382,85 @@ const EditProfileData: React.FC = () => {
             <TouchableOpacity
               style={styles.imagePressContainer}
               onPress={() => pickImage()}
-              // onPress={savePhoto}
             >
               <Image source={Gallery} style={styles.modalImageStyle} />
               <Text style={styles.onCameraText}>GALIREYA</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </Modal> */}
 
       <Modal isVisible={locationMdalVisible}>
         <View style={styles.modalContainer}>
+          <View style={styles.googleSearchContainer}>
+          <GooglePlacesAutocomplete
+            placeholder="Search"
+            onPress={(data, details = null) => {
+              // 'details' is provided when fetchDetails = true
+              console.log(data, details);
+            }}
+            query={{
+              key: GOOGLE_MAPS_API_KEY,
+              language: "en",
+            }}
+            styles={{  
+              textInputContainer: {
+              width:'90%',
+              borderWidth:1,
+              borderColor:palette.mainBlack,
+              marginTop:15,
+              borderRadius:8,
+            },
+            textInput: {
+              // width:150,
+              height: 38,
+              color: "#5d5d5d",
+              fontSize: 16,
+            },
+          }}
+          />
+          </View>
+          {/* <GooglePlacesAutocomplete
+            placeholder="Search"
+            // minLength={2}
+            autoFocus={false}
+            returnKeyType={"default"}
+            fetchDetails={true}
+            styles={{
+              textInputContainer: {
+                // backgroundColor: "grey",
+                width:'90%',
+                borderWidth:2,
+                borderColor:palette.lightGray,
+                marginTop:15,
+              },
+              textInput: {
+                // width:150,
+                height: 30,
+                color: "#5d5d5d",
+                fontSize: 16,
+              },
+              predefinedPlacesDescription: {
+                color: "#1faadb",
+              },
+            }}
+          /> */}
+
+          {selectedLocation && (
+            <Marker
+              coordinate={{
+                latitude: selectedLocation.latitude,
+                longitude: selectedLocation.longitude,
+              }}
+              draggable
+              onDragEnd={(e) => handleMapRegionChange(e.nativeEvent.coordinate)}
+              title="Marker"
+              description="Mening Hozirgi joylashuvim"
+            />
+          )}
           {location && (
             <MapView
+              provider={PROVIDER_GOOGLE}
               style={styles.map}
               initialRegion={{
                 latitude: location.coords.latitude,
@@ -402,20 +469,7 @@ const EditProfileData: React.FC = () => {
                 longitudeDelta: 0.0421,
               }}
               onPress={(e) => handleMapRegionChange(e.nativeEvent.coordinate)}
-            >
-              {selectedLocation && (
-                <Marker
-                  coordinate={{
-                    latitude: selectedLocation.latitude,
-                    longitude: selectedLocation.longitude,
-                  }}
-                  draggable
-                  onDragEnd={(e) =>
-                    handleMapRegionChange(e.nativeEvent.coordinate)
-                  }
-                />
-              )}
-            </MapView>
+            ></MapView>
           )}
           <View style={styles.coupleButton}>
             <TouchableOpacity
@@ -446,6 +500,9 @@ const EditProfileData: React.FC = () => {
 export default EditProfileData;
 
 const styles = StyleSheet.create({
+  googleSearchContainer:{
+    // zIndex:1,
+  },
   closeLocationButton: {
     backgroundColor: palette.mainBlack,
     borderRadius: 5,
@@ -480,18 +537,22 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
+    height:500,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: palette.backWhite,
     borderRadius: 10,
+    marginTop:45,
   },
   map: {
-    flex: 1,
-    width: "95%",
-    height: "100%",
+    // flex: 1,
+    width:'95%',
+    height:'90%',
     borderTopLeftRadius: 10,
     marginVertical: 8,
     marginHorizontal: 15,
+    // zIndex:-1,
+    // marginTop:-250,
   },
   button: {
     backgroundColor: "#007AFF",
@@ -576,12 +637,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageOutlineView: {
-    width: 79,
-    height: 79,
+    width: 89,
+    height: 89,
     backgroundColor: palette.lightGray,
     borderRadius: 50,
     position: "absolute",
-    bottom: -39,
+    bottom: -44,
   },
   imageInnerView: {
     flex: 1,

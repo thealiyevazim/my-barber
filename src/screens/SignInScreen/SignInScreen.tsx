@@ -48,9 +48,11 @@ const SignInScreen = () => {
       <Container style={styles.whiteRoundedContainer}>
         <GmailInput />
         <PasswordInput />
+
         <TouchableOpacity style={styles.pressableStyle}>
           <Text style={styles.passwordText}>Parolni unutdingizmi?</Text>
         </TouchableOpacity>
+
         <View style={styles.enterContainer}>
           <Button
             text={"Tizimga kirish"}
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
+    paddingTop:10,
   },
   pressableStyle: {
     marginTop: 10,

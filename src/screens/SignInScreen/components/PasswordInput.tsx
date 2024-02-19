@@ -39,6 +39,7 @@ const handleInputChange = (text:string) => {
         margin={0} 
         secureTextEntry={isSecureEntry}
         onChangeText={handleInputChange}
+        style={styles.innerInputStyle}
         />
         </View>
         <TouchableOpacity  onPress={ ()=> { setIsSecureEntry((prev)=> !prev)}}>
@@ -51,13 +52,18 @@ const handleInputChange = (text:string) => {
 export default PasswordInput
 
 const styles = StyleSheet.create({
+  innerInputStyle:{
+    width:'85%',
+  },
   mainContainer:{
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
-    borderBottomColor:palette.hideGray,
-    borderBottomWidth:1,
+    borderColor:palette.hideGray,
+    borderWidth:1,
+    borderRadius:6,
     marginHorizontal:16,
+    paddingRight:14,
   },
   inputContainer:{
     flexDirection:'row',

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, TextInput, FlatList, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, FlatList, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { palette } from "~utils/theme";
 
 interface Option {
@@ -7,7 +7,12 @@ interface Option {
   value: string;
 }
 
-const TimeDropDownSelect: React.FC = () => {
+type Props = {
+  style: ViewStyle
+
+}
+
+const TimeDropDownSelect: React.FC<Props> = ({style}) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -68,7 +73,7 @@ const TimeDropDownSelect: React.FC = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <TouchableOpacity onPress={handleInputPress}>
         <TextInput
           style={styles.input}
@@ -97,9 +102,10 @@ const styles = StyleSheet.create({
   container: {
     // alignItems: "center",
     // justifyContent: "center",
+    // position:'relative',
   },
   input: {
-    width: 162,
+    width: 140,
     height: 42,
     borderRadius: 4,
     backgroundColor: palette.backWhite,
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     height: 200,
-    width: 162,
+    width: 140,
     backgroundColor:palette.backWhite,
     borderBottomLeftRadius:10,
     borderBottomRightRadius:10,

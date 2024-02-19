@@ -11,14 +11,19 @@ import { palette } from "~utils/theme";
 // ----- SVG ----- //
 import TopDirectionArrow from "~assets/icons/TopSideArrow";
 import BottomDirectionArrow from "~assets/icons/BottomSideArrow";
+import { ViewStyle } from "react-native";
 
 interface Option {
   label: string;
   value: string;
   price?: string;
 }
+type Props = {
+  style: ViewStyle
 
-const ServiceComponent: React.FC = () => {
+}
+
+const ServiceComponent: React.FC<Props> = ({style}) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [priceValue, setPriceValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
@@ -67,7 +72,7 @@ const ServiceComponent: React.FC = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <TouchableOpacity onPress={handleInputPress} style={styles.inputBox}>
         <TextInput
           style={styles.input}

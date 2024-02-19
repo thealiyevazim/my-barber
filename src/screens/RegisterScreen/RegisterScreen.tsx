@@ -56,6 +56,7 @@ const RegisterScreen = () => {
             borderWidth={0}
             borderColor={"transparent"}
             margin={0}
+            style={styles.innerInputStyle}
           />
         </View>
         <View style={styles.inputcontainer}>
@@ -65,6 +66,7 @@ const RegisterScreen = () => {
             borderWidth={0}
             borderColor={"transparent"}
             margin={0}
+            style={styles.innerInputStyle}
           />
         </View>
         <TouchableOpacity style={styles.registerButtonContainerStyle}>
@@ -83,6 +85,9 @@ const RegisterScreen = () => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
+  innerInputStyle:{
+    width:'100%',
+  },
   mainContainer: {
     flex: 1,
     alignItems: "center",
@@ -91,7 +96,7 @@ const styles = StyleSheet.create({
     paddingTop:45,
   },
   mainImageStyle: {
-    marginHorizontal:16,
+    // marginHorizontal:16,
     marginVertical:64,
   },
   whiteCircleContainer: {
@@ -100,14 +105,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
+    padding:14,
   },
   inputcontainer: {
     flexDirection: "row",
-    borderBottomColor: palette.hideGray,
-    borderBottomWidth: 1,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 20,
+    borderColor: palette.hideGray,
+    borderWidth: 1,
+    borderRadius:6,
+    marginTop: 10,
     padding: 0,
     width:'100%'
   },
@@ -117,10 +122,10 @@ const styles = StyleSheet.create({
   registerButtontyle: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
-    marginHorizontal:16,
     height: 60,
     gap: 10,
     justifyContent:'center',
+    width:'100%'
   },
   topBack:{
     flexDirection:'row',

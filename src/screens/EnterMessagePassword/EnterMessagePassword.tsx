@@ -44,6 +44,7 @@ const EnterMessagePassword = () => {
         <View></View>
       </View>
       <Image source={ReverseMainIMage} style={styles.reverseMainImageStyle} />
+
       <Container style={styles.whiteCircleContainer}>
         <View style={styles.numberContainerStyle}>
           <TouchableOpacity style={styles.touchableContainerStyle}>
@@ -107,9 +108,12 @@ const styles = StyleSheet.create({
   },
   numberContainerStyle: {
     flexDirection: "row",
-    borderBottomColor: palette.hideGray,
-    borderBottomWidth: 1,
-    paddingVertical: 10,
+    borderColor: palette.hideGray,
+    borderWidth: 1,
+    borderRadius:6,
+    height:50,
+    alignItems:'center',
+    paddingHorizontal:14,
   },
   topBack: {
     flexDirection: "row",

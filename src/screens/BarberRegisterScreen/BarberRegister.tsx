@@ -53,6 +53,7 @@ const BarberRegister = () => {
             borderColor={"transparent"}
             margin={0}
             inputMode="numeric"
+            style={styles.innerinputStyle}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -72,6 +73,9 @@ const BarberRegister = () => {
 export default BarberRegister;
 
 const styles = StyleSheet.create({
+  innerinputStyle:{
+    width:'100%',
+  },
   registerButtonStyle: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
@@ -97,8 +101,10 @@ const styles = StyleSheet.create({
   },
   selectNumerContainer: {
     flexDirection: "row",
-    borderBottomColor: palette.hideGray,
-    borderBottomWidth: 1,
+    borderColor: palette.hideGray,
+    borderWidth: 1,
+    borderRadius:6,
+    paddingHorizontal:14,
   },
   whiteRoundedContainer: {
     flex: 1,
@@ -106,7 +112,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
-    padding:15,
+    paddingHorizontal:16,
+    paddingTop:20,
     marginTop:30,
   },
   topImage: {

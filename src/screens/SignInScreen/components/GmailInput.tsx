@@ -40,9 +40,11 @@ const GmailInput = () => {
           margin={0}
           value={inputValue}
           onChangeText={handleInputChange}
-          secureTextEntry={false}            />
+          secureTextEntry={false}  
+          style={styles.innerInputStyle}        
+            />
         </View>  
-        <Image source={  ChekingImage} style={styles.imageTwoStyle}/>
+        <Image source={ ChekingImage} style={styles.imageTwoStyle}/>
 
     </View>
   )
@@ -56,9 +58,11 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
-    borderBottomColor:palette.hideGray,
-    borderBottomWidth:1,
+    borderColor:palette.hideGray,
+    borderWidth:1,
     margin:16,
+    paddingHorizontal:16,
+    borderRadius:6,
    },
    inputContainer:{
     flexDirection:'row',
@@ -72,5 +76,8 @@ const styles = StyleSheet.create({
    },
    imageTwoStyle:{
     display:'none',
+   },
+   innerInputStyle:{
+    width:'94%'
    },
 })
