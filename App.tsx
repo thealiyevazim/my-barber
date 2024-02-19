@@ -40,7 +40,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <StatusBar animated style="light" />
-        <NavigationContainer theme={myTheme}>
+        <NavigationContainer>
           <SafeAreaProvider>
             <ThemeProvider theme={theme}>
               <KeyboardAvoidingView

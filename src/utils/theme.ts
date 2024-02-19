@@ -1,11 +1,23 @@
 import { createTheme } from "@shopify/restyle";
 
-const palette = {
+export const palette = {
   white: "#fff",
   black: "#000",
   gray: "#808080",
   defaultBlue: "#11145A",
   defaultGreen: "#f9f7be",
+  mainBlue:"#14145C",
+  hideGray:'#A0A0A0',
+  lightGray:'#E5E7EB',
+  backWhite:'#FDFDFD',
+  mainBlack:'#181818',
+  mainWhite:'#F9FAFB',
+  green:'#16A34A',
+  red:'#FF3B30',
+  textLight:'#9F9D9D',
+  totalGray:'#9CA3AF',
+  labelGray:'#F3F4F6',
+  personGray:'#D1D5DB',
 };
 
 // const Gradients = {};
@@ -19,6 +31,7 @@ const Spacing = {
   25: 25,
   30: 30,
   35: 35,
+  50: 50,
 };
 
 const RegularTextVariant = {
