@@ -5,44 +5,48 @@ import { useNavigation } from "@react-navigation/native";
 import LocationIcon from "~assets/icons/LocationIcon";
 import DoteIcon from "~assets/icons/DoteIcon";
 import { palette } from "~utils/theme";
-import { spacing } from "@shopify/restyle";
+import { AuthenticationRouteList } from "~navigation";
 
 // ------ Card Component style ----- //
 
 interface Props {
-  imageSource:any ,
-  isWork:boolean,
-  time:string,
-  title:string,
-  distance:string,
-  ratio:string,
+  imageSource: any,
+  isWork: boolean,
+  time: string,
+  title: string,
+  distance: string,
+  ratio: string,
   handleClick?: () => void;
 }
 
 
-const CardComponent:FC<Props> = ({ imageSource, isWork,ratio, time, title, distance }) => {
-  const navigation = useNavigation()
+const CardComponent: FC<Props> = ({ imageSource, isWork, ratio, time, title, distance }) => {
+
+  const navigation = useNavigation<AuthenticationRouteList>()
+
+  const onPress = () => {
+    navigation.navigate("barbershopinformation")
+  }
+
   return (
     <View style={styles.undefinedStyle}>
 
-    <View style={styles.cardBody}>
-      <Image style={styles.cardImage} source={imageSource} />
-      <View style={styles.workContainer}>
-        <Text style={[styles.workText ,isWork ? {color : 'green'} : {color : 'red'}]}>{isWork ? 'Ochiq' : 'Yopiq'}</Text>
-        {/* SVG image */}
-        <DoteIcon />
-        <Text style={styles.timeText}>{time}</Text>
+      <View style={styles.cardBody}>
+        <Image style={styles.cardImage} source={imageSource} />
+        <View style={styles.workContainer}>
+          <Text style={[styles.workText, isWork ? { color: 'green' } : { color: 'red' }]}>{isWork ? 'Ochiq' : 'Yopiq'}</Text>
+          <DoteIcon />
+          <Text style={styles.timeText}>{time}</Text>
+        </View>
+        <Text style={styles.cardTitle}>{title}</Text>
+        <View style={styles.locationBox}>
+          <LocationIcon />
+          <Text style={styles.distanceText}>{distance}</Text>
+        </View>
+        <TouchableOpacity style={styles.buyButton} onPress={onPress}>
+          <Text style={styles.buyText}>Book Now</Text>
+        </TouchableOpacity>
       </View>
-      <Text style={styles.cardTitle}>{title}</Text>
-      <View style={styles.locationBox}>
-        {/* SVG image  */}
-        <LocationIcon />
-        <Text style={styles.distanceText}>{distance}</Text>
-      </View>
-      <TouchableOpacity style={styles.buyButton}  onPress={() => navigation.navigate("barbershopinformation")}>
-        <Text style={styles.buyText}>Book Now</Text>
-      </TouchableOpacity>
-    </View>
     </View>
   );
 };
@@ -85,12 +89,12 @@ const CardFlatList = () => {
       pagingEnabled
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <CardComponent 
+        <CardComponent
           imageSource={item.imageSource}
           isWork={item.isWork}
           time={item.time}
           title={item.title}
-          distance={item.distance} ratio={""}        />
+          distance={item.distance} ratio={""} />
       )}
       horizontal={true}
     />
@@ -105,12 +109,12 @@ const styles = StyleSheet.create({
     height: 288,
     padding: 6,
     borderRadius: 8,
-    gap:11,
+    gap: 11,
     backgroundColor: palette.backWhite,
-    marginRight:12,
-    borderWidth:1,
-    borderColor:"rgba(20, 20, 92, 0.10)",
-    flexDirection:'column',
+    marginRight: 12,
+    borderWidth: 1,
+    borderColor: "rgba(20, 20, 92, 0.10)",
+    flexDirection: 'column',
   },
   cardImage: {
     width: 180,
@@ -154,20 +158,15 @@ const styles = StyleSheet.create({
     width: 180,
     height: 32,
     backgroundColor: palette.mainBlack,
-    borderRadius:10,
+    borderRadius: 10,
   },
   buyText: {
     fontSize: 12,
     fontWeight: "500",
     color: palette.backWhite,
   },
-  flatOwnStyle: {
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  undefinedStyle:{
-    gap:12,
-    flexDirection:'row',
+  undefinedStyle: {
+    gap: 12,
+    flexDirection: 'row',
   },
 });

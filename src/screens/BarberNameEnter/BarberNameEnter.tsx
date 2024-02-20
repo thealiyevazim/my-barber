@@ -9,7 +9,7 @@ import {
 import React, { useCallback, useState } from "react";
 import { Container, Text, Button, Input } from "~components";
 import { palette } from "~utils/theme";
-import { AuthenticationNavigationProp } from "~navigation";
+import { AuthenticationNavigationProp, AuthenticationRouteList } from "~navigation";
 import { useNavigation } from "@react-navigation/native";
 import {
   selectedUserTypeSelector,
@@ -25,8 +25,8 @@ const HeaderIMage = require("../../assets/images/HeaderIMage.png");
 const BarberNameEnter = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError,setPasswordError] = useState("");
-  const navigation = useNavigation();
+  const [passwordError, setPasswordError] = useState("");
+  const navigation = useNavigation<AuthenticationRouteList>();
   const goBack = () => {
     navigation.goBack();
   };
@@ -40,7 +40,7 @@ const BarberNameEnter = () => {
       // flex={1}
       style={styles.mainContainer}
     >
-      <StatusBar backgroundColor="transparent" barStyle="white-content" />
+      <StatusBar backgroundColor="transparent" />
       <View style={styles.topBackContainer}>
         <TouchableOpacity onPress={goBack}>
           <LeftBack
@@ -63,8 +63,8 @@ const BarberNameEnter = () => {
             containerStyle={undefined}
             onChangeText={setPassword}
             error={undefined}
-          /> 
-          
+          />
+
         </View>
         <View style={styles.buttonContainer}>
           <Button
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: "100%",
     marginBottom: 10,
-    marginTop:230,
+    marginTop: 230,
   },
   pressableStyle: {
     flexDirection: "row",
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
   },
   selectNumerContainer: {
     flexDirection: "column",
-    gap:10,
-    paddingTop:40,
+    gap: 10,
+    paddingTop: 40,
   },
   whiteRoundedContainer: {
     flex: 1,

@@ -35,7 +35,7 @@ const data = [
   {
     id: "5",
     uri: require("../../assets/images/Rectangle2.png"),
-    title: "Coloring",
+    title: "Hairdryer",
   },
 ];
 
@@ -54,13 +54,13 @@ const renderItem = ({
 
 const ServicesFlatList = () => {
   return (
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      />
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+    />
   );
 };
 

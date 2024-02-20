@@ -9,7 +9,7 @@ import ClientScreen from "~screens/MainClientScreen/ClientScreen";
 import BarberRegister from "~screens/BarberRegisterScreen/BarberRegister";
 import { BarberMessageScreen } from "~screens/BarberMessage";
 import AllScreens from "../AllScreen/AllScreen";
-import {UniqueMessageScreen} from "~screens/UniqueMessageScreen";
+import { UniqueMessageScreen } from "~screens/UniqueMessageScreen";
 import { BarberNameEnter } from "~screens/BarberNameEnter";
 import { BarberFullData } from "~screens/BarberFullData";
 import { BarberProfileData } from "~screens/BarberProfileData";
@@ -24,6 +24,7 @@ const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 type InitialRouteState = "barber" | "client";
 
 const AuthenticationNavigator = () => {
+
   const userType = useAppSelector(selectedUserTypeSelector);
   const isAuthed = true;
   return (
@@ -47,10 +48,10 @@ const AuthenticationNavigator = () => {
           {/* Barber screens */}
           <Stack.Screen name="BarberRegister" component={BarberRegister} />
           <Stack.Screen name="BarberMessageScreen" component={BarberMessageScreen} />
-          <Stack.Screen name="BarberNameEnter" component={BarberNameEnter}/>
-          <Stack.Screen name="BarberFullData" component={BarberFullData}/>
-          <Stack.Screen name="BarberProfileData" component={BarberProfileData}/>
-          <Stack.Screen name="TabbarScreen" component={TabbarScreen}/>
+          <Stack.Screen name="BarberNameEnter" component={BarberNameEnter} />
+          <Stack.Screen name="BarberFullData" component={BarberFullData} />
+          <Stack.Screen name="BarberProfileData" component={BarberProfileData} />
+          <Stack.Screen name="TabbarScreen" component={TabbarScreen} />
         </Stack.Navigator>
       )}
     </>

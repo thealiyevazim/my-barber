@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView ,Image,TouchableOpacity} from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import {
   CodeField,
   Cursor,
@@ -13,12 +13,13 @@ import { Container, Button } from "~components";
 const ReverseMainIMage = require('../../assets/images/ReaverseHeaderIMage.png');
 // ----- SVG ----- // 
 import LeftBack from "~assets/icons/ArrowLeft";
+import { AuthenticationRouteList } from "~navigation";
 
 const CELL_COUNT = 4;
 
 const BarberMessageScreen = () => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthenticationRouteList>();
   const goBack = () => {
     navigation.goBack();
   };
@@ -38,12 +39,12 @@ const BarberMessageScreen = () => {
   return (
     <Container style={styles.mainContainer}>
       <View style={styles.topBackContainer}>
-        <TouchableOpacity  onPress={goBack}>
-            <LeftBack color={palette.backWhite} hitSlop={{left:10,right:10,top:10,bottom:10}} />
+        <TouchableOpacity onPress={goBack}>
+          <LeftBack color={palette.backWhite} hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }} />
         </TouchableOpacity>
         <View style={styles.messageCentrBox}>
-        <Text style={styles.openTextStyle}>SMS</Text>
-        <Text style={styles.openTextRightStyle}>kodni kiritnig</Text>
+          <Text style={styles.openTextStyle}>SMS</Text>
+          <Text style={styles.openTextRightStyle}>kodni kiritnig</Text>
         </View>
         <Text> </Text>
       </View>
@@ -103,14 +104,14 @@ const styles = StyleSheet.create({
     lineHeight: 38,
     fontSize: 26,
     borderWidth: 2,
-    borderColor:palette.totalGray,
+    borderColor: palette.totalGray,
     textAlign: "center",
     justifyContent: "space-evenly",
     borderRadius: 8,
   },
   focusCell: {
     borderColor: palette.mainBlack,
-    color:palette.mainBlack,
+    color: palette.mainBlack,
   },
   topContainer: {
     width: "100%",
@@ -118,10 +119,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
     marginTop: 15,
-    flex:1,
+    flex: 1,
   },
   buttonContainer: {
-    marginHorizontal:16,
+    marginHorizontal: 16,
     marginTop: 10,
     borderRadius: 8,
     marginBottom: 15,
@@ -130,63 +131,63 @@ const styles = StyleSheet.create({
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
     height: 60,
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   mainContainer: {
     flex: 1,
     backgroundColor: palette.mainBlack,
-    flexDirection:'column',
-    paddingTop:45,
+    flexDirection: 'column',
+    paddingTop: 45,
   },
-  mainImage:{
-    resizeMode:'cover',
+  mainImage: {
+    resizeMode: 'cover',
   },
-  topBackContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingHorizontal:10,
+  topBackContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
-  openTextStyle:{
-    color:palette.white,
-    fontSize:26,
-    fontWeight:'400',
-   
+  openTextStyle: {
+    color: palette.white,
+    fontSize: 26,
+    fontWeight: '400',
+
   },
-  imageDivStyle:{
-    paddingHorizontal:10,
-    marginVertical:15,
-    alignItems:'center',
-    flexDirection:'column',
+  imageDivStyle: {
+    paddingHorizontal: 10,
+    marginVertical: 15,
+    alignItems: 'center',
+    flexDirection: 'column',
     // gap:10,
   },
-  centerTextStyle:{
-    color:palette.backWhite,
-    width:230,
-    fontSize:12,
+  centerTextStyle: {
+    color: palette.backWhite,
+    width: 230,
+    fontSize: 12,
   },
-  numberTextStyle:{
-    color:palette.backWhite,
-    fontSize:12,
+  numberTextStyle: {
+    color: palette.backWhite,
+    fontSize: 12,
   },
-  messageCentrBox:{
-    flexDirection:'row',
-    alignItems:'baseline',
-    gap:5,
+  messageCentrBox: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 5,
   },
-  openTextRightStyle:{
-    fontSize:20,
-    fontWeight:'400',
-    color:palette.backWhite,
+  openTextRightStyle: {
+    fontSize: 20,
+    fontWeight: '400',
+    color: palette.backWhite,
   },
-  prevButtonText:{
-    fontSize:12,
-    color:palette.backWhite,
-    fontWeight:'400',
-    textDecorationLine:"underline",
+  prevButtonText: {
+    fontSize: 12,
+    color: palette.backWhite,
+    fontWeight: '400',
+    textDecorationLine: "underline",
   },
-  prevContainer:{
-    alignItems:'center',
-    marginTop:75,
+  prevContainer: {
+    alignItems: 'center',
+    marginTop: 75,
   },
 });

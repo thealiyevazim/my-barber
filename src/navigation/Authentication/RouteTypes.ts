@@ -3,6 +3,8 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { UserTypesEnum } from "~enums";
 
 export type AuthenticationRouteList = {
+  navigate(e: string): unknown;
+  goBack(): unknown;
   SelectRoleScreen: undefined;
   SignInScreen: {
     mode: UserTypesEnum;
@@ -10,6 +12,24 @@ export type AuthenticationRouteList = {
   RegisterScreen: undefined;
   RegisterNumberScreen: undefined;
   EnterMessagePassword: undefined;
+  BarberRegister: undefined
+  OpenScreen:undefined;
+  EnterenceScreenThree: undefined;
+  EnterenceScreenTwo: undefined;
+  EnterenceScreenOne: undefined;
+  UniqueMessageScreen: undefined;
+  ClientScreen: undefined;
+  BarberMessageScreen: undefined;
+  BarberNameEnter: undefined;
+  BarberFullData: undefined;
+  BarberProfileData: undefined;
+  TabbarScreen: undefined;
+
+  bookingbarber: undefined;
+  barbershopinformation: undefined;
+  languageScreen: undefined;
+  editProfileData: undefined;
+  testScreen: undefined;
 };
 
 export type AuthenticationNavigationProp<

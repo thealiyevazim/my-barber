@@ -9,3 +9,5 @@ export * from './CarouselFlatList';
 export * from  './TitleComponent';
 export * from  './RecommendedCard';
 export * from  './NextButton';
+export * from './FaceFactory'
+export * from './HeaderTitleArrow'
