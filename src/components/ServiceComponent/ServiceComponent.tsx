@@ -18,11 +18,9 @@ interface Option {
   value: string;
   price?: any;
 }
-type Props = {
-  style: ViewStyle
-}
 
-const ServiceComponent: React.FC<Props> = ({ style }) => {
+
+const ServiceComponent: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [priceValue, setPriceValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
@@ -88,17 +86,19 @@ const ServiceComponent: React.FC<Props> = ({ style }) => {
             placeholder="80 000"
             editable={false}
           />
-          {!dropdownVisible ? <BottomDirectionArrow color="#181818" /> : <TopDirectionArrow color="#181818" />}
+          {!dropdownVisible ? <TopDirectionArrow color="#181818" /> : <BottomDirectionArrow color="#181818" />}
         </View>
       </TouchableOpacity>
 
       {dropdownVisible && (
-        <FlatList
-          data={options}
-          renderItem={renderOptionItem}
-          keyExtractor={(item) => item.value}
-          style={styles.dropdown}
-        />
+        <View style={styles.dropdownContainer}>
+          <FlatList
+            data={options}
+            renderItem={renderOptionItem}
+            keyExtractor={(item) => item.value}
+            contentContainerStyle={styles.flatListContent}
+          />
+        </View>
       )}
     </View>
   );
@@ -106,6 +106,8 @@ const ServiceComponent: React.FC<Props> = ({ style }) => {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
+    zIndex: 1,
   },
   input: {
     width: 87,
@@ -115,14 +117,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-  dropdown: {
-    width: "100%",
+  dropdownContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 2,
+    elevation: 2,
+    marginTop: 55
+  },
+  flatListContent: {
     backgroundColor: palette.backWhite,
-    color: palette.totalGray,
-    borderTopColor: '#EDEEF1',
-    borderTopWidth: 1,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderRadius: 4,
+    marginTop: 2,
   },
   optionItem: {
     flexDirection: "column",

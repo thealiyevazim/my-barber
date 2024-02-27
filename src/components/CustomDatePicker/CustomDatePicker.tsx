@@ -11,6 +11,7 @@ import {
   genDaysOfTheWeek,
 } from '../../utils/date';
 import { addAlpha } from '../../utils/indexUtils';
+import { palette } from '~utils/theme';
 
 interface CalendarProps {
   selectDate: string;
@@ -145,7 +146,7 @@ const Header = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: palette.white,
     borderRadius: 10
   },
   header: {
@@ -158,16 +159,16 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 18,
-    color: "#000",
+    color: palette.black,
     fontWeight: "600",
   },
   selectDate: {
     fontSize: 12,
-    color: addAlpha("#fff", 0.6),
+    color: addAlpha(palette.white, 0.6),
   },
   selectDataBold: {
     fontSize: 12,
-    color: "#fff",
+    color: palette.white,
   },
   flexRow: {
     flexDirection: 'row',
@@ -199,14 +200,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   weekName: {
-    color: "#9CA3AF",
+    color: palette.hideGray,
     paddingBottom: 3,
     fontWeight: "400",
     fontSize: 16
   },
   day: {
     fontSize: 16,
-    color: "#000",
+    color: palette.black,
   },
   noActiveDate: {
     width: 35,
@@ -223,13 +224,13 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   activeDate: {
-    backgroundColor: "#000",
-    borderColor: "#000",
+    backgroundColor: palette.black,
+    borderColor: palette.black,
   },
   today: {
-    borderColor: "#000",
+    borderColor: palette.black,
   },
   activeDay: {
-    color: "#fff",
+    color: palette.white,
   },
 });

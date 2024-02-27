@@ -45,11 +45,11 @@ const BookingBarber: React.FC = () => {
           <TitleComponent title='Kunni tanlang' size />
           <CustomDatePicker selectDate={selectDate} onSelectDate={handleSelectDate} />
           <TitleComponent title='Service' size />
-          <ServiceComponent style={styles.seviseViewStyle} />
+          <ServiceComponent />
           <TitleComponent title='Necha kishi?' size />
           <CounterPeopleComponent />
+          <NextButton btnTitle="Next" handleClick={openModal} />
         </View>
-        <NextButton btnTitle="Next" handleClick={openModal} />
       </View>
       <BooKDataModal isVisible={modalVisible} onPress={closeModal} handleSubmit={closeModal} />
     </>
@@ -59,15 +59,10 @@ const BookingBarber: React.FC = () => {
 export default BookingBarber;
 
 const styles = StyleSheet.create({
-  seviseViewStyle: {
-    zIndex: -90,
-    position: 'absolute',
-    top: -40,
-  },
+
   container: {
     paddingTop: 45,
     paddingHorizontal: 15,
-    zIndex: -100,
   },
   mainContainer: {
     flexDirection: "column",
@@ -75,8 +70,5 @@ const styles = StyleSheet.create({
   appoinment: {
     marginTop: 0,
     paddingHorizontal: 0
-  },
-  servisesStyle: {
-
   },
 });
