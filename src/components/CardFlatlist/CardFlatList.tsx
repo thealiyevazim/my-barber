@@ -96,7 +96,8 @@ const CardFlatList = () => {
           title={item.title}
           distance={item.distance} ratio={""} />
       )}
-      horizontal={true}
+      horizontal
+      showsHorizontalScrollIndicator={false}
     />
   );
 };

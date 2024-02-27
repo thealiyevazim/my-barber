@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
-   alignItems: 'center',
+    alignItems: 'center',
   },
   map: {
     flex: 1,

@@ -71,7 +71,7 @@ const ServiceComponent: React.FC<Props> = ({ style }) => {
   );
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={handleInputPress} style={styles.inputBox}>
         <TextInput
           style={styles.input}
@@ -81,7 +81,6 @@ const ServiceComponent: React.FC<Props> = ({ style }) => {
           editable={false}
         />
         <View style={styles.rightArrowContainer}>
-          {/* <Text style={styles.priceShowBox}>454554</Text> */}
           <TextInput
             style={styles.priceShowBox}
             onChangeText={handleInputPriceChange}
@@ -89,7 +88,7 @@ const ServiceComponent: React.FC<Props> = ({ style }) => {
             placeholder="80 000"
             editable={false}
           />
-          {!dropdownVisible ? <BottomDirectionArrow color="#181818" style={styles.arrowStyle} /> : <TopDirectionArrow color="#181818" />}
+          {!dropdownVisible ? <BottomDirectionArrow color="#181818" /> : <TopDirectionArrow color="#181818" />}
         </View>
       </TouchableOpacity>
 
@@ -106,7 +105,8 @@ const ServiceComponent: React.FC<Props> = ({ style }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+  },
   input: {
     width: 87,
     height: 23,
@@ -116,15 +116,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   dropdown: {
-    height: 196,
-    width: 332,
+    width: "100%",
     backgroundColor: palette.backWhite,
     color: palette.totalGray,
     borderTopColor: '#EDEEF1',
     borderTopWidth: 1,
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
-    // marginTop:-17,
   },
   optionItem: {
     flexDirection: "column",
@@ -158,8 +156,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    width: 332,
+    paddingHorizontal: 25,
+    width: "100%",
     height: 52,
     borderRadius: 4,
     backgroundColor: palette.backWhite,
@@ -180,11 +178,6 @@ const styles = StyleSheet.create({
     color: palette.mainBlack,
     fontSize: 14,
     fontWeight: '400',
-  },
-  arrowStyle: {
-    // width:20,
-    // height:20,
-    // fontSize:20,
   },
 });
 

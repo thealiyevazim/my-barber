@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, StyleProp, ViewStyle } from "react-native";
 import React, { FC } from "react";
 import { palette } from "~utils/theme";
 
@@ -6,13 +6,14 @@ interface TitleProps {
   title: string;
   btnTitle?: string;
   handleClick?: () => void;
+  size?: boolean
 }
 
-const TitleComponent = ({ btnTitle, title, handleClick }: TitleProps) => {
+const TitleComponent = ({ btnTitle, title, handleClick, size }: TitleProps) => {
 
   return (
     <View style={styles.twiceText}>
-      <Text style={styles.boldText}>{title}</Text>
+      <Text style={[size ? { fontSize: 16, fontWeight: "500" } : styles.boldText]}>{title}</Text>
       <TouchableOpacity onPress={handleClick}>
         <Text style={styles.allTextStyle}>{btnTitle}</Text>
       </TouchableOpacity>

@@ -8,13 +8,11 @@ interface Option {
   value: string;
 }
 
-
 type Props = {
-  style: ViewStyle
-
+  style?: ViewStyle
 }
 
-const BottomDropdownSelect: React.FC<Props> = ({style}) => {
+const BottomDropdownSelect: React.FC<Props> = ({ style }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -46,7 +44,7 @@ const BottomDropdownSelect: React.FC<Props> = ({style}) => {
   );
 
   return (
-    <View  style={[styles.container, style]}>
+    <View style={[styles.container, style]}>
       <TouchableOpacity onPress={handleInputPress}>
         <TextInput
           style={styles.input}
@@ -66,7 +64,7 @@ const BottomDropdownSelect: React.FC<Props> = ({style}) => {
         />
       )}
 
-     
+
     </View>
   );
 };
@@ -82,19 +80,19 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: palette.backWhite,
     textAlign: "center",
-    color:palette.mainBlack,
-    fontSize:18,
-    fontWeight:'500',
+    color: palette.mainBlack,
+    fontSize: 18,
+    fontWeight: '500',
 
   },
   dropdown: {
     maxHeight: 80,
     width: 100,
-    backgroundColor:palette.backWhite,
-    borderBottomLeftRadius:10,
-    borderBottomRightRadius:10,
-    color:palette.totalGray,
-    zIndex:1,
+    backgroundColor: palette.backWhite,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    color: palette.totalGray,
+    zIndex: 1,
   },
   optionItem: {
     padding: 10,
@@ -102,11 +100,11 @@ const styles = StyleSheet.create({
   selectedText: {
     fontSize: 18,
   },
-  labelStyle:{
-    color:palette.totalGray,
-    textAlign:'center',
-    fontSize:16,
-    fontWeight:'400',
+  labelStyle: {
+    color: palette.totalGray,
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '400',
   },
 });
 

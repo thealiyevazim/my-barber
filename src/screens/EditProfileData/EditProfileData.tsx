@@ -4,7 +4,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  Dimensions  
+  Dimensions
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import React, { useState, useRef, useEffect } from "react";
@@ -76,37 +76,37 @@ const EditProfileData: React.FC = () => {
     })();
   }, []);
 
-  const determineCurrentLocation = async () => {
-    try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+  // const determineCurrentLocation = async () => {
+  //   try {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       console.log("Permission to access location was denied");
+  //       return;
+  //     }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation(location);
 
-      const { latitude, longitude } = location.coords;
+  //     const { latitude, longitude } = location.coords;
 
-      let addressResponse = await Location.reverseGeocodeAsync({
-        latitude,
-        longitude,
-      });
+  //     let addressResponse = await Location.reverseGeocodeAsync({
+  //       latitude,
+  //       longitude,
+  //     });
 
-      if (addressResponse.length > 0) {
-        let { district, street, name } = addressResponse[0];
-        setAddress(`${street} ${name}, ${district}`);
-      }
+  //     if (addressResponse.length > 0) {
+  //       let { district, street, name } = addressResponse[0];
+  //       setAddress(`${street} ${name}, ${district}`);
+  //     }
 
-      setSelectedLocation({
-        latitude,
-        longitude,
-      });
-    } catch (error) {
-      console.log("Error:", error);
-    }
-  };
+  //     setSelectedLocation({
+  //       latitude,
+  //       longitude,
+  //     });
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //   }
+  // };
 
   const handleMapRegionChange = async (region: LocationCoordinates) => {
     const { latitude, longitude } = region;
@@ -352,7 +352,7 @@ const EditProfileData: React.FC = () => {
             fontWeight={"bold"}
             // onPress={goNextPage}
             style={styles.saveButton}
-            onPress={()=> navigation.navigate}
+            onPress={() => navigation.navigate}
           />
         </Container>
       </Container>
@@ -393,32 +393,32 @@ const EditProfileData: React.FC = () => {
       <Modal isVisible={locationMdalVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.googleSearchContainer}>
-          <GooglePlacesAutocomplete
-            placeholder="Search"
-            onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details);
-            }}
-            query={{
-              key: GOOGLE_MAPS_API_KEY,
-              language: "en",
-            }}
-            styles={{  
-              textInputContainer: {
-              width:'90%',
-              borderWidth:1,
-              borderColor:palette.mainBlack,
-              marginTop:15,
-              borderRadius:8,
-            },
-            textInput: {
-              // width:150,
-              height: 38,
-              color: "#5d5d5d",
-              fontSize: 16,
-            },
-          }}
-          />
+            <GooglePlacesAutocomplete
+              placeholder="Search"
+              onPress={(data, details = null) => {
+                // 'details' is provided when fetchDetails = true
+                console.log(data, details);
+              }}
+              query={{
+                key: GOOGLE_MAPS_API_KEY,
+                language: "en",
+              }}
+              styles={{
+                textInputContainer: {
+                  width: '90%',
+                  borderWidth: 1,
+                  borderColor: palette.mainBlack,
+                  marginTop: 15,
+                  borderRadius: 8,
+                },
+                textInput: {
+                  // width:150,
+                  height: 38,
+                  color: "#5d5d5d",
+                  fontSize: 16,
+                },
+              }}
+            />
           </View>
           {/* <GooglePlacesAutocomplete
             placeholder="Search"
@@ -479,7 +479,7 @@ const EditProfileData: React.FC = () => {
               <Text style={styles.buttonText}>Joylashuvni tanlash</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.determineLocationButton}
               onPress={determineCurrentLocation}
             >
@@ -489,7 +489,7 @@ const EditProfileData: React.FC = () => {
                 fill={palette.backWhite}
                 stroke={palette.backWhite}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </Modal>
@@ -500,7 +500,7 @@ const EditProfileData: React.FC = () => {
 export default EditProfileData;
 
 const styles = StyleSheet.create({
-  googleSearchContainer:{
+  googleSearchContainer: {
     // zIndex:1,
   },
   closeLocationButton: {
@@ -537,17 +537,17 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    height:500,
+    height: 500,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: palette.backWhite,
     borderRadius: 10,
-    marginTop:45,
+    marginTop: 45,
   },
   map: {
     // flex: 1,
-    width:'95%',
-    height:'90%',
+    width: '95%',
+    height: '90%',
     borderTopLeftRadius: 10,
     marginVertical: 8,
     marginHorizontal: 15,

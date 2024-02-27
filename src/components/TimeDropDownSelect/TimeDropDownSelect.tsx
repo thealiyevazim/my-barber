@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, FlatList, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import BottomDropdownSelect from "~components/BottomDropdownComponent/BottomDropDownSelection";
+import { TitleComponent } from "~components/TitleComponent";
 import { palette } from "~utils/theme";
 
 interface Option {
@@ -8,11 +10,12 @@ interface Option {
 }
 
 type Props = {
-  style: ViewStyle
+  style?: ViewStyle
 
 }
 
 const TimeDropDownSelect: React.FC<Props> = ({ style }) => {
+
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -73,26 +76,32 @@ const TimeDropDownSelect: React.FC<Props> = ({ style }) => {
   );
 
   return (
-    <View style={[styles.container, style]}>
-      <TouchableOpacity onPress={handleInputPress}>
-        <TextInput
-          style={styles.input}
-          value={searchValue}
-          onChangeText={handleInputChange}
-          placeholder="11:30"
-          editable={false}
-        />
-      </TouchableOpacity>
+    <>
+      <TitleComponent title='Vaqtni tanlash' size />
+      <View>
+        <View style={[styles.container, style]}>
+          <TouchableOpacity onPress={handleInputPress}>
+            <TextInput
+              style={styles.input}
+              value={searchValue}
+              onChangeText={handleInputChange}
+              placeholder="11:30"
+              editable={false}
+            />
+          </TouchableOpacity>
 
-      {dropdownVisible && (
-        <FlatList
-          data={options}
-          renderItem={renderOptionItem}
-          keyExtractor={(item) => item.value}
-          style={styles.dropdown}
-        />
-      )}
-    </View>
+          {dropdownVisible && (
+            <FlatList
+              data={options}
+              renderItem={renderOptionItem}
+              keyExtractor={(item) => item.value}
+              style={styles.dropdown}
+            />
+          )}
+        </View>
+        <BottomDropdownSelect />
+      </View>
+    </>
   );
 };
 
