@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
-  TouchableOpacity,
   StyleSheet,
   StatusBar,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { palette } from "~utils/theme";
 import { ServiceComponent } from "~components/ServiceComponent";
-import { BooKDataModal, CounterPeopleComponent, HeaderTitleArrow, NextButton, TitleComponent } from "~components";
+import { BooKDataModal, CounterPeopleComponent, CustomTimePicker, HeaderTitleArrow, NextButton, TitleComponent } from "~components";
 import { CustomDatePicker } from "~components/CustomDatePicker";
 
 const BookingBarber: React.FC = () => {
@@ -42,13 +40,19 @@ const BookingBarber: React.FC = () => {
         <StatusBar backgroundColor="transparent" barStyle="dark-content" />
         <View style={styles.mainContainer}>
           <HeaderTitleArrow title="Bron qilish" onPress={goBack} style={styles.appoinment} />
-          <TitleComponent title='Kunni tanlang' size />
-          <CustomDatePicker selectDate={selectDate} onSelectDate={handleSelectDate} />
-          <TitleComponent title='Service' size />
-          <ServiceComponent />
-          <TitleComponent title='Necha kishi?' size />
-          <CounterPeopleComponent />
-          <NextButton btnTitle="Next" handleClick={openModal} />
+          <View style={styles.scroll}>
+            <TitleComponent title='Kunni tanlang' size />
+            <CustomDatePicker selectDate={selectDate} onSelectDate={handleSelectDate} />
+            <TitleComponent title='Vaqtni tanlang' size height />
+            <CustomTimePicker />
+            <TitleComponent title='Service' size height />
+            <ServiceComponent />
+            <TitleComponent title='Necha kishi?' size height />
+            <CounterPeopleComponent />
+          </View>
+          <View style={styles.nextButton}>
+            <NextButton btnTitle="Next" handleClick={openModal} />
+          </View>
         </View>
       </View>
       <BooKDataModal isVisible={modalVisible} onPress={closeModal} handleSubmit={closeModal} />
@@ -59,16 +63,25 @@ const BookingBarber: React.FC = () => {
 export default BookingBarber;
 
 const styles = StyleSheet.create({
-
   container: {
-    paddingTop: 45,
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 55 : 45,
     paddingHorizontal: 15,
   },
   mainContainer: {
-    flexDirection: "column",
+    height: '100%',
   },
   appoinment: {
     marginTop: 0,
     paddingHorizontal: 0
   },
+  scroll: {
+
+  },
+  nextButton: {
+    height: "15%",
+    justifyContent: "flex-end",
+    marginTop: Platform.OS === "ios" ? 40 : 0,
+    paddingBottom: 10
+  }
 });

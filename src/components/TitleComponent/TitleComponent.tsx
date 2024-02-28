@@ -6,13 +6,21 @@ interface TitleProps {
   title: string;
   btnTitle?: string;
   handleClick?: () => void;
-  size?: boolean
+  size?: boolean,
+  height?: boolean
 }
 
-const TitleComponent = ({ btnTitle, title, handleClick, size }: TitleProps) => {
+const TitleComponent = ({ btnTitle, title, handleClick, size, height }: TitleProps) => {
 
   return (
-    <View style={styles.twiceText}>
+    <View style={[height ? {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "100%",
+      marginTop: 45,
+      marginBottom: 10
+    } : styles.twiceText]}>
       <Text style={[size ? { fontSize: 16, fontWeight: "500" } : styles.boldText]}>{title}</Text>
       <TouchableOpacity onPress={handleClick}>
         <Text style={styles.allTextStyle}>{btnTitle}</Text>

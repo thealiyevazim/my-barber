@@ -49,7 +49,9 @@ const BarbershopInformation = () => {
               <Text style={styles.plusText}>+3</Text>
             </TouchableOpacity>
           </View>
-          <NextButton btnTitle="Next" handleClick={goNextPage} />
+          <View style={styles.nextButton}>
+            <NextButton btnTitle="Next" handleClick={goNextPage} />
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -119,4 +121,9 @@ const styles = StyleSheet.create({
   buttonStyle: {
     marginBottom: 20,
   },
+  nextButton: {
+    height: "10%",
+    justifyContent: "flex-end",
+    marginTop: Platform.OS === "ios" ? 10 : 0,
+  }
 });
