@@ -3,6 +3,7 @@ import React from 'react'
 import Modal from "react-native-modal";
 import LeftBack from '~assets/icons/ArrowLeft';
 import { palette } from '~utils/theme';
+import { HeaderTitleArrow } from '~components/HeaderTitleArrow';
 
 interface Props {
   isVisible: boolean,
@@ -16,9 +17,7 @@ const BookDataModal = ({ isVisible, onPress, handleSubmit }: Props) => {
       isVisible={isVisible}
     >
       <View style={styles.modalBody}>
-        <TouchableOpacity style={styles.backButtonStyle} hitSlop={{ left: 10, top: 10, bottom: 10, right: 10 }} onPress={onPress}>
-          <LeftBack color="#181818" />
-        </TouchableOpacity>
+        <HeaderTitleArrow onPress={onPress} style={{ marginTop: 0, paddingVertical: 10, paddingHorizontal: 10 }} />
         <View style={styles.confrimTopDiv}>
           <View style={styles.textCenter}>
             <Text style={styles.leftGrayText}>Service</Text>
@@ -61,24 +60,19 @@ export default BookDataModal
 
 const styles = StyleSheet.create({
   modalBody: {
-    width: 325,
-    height: 562,
+    width: "100%",
     borderRadius: 8,
     backgroundColor: palette.white,
     flexDirection: 'column',
-    paddingVertical: 15,
+    padding: 10,
     justifyContent: 'center',
-  },
-  backButtonStyle: {
-    marginHorizontal: 15,
-    marginBottom: 15,
   },
   confrimTopDiv: {
     flexDirection: 'column',
     borderBottomColor: palette.personGray,
     borderBottomWidth: 1,
     gap: 20,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     paddingBottom: 24,
   },
   textCenter: {
@@ -98,7 +92,7 @@ const styles = StyleSheet.create({
   },
   confrimBottomDiv: {
     marginTop: 24,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   totalStyle: {
     flexDirection: 'row',
@@ -116,17 +110,20 @@ const styles = StyleSheet.create({
     color: palette.mainBlack,
   },
   confrimButtonDiv: {
-    marginTop: 165,
+    marginTop: 100,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10
   },
   confrimButton: {
-    width: 305,
+    width: "90%",
     height: 52,
     borderRadius: 8,
     backgroundColor: palette.mainBlack,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 10,
   },
   confrimText: {
     color: palette.white,
