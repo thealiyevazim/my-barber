@@ -56,14 +56,13 @@ const CardRec: FC<{ data: PropsCarouselData[] }> = ({ data }) => {
                   <View style={styles.rightTextTopContainer}>
                     <Text>{item.title}</Text>
                     <View style={styles.starRatio}>
-                      {/* SVG Image */}
-                      <StarIcon style={styles.starIcon} />
+                      <StarIcon />
                       <Text style={styles.ratioText}>{item.ratio}/5</Text>
                       <Text style={styles.totalText}>{item.total}</Text>
                     </View>
                   </View>
                   <View style={styles.middleContainer}>
-                  {/* <Text style={[styles.workText ,isWork ? {color : 'green'} : {color : 'red'}]}>{isWork ? 'Ochiq' : 'Yopiq'}</Text> */}
+                    {/* <Text style={[styles.workText ,isWork ? {color : 'green'} : {color : 'red'}]}>{isWork ? 'Ochiq' : 'Yopiq'}</Text> */}
                   </View>
                   <View style={styles.rightBottomContainer}>
                     <Text>{item.opentime}</Text>
@@ -156,9 +155,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 5,
   },
-  starIcon: {
-    fontSize: 14,
-  },
   ratioText: {
     fontSize: 10,
     fontWeight: "400",
@@ -178,7 +174,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: palette.green,
   },
-  middleContainer:{
-    alignItems:'flex-start',
+  middleContainer: {
+    alignItems: 'flex-start',
   },
 });
