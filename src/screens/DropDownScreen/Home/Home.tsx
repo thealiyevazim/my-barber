@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       <StatusBar backgroundColor="transparent" barStyle="dark-content" />
       <SearchComponent onSearch={handleSearch} />
       <ScrollView
-        contentContainerStyle={{ paddingBottom: 130 }}
+        contentContainerStyle={{ paddingBottom: 30 }}
         showsVerticalScrollIndicator={false}
       >
         <CarouselMain />

@@ -1,8 +1,8 @@
-import { StyleSheet, View, Image, Pressable, StatusBar,TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, Pressable, StatusBar, TouchableOpacity } from "react-native";
 import React, { useCallback } from "react";
 import { Container, Text, Button, Input } from "~components";
 import { palette } from "~utils/theme";
-import { AuthenticationNavigationProp } from "~navigation";
+import { AuthenticationRouteList } from "~navigation";
 import { useNavigation } from "@react-navigation/native";
 import {
   selectedUserTypeSelector,
@@ -15,7 +15,7 @@ import LeftBack from "~assets/icons/ArrowLeft";
 const ReverseMainIMage = require("../../assets/images/ReaverseHeaderIMage.png");
 
 const BarberRegister = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthenticationRouteList>();
   const goBack = () => {
     navigation.goBack();
   };
@@ -28,13 +28,13 @@ const BarberRegister = () => {
   }, []);
 
   return (
-    <Container 
+    <Container
       // flex={1}
-    style={styles.mainContainer}>
-      <StatusBar backgroundColor="transparent" barStyle="white-content" />
+      style={styles.mainContainer}>
+      <StatusBar backgroundColor="transparent" />
       <View style={styles.topBackContainer}>
-        <TouchableOpacity  onPress={goBack}>
-            <LeftBack color="#ffff" hitSlop={{left:10,right:10,top:10,bottom:10}} />
+        <TouchableOpacity onPress={goBack}>
+          <LeftBack color="#ffff" hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }} />
         </TouchableOpacity>
         <Text style={styles.openTextStyle}>Kirish</Text>
         <Text></Text>
@@ -73,14 +73,14 @@ const BarberRegister = () => {
 export default BarberRegister;
 
 const styles = StyleSheet.create({
-  innerinputStyle:{
-    width:'100%',
+  innerinputStyle: {
+    width: '100%',
   },
   registerButtonStyle: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
     height: 60,
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   telNumerText: {
     marginLeft: 10,
@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     borderRadius: 8,
-    width:'100%',
-    marginBottom:10,
-    position:'absolute',
-    bottom:10,
-    left:15,
+    width: '100%',
+    marginBottom: 10,
+    position: 'absolute',
+    bottom: 10,
+    left: 15,
   },
   pressableStyle: {
     flexDirection: "row",
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: palette.hideGray,
     borderWidth: 1,
-    borderRadius:6,
-    paddingHorizontal:14,
+    borderRadius: 6,
+    paddingHorizontal: 14,
   },
   whiteRoundedContainer: {
     flex: 1,
@@ -112,9 +112,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
-    paddingHorizontal:16,
-    paddingTop:20,
-    marginTop:30,
+    paddingHorizontal: 16,
+    paddingTop: 20,
+    marginTop: 30,
   },
   topImage: {
     marginVertical: 45,
@@ -124,22 +124,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: palette.mainBlack,
     justifyContent: "center",
-    paddingTop:45,
+    paddingTop: 45,
   },
-  flagImageStyle:{
+  flagImageStyle: {
     height: 20,
     width: 20,
   },
-  topBackContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingHorizontal:10,
-    width:'100%',
+  topBackContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    width: '100%',
   },
-  openTextStyle:{
-    color:palette.white,
-    fontSize:26,
-    fontWeight:'400',
+  openTextStyle: {
+    color: palette.white,
+    fontSize: 26,
+    fontWeight: '400',
   },
 });
