@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React from "react";
 
-import Chat from "~screens/DropDownScreen/Chat/Chat";
 import { BarberProfileData } from "~screens/BarberProfileData";
 import Home from "~screens/DropDownScreen/Home/Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -16,6 +15,7 @@ import HomeIcon from "~assets/icons/HomeIcon";
 import CalendarIcon from "~assets/icons/CalendarIcon";
 import UserICon from "~assets/icons/UserIcon";
 import { palette } from "~utils/theme";
+import { BookingScreen } from "~screens/DropDownScreen/BookingScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -118,7 +118,7 @@ export default function DrawerContent() {
         tabBarHideOnKeyboard: true
       }}
       tabBar={(props: any) => <MyTabBar {...props} />}>
-      <Tab.Screen name={tabBarData[0].label} component={Chat} />
+      <Tab.Screen name={tabBarData[0].label} component={BookingScreen} />
       <Tab.Screen name={tabBarData[1].label} component={Home} />
       <Tab.Screen name={tabBarData[2].label} component={BarberProfileData} />
     </Tab.Navigator>

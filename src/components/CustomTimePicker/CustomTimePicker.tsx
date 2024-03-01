@@ -115,6 +115,8 @@ const CustomTimePicker: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    position: 'relative',
+    zIndex: 2,
   },
   horzantal: {
     flexDirection: "row",
@@ -138,18 +140,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    right: 0,
-    zIndex: 4,
-    elevation: 4,
-    marginTop: -60
+    zIndex: 2,
+    elevation: 6,
+    marginTop: 45
   },
   dropdownPeriodContainer: {
     position: 'absolute',
     top: 0,
     right: 0,
-    zIndex: 4,
+    zIndex: 2,
     elevation: 4,
-    marginTop: -20
+    marginTop: 45
   },
   flatListContent: {
     backgroundColor: palette.backWhite,
