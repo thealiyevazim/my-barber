@@ -25,7 +25,7 @@ const CounterPeopleComponent = () => {
       </View>
       <View style={styles.calculationBox}>
         <TouchableOpacity style={styles.minusButton} onPress={() => counterHandler("remove")}>
-          <Text style={styles.minusText}>--</Text>
+          <Text style={styles.minusText}>-</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.minusButton} onPress={() => counterHandler("add")}>
           <Text style={styles.minusText}>+</Text>
