@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     paddingLeft: 20,
     paddingVertical: 15,
-    gap: 15
+    gap: 15,
   },
   image: {
     width: 50,
@@ -120,5 +120,6 @@ const styles = StyleSheet.create({
   },
   flatlist: {
     gap: 12,
+    marginBottom: 3,
   }
 })

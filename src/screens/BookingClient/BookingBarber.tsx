@@ -4,6 +4,8 @@ import {
   StyleSheet,
   StatusBar,
   Platform,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ServiceComponent } from "~components/ServiceComponent";
@@ -38,9 +40,9 @@ const BookingBarber: React.FC = () => {
     <>
       <View style={styles.container}>
         <StatusBar backgroundColor="transparent" barStyle="dark-content" />
-        <View style={styles.mainContainer}>
+        <SafeAreaView style={styles.mainContainer}>
           <HeaderTitleArrow title="Bron qilish" onPress={goBack} style={styles.appoinment} />
-          <View style={styles.scroll}>
+          <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll} >
             <TitleComponent title='Kunni tanlang' size />
             <CustomDatePicker selectDate={selectDate} onSelectDate={handleSelectDate} />
             <TitleComponent title='Vaqtni tanlang' size height />
@@ -49,11 +51,11 @@ const BookingBarber: React.FC = () => {
             <ServiceComponent />
             <TitleComponent title='Necha kishi?' size height />
             <CounterPeopleComponent />
-          </View>
-          <View style={styles.nextButton}>
-            <NextButton btnTitle="Next" handleClick={openModal} />
-          </View>
-        </View>
+            <View style={styles.nextButton}>
+              <NextButton btnTitle="Next" handleClick={openModal} />
+            </View>
+          </ScrollView>
+        </SafeAreaView>
       </View>
       <BooKDataModal isVisible={modalVisible} onPress={closeModal} handleSubmit={closeModal} />
     </>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
   nextButton: {
     height: "15%",
     justifyContent: "flex-end",
-    marginTop: Platform.OS === "ios" ? 40 : 0,
-    paddingBottom: 10
+    marginTop: Platform.OS === "ios" ? 50 : 0,
+    paddingBottom: 30
   }
 });

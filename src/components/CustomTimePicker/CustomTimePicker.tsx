@@ -105,6 +105,7 @@ const CustomTimePicker: React.FC = () => {
             contentContainerStyle={styles.flatListContent}
             style={styles.flatList}
             showsVerticalScrollIndicator={false}
+            scrollEnabled={false}
           />
         </View>
       )}

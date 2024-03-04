@@ -113,5 +113,6 @@ const styles = StyleSheet.create({
   },
   flatlist: {
     gap: 12,
+    marginBottom: 3
   }
 })
