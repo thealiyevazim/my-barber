@@ -9,3 +9,4 @@ export * from "./BookingClient";
 export * from "./BarbershopInformationScreen";
 export * from "./BarberRegisterScreen";
 export * from "./BarberMessage";
+export * from "./ClientHistory";

@@ -30,6 +30,7 @@ export type AuthenticationRouteList = {
   languageScreen: undefined;
   editProfileData: undefined;
   testScreen: undefined;
+  historyScreen: undefined
 };
 
 export type AuthenticationNavigationProp<

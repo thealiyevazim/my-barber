@@ -9,6 +9,7 @@ import { Language } from "~screens/DropDownScreen/Language";
 import { EditProfileData } from "~screens/EditProfileData";
 import { TestScreen } from "~screens/TestScreen";
 import { AuthenticationRouteList } from "~navigation/Authentication";
+import { ClientHistoryScreen } from "~screens";
 
 const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 
@@ -22,6 +23,7 @@ const ScreenNavigation = () => {
       <Stack.Screen name="languageScreen" component={Language} />
       <Stack.Screen name="editProfileData" component={EditProfileData} />
       <Stack.Screen name="testScreen" component={TestScreen} />
+      <Stack.Screen name="historyScreen" component={ClientHistoryScreen} />
     </Stack.Navigator>
   );
 };

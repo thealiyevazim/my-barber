@@ -22,6 +22,7 @@ const carouselData: PropsCarouselData[] = [
 ];
 
 const CarouselMain = () => {
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (

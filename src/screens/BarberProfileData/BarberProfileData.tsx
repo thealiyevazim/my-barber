@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar } from "react-native"
 import { palette } from "~utils/theme";
 import { useNavigation } from "@react-navigation/native";
@@ -6,15 +6,17 @@ import { useNavigation } from "@react-navigation/native";
 import ProfileIMage from '../../assets/images/ProfileRoundedImage.png';
 // ------ SVG ------ //
 import UserIcon from "~assets/icons/UserIcon";
-import LeftBack from "~assets/icons/ArrowLeft";
 import LanguageIcon from "~assets/icons/LanguageIcon";
 import HistorySvgIcon from "~assets/icons/HistorySvg";
 import LogOutIcon from "~assets/icons/LogOutIcon";
 import RightBack from "~assets/icons/RightArrow";
 import { AuthenticationRouteList } from "~navigation";
+import Modal from "react-native-modal";
+
 
 const BarberProfileData = () => {
     const navigation = useNavigation<AuthenticationRouteList>();
+    const [logOut, setLogOut] = useState(false)
 
     const goNextPage = () => {
         navigation.navigate("languageScreen")
@@ -22,6 +24,18 @@ const BarberProfileData = () => {
 
     const goEditProfil = () => {
         navigation.navigate("editProfileData")
+    }
+
+    const goHistoryScreen = () => {
+        navigation.navigate("historyScreen")
+    }
+
+    const openModal = () => {
+        setLogOut(true)
+    }
+
+    const closeModal = () => {
+        setLogOut(false)
     }
 
     return (
@@ -53,7 +67,7 @@ const BarberProfileData = () => {
                     {/* svg */}
                     <RightBack color="#181818" width={20} height={20} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.topUserCOntainer}>
+                <TouchableOpacity style={styles.topUserCOntainer} onPress={goHistoryScreen}>
                     {/* svg */}
                     <View style={styles.leftIconBox}>
                         <HistorySvgIcon />
@@ -62,7 +76,7 @@ const BarberProfileData = () => {
                     {/* svg */}
                     <RightBack color={palette.mainBlack} width={20} height={20} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.topUserCOntainer}>
+                <TouchableOpacity style={styles.topUserCOntainer} onPress={openModal}>
                     {/* svg */}
                     <View style={styles.leftIconBox}>
                         <LogOutIcon />
@@ -71,9 +85,28 @@ const BarberProfileData = () => {
                     {/* svg */}
                     <View></View>
                 </TouchableOpacity>
-
-
             </View>
+            <Modal isVisible={logOut} style={styles.modal}>
+                <View style={styles.modalBox}>
+                    <Text style={styles.modalTitle}>
+                        Ilovadan chiqish
+                    </Text>
+                    <Text style={styles.description}>
+                        Barbershop ilovasidan chiqishga
+                    </Text>
+                    <Text style={styles.description}>
+                        ishonchingiz komilmi?
+                    </Text>
+                    <View style={styles.buttonBox}>
+                        <TouchableOpacity style={styles.noButton} onPress={closeModal}>
+                            <Text style={{ color: palette.white }}>Yo'q</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.yesButton}>
+                            <Text style={{ color: palette.white }}>Ha</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     )
 }
@@ -140,6 +173,46 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '400',
         color: palette.mainBlack,
-
     },
+    modal: {
+        width: "90%",
+    },
+    modalBox: {
+        paddingVertical: 20,
+        width: "100%",
+        borderRadius: 8,
+        backgroundColor: palette.white,
+        flexDirection: 'column',
+        paddingHorizontal: 10,
+        justifyContent: 'center',
+    },
+    modalTitle: {
+        fontWeight: "600",
+        fontSize: 18,
+        alignSelf: "center",
+        marginBottom: 15
+    },
+    description: {
+        alignSelf: "center",
+        fontWeight: "400",
+        color: palette.totalGray,
+    },
+    buttonBox: {
+        flexDirection: "row",
+        paddingHorizontal: 60,
+        marginTop: 40,
+        justifyContent: "space-between"
+    },
+    noButton: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 8,
+        backgroundColor: palette.totalGray
+    },
+    yesButton: {
+        paddingHorizontal: 25,
+        paddingVertical: 10,
+        borderRadius: 8,
+        backgroundColor: palette.black
+    }
 });
