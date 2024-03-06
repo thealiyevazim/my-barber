@@ -67,8 +67,8 @@ const BarberFullData = () => {
   };
 
   const goNextPage = () => {
-    navigation.navigate("BarberProfileData")
-  }
+    navigation.navigate("BarberProfileData");
+  };
 
   return (
     <Container style={styles.mainContainer}>
@@ -178,7 +178,6 @@ const BarberFullData = () => {
             fontWeight={"bold"}
             onPress={goNextPage}
             style={styles.saveButton}
-            
           ></Button>
         </Container>
       </Container>
@@ -192,29 +191,18 @@ const BarberFullData = () => {
         transparent={true}
         style={{}}
       >
-        <View
-          style={styles.modalViewStyle}
-        >
+        <View style={styles.modalViewStyle}>
           <TouchableOpacity
             style={styles.modalCloseButtonStyle}
             onPress={() => setIsModalVisible(false)}
           >
             <Text style={styles.closeText}>Chiqish</Text>
           </TouchableOpacity>
-          <View
-            style={styles.galleryImageButtonStyle}
-          >
+          <View style={styles.galleryImageButtonStyle}>
             {/* Camera touchable part */}
-            <TouchableOpacity
-              style={styles.imagePressContainer}
-            >
-              <Image
-                source={CameraIcon}
-                style={styles.modalImageStyle}
-              />
-              <Text style={styles.onCameraText}>
-                CAMERA
-              </Text>
+            <TouchableOpacity style={styles.imagePressContainer}>
+              <Image source={CameraIcon} style={styles.modalImageStyle} />
+              <Text style={styles.onCameraText}>CAMERA</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -222,13 +210,8 @@ const BarberFullData = () => {
               onPress={() => pickImage()}
               // onPress={savePhoto}
             >
-              <Image
-                source={Gallery}
-                style={styles.modalImageStyle}
-              />
-              <Text style={styles.onCameraText}>
-                GALIREYA
-              </Text>
+              <Image source={Gallery} style={styles.modalImageStyle} />
+              <Text style={styles.onCameraText}>GALIREYA</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -246,7 +229,7 @@ const styles = StyleSheet.create({
     height: 60,
     padding: 14,
     gap: 10,
-    marginTop:25,
+    marginTop: 25,
   },
   inputView: {
     alignItems: "flex-start",
@@ -255,13 +238,13 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 10,
   },
-  inputViewFirst:{
+  inputViewFirst: {
     alignItems: "flex-start",
     borderColor: palette.gray,
     borderWidth: 1,
     borderRadius: 6,
     marginBottom: 10,
-    marginTop:65,
+    marginTop: 65,
   },
   sourseImageStyle: {
     width: 79,
@@ -288,8 +271,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   whiteInnerContainer: {
-    marginHorizontal:16,
-    flex:1,
+    marginHorizontal: 16,
+    flex: 1,
   },
   whiteRoundedContainer: {
     flex: 1,
@@ -307,10 +290,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor:palette.mainBlack,
+    backgroundColor: palette.mainBlack,
   },
   // modal styles //
-  modalViewStyle:{
+  modalViewStyle: {
     width: "100%",
     height: "35%",
     backgroundColor: palette.lightGray,
@@ -325,7 +308,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     flexDirection: "row",
   },
-   modalCloseButtonStyle:{
+  modalCloseButtonStyle: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
     height: 40,
@@ -335,29 +318,28 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 15,
     top: 15,
-   },
-   galleryImageButtonStyle:{
+  },
+  galleryImageButtonStyle: {
     flexDirection: "row",
     justifyContent: "space-between",
     flex: 1,
-    gap:10,
-   },
-   imagePressContainer:{
+    gap: 10,
+  },
+  imagePressContainer: {
     flexDirection: "column",
     alignItems: "center",
-   },
-   modalImageStyle:{
+  },
+  modalImageStyle: {
     width: 120,
     height: 120,
     resizeMode: "contain",
-    
-   },
-   onCameraText:{
+  },
+  onCameraText: {
     color: "#067fd0",
-    fontWeight: "900" ,
-   },
-   closeText:{
+    fontWeight: "900",
+  },
+  closeText: {
     fontWeight: "800",
-    color:palette.white,
-   },
+    color: palette.white,
+  },
 });

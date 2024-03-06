@@ -1,41 +1,39 @@
+import { useNavigation } from "@react-navigation/native";
+import { Camera, CameraType } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
+import * as MediaLibrary from "expo-media-library";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  StyleSheet,
-  View,
+  Dimensions,
   Image,
+  StyleSheet,
   TouchableOpacity,
-  TextInput,
-  Dimensions
+  View,
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import React, { useState, useRef, useEffect } from "react";
-import { palette } from "~utils/theme";
-import { Container, Text, Button, Input } from "~components";
-import * as ImagePicker from "expo-image-picker";
-import { Camera, CameraType } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
-import { useNavigation } from "@react-navigation/native";
 import Modal from "react-native-modal";
-import * as Location from "expo-location";
+import { Button, Container, Input, Text } from "~components";
+import { palette } from "~utils/theme";
 // ----- IMG ----- //
 const HeaderImage = require("../../assets/images/HeaderIMage.png");
 const LightCamera = require("../../assets/images/Camera_light.png");
 const Gallery = require("../../assets/images/MyCamera.png");
 const CameraIcon = require("../../assets/images/cameraCircle.png");
 // ----- SVG ----- //
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import LocationIcon from "~assets/icons/LocationIcon";
 import { GOOGLE_MAPS_API_KEY } from "~config/constants";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
+const { height: windowHeight } = Dimensions.get("window");
 
 interface LocationCoordinates {
   latitude: number;
   longitude: number;
 }
-const { height, width } = Dimensions.get('window');
+const { height, width } = Dimensions.get("window");
 
 const EditProfileData: React.FC = () => {
-
-
   // marker properties //
   const [markersList, setMarkersList] = useState("");
 
@@ -75,38 +73,6 @@ const EditProfileData: React.FC = () => {
       }
     })();
   }, []);
-
-  // const determineCurrentLocation = async () => {
-  //   try {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       console.log("Permission to access location was denied");
-  //       return;
-  //     }
-
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-
-  //     const { latitude, longitude } = location.coords;
-
-  //     let addressResponse = await Location.reverseGeocodeAsync({
-  //       latitude,
-  //       longitude,
-  //     });
-
-  //     if (addressResponse.length > 0) {
-  //       let { district, street, name } = addressResponse[0];
-  //       setAddress(`${street} ${name}, ${district}`);
-  //     }
-
-  //     setSelectedLocation({
-  //       latitude,
-  //       longitude,
-  //     });
-  //   } catch (error) {
-  //     console.log("Error:", error);
-  //   }
-  // };
 
   const handleMapRegionChange = async (region: LocationCoordinates) => {
     const { latitude, longitude } = region;
@@ -149,11 +115,6 @@ const EditProfileData: React.FC = () => {
   };
 
   const [mapRegion, setMapRegion] = useState({
-    // latitude: 41.30317369162860,
-    // latitudeDelta: 0.5677638700757441,
-    // longitude: 69.24751281738281,
-    // longitudeDelta: 0.3291258215904236,
-
     latitude: 41.32831126787846,
     latitudeDelta: 0.5677638700757441,
     longitude: 69.24751281738281,
@@ -205,34 +166,6 @@ const EditProfileData: React.FC = () => {
       return <Text>No access storage</Text>;
     }
   };
-
-  // const goNextPage = () => {
-  //   navigation.navigate("testScreen");
-  // };
-
-  // const requestCameraPermission = async () => {
-  //   try {
-  //     const granted = await PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.CAMERA,
-  //       {
-  //         title: "Cool Photo App Camera Permission",
-  //         message:
-  //           "Cool Photo App needs access to your camera " +
-  //           "so you can take awesome pictures.",
-  //         buttonNeutral: "Ask Me Later",
-  //         buttonNegative: "Cancel",
-  //         buttonPositive: "OK",
-  //       }
-  //     );
-  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //       console.log("You can use the camera");
-  //     } else {
-  //       console.log("Camera permission denied");
-  //     }
-  //   } catch (err) {
-  //     console.warn(err);
-  //   }
-  // };
 
   return (
     <Container style={styles.mainContainer}>
@@ -356,96 +289,23 @@ const EditProfileData: React.FC = () => {
           />
         </Container>
       </Container>
-
-      {/* MODAL section  */}
-      {/* <Modal
-        isVisible={isMOdalVisible}
-        style={{}}
+      <Modal
+        isVisible={locationMdalVisible}
+        style={{ width: "90%", height: windowHeight / 2, flex: 1 }}
       >
-        <View style={styles.modalViewStyle}>
-          <TouchableOpacity
-            style={styles.modalCloseButtonStyle}
-            onPress={() => setIsModalVisible(false)}
-          >
-            <Text style={styles.closeText}>Chiqish</Text>
-          </TouchableOpacity>
-          <View style={styles.galleryImageButtonStyle}>
-            <TouchableOpacity
-              style={styles.imagePressContainer}
-              onPress={() => requestCameraPermission()}
-            > 
-              <Image source={CameraIcon} style={styles.modalImageStyle} />
-              <Text style={styles.onCameraText}>CAMERA</Text>
-             
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.imagePressContainer}
-              onPress={() => pickImage()}
-            >
-              <Image source={Gallery} style={styles.modalImageStyle} />
-              <Text style={styles.onCameraText}>GALIREYA</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal> */}
-
-      <Modal isVisible={locationMdalVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.googleSearchContainer}>
             <GooglePlacesAutocomplete
               placeholder="Search"
               onPress={(data, details = null) => {
-                // 'details' is provided when fetchDetails = true
                 console.log(data, details);
               }}
               query={{
                 key: GOOGLE_MAPS_API_KEY,
                 language: "en",
               }}
-              styles={{
-                textInputContainer: {
-                  width: '90%',
-                  borderWidth: 1,
-                  borderColor: palette.mainBlack,
-                  marginTop: 15,
-                  borderRadius: 8,
-                },
-                textInput: {
-                  // width:150,
-                  height: 38,
-                  color: "#5d5d5d",
-                  fontSize: 16,
-                },
-              }}
             />
           </View>
-          {/* <GooglePlacesAutocomplete
-            placeholder="Search"
-            // minLength={2}
-            autoFocus={false}
-            returnKeyType={"default"}
-            fetchDetails={true}
-            styles={{
-              textInputContainer: {
-                // backgroundColor: "grey",
-                width:'90%',
-                borderWidth:2,
-                borderColor:palette.lightGray,
-                marginTop:15,
-              },
-              textInput: {
-                // width:150,
-                height: 30,
-                color: "#5d5d5d",
-                fontSize: 16,
-              },
-              predefinedPlacesDescription: {
-                color: "#1faadb",
-              },
-            }}
-          /> */}
-
           {selectedLocation && (
             <Marker
               coordinate={{
@@ -462,6 +322,8 @@ const EditProfileData: React.FC = () => {
             <MapView
               provider={PROVIDER_GOOGLE}
               style={styles.map}
+              showsUserLocation
+              showsMyLocationButton
               initialRegion={{
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
@@ -478,18 +340,6 @@ const EditProfileData: React.FC = () => {
             >
               <Text style={styles.buttonText}>Joylashuvni tanlash</Text>
             </TouchableOpacity>
-
-            {/* <TouchableOpacity
-              style={styles.determineLocationButton}
-              onPress={determineCurrentLocation}
-            >
-              <LocationIcon
-                width={25}
-                height={25}
-                fill={palette.backWhite}
-                stroke={palette.backWhite}
-              />
-            </TouchableOpacity> */}
           </View>
         </View>
       </Modal>
@@ -504,12 +354,12 @@ const styles = StyleSheet.create({
     // zIndex:1,
   },
   closeLocationButton: {
-    backgroundColor: palette.mainBlack,
     borderRadius: 5,
-    width: 200,
-    height: 40,
+    width: "100%",
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: palette.mainBlack,
   },
 
   determineLocationButton: {
@@ -521,10 +371,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   coupleButton: {
-    marginVertical: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 30,
+    width: "100%",
+    alignSelf: "center",
   },
   newText: {
     color: palette.mainBlack,
@@ -536,23 +384,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalContainer: {
-    flex: 1,
-    height: 500,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: palette.backWhite,
     borderRadius: 10,
-    marginTop: 45,
+    padding: 10,
+    justifyContent: "space-between",
   },
   map: {
-    // flex: 1,
-    width: '95%',
-    height: '90%',
-    borderTopLeftRadius: 10,
-    marginVertical: 8,
-    marginHorizontal: 15,
-    // zIndex:-1,
-    // marginTop:-250,
+    width: "100%",
+    height: "80%",
+    borderRadius: 10,
+    alignSelf: "center",
   },
   button: {
     backgroundColor: "#007AFF",
@@ -746,6 +587,3 @@ const styles = StyleSheet.create({
     position: "relative",
   },
 });
-function setErrorMsg(arg0: string) {
-  throw new Error("Function not implemented.");
-}
