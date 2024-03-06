@@ -8,10 +8,8 @@ import {
   StyleSheet,
 } from "react-native";
 import { palette } from "~utils/theme";
-// ----- SVG ----- //
 import TopDirectionArrow from "~assets/icons/TopSideArrow";
 import BottomDirectionArrow from "~assets/icons/BottomSideArrow";
-import { ViewStyle } from "react-native";
 
 interface Option {
   label: string;
@@ -36,11 +34,9 @@ const ServiceComponent: React.FC = () => {
 
   const handleInputChange = (value: string) => {
     setSearchValue(value);
-    // setPriceValue(value);
     setDropdownVisible(true);
   };
   const handleInputPriceChange = (value: string) => {
-    // setSearchValue(value);
     setPriceValue(value);
     setDropdownVisible(true);
   };
@@ -173,7 +169,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-
   },
   priceShowBox: {
     width: 71,

@@ -61,7 +61,6 @@ const BarberMessageScreen = () => {
           <CodeField
             ref={ref}
             {...props}
-            // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
             value={value}
             onChangeText={setValue}
             cellCount={CELL_COUNT}
@@ -97,7 +96,10 @@ export default BarberMessageScreen;
 
 const styles = StyleSheet.create({
   root: { flex: 1, padding: 25 },
-  codeFieldRoot: { marginTop: 20 },
+  codeFieldRoot: {
+    marginTop: 20,
+    marginHorizontal: 60
+  },
   cell: {
     width: 60,
     height: 45,

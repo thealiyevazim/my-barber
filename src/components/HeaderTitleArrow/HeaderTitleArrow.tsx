@@ -3,18 +3,19 @@ import React from 'react'
 import LeftBack from '~assets/icons/ArrowLeft'
 
 interface Props {
-  onPress: () => void;
+  onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   title?: string;
   changeColor?: boolean
+  withoutArrow?: boolean
 }
 
-function HeaderTitleArrow({ onPress, style, title, changeColor }: Props) {
+function HeaderTitleArrow({ onPress, style, title, changeColor, withoutArrow }: Props) {
   return (
     <View style={[styles.container, style]}>
-      <TouchableOpacity style={styles.leftBack} onPress={onPress}>
+      {withoutArrow ? null : <TouchableOpacity style={styles.leftBack} onPress={onPress}>
         <LeftBack color={changeColor ? "#fff" : "#000"} />
-      </TouchableOpacity>
+      </TouchableOpacity>}
       <View style={styles.titleBox}>
         <Text style={styles.title}>{title}</Text>
       </View>
