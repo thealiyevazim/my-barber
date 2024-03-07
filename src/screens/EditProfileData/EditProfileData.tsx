@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { Camera, CameraType } from "expo-camera";
+import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 import * as MediaLibrary from "expo-media-library";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
@@ -13,13 +13,10 @@ import {
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Modal from "react-native-modal";
-import { Button, Container, Input, Text } from "~components";
+import { Button, Container, HeaderTitleArrow, Input, Text } from "~components";
 import { palette } from "~utils/theme";
 // ----- IMG ----- //
 const HeaderImage = require("../../assets/images/HeaderIMage.png");
-const LightCamera = require("../../assets/images/Camera_light.png");
-const Gallery = require("../../assets/images/MyCamera.png");
-const CameraIcon = require("../../assets/images/cameraCircle.png");
 // ----- SVG ----- //
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import LocationIcon from "~assets/icons/LocationIcon";
@@ -31,20 +28,15 @@ interface LocationCoordinates {
   latitude: number;
   longitude: number;
 }
-const { height, width } = Dimensions.get("window");
 
 const EditProfileData: React.FC = () => {
   // marker properties //
-  const [markersList, setMarkersList] = useState("");
-
-  const [modalVisible, setModalVisible] = useState(false);
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
   const [address, setAddress] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] =
     useState<LocationCoordinates | null>(null);
-  const [openInput, setOpenInput] = useState(true);
   // const showInput = useState(true)
   const [showInput, setShowInput] = useState(true);
 
@@ -122,19 +114,15 @@ const EditProfileData: React.FC = () => {
   });
 
   const navigation = useNavigation();
+
+  const goBack = () => (
+    navigation.goBack()
+  )
+
   const [image, setImage] = useState("");
   const [hasGalleryPermission, setHasGalleryPermission] = useState(false);
-  const [isMOdalVisible, setIsModalVisible] = useState(false);
   const [locationMdalVisible, setLocationModalVisible] = useState(false);
-  // const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const [type, setType] = useState(CameraType.back);
-  const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
-  const CameraRef = useRef(null);
-
-  const [hasPermission, setHasPermission] = useState(null);
-  const [cameraRef, setCameraRef] = useState(null);
-  // ------ Camera Permission ------- //
 
   useEffect(() => {
     (async () => {
@@ -170,6 +158,7 @@ const EditProfileData: React.FC = () => {
   return (
     <Container style={styles.mainContainer}>
       {/*  header image */}
+      <HeaderTitleArrow changeColor style={{ marginBottom: -50, }} onPress={goBack} />
       <Image source={HeaderImage} style={styles.headerImageStyle} />
       <Container style={styles.whiteRoundedContainer}>
         <Container style={styles.whiteInnerContainer}>

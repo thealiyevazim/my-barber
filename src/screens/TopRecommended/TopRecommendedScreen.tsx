@@ -8,21 +8,20 @@ import {
   Dimensions,
   ImageSourcePropType,
 } from "react-native";
-import React, { FC, useState } from "react";
-
-const { height, width } = Dimensions.get("window");
+import React, { FC } from "react";
 
 export interface PropsCarouselData {
   id: number;
   source: ImageSourcePropType;
 }
 
-// ------ SVG images ------ //
 import LocationIcon from "~assets/icons/LocationIcon";
 import StarIcon from "~assets/icons/StartIcon";
 import TimeLine from "~assets/icons/TimeLine";
 import { palette } from "~utils/theme";
-// ------ Card Component style ----- //
+import { HeaderTitleArrow } from "~components";
+import { useNavigation } from "@react-navigation/native";
+import { AuthenticationRouteList } from "~navigation";
 
 interface Props {
   imageSource: any;
@@ -47,49 +46,57 @@ const CardComponent: FC<Props> = ({
   distance,
 }) => {
 
-  return (
-    <View style={styles.undefinedStyle}>
-      <TouchableOpacity style={styles.cardBody}>
-        <Image style={styles.cardImage} source={imageSource} />
+  const navigation = useNavigation<AuthenticationRouteList>()
 
-        <View style={styles.rightSideBox}>
-          <View style={styles.rightTopContainer}>
-            <Text style={styles.cardTitle}>{title}</Text>
-            <View style={styles.locationDiv}>
-              <StarIcon />
-              <Text style={styles.ratioText}>{ratio}/5</Text>
-              <Text style={styles.totalText}>{total}</Text>
-            </View>
-          </View>
-          <View style={styles.workContainer}>
-            <Text
-              style={[
-                styles.workText,
-                isWork ? { color: "green" } : { color: "red" },
-              ]}
-            >
-              {isWork ? "Ochiq" : "Yopiq"}
-            </Text>
-          </View>
-          <View style={styles.rightBottomBox}>
-            <View style={styles.rightTimeBox}>
-              <Text style={styles.workTime}>{opentime}</Text>
-              <TimeLine />
-              <Text style={styles.workTime}>{closetime}</Text>
-            </View>
-            <View style={styles.locationBox}>
-              <LocationIcon />
-              <Text style={styles.distanceText}>{distance}</Text>
-            </View>
+  const onPress = () => {
+    navigation.navigate("barbershopinformation")
+  }
+
+  return (
+    <TouchableOpacity style={styles.cardBody} onPress={onPress}>
+      <Image style={styles.cardImage} source={imageSource} />
+      <View style={styles.rightSideBox}>
+        <View style={styles.rightTopContainer}>
+          <Text style={styles.cardTitle}>{title}</Text>
+          <View style={styles.locationDiv}>
+            <StarIcon />
+            <Text style={styles.ratioText}>{ratio}/5</Text>
+            <Text style={styles.totalText}>{total}</Text>
           </View>
         </View>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.workContainer}>
+          <Text
+            style={[
+              styles.workText,
+              isWork ? { color: "green" } : { color: "red" },
+            ]}
+          >
+            {isWork ? "Ochiq" : "Yopiq"}
+          </Text>
+        </View>
+        <View style={styles.rightBottomBox}>
+          <View style={styles.rightTimeBox}>
+            <Text style={styles.workTime}>{opentime}</Text>
+            <TimeLine />
+            <Text style={styles.workTime}>{closetime}</Text>
+          </View>
+          <View style={styles.locationBox}>
+            <LocationIcon />
+            <Text style={styles.distanceText}>{distance}</Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
-const CardFlatList = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const TopRecommendedScreen = () => {
+
+  const navigation = useNavigation<AuthenticationRouteList>()
+
+  const goBack = () => {
+    navigation.goBack()
+  }
 
   const data = [
     {
@@ -139,8 +146,8 @@ const CardFlatList = () => {
   ];
 
   return (
-    <View>
-
+    <View style={styles.container}>
+      <HeaderTitleArrow title="Oxirgi tashriflar" style={{ paddingBottom: 20 }} onPress={goBack} />
       <FlatList
         data={data}
         pagingEnabled
@@ -157,34 +164,33 @@ const CardFlatList = () => {
             total={item.total}
           />
         )}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        onScroll={(e) => {
-          const x = e.nativeEvent.contentOffset.x;
-          setCurrentIndex(Math.round(x / width));
-        }}
+        contentContainerStyle={styles.flatlistContainer}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
 };
 
-export default CardFlatList;
+export default TopRecommendedScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   cardBody: {
-    width: 330,
-    height: 76,
+    width: "100%",
     padding: 8,
     borderRadius: 10,
-    gap: 12,
+    gap: 20,
     backgroundColor: palette.backWhite,
     borderWidth: 1,
     borderColor: "rgba(20, 20, 92, 0.10)",
     flexDirection: "row",
+    alignItems: "center"
   },
   cardImage: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     borderRadius: 4,
   },
   workContainer: {
@@ -212,13 +218,10 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: palette.mainBlack,
   },
-  undefinedStyle: {
-    marginRight: 7,
-  },
   rightSideBox: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: 5,
+    gap: 10
   },
   rightTopContainer: {
     flexDirection: 'row',
@@ -254,5 +257,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '400',
     color: palette.totalGray,
+  },
+  flatlistContainer: {
+    paddingHorizontal: 15,
+    gap: 8
   }
 });

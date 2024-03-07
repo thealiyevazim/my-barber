@@ -31,6 +31,9 @@ export type AuthenticationRouteList = {
   editProfileData: undefined;
   testScreen: undefined;
   historyScreen: undefined
+  latestVisit: undefined
+  nearbyBarbershop: undefined
+  topRecommended: undefined
 };
 
 export type AuthenticationNavigationProp<

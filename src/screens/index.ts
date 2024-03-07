@@ -10,3 +10,6 @@ export * from "./BarbershopInformationScreen";
 export * from "./BarberRegisterScreen";
 export * from "./BarberMessage";
 export * from "./ClientHistory";
+export * from "./LatestVisitClient";
+export * from "./NearbyBarbershop";
+export * from "./TopRecommended";

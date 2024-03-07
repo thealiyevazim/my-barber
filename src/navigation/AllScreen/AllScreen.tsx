@@ -9,7 +9,7 @@ import { Language } from "~screens/DropDownScreen/Language";
 import { EditProfileData } from "~screens/EditProfileData";
 import { TestScreen } from "~screens/TestScreen";
 import { AuthenticationRouteList } from "~navigation/Authentication";
-import { ClientHistoryScreen } from "~screens";
+import { ClientHistoryScreen, LatestVisitScreen, NearbyBarbershopScreen, TopRecommendedScreen } from "~screens";
 
 const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 
@@ -24,9 +24,11 @@ const ScreenNavigation = () => {
       <Stack.Screen name="editProfileData" component={EditProfileData} />
       <Stack.Screen name="testScreen" component={TestScreen} />
       <Stack.Screen name="historyScreen" component={ClientHistoryScreen} />
+      <Stack.Screen name="latestVisit" component={LatestVisitScreen} />
+      <Stack.Screen name="nearbyBarbershop" component={NearbyBarbershopScreen} />
+      <Stack.Screen name="topRecommended" component={TopRecommendedScreen} />
     </Stack.Navigator>
   );
 };
 
 export default ScreenNavigation;
-
