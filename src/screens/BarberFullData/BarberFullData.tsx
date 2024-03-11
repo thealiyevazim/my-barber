@@ -3,37 +3,29 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ScrollView,
   Modal,
 } from "react-native";
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { palette } from "~utils/theme";
 import { Container, Text, Button, Input } from "~components";
 import * as ImagePicker from "expo-image-picker";
-import { Camera, CameraType } from "expo-camera";
-import { shareAsync } from "expo-sharing";
-import * as Permissions from "expo-permissions";
+import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Archtype } from "immer/dist/internal";
 import { useNavigation } from "@react-navigation/native";
+import { AuthenticationRouteList } from "~navigation";
 
 const HeaderImage = require("../../assets/images/HeaderIMage.png");
-const LightCamera = require("../../assets/images/Camera_light.png");
 const Gallery = require("../../assets/images/MyCamera.png");
 const CameraIcon = require("../../assets/images/cameraCircle.png");
 
 const BarberFullData = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthenticationRouteList>();
   const [image, setImage] = useState(null);
   // const [status, requestPermission] = ImagePicker.useCameraPermissions();
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [isMOdalVisible, setIsModalVisible] = useState(false);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   // const [type,setType] = useState(Camera.Constants.Type.back);
-  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const CameraRef = useRef(null);
-  const [type, setType] = useState(CameraType.back);
-  const [permission, requestPermission] = Camera.useCameraPermissions();
 
   useEffect(() => {
     (async () => {
@@ -208,7 +200,7 @@ const BarberFullData = () => {
             <TouchableOpacity
               style={styles.imagePressContainer}
               onPress={() => pickImage()}
-              // onPress={savePhoto}
+            // onPress={savePhoto}
             >
               <Image source={Gallery} style={styles.modalImageStyle} />
               <Text style={styles.onCameraText}>GALIREYA</Text>

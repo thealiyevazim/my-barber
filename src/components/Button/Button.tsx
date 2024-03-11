@@ -1,7 +1,6 @@
 import React, { ComponentProps, PropsWithChildren } from "react";
 import { Text } from "~components";
 import { Container, Pressable } from "~components";
-import { palette } from "~utils/theme";
 
 type IProps = {
   text?: string;

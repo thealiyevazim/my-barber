@@ -28,7 +28,7 @@ const RegisterNumberScreen = () => {
     useNavigation<AuthenticationNavigationProp<"SignInScreen">>();
   const dispatch = useAppDispatch();
   const onPressPasswordMessage = useCallback(() => {
-    navigation.navigate("EnterMessagePassword");
+    navigation.navigate("UniqueMessageScreen");
   }, []);
   const goBack = () => {
     navigation.goBack();
@@ -57,7 +57,6 @@ const RegisterNumberScreen = () => {
             borderColor={"transparent"}
             margin={0}
             inputMode="numeric"
-            style={styles.innerInputStyle}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -77,9 +76,6 @@ const RegisterNumberScreen = () => {
 export default RegisterNumberScreen;
 
 const styles = StyleSheet.create({
-  innerInputStyle:{
-    width:'100%',
-  },
   mainContainer: {
     flex: 1,
     alignItems: "center",
@@ -109,7 +105,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
     paddingTop: 20,
-    paddingHorizontal:14,
+    paddingHorizontal: 14,
   },
   flagText: {
     marginLeft: 10,
@@ -126,7 +122,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: palette.hideGray,
     borderWidth: 1,
-    borderRadius:6,
+    borderRadius: 6,
     paddingHorizontal: 16,
     padding: 0,
   },

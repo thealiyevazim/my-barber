@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { Dimensions, Image } from "react-native";
-import { Button, Container, Pressable, Text } from "~components";
+import { Button, Container, Text } from "~components";
 import { UserTypesEnum } from "~enums";
 import { AuthenticationNavigationProp } from "~navigation";
 import { setUserType, useAppDispatch } from "~store";
@@ -16,7 +16,7 @@ import {
 } from "react-native";
 
 const SelectRoleScreen = () => {
-  
+
   const navigation =
     useNavigation<AuthenticationNavigationProp<"SelectRoleScreen">>();
 

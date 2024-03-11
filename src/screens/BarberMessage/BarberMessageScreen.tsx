@@ -95,7 +95,10 @@ const BarberMessageScreen = () => {
 export default BarberMessageScreen;
 
 const styles = StyleSheet.create({
-  root: { flex: 1, padding: 25 },
+  root: {
+    flex: 1,
+    padding: 25
+  },
   codeFieldRoot: {
     marginTop: 20,
     marginHorizontal: 60

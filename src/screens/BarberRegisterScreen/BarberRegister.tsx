@@ -4,12 +4,7 @@ import { Container, Text, Button, Input } from "~components";
 import { palette } from "~utils/theme";
 import { AuthenticationRouteList } from "~navigation";
 import { useNavigation } from "@react-navigation/native";
-import {
-  selectedUserTypeSelector,
-  setUserType,
-  useAppDispatch,
-  useAppSelector,
-} from "~store";
+
 const FlagImg = require("../../assets/images/FlagUzb.png");
 import LeftBack from "~assets/icons/ArrowLeft";
 const ReverseMainIMage = require("../../assets/images/ReaverseHeaderIMage.png");
@@ -53,7 +48,6 @@ const BarberRegister = () => {
             borderColor={"transparent"}
             margin={0}
             inputMode="numeric"
-            style={styles.innerinputStyle}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -73,9 +67,6 @@ const BarberRegister = () => {
 export default BarberRegister;
 
 const styles = StyleSheet.create({
-  innerinputStyle: {
-    width: '100%',
-  },
   registerButtonStyle: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,

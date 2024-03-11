@@ -29,7 +29,6 @@ export type AuthenticationRouteList = {
   barbershopinformation: undefined;
   languageScreen: undefined;
   editProfileData: undefined;
-  testScreen: undefined;
   historyScreen: undefined
   latestVisit: undefined
   nearbyBarbershop: undefined

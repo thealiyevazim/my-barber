@@ -41,11 +41,11 @@ const RegisterScreen = () => {
   return (
     <Container style={styles.mainContainer}>
       <View style={styles.topBack}>
-      <TouchableOpacity onPress={goBack}>
-          <LeftBack color={palette.backWhite}/>
-      </TouchableOpacity>
-      <Text style={styles.enterText}>Kirish</Text>
-      <View></View>
+        <TouchableOpacity onPress={goBack}>
+          <LeftBack color={palette.backWhite} />
+        </TouchableOpacity>
+        <Text style={styles.enterText}>Kirish</Text>
+        <View></View>
       </View>
       <Image source={MainImage} style={styles.mainImageStyle} />
       <Container style={styles.whiteCircleContainer}>
@@ -56,7 +56,6 @@ const RegisterScreen = () => {
             borderWidth={0}
             borderColor={"transparent"}
             margin={0}
-            style={styles.innerInputStyle}
           />
         </View>
         <View style={styles.inputcontainer}>
@@ -66,7 +65,6 @@ const RegisterScreen = () => {
             borderWidth={0}
             borderColor={"transparent"}
             margin={0}
-            style={styles.innerInputStyle}
           />
         </View>
         <TouchableOpacity style={styles.registerButtonContainerStyle}>
@@ -85,19 +83,16 @@ const RegisterScreen = () => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
-  innerInputStyle:{
-    width:'100%',
-  },
   mainContainer: {
     flex: 1,
     alignItems: "center",
     backgroundColor: palette.mainBlack,
     justifyContent: "center",
-    paddingTop:45,
+    paddingTop: 45,
   },
   mainImageStyle: {
     // marginHorizontal:16,
-    marginVertical:64,
+    marginVertical: 64,
   },
   whiteCircleContainer: {
     flex: 1,
@@ -105,16 +100,16 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
-    padding:14,
+    padding: 14,
   },
   inputcontainer: {
     flexDirection: "row",
     borderColor: palette.hideGray,
     borderWidth: 1,
-    borderRadius:6,
+    borderRadius: 6,
     marginTop: 10,
     padding: 0,
-    width:'100%'
+    width: '100%'
   },
   registerButtonContainerStyle: {
     marginTop: 260,
@@ -124,18 +119,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: 60,
     gap: 10,
-    justifyContent:'center',
-    width:'100%'
+    justifyContent: 'center',
+    width: '100%'
   },
-  topBack:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    width:'90%'
+  topBack: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '90%'
   },
-  enterText:{
-    fontSize:26,
-    fontWeight:'400',
-    color:palette.backWhite,
+  enterText: {
+    fontSize: 26,
+    fontWeight: '400',
+    color: palette.backWhite,
   },
 });

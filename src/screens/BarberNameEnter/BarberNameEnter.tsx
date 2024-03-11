@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useCallback, useState } from "react";
-import { Container, Text, Button, Input } from "~components";
+import { Container, Button } from "~components";
 import { palette } from "~utils/theme";
 import { AuthenticationNavigationProp, AuthenticationRouteList } from "~navigation";
 import { useNavigation } from "@react-navigation/native";

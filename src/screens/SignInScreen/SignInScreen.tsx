@@ -3,7 +3,7 @@ import { Container, Text, Button } from "~components";
 import { selectedUserTypeSelector, useAppSelector } from "~store";
 // import InputContainer from "./components/InputContainer";
 const MainImage = require("../../assets/images/HeaderIMage.png");
-import { StyleSheet, View, Image, Pressable, StatusBar,TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, Pressable, StatusBar, TouchableOpacity } from "react-native";
 import { palette } from "~utils/theme";
 import GmailInput from "~screens/SignInScreen/components/GmailInput";
 import PasswordInput from "~screens/SignInScreen/components/PasswordInput";
@@ -35,12 +35,12 @@ const SignInScreen = () => {
 
   return (
     <Container style={styles.mainContainer}>
-      <StatusBar barStyle="white-content" backgroundColor="transpatent" />
+      <StatusBar backgroundColor="transpatent" />
       {/* <Header/> */}
       <View style={styles.topPreviousButtonStyle}>
-      <TouchableOpacity style={styles.backButtonStyle} onPress={goBack}>
-        <LeftBack  color={palette.white}/>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.backButtonStyle} onPress={goBack}>
+          <LeftBack color={palette.white} />
+        </TouchableOpacity>
         <Text style={styles.enterText}>Kirish</Text>
         <View></View>
       </View>
@@ -82,10 +82,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: palette.mainBlack,
-    paddingTop:45,
+    paddingTop: 45,
   },
   mainImage: {
-    marginHorizontal:16,
+    marginHorizontal: 16,
     marginBottom: 60,
   },
   whiteRoundedContainer: {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
-    paddingTop:10,
+    paddingTop: 10,
   },
   pressableStyle: {
     marginTop: 10,
@@ -128,18 +128,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  backButtonStyle:{
+  backButtonStyle: {
   },
-  topPreviousButtonStyle:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    marginVertical:15,
-    width:'90%'
+  topPreviousButtonStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 15,
+    width: '90%'
   },
-  enterText:{
-    fontSize:26,
-    fontWeight:'400',
+  enterText: {
+    fontSize: 26,
+    fontWeight: '400',
 
   },
 });

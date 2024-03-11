@@ -7,13 +7,10 @@ import {
 } from "react-native";
 import React, { useCallback } from "react";
 import { palette } from "~utils/theme";
-import { Container, Text, Button, Input } from "~components";
+import { Container, Text, Button } from "~components";
 import { AuthenticationNavigationProp } from "~navigation";
 import {
-  selectedUserTypeSelector,
-  setUserType,
   useAppDispatch,
-  useAppSelector,
 } from "~store";
 import { useNavigation } from "@react-navigation/native";
 // ------ SVG ------ //
@@ -92,7 +89,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
     paddingTop: 20,
-    paddingHorizontal:16,
+    paddingHorizontal: 16,
   },
   numberText: {
     color: palette.mainBlack,
@@ -110,10 +107,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: palette.hideGray,
     borderWidth: 1,
-    borderRadius:6,
-    height:50,
-    alignItems:'center',
-    paddingHorizontal:14,
+    borderRadius: 6,
+    height: 50,
+    alignItems: 'center',
+    paddingHorizontal: 14,
   },
   topBack: {
     flexDirection: "row",
@@ -126,14 +123,14 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: palette.backWhite,
   },
-  passwordButtonStyle:{
+  passwordButtonStyle: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
     height: 60,
-    justifyContent:'center',
+    justifyContent: 'center',
   },
-  passwordButtonContainer:{
+  passwordButtonContainer: {
     borderRadius: 8,
-    marginTop:390,
+    marginTop: 390,
   },
 });
