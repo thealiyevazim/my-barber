@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import {
   CodeField,
@@ -9,8 +9,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { palette } from "~utils/theme";
 import { Container, Button } from "~components";
-// ------ IMG ------ //
-const ReverseMainIMage = require('../../assets/images/ReaverseHeaderIMage.png');
 // ----- SVG ----- // 
 import LeftBack from "~assets/icons/ArrowLeft";
 import { AuthenticationRouteList } from "~navigation";
@@ -35,6 +33,33 @@ const BarberMessageScreen = () => {
     value,
     setValue,
   });
+
+  const [time, setTime] = useState(60);
+  const [showResendButton, setShowResendButton] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (time > 0) {
+        setTime(prevTime => prevTime - 1);
+      } else {
+        setShowResendButton(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+
+  }, [time]);
+
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
+
+  const handleResend = () => {
+    setTime(60);
+    setShowResendButton(false);
+  };
 
   return (
     <Container style={styles.mainContainer}>
@@ -77,6 +102,18 @@ const BarberMessageScreen = () => {
               </Text>
             )}
           />
+          <View style={styles.timeCheckBox}>
+            {showResendButton ? (
+              <TouchableOpacity style={styles.reSendButton} onPress={handleResend}>
+                <Text style={styles.buttonText}>Kodni qayta yuborish</Text>
+              </TouchableOpacity>
+            ) : (
+              <View style={{ width: "100%" }}>
+                <Text style={styles.timeText}>{formatTime(time)} soniyadan so'ng qayta</Text>
+                <Text style={styles.timeText}>yuborish mumkin</Text>
+              </View>
+            )}
+          </View>
         </SafeAreaView>
         <View style={styles.buttonContainer}>
           <Button
@@ -131,6 +168,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     marginBottom: 15,
+  },
+  timeCheckBox: {
+    marginTop: 20,
+    marginHorizontal: 60
+  },
+  reSendButton: {
+    padding: 5
+  },
+  buttonText: {
+    fontWeight: "400",
+    fontSize: 16,
+    color: palette.mainBlue
+  },
+  timeText: {
+    fontWeight: "400",
+    fontSize: 16,
+    color: palette.totalGray,
+    alignSelf: "center"
   },
   passwordButton: {
     backgroundColor: palette.mainBlack,

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import {
   CodeField,
@@ -34,6 +34,33 @@ const UniqueMessageScreen = () => {
     setValue,
   });
 
+  const [time, setTime] = useState(60);
+  const [showResendButton, setShowResendButton] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (time > 0) {
+        setTime(prevTime => prevTime - 1);
+      } else {
+        setShowResendButton(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+
+  }, [time]);
+
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
+
+  const handleResend = () => {
+    setTime(60);
+    setShowResendButton(false);
+  };
+
   return (
     <Container style={styles.mainContainer}>
       <View style={styles.topBackContainer}>
@@ -49,7 +76,6 @@ const UniqueMessageScreen = () => {
       <View style={styles.imageDivStyle}>
         <Text style={styles.centerTextStyle}>Faollashtirish kodi raqamingizga yuborildi</Text>
         <Text style={styles.numberTextStyle}>  +998 94 *** ** 77</Text>
-
       </View>
       <TouchableOpacity style={styles.prevContainer} onPress={goEditNumber}>
         <Text style={styles.prevButtonText}>Raqamni o'zgartirish!</Text>
@@ -59,7 +85,6 @@ const UniqueMessageScreen = () => {
           <CodeField
             ref={ref}
             {...props}
-            // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
             value={value}
             onChangeText={setValue}
             cellCount={CELL_COUNT}
@@ -76,6 +101,18 @@ const UniqueMessageScreen = () => {
               </Text>
             )}
           />
+          <View style={styles.timeCheckBox}>
+            {showResendButton ? (
+              <TouchableOpacity style={styles.reSendButton} onPress={handleResend}>
+                <Text style={styles.buttonText}>Kodni qayta yuborish</Text>
+              </TouchableOpacity>
+            ) : (
+              <View style={{ width: "100%" }}>
+                <Text style={styles.timeText}>{formatTime(time)} soniyadan so'ng qayta</Text>
+                <Text style={styles.timeText}>yuborish mumkin</Text>
+              </View>
+            )}
+          </View>
         </SafeAreaView>
         <View style={styles.buttonContainer}>
           <Button
@@ -125,6 +162,24 @@ const styles = StyleSheet.create({
     marginTop: 15,
     flex: 1,
   },
+  timeCheckBox: {
+    marginTop: 20,
+    marginHorizontal: 60
+  },
+  reSendButton: {
+    padding: 5
+  },
+  buttonText: {
+    fontWeight: "400",
+    fontSize: 16,
+    color: palette.mainBlue
+  },
+  timeText: {
+    fontWeight: "400",
+    fontSize: 16,
+    color: palette.totalGray,
+    alignSelf: "center"
+  },
   buttonContainer: {
     marginHorizontal: 16,
     marginTop: 10,
@@ -156,14 +211,12 @@ const styles = StyleSheet.create({
     color: palette.white,
     fontSize: 26,
     fontWeight: '400',
-
   },
   imageDivStyle: {
     paddingHorizontal: 10,
     marginVertical: 15,
     alignItems: 'center',
     flexDirection: 'column',
-    // gap:10,
   },
   centerTextStyle: {
     color: palette.backWhite,
