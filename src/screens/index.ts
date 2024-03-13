@@ -5,7 +5,7 @@ export * from "./BarberProfileData";
 export * from "./BarberRegisterScreen";
 export * from "./BarbershopInformationScreen";
 export * from "./BookingClient";
-export * from "./ClientHistory";
+export * from "./BarberHistory";
 export * from "./DropDownScreen";
 export * from "./EditProfileData";
 export * from "./EnterMessagePassword";
@@ -22,3 +22,5 @@ export * from "./SelectRoleScreen";
 export * from "./SignInScreen";
 export * from "./TopRecommended";
 export * from "./UniqueMessageScreen";
+export * from "./ClientProfileData"
+export * from "./ClientEditProfile"

@@ -2,14 +2,14 @@ import React from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar } from "react-native"
 import { palette } from "~utils/theme";
 import { useNavigation } from "@react-navigation/native";
-
-// ------ IMG ------ //
-import SecondTopImage from '../../assets/images/SecondScreenImage.png'
 // ------ SVG ------ //
 import RightBack from "~assets/icons/RightArrow";
 import { AuthenticationRouteList } from "~navigation";
 
+const SecondTopImage = require("../../assets/images/SecondScreenImage.png")
+
 const EnterenceScreenTwo = () => {
+
     const navigation = useNavigation<AuthenticationRouteList>();
 
     const goNextPage = () => {

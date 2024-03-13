@@ -1,1 +1,1 @@
-export { default as EnterScreenTwo } from "./EnterScreenTwo";
+export { default as EnterenceScreenTwo } from "./EnterScreenTwo";

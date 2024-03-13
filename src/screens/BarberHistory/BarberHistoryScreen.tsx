@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { BooKDataModal, HeaderTitleArrow, OldBookedComponent } from '~components'
 import { useNavigation } from '@react-navigation/native'
 
-const ClientHistoryScreen = () => {
+const BarberHistoryScreen = () => {
 
   const navigation = useNavigation()
   const [modalOldBooked, setModalOldBooked] = useState(false);
@@ -32,7 +32,7 @@ const ClientHistoryScreen = () => {
   )
 }
 
-export default ClientHistoryScreen
+export default BarberHistoryScreen
 
 const styles = StyleSheet.create({
   container: {

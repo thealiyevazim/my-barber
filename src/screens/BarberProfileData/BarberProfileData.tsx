@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar } from "react-native"
 import { palette } from "~utils/theme";
 import { useNavigation } from "@react-navigation/native";
-// ----- IMG ----- //
-import ProfileIMage from '../../assets/images/ProfileRoundedImage.png';
 // ------ SVG ------ //
 import UserIcon from "~assets/icons/UserIcon";
 import LanguageIcon from "~assets/icons/LanguageIcon";
@@ -13,6 +11,7 @@ import RightBack from "~assets/icons/RightArrow";
 import { AuthenticationRouteList } from "~navigation";
 import Modal from "react-native-modal";
 
+const ProfileIMage = require("../../assets/images/ProfileRoundedImage.png")
 
 const BarberProfileData = () => {
     const navigation = useNavigation<AuthenticationRouteList>();
@@ -83,7 +82,6 @@ const BarberProfileData = () => {
                         <Text style={styles.iconText}>Akkauntdan Chiqish</Text>
                     </View>
                     {/* svg */}
-                    <View></View>
                 </TouchableOpacity>
             </View>
             <Modal isVisible={logOut} style={styles.modal}>

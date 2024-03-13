@@ -33,6 +33,7 @@ export type AuthenticationRouteList = {
   latestVisit: undefined
   nearbyBarbershop: undefined
   topRecommended: undefined
+  clientEdit: undefined
 };
 
 export type AuthenticationNavigationProp<

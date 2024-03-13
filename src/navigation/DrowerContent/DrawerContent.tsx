@@ -6,8 +6,6 @@ import {
   Platform,
 } from "react-native";
 import React from "react";
-
-import { BarberProfileData } from "~screens/BarberProfileData";
 import Home from "~screens/DropDownScreen/Home/Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import "react-native-gesture-handler";
@@ -16,6 +14,7 @@ import CalendarIcon from "~assets/icons/CalendarIcon";
 import UserICon from "~assets/icons/UserIcon";
 import { palette } from "~utils/theme";
 import { BookingScreen } from "~screens/DropDownScreen/BookingScreen";
+import { ClientProfileData } from "~screens";
 
 const Tab = createBottomTabNavigator();
 
@@ -120,8 +119,7 @@ export default function DrawerContent() {
       tabBar={(props: any) => <MyTabBar {...props} />}>
       <Tab.Screen name={tabBarData[0].label} component={BookingScreen} />
       <Tab.Screen name={tabBarData[1].label} component={Home} />
-      <Tab.Screen name={tabBarData[2].label} component={BarberProfileData} />
+      <Tab.Screen name={tabBarData[2].label} component={ClientProfileData} />
     </Tab.Navigator>
   );
 }
-const styles = StyleSheet.create({});

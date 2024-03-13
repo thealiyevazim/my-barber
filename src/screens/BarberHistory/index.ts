@@ -1,0 +1,1 @@
+export {default as BarberHistoryScreen} from './BarberHistoryScreen'

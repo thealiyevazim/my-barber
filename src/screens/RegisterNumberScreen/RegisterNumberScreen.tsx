@@ -2,34 +2,27 @@ import {
   StyleSheet,
   View,
   Image,
-  Pressable,
   TouchableOpacity,
 } from "react-native";
 import React, { useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { AuthenticationNavigationProp } from "~navigation";
-import {
-  selectedUserTypeSelector,
-  setUserType,
-  useAppDispatch,
-  useAppSelector,
-} from "~store";
-import { UserTypesEnum } from "~enums";
+import { AuthenticationRouteList } from "~navigation";
 import { Container, Text, Button, Input } from "~components";
 import { palette } from "~utils/theme";
-const FlagImg = require("../../assets/images/FlagUzb.png");
 // ----- SVG ----- //
 import LeftBack from "~assets/icons/ArrowLeft";
 
+const FlagImg = require("../../assets/images/FlagUzb.png");
 const ReverseMainIMage = require("../../assets/images/ReaverseHeaderIMage.png");
+
 const RegisterNumberScreen = () => {
-  const userType = useAppSelector(selectedUserTypeSelector);
-  const navigation =
-    useNavigation<AuthenticationNavigationProp<"SignInScreen">>();
-  const dispatch = useAppDispatch();
+
+  const navigation = useNavigation<AuthenticationRouteList>();
+
   const onPressPasswordMessage = useCallback(() => {
     navigation.navigate("UniqueMessageScreen");
   }, []);
+
   const goBack = () => {
     navigation.goBack();
   };
@@ -41,7 +34,6 @@ const RegisterNumberScreen = () => {
           <LeftBack color={palette.backWhite} />
         </TouchableOpacity>
         <Text style={styles.enterText}>Kirish</Text>
-        <View></View>
       </View>
       <Image source={ReverseMainIMage} style={styles.reverseMainImage} />
       <Container style={styles.whiteCircleContainer}>
@@ -66,7 +58,7 @@ const RegisterNumberScreen = () => {
             fontWeight={"bold"}
             onPress={onPressPasswordMessage}
             style={styles.registerButton}
-          ></Button>
+          />
         </View>
       </Container>
     </Container>

@@ -2,13 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // ----- SCREENS ----- //
 import TabbarScreen from "../DrowerContent/DrawerContent"
-import { BookingBarber } from "~screens/BookingClient";
-import { BarbershopInformation } from "~screens/BarbershopInformationScreen";
-import { BarberProfileData } from "~screens/BarberProfileData";
-import { Language } from "~screens/DropDownScreen/Language";
-import { EditProfileData } from "~screens/EditProfileData";
 import { AuthenticationRouteList } from "~navigation/Authentication";
-import { ClientHistoryScreen, LatestVisitScreen, NearbyBarbershopScreen, TopRecommendedScreen } from "~screens";
+import { BarberHistoryScreen, BarberProfileData, BarbershopInformation, BookingBarber, ClientEditProfile, EditProfileData, Language, LatestVisitScreen, NearbyBarbershopScreen, TopRecommendedScreen } from "~screens";
 
 const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 
@@ -21,10 +16,11 @@ const ScreenNavigation = () => {
       <Stack.Screen name="BarberProfileData" component={BarberProfileData} />
       <Stack.Screen name="languageScreen" component={Language} />
       <Stack.Screen name="editProfileData" component={EditProfileData} />
-      <Stack.Screen name="historyScreen" component={ClientHistoryScreen} />
+      <Stack.Screen name="historyScreen" component={BarberHistoryScreen} />
       <Stack.Screen name="latestVisit" component={LatestVisitScreen} />
       <Stack.Screen name="nearbyBarbershop" component={NearbyBarbershopScreen} />
       <Stack.Screen name="topRecommended" component={TopRecommendedScreen} />
+      <Stack.Screen name="clientEdit" component={ClientEditProfile} />
     </Stack.Navigator>
   );
 };
