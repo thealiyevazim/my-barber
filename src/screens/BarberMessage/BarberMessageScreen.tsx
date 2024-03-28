@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView ,Image,TouchableOpacity} from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import {
   CodeField,
   Cursor,
@@ -9,16 +9,15 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { palette } from "~utils/theme";
 import { Container, Button } from "~components";
-// ------ IMG ------ //
-const ReverseMainIMage = require('../../assets/images/ReaverseHeaderIMage.png');
 // ----- SVG ----- // 
 import LeftBack from "~assets/icons/ArrowLeft";
+import { AuthenticationRouteList } from "~navigation";
 
 const CELL_COUNT = 4;
 
 const BarberMessageScreen = () => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthenticationRouteList>();
   const goBack = () => {
     navigation.goBack();
   };
@@ -35,15 +34,42 @@ const BarberMessageScreen = () => {
     setValue,
   });
 
+  const [time, setTime] = useState(60);
+  const [showResendButton, setShowResendButton] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (time > 0) {
+        setTime(prevTime => prevTime - 1);
+      } else {
+        setShowResendButton(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+
+  }, [time]);
+
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
+
+  const handleResend = () => {
+    setTime(60);
+    setShowResendButton(false);
+  };
+
   return (
     <Container style={styles.mainContainer}>
       <View style={styles.topBackContainer}>
-        <TouchableOpacity  onPress={goBack}>
-            <LeftBack color={palette.backWhite} hitSlop={{left:10,right:10,top:10,bottom:10}} />
+        <TouchableOpacity onPress={goBack}>
+          <LeftBack color={palette.backWhite} hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }} />
         </TouchableOpacity>
         <View style={styles.messageCentrBox}>
-        <Text style={styles.openTextStyle}>SMS</Text>
-        <Text style={styles.openTextRightStyle}>kodni kiritnig</Text>
+          <Text style={styles.openTextStyle}>SMS</Text>
+          <Text style={styles.openTextRightStyle}>kodni kiritnig</Text>
         </View>
         <Text> </Text>
       </View>
@@ -60,7 +86,6 @@ const BarberMessageScreen = () => {
           <CodeField
             ref={ref}
             {...props}
-            // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
             value={value}
             onChangeText={setValue}
             cellCount={CELL_COUNT}
@@ -77,6 +102,18 @@ const BarberMessageScreen = () => {
               </Text>
             )}
           />
+          <View style={styles.timeCheckBox}>
+            {showResendButton ? (
+              <TouchableOpacity style={styles.reSendButton} onPress={handleResend}>
+                <Text style={styles.buttonText}>Kodni qayta yuborish</Text>
+              </TouchableOpacity>
+            ) : (
+              <View style={{ width: "100%" }}>
+                <Text style={styles.timeText}>{formatTime(time)} soniyadan so'ng qayta</Text>
+                <Text style={styles.timeText}>yuborish mumkin</Text>
+              </View>
+            )}
+          </View>
         </SafeAreaView>
         <View style={styles.buttonContainer}>
           <Button
@@ -95,22 +132,28 @@ const BarberMessageScreen = () => {
 export default BarberMessageScreen;
 
 const styles = StyleSheet.create({
-  root: { flex: 1, padding: 25 },
-  codeFieldRoot: { marginTop: 20 },
+  root: {
+    flex: 1,
+    padding: 25
+  },
+  codeFieldRoot: {
+    marginTop: 20,
+    marginHorizontal: 60
+  },
   cell: {
     width: 60,
     height: 45,
     lineHeight: 38,
     fontSize: 26,
     borderWidth: 2,
-    borderColor:palette.totalGray,
+    borderColor: palette.totalGray,
     textAlign: "center",
     justifyContent: "space-evenly",
     borderRadius: 8,
   },
   focusCell: {
     borderColor: palette.mainBlack,
-    color:palette.mainBlack,
+    color: palette.mainBlack,
   },
   topContainer: {
     width: "100%",
@@ -118,75 +161,93 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
     marginTop: 15,
-    flex:1,
+    flex: 1,
   },
   buttonContainer: {
-    marginHorizontal:16,
+    marginHorizontal: 16,
     marginTop: 10,
     borderRadius: 8,
     marginBottom: 15,
+  },
+  timeCheckBox: {
+    marginTop: 20,
+    marginHorizontal: 60
+  },
+  reSendButton: {
+    padding: 5
+  },
+  buttonText: {
+    fontWeight: "400",
+    fontSize: 16,
+    color: palette.mainBlue
+  },
+  timeText: {
+    fontWeight: "400",
+    fontSize: 16,
+    color: palette.totalGray,
+    alignSelf: "center"
   },
   passwordButton: {
     backgroundColor: palette.mainBlack,
     borderRadius: 8,
     height: 60,
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   mainContainer: {
     flex: 1,
     backgroundColor: palette.mainBlack,
-    flexDirection:'column',
-    paddingTop:45,
+    flexDirection: 'column',
+    paddingTop: 45,
   },
-  mainImage:{
-    resizeMode:'cover',
+  mainImage: {
+    resizeMode: 'cover',
   },
-  topBackContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingHorizontal:10,
+  topBackContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
-  openTextStyle:{
-    color:palette.white,
-    fontSize:26,
-    fontWeight:'400',
-   
+  openTextStyle: {
+    color: palette.white,
+    fontSize: 26,
+    fontWeight: '400',
+
   },
-  imageDivStyle:{
-    paddingHorizontal:10,
-    marginVertical:15,
-    alignItems:'center',
-    flexDirection:'column',
+  imageDivStyle: {
+    paddingHorizontal: 10,
+    marginVertical: 15,
+    alignItems: 'center',
+    flexDirection: 'column',
     // gap:10,
   },
-  centerTextStyle:{
-    color:palette.backWhite,
-    width:230,
-    fontSize:12,
+  centerTextStyle: {
+    color: palette.backWhite,
+    width: 230,
+    fontSize: 12,
   },
-  numberTextStyle:{
-    color:palette.backWhite,
-    fontSize:12,
+  numberTextStyle: {
+    color: palette.backWhite,
+    fontSize: 12,
   },
-  messageCentrBox:{
-    flexDirection:'row',
-    alignItems:'baseline',
-    gap:5,
+  messageCentrBox: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 5,
   },
-  openTextRightStyle:{
-    fontSize:20,
-    fontWeight:'400',
-    color:palette.backWhite,
+  openTextRightStyle: {
+    fontSize: 20,
+    fontWeight: '400',
+    color: palette.backWhite,
   },
-  prevButtonText:{
-    fontSize:12,
-    color:palette.backWhite,
-    fontWeight:'400',
-    textDecorationLine:"underline",
+  prevButtonText: {
+    fontSize: 12,
+    color: palette.backWhite,
+    fontWeight: '400',
+    textDecorationLine: "underline",
   },
-  prevContainer:{
-    alignItems:'center',
-    marginTop:75,
+  prevContainer: {
+    alignItems: 'center',
+    marginTop: 75,
   },
 });

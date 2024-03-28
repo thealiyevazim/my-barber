@@ -1,13 +1,14 @@
 import React from "react"
-import { View ,Text ,StyleSheet,Image,TouchableOpacity,StatusBar} from "react-native"
+import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar } from "react-native"
 import { palette } from "~utils/theme";
 import { useNavigation } from "@react-navigation/native";
 
 // ------ IMG ------ // 
 import BlueIconImage from '../../assets/images/barberNewBlackImage.png'
+import { AuthenticationRouteList } from "~navigation";
 
 const OpenScreen: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<AuthenticationRouteList>();
 
     const goNextPage = () => {
         navigation.navigate("EnterenceScreenThree")
@@ -15,14 +16,14 @@ const OpenScreen: React.FC = () => {
 
     return (
         <View style={styles.mainContainer}>
-             <StatusBar backgroundColor="transparent" barStyle="dark-content" />
+            <StatusBar backgroundColor="transparent" barStyle="dark-content" />
             <View style={styles.imageContainer}>
-             <Image source={BlueIconImage}  style={styles.iconImageStyle}/>
+                <Image source={BlueIconImage} style={styles.iconImageStyle} />
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.middleCenterText}>
-                Select the language 
-                of the application
+                    Select the language
+                    of the application
                 </Text>
             </View>
 
@@ -41,52 +42,52 @@ const OpenScreen: React.FC = () => {
 export default OpenScreen;
 
 const styles = StyleSheet.create({
-    mainContainer:{
+    mainContainer: {
         flex: 1,
         backgroundColor: palette.backWhite,
-        flexDirection:'column',
-        paddingTop:45,
-        alignItems:'center',
+        flexDirection: 'column',
+        paddingTop: 45,
+        alignItems: 'center',
     },
-    iconImageStyle:{
-        width:255,
-        height:255,
-        resizeMode:'cover',
-        borderRadius:112,
+    iconImageStyle: {
+        width: 255,
+        height: 255,
+        resizeMode: 'cover',
+        borderRadius: 112,
     },
-    imageContainer:{
-        width:255,
-        height:255,
-        marginVertical:60,
+    imageContainer: {
+        width: 255,
+        height: 255,
+        marginVertical: 60,
     },
-    textContainer:{
+    textContainer: {
 
     },
-    middleCenterText:{
-        fontSize:22,
-        textAlign:'center',
-        fontWeight:'400',
-        color:palette.mainBlack,
-        width:200,
+    middleCenterText: {
+        fontSize: 22,
+        textAlign: 'center',
+        fontWeight: '400',
+        color: palette.mainBlack,
+        width: 200,
     },
-    languageBox:{
-        flexDirection:'row',
-        alignItems:'center',
-        gap:27,
-        marginTop:60,
+    languageBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 27,
+        marginTop: 60,
     },
-    languageButton:{
-        width:87,
-        height:54,
-        borderRadius:8,
-        backgroundColor:palette.mainBlack,
-        justifyContent:'center',
-        alignItems:'center',
+    languageButton: {
+        width: 87,
+        height: 54,
+        borderRadius: 8,
+        backgroundColor: palette.mainBlack,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    buttonText:{
-        color:palette.backWhite,
-        fontSize:18,
-        fontWeight:'700',
+    buttonText: {
+        color: palette.backWhite,
+        fontSize: 18,
+        fontWeight: '700',
     },
 });
 

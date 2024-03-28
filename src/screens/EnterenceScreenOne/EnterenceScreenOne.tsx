@@ -12,9 +12,10 @@ import { useNavigation } from "@react-navigation/native";
 
 // ------ IMG ------ //
 import FirstTopImage from "../../assets/images/ThirdScreenImage.png";
+import { AuthenticationRouteList } from "~navigation";
 
 const EnterenceScreenOne = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthenticationRouteList>();
 
   const goNextPage = () => {
     navigation.navigate("SelectRoleScreen");

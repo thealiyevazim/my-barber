@@ -8,7 +8,7 @@ import {
   Dimensions,
   ImageSourcePropType,
 } from "react-native";
-import React, { FC ,useState} from "react";
+import React, { FC, useState } from "react";
 
 const { height, width } = Dimensions.get("window");
 
@@ -19,12 +19,9 @@ export interface PropsCarouselData {
 
 // ------ SVG images ------ //
 import LocationIcon from "~assets/icons/LocationIcon";
-import DoteIcon from "~assets/icons/DoteIcon";
 import StarIcon from "~assets/icons/StartIcon";
 import TimeLine from "~assets/icons/TimeLine";
 import { palette } from "~utils/theme";
-import { spacing } from "@shopify/restyle";
-
 // ------ Card Component style ----- //
 
 interface Props {
@@ -77,11 +74,11 @@ const CardComponent: FC<Props> = ({
           <View style={styles.rightBottomBox}>
             <View style={styles.rightTimeBox}>
               <Text style={styles.workTime}>{opentime}</Text>
-              <TimeLine  />
+              <TimeLine />
               <Text style={styles.workTime}>{closetime}</Text>
             </View>
             <View style={styles.locationBox}>
-              <LocationIcon  style={styles.locationStyle}/>
+              <LocationIcon />
               <Text style={styles.distanceText}>{distance}</Text>
             </View>
           </View>
@@ -144,48 +141,29 @@ const CardFlatList = () => {
   return (
     <View>
 
-        <FlatList
-          data={data}
-          pagingEnabled
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <CardComponent
-              imageSource={item.imageSource}
-              isWork={item.isWork}
-              opentime={item.opentime}
-              closetime={item.closetime}
-              title={item.title}
-              distance={item.distance}
-              ratio={item.ratio}
-              total={item.total}
-            />
-          )}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        //   contentContainerStyle={styles.contentContainer}
-          onScroll={(e) => {
-            const x = e.nativeEvent.contentOffset.x;
-            setCurrentIndex(Math.round(x / width));
-          }}
-        />
-           <View style={styles.controllerStyle}>
-        {data.map((item, index) => {
-          return (
-            <View
-              key={index}
-              style={{
-                width: currentIndex === index ? 6 : 6,
-                height: currentIndex === index ? 6 : 6,
-                borderRadius: currentIndex === index ? 3 : 3,
-                backgroundColor: currentIndex === index ? "#181818" : "#9f9d9d",
-              }}
-              >
-
-            </View>
-          );
-        })}
-      </View>
-
+      <FlatList
+        data={data}
+        pagingEnabled
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <CardComponent
+            imageSource={item.imageSource}
+            isWork={item.isWork}
+            opentime={item.opentime}
+            closetime={item.closetime}
+            title={item.title}
+            distance={item.distance}
+            ratio={item.ratio}
+            total={item.total}
+          />
+        )}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        onScroll={(e) => {
+          const x = e.nativeEvent.contentOffset.x;
+          setCurrentIndex(Math.round(x / width));
+        }}
+      />
     </View>
   );
 };
@@ -219,16 +197,10 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: palette.green,
   },
-  timeText: {
-    fontSize: 10,
-    fontWeight: "400",
-    opacity: 0.4,
-    color: palette.mainBlack,
-  },
   cardTitle: {
     fontSize: 16,
     fontWeight: "500",
-    color: palette.mainBlack ,
+    color: palette.mainBlack,
   },
   locationBox: {
     flexDirection: "row",
@@ -240,70 +212,47 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: palette.mainBlack,
   },
-  buyButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 180,
-    height: 32,
-    backgroundColor: palette.mainBlack,
-    borderRadius: 10,
-  },
-  buyText: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: palette.backWhite,
-  },
-  flatOwnStyle: {},
   undefinedStyle: {
     marginRight: 7,
   },
-  rightSideBox:{
-    flexDirection:'column',
-    alignItems:'flex-start',
-    gap:5,
-  },
-  rightTopContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-  },
-  locationDiv:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5,
-  },
-  ratioText:{
-    fontSize:10,
-    fontWeight:'400',
-    color:palette.mainBlack,
-  },
-  totalText:{
-    fontSize:10,
-    fontWeight:'400',
-    color:palette.totalGray,
-  },
-  rightBottomBox:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
-  },
-  rightTimeBox:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5,
-  },
-  workTime:{
-    fontSize:10,
-    fontWeight:'400',
-    color:palette.totalGray,
-  },
-  locationStyle:{
-    fontSize:10,
-  },
-  controllerStyle: {
-    justifyContent: "center",
-    flexDirection: "row",
+  rightSideBox: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     gap: 5,
-    marginTop:15,
   },
+  rightTopContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  locationDiv: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  ratioText: {
+    fontSize: 10,
+    fontWeight: '400',
+    color: palette.mainBlack,
+  },
+  totalText: {
+    fontSize: 10,
+    fontWeight: '400',
+    color: palette.totalGray,
+  },
+  rightBottomBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightTimeBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  workTime: {
+    fontSize: 10,
+    fontWeight: '400',
+    color: palette.totalGray,
+  }
 });

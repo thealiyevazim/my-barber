@@ -14,33 +14,29 @@ import StarIcon from "~assets/icons/StartIcon";
 import { palette } from "~utils/theme";
 
 interface Props {
-  imageSource:any ,
-  isWork:boolean,
-  time:string,
-  title:string,
-  distance:string,
-  ratio:string,
-  total:string,
+  imageSource: any,
+  isWork: boolean,
+  time: string,
+  title: string,
+  distance: string,
+  ratio: string,
+  total: string,
   handleClick?: () => void;
 }
 
 // ------ Card Component style ----- //
-const CardComponent:FC<Props> = ({ imageSource, isWork,time,ratio,total, title, distance }) => {
+const CardComponent: FC<Props> = ({ imageSource, isWork, time, ratio, total, title, distance }) => {
   return (
     <TouchableOpacity style={styles.cardBody}>
-      <View style={styles.imageBoxContainer}>
       <Image style={styles.cardImage} source={imageSource} />
-      </View>
       <View style={styles.lastContainerRight}>
         <Text style={styles.lastTitle}>{title}</Text>
         <View style={styles.starRatio}>
-          {/* SVG Image */}
-          <StarIcon  style={styles.startIcon}/>
+          <StarIcon />
           <Text style={styles.ratioText}>{ratio}/5</Text>
           <Text style={styles.totalText}>{total}</Text>
         </View>
         <View style={styles.locationBox}>
-          {/* SVG image  */}
           <LocationIcon />
           <Text style={styles.distanceText}>{distance}</Text>
         </View>
@@ -50,6 +46,7 @@ const CardComponent:FC<Props> = ({ imageSource, isWork,time,ratio,total, title, 
 };
 
 const CardFlatList = () => {
+
   const data = [
     {
       id: 1,
@@ -59,7 +56,7 @@ const CardFlatList = () => {
       time: "10 : 00 - 23 : 00",
       title: '"Power Barber"',
       distance: "0.2 km",
-      total:"(265)",
+      total: "(265)",
     },
     {
       id: 2,
@@ -69,7 +66,7 @@ const CardFlatList = () => {
       time: "12 : 00 - 02 : 00",
       title: '"The Face Factory"',
       distance: "1.2 km",
-      total:"(135)",
+      total: "(135)",
     },
     {
       id: 3,
@@ -79,14 +76,13 @@ const CardFlatList = () => {
       time: "09 : 00 - 22 : 00",
       title: '"The Face Factory"',
       distance: "2.2 km",
-      total:"(473)",
+      total: "(473)",
     },
   ];
 
   return (
     <FlatList
       data={data}
-
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <CardComponent
@@ -94,9 +90,10 @@ const CardFlatList = () => {
           ratio={item.ratio}
           title={item.title}
           total={item.total}
-          distance={item.distance} isWork={false} time={""}        />
+          distance={item.distance} isWork={false} time={""} />
       )}
-      horizontal={true}
+      horizontal
+      showsHorizontalScrollIndicator={false}
     />
   );
 };
@@ -115,14 +112,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: palette.backWhite,
-    borderWidth:1,
-    borderColor:"rgba(20, 20, 92, 0.10)",
+    borderWidth: 1,
+    borderColor: "rgba(20, 20, 92, 0.10)",
   },
   cardImage: {
     width: 60,
     height: 60,
     borderRadius: 4,
-
   },
   lastContainerRight: {
     flexDirection: "column",
@@ -144,10 +140,10 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: palette.mainBlack,
   },
-  totalText:{
-    fontSize:10,
-    fontWeight:'400',
-    color:palette.totalGray
+  totalText: {
+    fontSize: 10,
+    fontWeight: '400',
+    color: palette.totalGray
   },
   locationBox: {
     flexDirection: "row",
@@ -158,12 +154,6 @@ const styles = StyleSheet.create({
   distanceText: {
     fontSize: 10,
     fontWeight: "400",
-    color:palette.mainBlack,
-  },
-  startIcon:{
-    fontSize:14,
-  },
-  imageBoxContainer:{
-    // width:'40%'
+    color: palette.mainBlack,
   },
 });

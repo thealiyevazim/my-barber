@@ -2,34 +2,27 @@ import {
   StyleSheet,
   View,
   Image,
-  Pressable,
   TouchableOpacity,
 } from "react-native";
 import React, { useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { AuthenticationNavigationProp } from "~navigation";
-import {
-  selectedUserTypeSelector,
-  setUserType,
-  useAppDispatch,
-  useAppSelector,
-} from "~store";
-import { UserTypesEnum } from "~enums";
+import { AuthenticationRouteList } from "~navigation";
 import { Container, Text, Button, Input } from "~components";
 import { palette } from "~utils/theme";
-const FlagImg = require("../../assets/images/FlagUzb.png");
 // ----- SVG ----- //
 import LeftBack from "~assets/icons/ArrowLeft";
 
+const FlagImg = require("../../assets/images/FlagUzb.png");
 const ReverseMainIMage = require("../../assets/images/ReaverseHeaderIMage.png");
+
 const RegisterNumberScreen = () => {
-  const userType = useAppSelector(selectedUserTypeSelector);
-  const navigation =
-    useNavigation<AuthenticationNavigationProp<"SignInScreen">>();
-  const dispatch = useAppDispatch();
+
+  const navigation = useNavigation<AuthenticationRouteList>();
+
   const onPressPasswordMessage = useCallback(() => {
-    navigation.navigate("EnterMessagePassword");
+    navigation.navigate("UniqueMessageScreen");
   }, []);
+
   const goBack = () => {
     navigation.goBack();
   };
@@ -41,7 +34,6 @@ const RegisterNumberScreen = () => {
           <LeftBack color={palette.backWhite} />
         </TouchableOpacity>
         <Text style={styles.enterText}>Kirish</Text>
-        <View></View>
       </View>
       <Image source={ReverseMainIMage} style={styles.reverseMainImage} />
       <Container style={styles.whiteCircleContainer}>
@@ -57,7 +49,6 @@ const RegisterNumberScreen = () => {
             borderColor={"transparent"}
             margin={0}
             inputMode="numeric"
-            style={styles.innerInputStyle}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -67,7 +58,7 @@ const RegisterNumberScreen = () => {
             fontWeight={"bold"}
             onPress={onPressPasswordMessage}
             style={styles.registerButton}
-          ></Button>
+          />
         </View>
       </Container>
     </Container>
@@ -77,9 +68,6 @@ const RegisterNumberScreen = () => {
 export default RegisterNumberScreen;
 
 const styles = StyleSheet.create({
-  innerInputStyle:{
-    width:'100%',
-  },
   mainContainer: {
     flex: 1,
     alignItems: "center",
@@ -109,7 +97,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     backgroundColor: palette.white,
     paddingTop: 20,
-    paddingHorizontal:14,
+    paddingHorizontal: 14,
   },
   flagText: {
     marginLeft: 10,
@@ -126,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: palette.hideGray,
     borderWidth: 1,
-    borderRadius:6,
+    borderRadius: 6,
     paddingHorizontal: 16,
     padding: 0,
   },
