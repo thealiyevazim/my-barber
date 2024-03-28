@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MyBarber",
-    "slug": "MyBarber",
+    "slug": "my-barber",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/ActiveEye.png",
@@ -11,13 +11,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins":[
+    "plugins": [
       [
         "expo-image-picker",
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
           "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
-          "isAccessMediaLocationEnabled":"true"
+          "isAccessMediaLocationEnabled": "true"
         }
       ]
     ],
@@ -31,10 +31,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/cameraCircle.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./src/assets/images/BlueIconIMage.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f3bf6454-92ba-48e1-aa22-2c2c4465cdb7"
+      }
+    },
+    "owner": "thealiyevazim"
   }
 }
