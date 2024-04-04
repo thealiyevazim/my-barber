@@ -2202,6 +2202,18 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-community/datetimepicker@^7.6.2":
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-7.6.2.tgz#9bba92dc8088b54331f89bbf89134836f0d4c067"
+  integrity sha512-ogZnvCmNG/lGHhEQypqz/mPymiIWD5jv6uKczg/l/aWgiKs1RDPQH1abh+R0I26aKoXmgamJJPuXKeC5eRWtZg==
+  dependencies:
+    invariant "^2.2.4"
+
+"@react-native-picker/picker@2.4.10":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.10.tgz#339c7bfc6e1d9a5e934122eaaa7767dc1c5fb725"
+  integrity sha512-EvAlHmPEPOwvbP6Pjg/gtDV3XJzIjIxr10fXFNlX5r9HeHw582G1Zt2o8FLyB718nOttgj8HYUTGxvhu4N65sQ==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -5016,13 +5028,6 @@ expo-file-system@~15.4.0, expo-file-system@~15.4.5:
   integrity sha512-xy61KaTaDgXhT/dllwYDHm3ch026EyO8j4eC6wSVr/yE12MMMxAC09yGwy4f7kkOs6ztGVQF5j7ldRzNLN4l0Q==
   dependencies:
     uuid "^3.4.0"
-
-expo-font@~11.1.1:
-  version "11.1.1"
-  resolved "https://registry.npmjs.org/expo-font/-/expo-font-11.1.1.tgz"
-  integrity sha512-X+aICqYY69hiiDDtcNrjq8KutHrH2TrHuMqk0Rfq0P7hF6hMd+YefwLBNkvIrqrgmTAuqiLjMUwj2rHLqmgluw==
-  dependencies:
-    fontfaceobserver "^2.1.0"
 
 expo-font@~11.4.0:
   version "11.4.0"
@@ -9341,6 +9346,11 @@ react-native-modal@^13.0.1:
   dependencies:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
+
+react-native-pager-view@6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-6.2.0.tgz#51380d93fbe47f6380dc71d613a787bf27a4ca37"
+  integrity sha512-pf9OnL/Tkr+5s4Gjmsn7xh91PtJLDa6qxYa/bmtUhd/+s4cQdWQ8DIFoOFghwZIHHHwVdWtoXkp6HtpjN+r20g==
 
 react-native-picker-select@^9.0.0:
   version "9.0.0"

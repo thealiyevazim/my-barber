@@ -4,37 +4,23 @@
     "slug": "MyBarber",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/ActiveEye.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./src/assets/images/HeaderIMage.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "plugins":[
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
-          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
-          "isAccessMediaLocationEnabled":"true"
-        }
-      ]
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "splash": {},
+    "plugins": [],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/cameraCircle.png",
-        "backgroundColor": "#ffffff"
+      "adaptiveIcon": {},
+      "permissions": ["android.permission.RECORD_AUDIO"]
+    },
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "f3bf6454-92ba-48e1-aa22-2c2c4465cdb7"
       }
     },
-    "web": {
-      "favicon": "./src/assets/images/BlueIconIMage.png"
-    }
+    "owner": "thealiyevazim"
   }
 }

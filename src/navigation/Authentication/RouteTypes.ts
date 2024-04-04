@@ -1,15 +1,7 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
-import { UserTypesEnum } from "~enums";
 
 export type AuthenticationRouteList = {
-  SelectRoleScreen: undefined;
-  SignInScreen: {
-    mode: UserTypesEnum;
-  };
-  RegisterScreen: undefined;
-  RegisterNumberScreen: undefined;
-  EnterMessagePassword: undefined;
+  OnboardingNavigator: undefined;
 };
 
 export type AuthenticationNavigationProp<

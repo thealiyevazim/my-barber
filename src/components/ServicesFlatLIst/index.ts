@@ -1,1 +1,0 @@
-export { default as ServicesFlatList } from './ServicesFlatList';
