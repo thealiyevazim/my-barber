@@ -1,14 +1,16 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { OnboardingPagerView } from "~components";
+import { OnboardingNavigationProp } from "~navigation";
 import { SafeAreaTemplate } from "~templates";
 
 export const OnboardingScreen: React.FC = () => {
-  // const navigation =
-  //   useNavigation<AuthenticationNavigationProp<"OnboardingScreen">>();
+  const navigation =
+    useNavigation<OnboardingNavigationProp<"OnboardingScreen">>();
 
   const onNavigateNextPage = useCallback(() => {
-    // navigation.navigate("OnboardingScreen");
+    navigation.navigate("SelectRoleScreen");
   }, []);
 
   return (

@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import ClientNavigator from "../ClientNavigator/ClientNavigator";
 import OnboardingNavigator from "../OnboardingNavigator/OnboardingNavigator";
 import { AuthenticationRouteList } from "./RouteTypes";
 
@@ -17,6 +18,7 @@ const AuthenticationNavigator = () => {
         name="OnboardingNavigator"
         component={OnboardingNavigator}
       />
+      <Stack.Screen name="ClientNavigator" component={ClientNavigator} />
     </Stack.Navigator>
   );
 };

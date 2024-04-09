@@ -3,7 +3,9 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
+  StyleProp,
   StyleSheet,
+  ViewStyle,
 } from "react-native";
 import { AppText } from "~components/AppText";
 import { colors, windowWidth } from "~utils";
@@ -11,12 +13,14 @@ import { colors, windowWidth } from "~utils";
 type Props = PressableProps & {
   isLoading?: boolean;
   title: string;
+  style?: StyleProp<ViewStyle>;
 };
 
 export const AppButton: React.FC<Props> = ({
   disabled,
   isLoading,
   title,
+  style,
   ...otherProps
 }) => {
   const buttonColor = useMemo(() => {
@@ -40,7 +44,7 @@ export const AppButton: React.FC<Props> = ({
   return (
     <Pressable
       disabled={disabled}
-      style={[{ backgroundColor: buttonColor }, styles.container]}
+      style={[style, { backgroundColor: buttonColor }, styles.container]}
       {...otherProps}
     >
       {buttonContext}
@@ -55,6 +59,7 @@ const styles = StyleSheet.create({
     width: windowWidth - 32,
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 15,
   },
   title: { color: colors.white, fontSize: 20 },
 });
