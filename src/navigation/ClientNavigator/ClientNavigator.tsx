@@ -9,11 +9,12 @@ import {
   LoginScreen,
 } from "~screens";
 import { screenWithCustomHeaderOptions } from "~utils";
+import { ClientTabNavigator } from "../TabNavigation";
 import { ClientRouteList } from "./RouteTypes";
 
 const Stack = createNativeStackNavigator<ClientRouteList>();
 
-const ClientNavigator = () => {
+const ClientNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -39,6 +40,11 @@ const ClientNavigator = () => {
           gestureDirection: "vertical",
         }}
         component={AuthLoadingScreen}
+      />
+      <Stack.Screen
+        name="ClientTabNavigator"
+        component={ClientTabNavigator}
+        options={{ header: () => null }}
       />
     </Stack.Navigator>
   );

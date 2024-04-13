@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import {
-  EnterPhoneNumberScreen,
   OnboardingScreen,
   SelectLanguageScreen,
   SelectRoleScreen,
@@ -10,7 +9,7 @@ import { OnboardingRouteList } from "./RouteTypes";
 
 const Stack = createNativeStackNavigator<OnboardingRouteList>();
 
-const OnboardingNavigator = () => {
+const OnboardingNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
@@ -22,10 +21,6 @@ const OnboardingNavigator = () => {
         component={SelectLanguageScreen}
       />
       <Stack.Screen name="SelectRoleScreen" component={SelectRoleScreen} />
-      <Stack.Screen
-        name="EnterPhoneNumberScreen"
-        component={EnterPhoneNumberScreen}
-      />
     </Stack.Navigator>
   );
 };

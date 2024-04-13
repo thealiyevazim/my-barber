@@ -15,6 +15,10 @@ export const LoginScreen: React.FC = () => {
     navigation.navigate("EnterPhoneNumber");
   }, []);
 
+  const onLoginPress = useCallback(() => {
+    navigation.navigate("ClientTabNavigator");
+  }, []);
+
   const handleChangeText = (value: string) => {
     const formattedValue = formatPhoneNumber(value);
     setPhoneNumber(formattedValue);
@@ -35,7 +39,7 @@ export const LoginScreen: React.FC = () => {
           <AppInput placeholder="Parolingiz" isSecure />
         </View>
         <View>
-          <AppButton title="Tizimga kirish" disabled />
+          <AppButton title="Tizimga kirish" onPress={onLoginPress} />
           <AppButton title="Ro'yxatdan o'tish" onPress={handleNextPage} />
         </View>
       </BottomComponent>

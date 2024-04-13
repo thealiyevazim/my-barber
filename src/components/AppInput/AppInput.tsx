@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
   Image,
   ImageSourcePropType,
@@ -38,16 +38,27 @@ export const AppInput: React.FC<Props> = ({
   ...otherProps
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<TextInput>(null);
 
   const handleVisibility = useCallback(() => {
     setIsVisible((prev) => !prev);
   }, [isVisible]);
+
+  const handleFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
 
   return (
     <View
       style={[
         styles.container,
         style,
+        { borderColor: isFocused ? colors.appBlack : colors.appGray },
         { justifyContent: isPhoneNumber ? "flex-start" : "space-between" },
       ]}
     >
@@ -58,10 +69,13 @@ export const AppInput: React.FC<Props> = ({
         </View>
       ) : null}
       <TextInput
+        ref={inputRef}
         placeholder={placeholder}
         verticalAlign="middle"
         style={[inputStyles, styles.input]}
         secureTextEntry={isSecure && !isVisible}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...otherProps}
       />
 
@@ -88,7 +102,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 15,
-    borderColor: colors.appBlack,
     marginBottom: 15,
   },
   flagContainer: {
@@ -100,6 +113,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "90%",
+    height: "100%",
     fontSize: 16,
     fontFamily: FONT_TYPES.MEDIUM,
   },

@@ -7,6 +7,8 @@ export type ClientRouteList = {
   EnterOtpScreen: { phoneNumber: string };
   EnterFullNameScreen: { phoneNumber: string };
   AuthLoadingScreen: undefined;
+
+  ClientTabNavigator: undefined;
 };
 
 export type ClientNavigationProp<T extends keyof ClientRouteList> =

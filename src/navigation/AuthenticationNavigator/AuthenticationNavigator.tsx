@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 
 type InitialRouteState = "barber" | "client";
 
-const AuthenticationNavigator = () => {
+export const AuthenticationNavigator: React.FC = () => {
   // const userType = useAppSelector(selectedUserTypeSelector);
   // const isAuthed = true;
 
@@ -22,5 +22,3 @@ const AuthenticationNavigator = () => {
     </Stack.Navigator>
   );
 };
-
-export default AuthenticationNavigator;
