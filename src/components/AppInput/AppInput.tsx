@@ -16,10 +16,12 @@ import OpenedEye from "~assets/images/eye-opened.png";
 import FlagIcon from "~assets/images/uzb-flag.png";
 import { colors } from "~utils";
 import { AppText } from "../AppText";
+import { Entypo } from "@expo/vector-icons";
 
 type Props = TextInputProps & {
   style?: StyleProp<ViewStyle>;
   rightIcon?: ImageSourcePropType;
+  leftIcon?: string;
   placeholder: string;
   isPhoneNumber?: boolean;
   inputStyles?: StyleProp<ViewStyle>;
@@ -35,6 +37,7 @@ export const AppInput: React.FC<Props> = ({
   inputStyles,
   onRightPress,
   isSecure,
+  leftIcon,
   ...otherProps
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -67,6 +70,13 @@ export const AppInput: React.FC<Props> = ({
           <Image source={FlagIcon} />
           <AppText style={{ fontSize: 16 }}> +998</AppText>
         </View>
+      ) : null}
+      {leftIcon ? (
+        <Entypo
+          size={24}
+          color={colors.iconGray}
+          name={leftIcon as "magnifying-glass"}
+        />
       ) : null}
       <TextInput
         ref={inputRef}
