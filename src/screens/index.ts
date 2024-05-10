@@ -8,3 +8,4 @@ export * from "./AuthLoadingScreen";
 export * from "./EnterFullNameScreen";
 export * from "./SelectLanguageScreen";
 export * from "./EnterPhoneNumberScreen";
+export * from "./SignupScreen";

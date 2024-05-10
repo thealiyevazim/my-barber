@@ -1,41 +1,24 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { AppButton, AppInput, BottomComponent } from "~components";
-import { ClientNavigationProp } from "~navigation";
+import { BarberNavigationProp } from "~navigation";
 import { SafeAreaTemplate } from "~templates";
-import { formatPhoneNumber } from "~utils";
 
 export const LoginScreen: React.FC = () => {
-  const navigation = useNavigation<ClientNavigationProp<"LoginScreen">>();
-
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const navigation = useNavigation<BarberNavigationProp<"LoginScreen">>();
 
   const handleNextPage = useCallback(() => {
-    navigation.navigate("EnterPhoneNumber");
+    navigation.navigate("SignupScreen");
   }, []);
 
-  const onLoginPress = useCallback(() => {
-    navigation.navigate("ClientTabNavigator");
-  }, []);
-
-  const handleChangeText = (value: string) => {
-    const formattedValue = formatPhoneNumber(value);
-    setPhoneNumber(formattedValue);
-  };
+  const onLoginPress = useCallback(() => {}, []);
 
   return (
     <SafeAreaTemplate isDark>
       <BottomComponent bottomStyles={styles.container}>
         <View>
-          <AppInput
-            isPhoneNumber
-            value={phoneNumber}
-            style={styles.input}
-            onChangeText={handleChangeText}
-            keyboardType="number-pad"
-            placeholder="Telefon raqamingiz"
-          />
+          <AppInput style={styles.input} placeholder="Login" />
           <AppInput placeholder="Parolingiz" isSecure />
         </View>
         <View>

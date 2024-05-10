@@ -3,6 +3,7 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 export type AuthenticationRouteList = {
   OnboardingNavigator: undefined;
   ClientNavigator: undefined;
+  BarberNavigator: undefined;
 };
 
 export type AuthenticationNavigationProp<

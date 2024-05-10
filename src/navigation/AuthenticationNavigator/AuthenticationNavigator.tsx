@@ -3,6 +3,7 @@ import React from "react";
 import ClientNavigator from "../ClientNavigator/ClientNavigator";
 import OnboardingNavigator from "../OnboardingNavigator/OnboardingNavigator";
 import { AuthenticationRouteList } from "./RouteTypes";
+import BarberNavigator from "../BarberNavigator/BarberNavigator";
 
 const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 
@@ -19,6 +20,7 @@ export const AuthenticationNavigator: React.FC = () => {
         component={OnboardingNavigator}
       />
       <Stack.Screen name="ClientNavigator" component={ClientNavigator} />
+      <Stack.Screen name="BarberNavigator" component={BarberNavigator} />
     </Stack.Navigator>
   );
 };

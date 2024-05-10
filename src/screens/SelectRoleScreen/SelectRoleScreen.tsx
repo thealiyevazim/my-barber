@@ -15,6 +15,10 @@ export const SelectRoleScreen: React.FC = () => {
     navigation.navigate("ClientNavigator");
   }, []);
 
+  const handleBarber = useCallback(() => {
+    navigation.navigate("BarberNavigator");
+  }, []);
+
   return (
     <SafeAreaTemplate>
       <View style={styles.container}>
@@ -29,7 +33,7 @@ export const SelectRoleScreen: React.FC = () => {
         </View>
         <View>
           <AppButton title="Mijoz" onPress={handleClient} />
-          <AppButton title="Barber" />
+          <AppButton title="Barber" onPress={handleBarber} />
         </View>
       </View>
     </SafeAreaTemplate>
