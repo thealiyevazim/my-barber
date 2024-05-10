@@ -1,5 +1,4 @@
-import { DarkTheme, NavigationContainer } from "@react-navigation/native";
-import { ThemeProvider } from "@shopify/restyle";
+import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -11,7 +10,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { fonts } from "~assets/fonts";
 import { AuthenticationNavigator } from "~navigation";
 import { persistor, store } from "~store";
-import { theme } from "~utils";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,31 +26,21 @@ const App = () => {
     return null;
   }
 
-  const myTheme = {
-    ...DarkTheme,
-    colors: {
-      ...DarkTheme.colors,
-      background: theme.colors.defaultBlue,
-    },
-  };
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <StatusBar animated style="light" />
+        <StatusBar animated style="auto" />
         <NavigationContainer>
           <SafeAreaProvider>
-            <ThemeProvider theme={theme}>
-              <KeyboardAvoidingView
-                onLayout={onLayoutRootView}
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={{
-                  flex: 1,
-                }}
-              >
-                <AuthenticationNavigator />
-              </KeyboardAvoidingView>
-            </ThemeProvider>
+            <KeyboardAvoidingView
+              onLayout={onLayoutRootView}
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={{
+                flex: 1,
+              }}
+            >
+              <AuthenticationNavigator />
+            </KeyboardAvoidingView>
           </SafeAreaProvider>
         </NavigationContainer>
       </PersistGate>

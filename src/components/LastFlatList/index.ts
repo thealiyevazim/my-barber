@@ -1,1 +1,0 @@
-export { default as LastFlatList } from './LastFlatList';

@@ -1,1 +1,0 @@
-export { default as CardFlatList } from './CardFlatList';
