@@ -5,23 +5,26 @@ import {
   PressableProps,
   StyleProp,
   StyleSheet,
+  TouchableOpacity,
   ViewStyle,
 } from "react-native";
 import { AppText } from "~components/AppText";
 import { colors, windowWidth } from "~utils";
 
-type Props = PressableProps & {
+type Props = {
   isLoading?: boolean;
   title: string;
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
+  disabled?: boolean;
 };
 
 export const AppButton: React.FC<Props> = ({
-  disabled,
+  disabled = false,
   isLoading,
   title,
   style,
-  ...otherProps
+  onPress,
 }) => {
   const buttonColor = useMemo(() => {
     if (disabled) {
@@ -41,14 +44,22 @@ export const AppButton: React.FC<Props> = ({
     }
   }, [disabled, isLoading, title]);
 
+  const handlePress = () => {
+    if (isLoading) {
+      return;
+    }
+    onPress?.();
+  };
+
   return (
-    <Pressable
+    <TouchableOpacity
       disabled={disabled}
       style={[style, { backgroundColor: buttonColor }, styles.container]}
-      {...otherProps}
+      onPress={handlePress}
+      activeOpacity={isLoading || disabled ? 1 : 0.8}
     >
       {buttonContext}
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

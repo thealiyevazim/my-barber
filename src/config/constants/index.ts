@@ -1,1 +1,0 @@
-export const GOOGLE_MAPS_API_KEY = "https://places.googleapis.com/v1/places/AlzaSyBnGH1abUqVk90Kn63xpWldOtTDIROrB10?fields=id,displayName&key"
