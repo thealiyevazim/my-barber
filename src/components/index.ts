@@ -10,3 +10,5 @@ export * from "./SnapCarousel";
 export * from "./LanguagePicker";
 export * from "./BottomComponent";
 export * from "./OnboardingPagerView";
+export * from "./MainTopTabNavigation";
+export * from "./MockTimeData";

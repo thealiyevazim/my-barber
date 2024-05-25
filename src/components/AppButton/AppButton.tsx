@@ -1,8 +1,6 @@
 import React, { useMemo } from "react";
 import {
   ActivityIndicator,
-  Pressable,
-  PressableProps,
   StyleProp,
   StyleSheet,
   TouchableOpacity,

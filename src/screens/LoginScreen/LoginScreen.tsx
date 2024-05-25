@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import React, { useCallback } from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import { object, string } from "yup";
+import { date, object, string } from "yup";
 import { AppButton, AppInput, BottomComponent } from "~components";
 import { BarberNavigationProp } from "~navigation";
 import { BarberLoginData } from "~shared";
@@ -29,7 +29,7 @@ export const LoginScreen: React.FC = () => {
 
   const handleSubmitForm = useCallback((data: BarberLoginData) => {
     dispatch(barberLogin(data))
-      .then((e) => Alert.alert(`id: ${e.payload.data.barber.id}`))
+      .then(() => navigation.navigate("BarberTabNavigator"))
       .catch((e) => console.log("error:", e));
   }, []);
 
@@ -39,7 +39,7 @@ export const LoginScreen: React.FC = () => {
         <Formik
           initialValues={{
             username: "barber-1",
-            password: "12345",
+            password: "123454",
           }}
           onSubmit={handleSubmitForm}
           validationSchema={validationSchema}
