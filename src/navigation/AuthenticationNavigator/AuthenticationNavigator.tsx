@@ -1,17 +1,18 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useMemo } from "react";
 import ClientNavigator from "../ClientNavigator/ClientNavigator";
 import OnboardingNavigator from "../OnboardingNavigator/OnboardingNavigator";
 import { AuthenticationRouteList } from "./RouteTypes";
 import BarberNavigator from "../BarberNavigator/BarberNavigator";
+import { useAppSelector } from "~store";
+import { UserTypesEnum } from "~enums";
 
 const Stack = createNativeStackNavigator<AuthenticationRouteList>();
 
 type InitialRouteState = "barber" | "client";
 
 export const AuthenticationNavigator: React.FC = () => {
-  // const userType = useAppSelector(selectedUserTypeSelector);
-  // const isAuthed = true;
+  const { userType } = useAppSelector((state) => state.userType);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -19,8 +20,11 @@ export const AuthenticationNavigator: React.FC = () => {
         name="OnboardingNavigator"
         component={OnboardingNavigator}
       />
-      <Stack.Screen name="ClientNavigator" component={ClientNavigator} />
-      <Stack.Screen name="BarberNavigator" component={BarberNavigator} />
+      {userType === UserTypesEnum.Barber ? (
+        <Stack.Screen name="BarberNavigator" component={BarberNavigator} />
+      ) : (
+        <Stack.Screen name="ClientNavigator" component={ClientNavigator} />
+      )}
     </Stack.Navigator>
   );
 };

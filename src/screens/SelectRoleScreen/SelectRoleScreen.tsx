@@ -3,19 +3,24 @@ import React, { useCallback } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import LogoIcon from "~assets/images/onboarding-logo.png";
 import { AppButton, AppText } from "~components";
+import { UserTypesEnum } from "~enums";
 import { AuthenticationNavigationProp } from "~navigation";
+import { setUserType, useAppDispatch } from "~store";
 import { SafeAreaTemplate } from "~templates";
 import { colors } from "~utils";
 
 export const SelectRoleScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<AuthenticationNavigationProp<"OnboardingNavigator">>();
 
   const handleClient = useCallback(() => {
+    dispatch(setUserType(UserTypesEnum.Client));
     navigation.navigate("ClientNavigator");
   }, []);
 
   const handleBarber = useCallback(() => {
+    dispatch(setUserType(UserTypesEnum.Barber));
     navigation.navigate("BarberNavigator");
   }, []);
 

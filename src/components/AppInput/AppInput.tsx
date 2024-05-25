@@ -90,7 +90,7 @@ export const AppInput: React.FC<Props> = ({
       />
 
       {isSecure ? (
-        <Pressable onPress={handleVisibility}>
+        <Pressable onPress={handleVisibility} hitSlop={10}>
           <Image source={isVisible ? OpenedEye : ClosedEye} />
         </Pressable>
       ) : null}
