@@ -6,14 +6,21 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {},
-    "plugins": [],
-    "assetBundlePatterns": ["**/*"],
+    "plugins": [
+      "expo-font",
+      "expo-secure-store"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {},
-      "permissions": ["android.permission.RECORD_AUDIO"]
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {},
     "extra": {

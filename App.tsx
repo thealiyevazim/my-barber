@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -9,6 +10,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { fonts } from "~assets/fonts";
 import { AuthenticationNavigator } from "~navigation";
+import NotificationServices from "~services/notificationService";
 import { persistor, store } from "~store";
 
 SplashScreen.preventAutoHideAsync();
@@ -29,20 +31,22 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <StatusBar animated style="auto" />
-        <NavigationContainer>
-          <SafeAreaProvider>
-            <KeyboardAvoidingView
-              onLayout={onLayoutRootView}
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
-              style={{
-                flex: 1,
-              }}
-            >
-              <AuthenticationNavigator />
-            </KeyboardAvoidingView>
-          </SafeAreaProvider>
-        </NavigationContainer>
+        <NotificationServices>
+          <StatusBar animated style="auto" />
+          <NavigationContainer>
+            <SafeAreaProvider>
+              <KeyboardAvoidingView
+                onLayout={onLayoutRootView}
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{
+                  flex: 1,
+                }}
+              >
+                <AuthenticationNavigator />
+              </KeyboardAvoidingView>
+            </SafeAreaProvider>
+          </NavigationContainer>
+        </NotificationServices>
       </PersistGate>
     </Provider>
   );
