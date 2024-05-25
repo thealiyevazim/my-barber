@@ -25,7 +25,7 @@
     "web": {},
     "extra": {
       "eas": {
-        "projectId": "f3bf6454-92ba-48e1-aa22-2c2c4465cdb7"
+        // "projectId": "f3bf6454-92ba-48e1-aa22-2c2c4465cdb7"
       }
     },
     "owner": "thealiyevazim"
