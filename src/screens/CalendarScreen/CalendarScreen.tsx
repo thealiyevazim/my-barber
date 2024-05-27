@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet, View, TouchableOpacity } from "react-native";
 import { AppText, MainTopTabNavigation, MockTimeData } from "~components";
+import { useAppSelector } from "~store";
 import { SafeAreaTemplate } from "~templates";
 import { colors } from "~utils";
 
 // Function to generate the next 7 days starting from today
 const generateNext7Days = () => {
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const next7Days = [];
   const today = new Date();
 
@@ -24,7 +33,6 @@ const generateNext7Days = () => {
 };
 
 export const CalendarScreen: React.FC = () => {
-
   const [activeButton, setActiveButton] = useState<string | null>(null);
   const [dayData, setDayData] = useState(generateNext7Days());
 
@@ -32,17 +40,18 @@ export const CalendarScreen: React.FC = () => {
     setActiveButton(day);
   };
 
-  const renderDayItem = ({ item }: { item: { id: number; day: string; date: string } }) => {
-
+  const renderDayItem = ({
+    item,
+  }: {
+    item: { id: number; day: string; date: string };
+  }) => {
     const isActive = activeButton === item.day;
 
     return (
       <TouchableOpacity
         onPress={() => handleDayPress(item.day)}
-        style={[
-          styles.dayButton,
-          isActive ? styles.activeButton : null
-        ]}>
+        style={[styles.dayButton, isActive ? styles.activeButton : null]}
+      >
         <AppText style={[styles.dayTitle, isActive ? styles.activeText : null]}>
           {item.day}
         </AppText>
@@ -87,26 +96,22 @@ const styles = StyleSheet.create({
   emptyPlace: {
     height: 20,
   },
-  flatListContainer: {
-
-  },
+  flatListContainer: {},
   dayButton: {
     paddingHorizontal: 8,
     paddingVertical: 8,
     backgroundColor: colors.appGray,
     marginRight: 11,
-    borderRadius: 8
+    borderRadius: 8,
   },
-  dayWrapper: {
-
-  },
+  dayWrapper: {},
   dayTitle: {
-    fontSize: 16
+    fontSize: 16,
   },
   activeButton: {
     backgroundColor: colors.appBlack,
   },
   activeText: {
     color: colors.white,
-  }
+  },
 });

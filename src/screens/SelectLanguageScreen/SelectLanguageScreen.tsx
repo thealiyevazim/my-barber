@@ -3,15 +3,15 @@ import React, { useCallback } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import LogoIcon from "~assets/images/onboarding-logo.png";
 import { AppButton, AppText, LanguagePicker } from "~components";
-import { OnboardingNavigationProp } from "~navigation";
+import { Routes } from "~navigation";
+import { useTypedNavigation } from "~shared";
 import { SafeAreaTemplate } from "~templates";
 
 export const SelectLanguageScreen: React.FC = () => {
-  const navigation =
-    useNavigation<OnboardingNavigationProp<"SelectLanguageScreen">>();
+  const { navigate } = useTypedNavigation<"start">();
 
   const handleNavigation = useCallback(() => {
-    navigation.navigate("OnboardingScreen");
+    navigate(Routes.onboardingScreen);
   }, []);
 
   return (

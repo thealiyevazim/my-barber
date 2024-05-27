@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AppThunkConfig } from "../../types";
 import { clientApi } from "~api";
 import {
   BarberLoginData,
@@ -7,26 +6,24 @@ import {
   storage,
   tokenStorage,
 } from "~shared";
+import { AppThunkConfig } from "../../types";
 
 export const barberLogin = createAsyncThunk<
   BarberLoginDataResponse,
   BarberLoginData,
   AppThunkConfig
->("auth/barberLogin", async ({ username, password }, thunkAPI) => {
+>("auth/barberLogin", async ({ password, username }, thunkAPI) => {
   const { dispatch, getState, rejectWithValue } = thunkAPI;
 
   try {
-    const response = await clientApi.barberLogin({
-      username,
-      password,
-    });
+    let response;
 
-    await tokenStorage.setToken(response.token);
-    await storage.setLastRefresh(new Date().toISOString());
-    await tokenStorage.setUserCredentials(username, password);
+    response = await clientApi.barberLogin({ password, username });
 
-    // dispatch(accountActions.setToken(response.token));
-    // dispatch(authActions.resetAccountLocked());
+    await tokenStorage.setToken(response.data.token);
+
+    // await storage.setLastRefresh(new Date().toISOString());
+    // await tokenStorage.setUserCredentials(username, password);
 
     return response;
   } catch (e: any) {

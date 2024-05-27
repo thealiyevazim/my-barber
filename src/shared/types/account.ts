@@ -6,8 +6,10 @@ export interface BarberLoginData {
 }
 
 export interface BarberLoginDataResponse {
-  barber: Barber;
-  token: string;
+  data: {
+    barber: Barber;
+    token: string;
+  };
 }
 
 export interface Barber {

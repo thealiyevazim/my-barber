@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { UserTypesEnum } from "~enums";
 
 const StorageKey = {
   biometricsEnabled: "@mybarber_biometrics_enabled",
@@ -6,6 +7,7 @@ const StorageKey = {
   LastRefresh: "@mybarber_last_refresh",
   locales: "@mybarber_locales",
   pendingRequests: "@mybarber_pending_requests",
+  userType: "@mybarber_user_type",
 } as const;
 type StorageKeyType = (typeof StorageKey)[keyof typeof StorageKey];
 
@@ -30,6 +32,12 @@ class BaseStorage {
 }
 
 class Storage extends BaseStorage {
+  async setUserType(value: UserTypesEnum) {
+    return this.setItem(StorageKey.userType, value);
+  }
+  async getUserType() {
+    return this.getItem(StorageKey.userType);
+  }
   async getLocales() {
     return this.getItem(StorageKey.locales);
   }
