@@ -1,4 +1,5 @@
 import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SecureStorageKey = {
   Token: "@mybarber_token",
@@ -8,22 +9,56 @@ const SecureStorageKey = {
 type SecureStorageKeyType =
   (typeof SecureStorageKey)[keyof typeof SecureStorageKey];
 
+async function getItem(
+  key: string,
+  options?: SecureStore.SecureStoreOptions
+): Promise<string | null> {
+  const isAvailable = await SecureStore.isAvailableAsync();
+  if (!isAvailable) {
+    return AsyncStorage.getItem(key);
+  }
+  return SecureStore.getItemAsync(key, options);
+}
+
+async function setItem(
+  key: string,
+  value: string,
+  options?: SecureStore.SecureStoreOptions
+): Promise<void> {
+  const isAvailable = await SecureStore.isAvailableAsync();
+  if (!isAvailable) {
+    return AsyncStorage.setItem(key, value);
+  }
+  return SecureStore.setItemAsync(key, value, options);
+}
+
+async function removeItem(
+  key: string,
+  options?: SecureStore.SecureStoreOptions
+): Promise<void> {
+  const isAvailable = await SecureStore.isAvailableAsync();
+  if (!isAvailable) {
+    return AsyncStorage.removeItem(key);
+  }
+  return SecureStore.deleteItemAsync(key, options);
+}
+
 class SecureStorage {
-  protected async getItem(key: SecureStorageKeyType) {
+  async getItem(key: SecureStorageKeyType) {
     try {
-      return await SecureStore.getItemAsync(key);
+      return await getItem(key);
     } catch {}
   }
 
-  protected async setItem(key: SecureStorageKeyType, value: string) {
+  async setItem(key: SecureStorageKeyType, value: string) {
     try {
-      await SecureStore.setItemAsync(key, value);
+      await setItem(key, value);
     } catch {}
   }
 
-  protected async removeItem(key: SecureStorageKeyType) {
+  async removeItem(key: SecureStorageKeyType) {
     try {
-      await SecureStore.deleteItemAsync(key);
+      await removeItem(key);
     } catch {}
   }
 }
@@ -47,10 +82,12 @@ export class TokenStorage extends SecureStorage {
 
     return { nickName, password };
   }
+
   async setUserCredentials(nickName: string, password: string) {
     await this.setItem(SecureStorageKey.UserLogin, nickName);
     await this.setItem(SecureStorageKey.UserPassword, password);
   }
+
   async removeCredentials() {
     await this.removeItem(SecureStorageKey.UserLogin);
     await this.removeItem(SecureStorageKey.UserPassword);

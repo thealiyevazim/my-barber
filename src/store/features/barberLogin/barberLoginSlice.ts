@@ -5,11 +5,11 @@ import { barberLogin } from "./barberLoginThunk";
 interface BarberLoginState {
   loading: boolean;
   isRejected: SerializedError;
-  loginResponse?: BarberLoginDataResponse;
+  loginResponse: BarberLoginDataResponse;
 }
 
 const initialState: BarberLoginState = {
-  loginResponse: undefined,
+  loginResponse: {} as BarberLoginDataResponse,
   loading: false,
   isRejected: {},
 };
@@ -17,7 +17,12 @@ const initialState: BarberLoginState = {
 export const barberLoginSlice = createSlice({
   name: "barberLogin",
   initialState,
-  reducers: {},
+  reducers: {
+    clear: (state) => {
+      state.loginResponse = initialState.loginResponse;
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(barberLogin.pending, (state) => {

@@ -3,18 +3,21 @@ import { UserTypesEnum } from "~enums";
 import { UserType } from "./types";
 
 const initialState: UserType = {
-  userType: UserTypesEnum.Barber || UserTypesEnum.Client,
+  userType: undefined,
 };
 
 export const userTypeSlice = createSlice({
   name: "userType",
   initialState,
   reducers: {
+    clear: (state) => {
+      state.userType = initialState.userType;
+    },
     setUserType: (state, { payload }) => {
       state.userType = payload;
     },
   },
 });
 
-export const { setUserType } = userTypeSlice.actions;
+export const { actions: userTypeActions } = userTypeSlice;
 export const userTypeReducer = userTypeSlice.reducer;

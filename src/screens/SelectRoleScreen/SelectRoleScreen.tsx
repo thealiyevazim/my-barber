@@ -2,27 +2,26 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import LogoIcon from "~assets/images/onboarding-logo.png";
-import { AppButton, AppText } from "~components";
+import { AppButton, AppText, RolePicker } from "~components";
 import { UserTypesEnum } from "~enums";
-import { AuthenticationNavigationProp } from "~navigation";
-import { setUserType, useAppDispatch } from "~store";
+import { Routes } from "~navigation";
+import { useTypedNavigation, useUserType } from "~shared";
+import { useAppDispatch } from "~store";
 import { SafeAreaTemplate } from "~templates";
 import { colors } from "~utils";
 
 export const SelectRoleScreen: React.FC = () => {
+  const userType = useUserType();
   const dispatch = useAppDispatch();
-  const navigation =
-    useNavigation<AuthenticationNavigationProp<"OnboardingNavigator">>();
+  const { navigate } = useTypedNavigation<"public">();
 
-  const handleClient = useCallback(() => {
-    dispatch(setUserType(UserTypesEnum.Client));
-    navigation.navigate("ClientNavigator");
-  }, []);
-
-  const handleBarber = useCallback(() => {
-    dispatch(setUserType(UserTypesEnum.Barber));
-    navigation.navigate("BarberNavigator");
-  }, []);
+  const handleNavigate = useCallback(async () => {
+    if (userType === UserTypesEnum.Barber) {
+      navigate(Routes.loginScreen);
+    } else {
+      // navigate("ClientNavigator");
+    }
+  }, [userType]);
 
   return (
     <SafeAreaTemplate>
@@ -36,10 +35,8 @@ export const SelectRoleScreen: React.FC = () => {
             Kim bo’lib davom etishingizni tanlang.
           </AppText>
         </View>
-        <View>
-          <AppButton title="Mijoz" onPress={handleClient} />
-          <AppButton title="Barber" onPress={handleBarber} />
-        </View>
+        <RolePicker />
+        <AppButton title={"Davom etish"} onPress={handleNavigate} />
       </View>
     </SafeAreaTemplate>
   );
@@ -52,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   textView: {
-    marginVertical: "30%",
+    marginVertical: "10%",
   },
   title: {
     fontSize: 42,

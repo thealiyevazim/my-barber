@@ -6,4 +6,5 @@ export const colors = {
   appBackground: "#F2F4F7",
   appGreen: "#50C878",
   appRed: "#FF3131",
+  lightGray: "#E5E7EB",
 };

@@ -6,26 +6,19 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {},
-    "plugins": [
-      "expo-font",
-      "expo-secure-store"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "plugins": ["expo-font", "expo-secure-store"],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {},
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {},
     "extra": {
       "eas": {
-        // "projectId": "f3bf6454-92ba-48e1-aa22-2c2c4465cdb7"
+        "projectId": "f3bf6454-92ba-48e1-aa22-2c2c4465cdb7"
       }
     },
     "owner": "thealiyevazim"
