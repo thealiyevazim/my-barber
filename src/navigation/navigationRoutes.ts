@@ -8,4 +8,5 @@ export enum Routes {
   loginScreen = "loginScreen",
   registerScreen = "registerScreen",
   barberCalendarScreen = "barberCalendarScreen",
+  profileEditScreen="profileEditScreen",
 }

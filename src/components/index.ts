@@ -13,3 +13,6 @@ export * from "./OnboardingPagerView";
 export * from "./MainTopTabNavigation";
 export * from "./MockTimeData";
 export * from "./RolePicker";
+export * from "./ProfileComponent";
+export * from "./BarberProfileEditForm";
+export * from "./ClientProfileEditForm";

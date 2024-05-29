@@ -7,6 +7,7 @@ import {
   ProfileScreen,
   SelectLanguageScreen,
   SelectRoleScreen,
+  ProfileEditScreen
 } from "~screens";
 import { Routes } from "./navigationRoutes";
 import {
@@ -35,6 +36,7 @@ export const BarberNavigationRoutes: NavigationRoute<BarberStackParamsList>[] =
   [
     { component: CalendarScreen, name: Routes.barberCalendarScreen },
     { component: ProfileScreen, name: Routes.profileScreen },
+    { component: ProfileEditScreen, name: Routes.profileEditScreen },
   ];
 
 // Client Stack

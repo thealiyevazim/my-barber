@@ -10,3 +10,4 @@ export * from "./SelectLanguageScreen";
 export * from "./EnterPhoneNumberScreen";
 export * from "./SignupScreen";
 export * from "./ProfileScreen";
+export * from "./ProfileEditScreen";
