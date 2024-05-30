@@ -1,14 +1,18 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaTemplate } from '~templates'
-import { AppButton, AppInput, BottomComponent } from '~components'
+import { AppButton, AppInput, AppText, BottomComponent } from '~components'
 import * as ImagePicker from 'expo-image-picker';
-import { windowHeight } from '~utils';
+import { colors, windowHeight } from '~utils';
+import Modal from "react-native-modal";
 import LocationIcon from "~assets/images/location.png";
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 export const BarberProfileEditForm: React.FC = () => {
 
   const [image, setImage] = useState<string | null>(null);
+  const [workTime, setWorkTime] = useState<boolean>(false);
+  const [selectTime, setSelectTime] = useState<boolean>(false);
 
   const PickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -21,6 +25,22 @@ export const BarberProfileEditForm: React.FC = () => {
     if (!result.canceled) {
       setImage(result.assets[0].uri)
     }
+  }
+
+  const openWorkTime = () => {
+    setWorkTime(true)
+  }
+
+  const closeWorkTime = () => {
+    setWorkTime(false)
+  }
+
+  const openSelectTimeModal = () => {
+    setSelectTime(true)
+  }
+
+  const closeSelectTimeModal = () => {
+    setSelectTime(false)
   }
 
   return (
@@ -53,9 +73,15 @@ export const BarberProfileEditForm: React.FC = () => {
           <AppInput
             placeholder="Tug'ilgan sana"
           />
-          <AppInput
-            placeholder="Ish vaqti"
-          />
+          <TouchableOpacity onPress={openWorkTime}>
+            <AppInput
+              value={"09 : 00 - 23 : 00"}
+              placeholder="Ish vaqti"
+              readOnly
+              editable={false}
+              pointerEvents="none"
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.button}>
           <AppButton
@@ -63,6 +89,45 @@ export const BarberProfileEditForm: React.FC = () => {
           />
         </View>
       </BottomComponent>
+      <Modal
+        isVisible={workTime}
+        onBackdropPress={closeWorkTime}
+        style={styles.modalView} >
+        <View style={styles.modalBox}>
+          <AppText style={styles.modalTitle}>
+            Ish vaqtini tanlang
+          </AppText>
+          <View style={styles.buttonBox}>
+            <TouchableOpacity style={styles.selectTimeButton} onPress={openSelectTimeModal}>
+              <AppText style={styles.timeTitle}>From: 08 : 00</AppText>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.selectTimeButton} onPress={openSelectTimeModal}>
+              <AppText style={styles.timeTitle}>To: 24 : 00</AppText>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.modalButton} onPress={closeWorkTime}>
+            <AppText semibold style={{ fontSize: 20, color: colors.white }}>
+              Tanlash
+            </AppText>
+          </TouchableOpacity>
+        </View>
+        <Modal
+          isVisible={selectTime}
+          onBackdropPress={closeSelectTimeModal}
+          style={styles.modalView} >
+          <View style={styles.modalBox}>
+            <RNDateTimePicker
+              mode='time'
+              value={new Date()}
+              display="spinner" />
+            <TouchableOpacity style={styles.modalButton} onPress={closeSelectTimeModal}>
+              <AppText semibold style={{ fontSize: 20, color: colors.white }}>
+                Tanlash
+              </AppText>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </Modal>
     </SafeAreaTemplate>
   )
 }
@@ -92,5 +157,52 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
+  },
+  modalView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalBox: {
+    paddingVertical: 16,
+    width: "100%",
+    borderRadius: 8,
+    backgroundColor: colors.white,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  modalTitle: {
+    fontWeight: "600",
+    fontSize: 18,
+    alignSelf: "center",
+    marginBottom: 15
+  },
+  buttonBox: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    marginTop: 10,
+    justifyContent: "space-between"
+  },
+  selectTimeButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: colors.appGray,
+    width: "45%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  timeTitle: {
+
+  },
+  modalButton: {
+    marginTop: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: colors.appBlack
   }
 })

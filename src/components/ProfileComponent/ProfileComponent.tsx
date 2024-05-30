@@ -82,6 +82,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
       </BottomComponent>
       <Modal
         isVisible={openLogOut}
+        onBackdropPress={() => setOpenLogOut(false)}
         style={styles.modalView} >
         <View style={styles.modalBox}>
           <AppText style={styles.modalTitle}>
