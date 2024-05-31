@@ -1,11 +1,11 @@
 import React from "react";
 import Svg, { Path, SvgProps } from "react-native-svg";
 
-export const ArrowLeftIcon = (props: SvgProps) => {
+export const GoBackIcon = (props: SvgProps) => {
   return (
     <Svg
-      width="24"
-      height="24"
+      width="30"
+      height="30"
       viewBox="0 0 20 20"
       fill="none"
       style={props.style}

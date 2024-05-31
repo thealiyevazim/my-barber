@@ -7,7 +7,7 @@ import {
   ProfileScreen,
   SelectLanguageScreen,
   SelectRoleScreen,
-  ProfileEditScreen
+  ProfileEditScreen,
 } from "~screens";
 import { Routes } from "./navigationRoutes";
 import {
@@ -16,7 +16,7 @@ import {
   PublicStackParamsList,
 } from "./navigationTypes";
 
-interface NavigationRoute<Stack> {
+export interface NavigationRoute<Stack> {
   component: ComponentType;
   name: keyof Stack;
 }

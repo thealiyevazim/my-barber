@@ -1,15 +1,20 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
-import { SafeAreaTemplate } from '~templates'
-import { AppButton, AppInput, AppText, BottomComponent } from '~components'
-import * as ImagePicker from 'expo-image-picker';
-import { colors, windowHeight } from '~utils';
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaTemplate } from "~templates";
+import {
+  AppButton,
+  AppHeader,
+  AppInput,
+  AppText,
+  BottomComponent,
+} from "~components";
+import * as ImagePicker from "expo-image-picker";
+import { colors, windowHeight } from "~utils";
 import Modal from "react-native-modal";
 import LocationIcon from "~assets/images/location.png";
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import RNDateTimePicker from "@react-native-community/datetimepicker";
 
 export const BarberProfileEditForm: React.FC = () => {
-
   const [image, setImage] = useState<string | null>(null);
   const [workTime, setWorkTime] = useState<boolean>(false);
   const [dateDay, setDateDay] = useState(new Date());
@@ -20,17 +25,17 @@ export const BarberProfileEditForm: React.FC = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1
-    })
-    console.log(result)
+      quality: 1,
+    });
+    console.log(result);
     if (!result.canceled) {
-      setImage(result.assets[0].uri)
+      setImage(result.assets[0].uri);
     }
-  }
+  };
 
   const formatDate = (date: Date) => {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day} / ${month} / ${year}`;
   };
@@ -43,44 +48,36 @@ export const BarberProfileEditForm: React.FC = () => {
   };
 
   const openWorkTime = () => {
-    setWorkTime(true)
-  }
+    setWorkTime(true);
+  };
 
   const closeWorkTime = () => {
-    setWorkTime(false)
-  }
+    setWorkTime(false);
+  };
 
   const openCalendar = () => {
-    setShowDayPicker(true)
-  }
+    setShowDayPicker(true);
+  };
 
   return (
-    <SafeAreaTemplate isDark>
+    <SafeAreaTemplate isDark goBack>
       <BottomComponent bottomStyles={styles.container}>
         <TouchableOpacity style={styles.imagePickerWrapper} onPress={PickImage}>
           <Image
             style={styles.imagePicker}
-            source={{ uri: image || "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" }} />
+            source={{
+              uri:
+                image ||
+                "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
+            }}
+          />
         </TouchableOpacity>
         <View style={styles.inputWrapper}>
-          <AppInput
-            placeholder="Ism"
-          />
-          <AppInput
-            placeholder="Familiya"
-          />
-          <AppInput
-            placeholder="+998 "
-            keyboardType="number-pad"
-          />
-          <AppInput
-            placeholder="E-mail"
-            textContentType="emailAddress"
-          />
-          <AppInput
-            placeholder="Ishlash manzili"
-            rightIcon={LocationIcon}
-          />
+          <AppInput placeholder="Ism" />
+          <AppInput placeholder="Familiya" />
+          <AppInput placeholder="+998 " keyboardType="number-pad" />
+          <AppInput placeholder="E-mail" textContentType="emailAddress" />
+          <AppInput placeholder="Ishlash manzili" rightIcon={LocationIcon} />
           <TouchableOpacity onPress={openCalendar}>
             <AppInput
               value={formatDate(dateDay)}
@@ -93,7 +90,8 @@ export const BarberProfileEditForm: React.FC = () => {
           <Modal
             isVisible={showDayPicker}
             onBackdropPress={() => setShowDayPicker(false)}
-            style={styles.modalView}>
+            style={styles.modalView}
+          >
             <View style={styles.calendar}>
               <RNDateTimePicker
                 mode="date"
@@ -114,31 +112,32 @@ export const BarberProfileEditForm: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <AppButton
-            title="Tasdiqlash"
-          />
+          <AppButton title="Tasdiqlash" />
         </View>
       </BottomComponent>
       <Modal
         isVisible={workTime}
         onBackdropPress={closeWorkTime}
-        style={styles.modalView} >
+        style={styles.modalView}
+      >
         <View style={styles.modalBox}>
           <AppText style={styles.modalTitle}>Ish vaqtini tanlang</AppText>
           <View style={styles.buttonBox}>
             <View style={styles.selectTimeButton}>
               <AppText>From:</AppText>
               <RNDateTimePicker
-                mode='time'
+                mode="time"
                 value={new Date()}
-                display="clock" />
+                display="clock"
+              />
             </View>
             <View style={styles.selectTimeButton}>
               <AppText>To:</AppText>
               <RNDateTimePicker
-                mode='time'
+                mode="time"
                 value={new Date()}
-                display="inline" />
+                display="inline"
+              />
             </View>
           </View>
           <TouchableOpacity style={styles.modalButton} onPress={closeWorkTime}>
@@ -149,13 +148,13 @@ export const BarberProfileEditForm: React.FC = () => {
         </View>
       </Modal>
     </SafeAreaTemplate>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
-    height: windowHeight / 2 + 160
+    height: windowHeight / 2 + 160,
   },
   imagePickerWrapper: {
     width: 81,
@@ -165,7 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     justifyContent: "center",
     alignItems: "center",
-    top: -40
+    top: -40,
   },
   imagePicker: {
     width: 80,
@@ -186,23 +185,23 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 8,
     backgroundColor: colors.white,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
   },
   modalTitle: {
     fontWeight: "600",
     fontSize: 18,
     alignSelf: "center",
-    marginBottom: 15
+    marginBottom: 15,
   },
   modalWrapper: {
-    backgroundColor: colors.white
+    backgroundColor: colors.white,
   },
   buttonBox: {
     flexDirection: "row",
     paddingHorizontal: 20,
     marginTop: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   selectTimeButton: {
     paddingHorizontal: 10,
@@ -211,7 +210,7 @@ const styles = StyleSheet.create({
     width: "45%",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   modalButton: {
     marginTop: 30,
@@ -221,11 +220,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: colors.appBlack
+    backgroundColor: colors.appBlack,
   },
   calendar: {
     backgroundColor: colors.white,
     borderRadius: 8,
-    padding: 20
-  }
-})
+    padding: 20,
+  },
+});

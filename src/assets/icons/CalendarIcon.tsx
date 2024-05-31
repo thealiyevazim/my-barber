@@ -1,16 +1,23 @@
-import React from "react";
-import Svg, { Path, SvgProps } from "react-native-svg";
+import React, { ReactElement, memo } from "react";
+import Svg, { Path } from "react-native-svg";
+import { ActiveIconProps } from "~shared/types/icon";
+import { colors } from "~utils";
 
-export const CalendarIcon = (props: SvgProps) => {
+export const CalendarIcon = memo(function CalendarIcon({
+  active = false,
+  activeColor = colors.appBlack,
+  color = colors.appGray,
+  size = 24,
+}: ActiveIconProps): ReactElement {
   return (
-    <Svg width="24" height="24" viewBox="0 0 17 19" fill="none">
+    <Svg width={size} height={size} viewBox="0 0 17 19" fill="none">
       <Path
         d="M8.3125 2.375C9.62362 2.375 10.6875 1.84309 10.6875 1.1875C10.6875 0.531913 9.62367 0 8.3125 0C7.00138 0 5.9375 0.531913 5.9375 1.1875C5.9375 1.84309 7.00133 2.375 8.3125 2.375Z"
-        fill={props.fill}
+        fill={active ? activeColor : color}
       />
       <Path
         d="M0 2C0 0.895431 0.866979 0.246426 1.8084 0.824177C1.93432 0.901454 2.06796 0.985976 2.20964 1.07842C2.31995 1.15039 2.42171 1.23506 2.5165 1.3265C4.25099 2.99977 6.00038 3.5625 8.3125 3.5625C10.6246 3.5625 12.374 2.99977 14.1085 1.3265C14.2033 1.23506 14.3051 1.15039 14.4154 1.07842C14.557 0.985977 14.6907 0.901454 14.8166 0.824178C15.758 0.246426 16.625 0.895431 16.625 2V17C16.625 18.1046 15.7296 19 14.625 19H2C0.895432 19 0 18.1046 0 17V2Z"
-        fill={props.fill}
+        fill={active ? activeColor : color}
       />
       <Path
         d="M4.7493 10.6861C5.40447 10.6861 5.9361 10.1545 5.9361 9.4993C5.9361 8.8441 5.4045 8.3125 4.7493 8.3125C4.09413 8.3125 3.5625 8.8441 3.5625 9.4993C3.5625 10.1545 4.0941 10.6861 4.7493 10.6861Z"
@@ -30,4 +37,4 @@ export const CalendarIcon = (props: SvgProps) => {
       />
     </Svg>
   );
-};
+});

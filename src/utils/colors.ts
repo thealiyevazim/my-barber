@@ -8,3 +8,5 @@ export const colors = {
   appRed: "#FF3131",
   lightGray: "#E5E7EB",
 };
+
+export type ColorsType = (typeof colors)[keyof typeof colors];

@@ -3,3 +3,4 @@ export * from "./dimensions";
 export * from "./formatPhoneNumber";
 export * from "./defaultScreenOptions";
 export * from "./constants";
+export * from "./colors";

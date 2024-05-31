@@ -1,15 +1,27 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Pressable, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { AppText, BottomComponent } from "~components";
 import { SafeAreaTemplate } from "~templates";
 import { colors, windowHeight } from "~utils";
-import { ArrowLeftIcon, EditIcon, HistoryIcon, LanguageIcon, LogOutIcon } from "~assets/icons";
+import {
+  ArrowLeftIcon,
+  EditIcon,
+  HistoryIcon,
+  LanguageIcon,
+  LogOutIcon,
+} from "~assets/icons";
 import Modal from "react-native-modal";
 
 interface ProfileComponentProps {
   name?: string;
   avatar?: string;
-  customerNumber?: string
+  customerNumber?: string;
   logOutPress?: () => void;
   goEditPress?: () => void;
 }
@@ -19,10 +31,9 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
   avatar,
   customerNumber,
   logOutPress,
-  goEditPress
+  goEditPress,
 }) => {
-
-  const [openLogOut, setOpenLogOut] = useState<boolean>(false)
+  const [openLogOut, setOpenLogOut] = useState<boolean>(false);
 
   return (
     <SafeAreaTemplate isDark>
@@ -31,16 +42,14 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           <Image
             style={styles.profileAvatar}
             source={{
-              uri: avatar
+              uri: avatar,
             }}
           />
           <Pressable style={styles.editButton} onPress={goEditPress}>
             <EditIcon />
           </Pressable>
         </View>
-        <AppText style={styles.name}>
-          {name}
-        </AppText>
+        <AppText style={styles.name}>{name}</AppText>
         <AppText medium={false} style={styles.customerNumber}>
           {customerNumber}
         </AppText>
@@ -55,10 +64,10 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
               </AppText>
             </View>
             <View style={styles.iconWrapper}>
-              <AppText medium={false} style={styles.value} >
+              <AppText medium={false} style={styles.value}>
                 English
               </AppText>
-              <ArrowLeftIcon />
+              <ArrowLeftIcon stroke={colors.appBlack} />
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonWrapper}>
@@ -69,10 +78,13 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
               </AppText>
             </View>
             <View style={styles.iconWrapper}>
-              <ArrowLeftIcon />
+              <ArrowLeftIcon stroke={colors.appBlack} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.logOutWrapper} onPress={() => setOpenLogOut(true)}>
+          <TouchableOpacity
+            style={styles.logOutWrapper}
+            onPress={() => setOpenLogOut(true)}
+          >
             <LogOutIcon />
             <AppText medium={false} style={styles.buttonTitle}>
               Log out
@@ -83,16 +95,18 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
       <Modal
         isVisible={openLogOut}
         onBackdropPress={() => setOpenLogOut(false)}
-        style={styles.modalView} >
+        style={styles.modalView}
+      >
         <View style={styles.modalBox}>
-          <AppText style={styles.modalTitle}>
-            Ilovadan chiqish
-          </AppText>
+          <AppText style={styles.modalTitle}>Ilovadan chiqish</AppText>
           <AppText style={styles.description}>
-            Barbershop ilovasidan chiqishga  ishonchingiz komilmi?
+            Barbershop ilovasidan chiqishga ishonchingiz komilmi?
           </AppText>
           <View style={styles.buttonBox}>
-            <TouchableOpacity style={styles.noButton} onPress={() => setOpenLogOut(false)}>
+            <TouchableOpacity
+              style={styles.noButton}
+              onPress={() => setOpenLogOut(false)}
+            >
               <AppText style={{ color: colors.white }}>Yo'q</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.yesButton} onPress={logOutPress}>
@@ -109,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
     bottom: "-10%",
-    height: windowHeight / 2 + 60
+    height: windowHeight / 2 + 60,
   },
   profileAvatar: {
     width: 80,
@@ -117,7 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   profileWrapper: {
-    marginTop: 40
+    marginTop: 40,
   },
   name: {
     color: colors.white,
@@ -127,20 +141,20 @@ const styles = StyleSheet.create({
   customerNumber: {
     color: colors.white,
     fontSize: 16,
-    marginTop: 6
+    marginTop: 6,
   },
   editButton: {
     justifyContent: "center",
     alignItems: "center",
     width: 26,
-    height: 26
+    height: 26,
   },
   profileAvatarWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   settingsWrapper: {
-    rowGap: 24
+    rowGap: 24,
   },
   buttonWrapper: {
     flexDirection: "row",
@@ -149,7 +163,7 @@ const styles = StyleSheet.create({
   },
   iconWrapper: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonTitle: {
     fontSize: 20,
@@ -170,44 +184,44 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 8,
     backgroundColor: colors.white,
-    flexDirection: 'column',
+    flexDirection: "column",
     paddingHorizontal: 10,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   modalTitle: {
     fontWeight: "600",
     fontSize: 18,
     alignSelf: "center",
-    marginBottom: 15
+    marginBottom: 15,
   },
   description: {
     alignSelf: "center",
     textAlign: "center",
     fontWeight: "400",
     color: colors.appGray,
-    width: 250
+    width: 250,
   },
   buttonBox: {
     flexDirection: "row",
     paddingHorizontal: 60,
     marginTop: 40,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   noButton: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: colors.appGray
+    backgroundColor: colors.appGray,
   },
   yesButton: {
     paddingHorizontal: 25,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: colors.appBlack
+    backgroundColor: colors.appBlack,
   },
   modalView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

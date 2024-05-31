@@ -6,3 +6,5 @@ export * from "./ArrowLeftIcon";
 export * from "./LogOutIcon";
 export * from "./HistoryIcon";
 export * from "./LocationIcon";
+export * from "./ArrowLeftIcon";
+export * from "./GoBackIcon";

@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AppHeader } from "~components";
 import { colors } from "~utils";
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   isDark?: boolean;
   scrollable?: boolean;
+  goBack?: boolean;
 };
 
 export const SafeAreaTemplate: React.FC<Props> = ({
@@ -15,6 +17,7 @@ export const SafeAreaTemplate: React.FC<Props> = ({
   style,
   isDark,
   scrollable,
+  goBack = false,
 }) => {
   return (
     <SafeAreaView
@@ -24,7 +27,14 @@ export const SafeAreaTemplate: React.FC<Props> = ({
         { backgroundColor: isDark ? colors.appBlack : colors.appBackground },
       ]}
     >
-      {scrollable ? <ScrollView>{children}</ScrollView> : children}
+      {scrollable ? (
+        <ScrollView>{children}</ScrollView>
+      ) : (
+        <>
+          {goBack && <AppHeader />}
+          {children}
+        </>
+      )}
     </SafeAreaView>
   );
 };
