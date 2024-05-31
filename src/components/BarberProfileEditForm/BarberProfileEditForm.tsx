@@ -12,7 +12,8 @@ export const BarberProfileEditForm: React.FC = () => {
 
   const [image, setImage] = useState<string | null>(null);
   const [workTime, setWorkTime] = useState<boolean>(false);
-  const [selectTime, setSelectTime] = useState<boolean>(false);
+  const [dateDay, setDateDay] = useState(new Date());
+  const [showDayPicker, setShowDayPicker] = useState(false);
 
   const PickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -27,6 +28,20 @@ export const BarberProfileEditForm: React.FC = () => {
     }
   }
 
+  const formatDate = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day} / ${month} / ${year}`;
+  };
+
+  const handleDateChange = (event: any, selectedDate: Date | undefined) => {
+    setShowDayPicker(false);
+    if (selectedDate) {
+      setDateDay(selectedDate);
+    }
+  };
+
   const openWorkTime = () => {
     setWorkTime(true)
   }
@@ -35,12 +50,8 @@ export const BarberProfileEditForm: React.FC = () => {
     setWorkTime(false)
   }
 
-  const openSelectTimeModal = () => {
-    setSelectTime(true)
-  }
-
-  const closeSelectTimeModal = () => {
-    setSelectTime(false)
+  const openCalendar = () => {
+    setShowDayPicker(true)
   }
 
   return (
@@ -70,9 +81,28 @@ export const BarberProfileEditForm: React.FC = () => {
             placeholder="Ishlash manzili"
             rightIcon={LocationIcon}
           />
-          <AppInput
-            placeholder="Tug'ilgan sana"
-          />
+          <TouchableOpacity onPress={openCalendar}>
+            <AppInput
+              value={formatDate(dateDay)}
+              placeholder="Tug'ilgan sana"
+              readOnly
+              editable={false}
+              pointerEvents="none"
+            />
+          </TouchableOpacity>
+          <Modal
+            isVisible={showDayPicker}
+            onBackdropPress={() => setShowDayPicker(false)}
+            style={styles.modalView}>
+            <View style={styles.calendar}>
+              <RNDateTimePicker
+                mode="date"
+                value={dateDay}
+                display="inline"
+                onChange={handleDateChange}
+              />
+            </View>
+          </Modal>
           <TouchableOpacity onPress={openWorkTime}>
             <AppInput
               value={"09 : 00 - 23 : 00"}
@@ -94,16 +124,22 @@ export const BarberProfileEditForm: React.FC = () => {
         onBackdropPress={closeWorkTime}
         style={styles.modalView} >
         <View style={styles.modalBox}>
-          <AppText style={styles.modalTitle}>
-            Ish vaqtini tanlang
-          </AppText>
+          <AppText style={styles.modalTitle}>Ish vaqtini tanlang</AppText>
           <View style={styles.buttonBox}>
-            <TouchableOpacity style={styles.selectTimeButton} onPress={openSelectTimeModal}>
-              <AppText style={styles.timeTitle}>From: 08 : 00</AppText>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.selectTimeButton} onPress={openSelectTimeModal}>
-              <AppText style={styles.timeTitle}>To: 24 : 00</AppText>
-            </TouchableOpacity>
+            <View style={styles.selectTimeButton}>
+              <AppText>From:</AppText>
+              <RNDateTimePicker
+                mode='time'
+                value={new Date()}
+                display="clock" />
+            </View>
+            <View style={styles.selectTimeButton}>
+              <AppText>To:</AppText>
+              <RNDateTimePicker
+                mode='time'
+                value={new Date()}
+                display="inline" />
+            </View>
           </View>
           <TouchableOpacity style={styles.modalButton} onPress={closeWorkTime}>
             <AppText semibold style={{ fontSize: 20, color: colors.white }}>
@@ -111,22 +147,6 @@ export const BarberProfileEditForm: React.FC = () => {
             </AppText>
           </TouchableOpacity>
         </View>
-        <Modal
-          isVisible={selectTime}
-          onBackdropPress={closeSelectTimeModal}
-          style={styles.modalView} >
-          <View style={styles.modalBox}>
-            <RNDateTimePicker
-              mode='time'
-              value={new Date()}
-              display="spinner" />
-            <TouchableOpacity style={styles.modalButton} onPress={closeSelectTimeModal}>
-              <AppText semibold style={{ fontSize: 20, color: colors.white }}>
-                Tanlash
-              </AppText>
-            </TouchableOpacity>
-          </View>
-        </Modal>
       </Modal>
     </SafeAreaTemplate>
   )
@@ -160,8 +180,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   modalBox: {
     paddingVertical: 16,
@@ -177,6 +195,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 15
   },
+  modalWrapper: {
+    backgroundColor: colors.white
+  },
   buttonBox: {
     flexDirection: "row",
     paddingHorizontal: 20,
@@ -185,15 +206,12 @@ const styles = StyleSheet.create({
   },
   selectTimeButton: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
     borderRadius: 8,
     backgroundColor: colors.appGray,
     width: "45%",
     justifyContent: "center",
-    alignItems: "center"
-  },
-  timeTitle: {
-
+    alignItems: "center",
+    flexDirection: "row"
   },
   modalButton: {
     marginTop: 30,
@@ -204,5 +222,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 8,
     backgroundColor: colors.appBlack
+  },
+  calendar: {
+    backgroundColor: colors.white,
+    borderRadius: 8,
+    padding: 20
   }
 })
