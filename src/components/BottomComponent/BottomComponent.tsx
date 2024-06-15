@@ -6,15 +6,19 @@ import BackgroundImage from "~assets/images/background-image.png";
 type Props = {
   bottomStyles?: StyleProp<ViewStyle>;
   children: React.ReactNode;
+  bgImage?: boolean;
 };
 
 export const BottomComponent: React.FC<Props> = ({
   children,
   bottomStyles,
+  bgImage
 }) => {
   return (
     <View style={styles.container}>
-      <Image source={BackgroundImage} style={styles.background} />
+      {!bgImage &&
+        <Image source={BackgroundImage} style={styles.background} />
+      }
       <View style={[styles.bottomView, bottomStyles]}>{children}</View>
     </View>
   );

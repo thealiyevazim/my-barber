@@ -6,6 +6,8 @@ import {
   RecentPlaces,
   SnapCarousel,
 } from "~components";
+import { Routes } from "~navigation";
+import { useTypedNavigation } from "~shared";
 import { SafeAreaTemplate } from "~templates";
 import { MainInfoCardType } from "~types";
 
@@ -88,6 +90,11 @@ const mainInfoMockData: MainInfoCardType[] = [
 
 export const DashboardScreen: React.FC = () => {
   const onUndefinedPress = () => undefined;
+  const { navigate } = useTypedNavigation<"client">();
+
+  const handleBooked = () => {
+    navigate(Routes.bookedScreen)
+  }
 
   return (
     <SafeAreaTemplate scrollable>
@@ -102,7 +109,7 @@ export const DashboardScreen: React.FC = () => {
 
       <MainInfoCard
         mainCardInfoData={mainInfoMockData}
-        handleCardPress={(cardInfo) => console.log(cardInfo)}
+        handleCardPress={handleBooked}
       />
 
       <View></View>

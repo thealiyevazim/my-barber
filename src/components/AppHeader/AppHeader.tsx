@@ -1,21 +1,15 @@
 import React, { useCallback } from "react";
 import {
-  Image,
-  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
-import { ArrowLeftIcon, GoBackIcon } from "~assets/icons";
-import BackIcon from "~assets/images/arrow-right.png";
+import { GoBackIcon } from "~assets/icons";
 import { useTypedNavigation } from "~shared";
 import { colors } from "~utils";
 
 export const AppHeader: React.FC = () => {
   const { goBack } = useTypedNavigation();
-  const statusBarHeight = StatusBar.currentHeight || 0;
-
-  const marginTop = statusBarHeight + 60;
 
   const handleGoBack = useCallback(() => {
     goBack();
@@ -31,7 +25,12 @@ export const AppHeader: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    zIndex: 1,
+    width: 30,
+    justifyContent: "center",
+    alignContent: "center",
+  },
   icon: {
     transform: [{ rotate: "180deg" }],
   },

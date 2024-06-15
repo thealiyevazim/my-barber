@@ -10,6 +10,7 @@ type Props = {
   isDark?: boolean;
   scrollable?: boolean;
   goBack?: boolean;
+  padding?: boolean
 };
 
 export const SafeAreaTemplate: React.FC<Props> = ({
@@ -18,13 +19,14 @@ export const SafeAreaTemplate: React.FC<Props> = ({
   isDark,
   scrollable,
   goBack = false,
+  padding = false,
 }) => {
   return (
     <SafeAreaView
       style={[
         style,
         styles.container,
-        { backgroundColor: isDark ? colors.appBlack : colors.appBackground },
+        { backgroundColor: isDark ? colors.appBlack : colors.appBackground, paddingHorizontal: padding ? 0 : 16 },
       ]}
     >
       {scrollable ? (

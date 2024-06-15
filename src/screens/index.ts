@@ -11,3 +11,5 @@ export * from "./EnterPhoneNumberScreen";
 export * from "./SignupScreen";
 export * from "./ProfileScreen";
 export * from "./ProfileEditScreen";
+export * from "./BookedScreen";
+export * from "./BookAppointmentScreen";

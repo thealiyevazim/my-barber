@@ -24,6 +24,7 @@ interface ProfileComponentProps {
   customerNumber?: string;
   logOutPress?: () => void;
   goEditPress?: () => void;
+  goToLanguage?: () => void;
 }
 
 export const ProfileComponent: React.FC<ProfileComponentProps> = ({
@@ -32,6 +33,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
   customerNumber,
   logOutPress,
   goEditPress,
+  goToLanguage,
 }) => {
   const [openLogOut, setOpenLogOut] = useState<boolean>(false);
 
@@ -50,21 +52,21 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           </Pressable>
         </View>
         <AppText style={styles.name}>{name}</AppText>
-        <AppText medium={false} style={styles.customerNumber}>
+        <AppText style={styles.customerNumber}>
           {customerNumber}
         </AppText>
       </View>
       <BottomComponent bottomStyles={styles.container}>
         <View style={styles.settingsWrapper}>
-          <TouchableOpacity style={styles.buttonWrapper}>
+          <TouchableOpacity style={styles.buttonWrapper} onPress={goToLanguage}>
             <View style={styles.iconWrapper}>
               <LanguageIcon />
-              <AppText medium={false} style={styles.buttonTitle}>
+              <AppText style={styles.buttonTitle}>
                 Language
               </AppText>
             </View>
             <View style={styles.iconWrapper}>
-              <AppText medium={false} style={styles.value}>
+              <AppText style={styles.value}>
                 English
               </AppText>
               <ArrowLeftIcon stroke={colors.appBlack} />
@@ -73,7 +75,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           <TouchableOpacity style={styles.buttonWrapper}>
             <View style={styles.iconWrapper}>
               <HistoryIcon />
-              <AppText medium={false} style={styles.buttonTitle}>
+              <AppText style={styles.buttonTitle}>
                 History
               </AppText>
             </View>
@@ -86,7 +88,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
             onPress={() => setOpenLogOut(true)}
           >
             <LogOutIcon />
-            <AppText medium={false} style={styles.buttonTitle}>
+            <AppText style={styles.buttonTitle}>
               Log out
             </AppText>
           </TouchableOpacity>
@@ -146,8 +148,9 @@ const styles = StyleSheet.create({
   editButton: {
     justifyContent: "center",
     alignItems: "center",
-    width: 26,
-    height: 26,
+    width: 30,
+    height: 30,
+    zIndex: 3
   },
   profileAvatarWrapper: {
     flexDirection: "row",

@@ -2,7 +2,7 @@ import { Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React, { useCallback } from "react";
 import { PixelRatio, StyleSheet } from "react-native";
-import { CalendarScreen, DashboardScreen } from "~screens";
+import { CalendarScreen, DashboardScreen, ProfileScreen } from "~screens";
 import { colors } from "~utils";
 import { Routes } from "../navigationRoutes";
 
@@ -56,7 +56,7 @@ export const ClientTabNavigator: React.FC = () => {
 
       <Tab.Screen
         name={Routes.profileScreen}
-        component={CalendarScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: renderTabIcon("user"),
           tabBarShowLabel: false,

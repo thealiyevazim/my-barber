@@ -18,7 +18,9 @@ export const ProfileScreen: React.FC = () => {
     navigate(Routes.profileEditScreen);
   }, []);
 
-  // console.warn(barberData)
+  const handleLanguage = useCallback(() => {
+    navigate(Routes.bookedScreen);
+  }, []);
 
   return (
     <ProfileComponent
@@ -29,6 +31,7 @@ export const ProfileScreen: React.FC = () => {
       customerNumber={"92 customers"}
       logOutPress={handleLogout}
       goEditPress={handleGoEdit}
+      goToLanguage={handleLanguage}
     />
   );
 };

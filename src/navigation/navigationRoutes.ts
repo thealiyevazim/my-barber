@@ -9,6 +9,8 @@ export const Routes = {
   registerScreen: "registerScreen",
   barberCalendarScreen: "barberCalendarScreen",
   profileEditScreen: "profileEditScreen",
+  bookedScreen: "bookedScreen",
+  bookAppointmentScreen: "bookAppointmentScreen"
 } as const;
 
 export type RoutesType = (typeof Routes)[keyof typeof Routes];

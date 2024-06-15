@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Feather, Octicons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { AppText } from '~components';
 import { colors } from '~utils';
 
-export const MainTopTabNavigation: React.FC = () => {
+interface Props {
+  schedulePress?: () => void;
+  tablePress?: () => void;
+  activeButton?: string;
+}
 
-  const [activeButton, setActiveButton] = useState<string | null>("schedule");
-
-  const handlePress = (button: string) => {
-    setActiveButton(button);
-  };
+export const MainTopTabNavigation: React.FC<Props> = ({
+  schedulePress,
+  tablePress,
+  activeButton,
+}) => {
 
   return (
     <View style={styles.container}>
@@ -19,28 +23,28 @@ export const MainTopTabNavigation: React.FC = () => {
           styles.button,
           activeButton === 'schedule' ? styles.activeButton : null
         ]}
-        onPress={() => handlePress('schedule')}
+        onPress={schedulePress}
       >
         <Octicons
           name={"table"}
           size={18}
           color={colors.appBlack}
         />
-        <AppText style={styles.buttonTitle}>Jadval</AppText>
+        <AppText style={styles.buttonTitle}>Calendar</AppText>
       </TouchableOpacity>
       <TouchableOpacity
         style={[
           styles.button,
-          activeButton === 'list' ? styles.activeButton : null
+          activeButton === 'table' ? styles.activeButton : null
         ]}
-        onPress={() => handlePress('list')}
+        onPress={tablePress}
       >
         <Feather
           name={"list"}
           size={18}
           color={colors.appBlack}
         />
-        <AppText style={styles.buttonTitle}>Ro’yxat</AppText>
+        <AppText style={styles.buttonTitle}>Tarix</AppText>
       </TouchableOpacity>
     </View>
   );
@@ -54,12 +58,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.appGray,
     borderRadius: 12,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   button: {
+    width: 170,
     borderRadius: 12,
     paddingVertical: 9,
-    paddingHorizontal: 40,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",

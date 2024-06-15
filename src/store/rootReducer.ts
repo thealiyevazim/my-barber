@@ -3,6 +3,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import {
   barberLoginReducer,
+  clientLoginReducer,
   internetStatusReducer,
   userTypeReducer,
 } from "./features";
@@ -11,6 +12,7 @@ const combinedReducer = combineReducers({
   userType: userTypeReducer,
   internetStatus: internetStatusReducer,
   barberLogin: barberLoginReducer,
+  clientLogin: clientLoginReducer,
 });
 
 const rootPersistConfig = {

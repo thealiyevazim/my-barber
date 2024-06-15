@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { SafeAreaTemplate } from "~templates";
 import {
   AppButton,
-  AppHeader,
   AppInput,
   AppText,
   BottomComponent,
@@ -154,7 +153,7 @@ export const BarberProfileEditForm: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
-    height: windowHeight / 2 + 160,
+    height: windowHeight / 2 + 180,
   },
   imagePickerWrapper: {
     width: 81,
