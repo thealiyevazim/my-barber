@@ -10,11 +10,14 @@ export function NavigationProvider(): ReactElement {
   const isBarberAuth = useIsAuthBarber();
   const isClientAuth = useIsAuthClient();
 
-  const isPublic = !isBarberAuth;
+  const isPublic = !isBarberAuth && !isClientAuth;
 
   const isBarber = isBarberAuth && userType === UserTypesEnum.Barber;
 
   const isClient = isClientAuth && userType === UserTypesEnum.Client;
+
+
+  console.warn(isPublic, isClientAuth, isBarberAuth)
 
   return (
     <NavigationContainer>
@@ -22,7 +25,7 @@ export function NavigationProvider(): ReactElement {
 
       {isBarber && <BarberTabNavigator />}
 
-      {isClient && <ClientTabNavigator />}
+      {isClient && < ClientTabNavigator />}
     </NavigationContainer>
   );
 }

@@ -1,7 +1,6 @@
 import { format, getDate, getMonth, isEqual, isToday } from 'date-fns';
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ArrowLeftIcon } from './../../assets/icons/ArrowLeftIcon';
 import {
   DAY,
   ISOToDate,
@@ -26,34 +25,33 @@ export const HIT_SLOP = {
 };
 
 export const SelectDateComponent: FC<CalendarProps> = ({ selectDate, onSelectDate }) => {
-
-  const currentDate = useMemo(() => {
+  const [currentDate, setCurrentDate] = useState(() => {
     const date = ISOToDate(selectDate);
     date.setHours(0, 0, 0, 0);
     return date;
-  }, [selectDate]);
+  });
 
   const days = useMemo(
-    () => genDaysOfTheWeek(ISOToDate(selectDate)),
-    [selectDate],
+    () => genDaysOfTheWeek(currentDate),
+    [currentDate],
   );
 
   const onNextPress = useCallback(() => {
-    currentDate.setTime(currentDate.getTime() + DAY * 7);
-    onSelectDate(currentDate.toISOString());
-  }, [currentDate, onSelectDate]);
+    const newDate = new Date(currentDate.getTime() + DAY * 7);
+    setCurrentDate(newDate);
+  }, [currentDate]);
 
   const onPrevPress = useCallback(() => {
-    currentDate.setTime(currentDate.getTime() - DAY * 7);
-    onSelectDate(currentDate.toISOString());
-  }, [currentDate, onSelectDate]);
+    const newDate = new Date(currentDate.getTime() - DAY * 7);
+    setCurrentDate(newDate);
+  }, [currentDate]);
 
   return (
     <View style={styles.container}>
       <Header
         onNextPress={onNextPress}
         onPrevPress={onPrevPress}
-        selectDate={selectDate}
+        currentDate={currentDate}
       />
       <DayList
         days={days}
@@ -77,7 +75,6 @@ const DayList = ({
           key={key.toString()}
           selectDate={selectDate}
           onSelectDate={onSelectDate}
-          index={key}
         />
       ))}
     </View>
@@ -88,10 +85,10 @@ const Day = ({
   day,
   selectDate,
   onSelectDate,
-}: { day: Date; index: number } & CalendarProps) => {
+}: { day: Date } & CalendarProps) => {
   const dayIndex = useMemo(() => (day.getDay() - 1 + 7) % 7, [day]);
 
-  const isSelected = isEqual(getDate(selectDate), getDate(day));
+  const isSelected = isEqual(ISOToDate(selectDate), day);
   const key = useMemo(() => day.toISOString(), [day]);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -112,7 +109,7 @@ const Day = ({
             styles.noActiveDate,
             isSelected && styles.activeDate,
             isToday(day) && styles.today,
-            !(getMonth(day) === getMonth(selectDate)) && styles.disabledDate,
+            !(getMonth(day) === getMonth(ISOToDate(selectDate))) && styles.disabledDate,
             isPast && styles.pastDate,
           ]}>
           <Text style={[styles.day, isSelected && styles.activeDay]}>
@@ -124,17 +121,16 @@ const Day = ({
   );
 };
 
-
 const Header = ({
   onNextPress,
   onPrevPress,
-  selectDate,
+  currentDate,
 }: {
   onNextPress: () => void;
   onPrevPress: () => void;
-  selectDate: string;
+  currentDate: Date;
 }) => {
-  const key = useMemo(() => format(selectDate, MONTH_WITH_YEAR), [selectDate]);
+  const key = useMemo(() => format(currentDate, MONTH_WITH_YEAR), [currentDate]);
   return (
     <View style={styles.header}>
       <View style={[styles.flexRow, styles.arrowButtonGroup]}>
@@ -142,7 +138,7 @@ const Header = ({
       </View>
       <View>
         <View key={key}>
-          <Text style={styles.date}>{format(selectDate, MONTH_WITH_YEAR)}</Text>
+          <Text style={styles.date}>{format(currentDate, MONTH_WITH_YEAR)}</Text>
         </View>
       </View>
       <View style={[styles.flexRow, styles.arrowButtonGroup]}>

@@ -1,6 +1,6 @@
-import { PayloadAction, SerializedError, createSlice } from "@reduxjs/toolkit";
-import { ClientLoginDataResponse } from "~shared";
-import { clientLogin } from "./clientLoginThunk";
+import { PayloadAction, SerializedError, createSlice } from '@reduxjs/toolkit';
+import { ClientLoginDataResponse } from '~shared';
+import { clientLogin } from './clientLoginThunk';
 
 interface ClientLoginState {
   loading: boolean;
@@ -15,25 +15,26 @@ const initialState: ClientLoginState = {
 };
 
 export const clientLoginSlice = createSlice({
-  name: "clientLogin",
+  name: 'clientLogin',
   initialState,
   reducers: {
-    clear: (state) => {
+    clear: state => {
       state.loginResponse = initialState.loginResponse;
     },
   },
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(clientLogin.pending, (state) => {
+      .addCase(clientLogin.pending, state => {
         state.loading = true;
       })
       .addCase(
         clientLogin.fulfilled,
         (state, { payload }: PayloadAction<ClientLoginDataResponse>) => {
           state.loading = false;
+          console.warn(payload);
           state.loginResponse = payload;
-        }
+        },
       )
       .addCase(clientLogin.rejected, (state, action) => {
         state.loading = false;

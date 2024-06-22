@@ -1,134 +1,109 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  FlatList,
-  StyleSheet,
-} from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { MultiSelect } from 'react-native-element-dropdown';
+import { AppText } from "~components";
 import { colors } from "~utils";
-import { GoBackIcon } from "~assets/icons";
+import { FONT_TYPES } from "~assets/fonts/types";
 
 interface Option {
   label: string;
   value: string;
-  price?: any;
+  price: string;
 }
 
-const options: Option[] = [
-  { label: "Shaving", value: "shaving", price: "80 000" },
-  { label: "Haircut", value: "haircut", price: "50 000" },
-  { label: "Styling", value: "styling", price: "100 000" },
-  { label: "Coloring", value: "coloring", price: "50 000" },
-  { label: "Hairdryer", value: "hairdryer", price: "25 000" },
-];
+interface SelectServiceProps {
+  selected: string[];
+  setSelected: (selected: string[]) => void;
+  data: Option[];
+}
 
-export const SelectService: React.FC = () => {
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [priceValue, setPriceValue] = useState<string>("");
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
-  const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
+export const SelectService: React.FC<SelectServiceProps> = ({
+  selected,
+  setSelected,
+  data
+}) => {
+  // const [selected, setSelected] = useState<string[]>([]);
 
-  const handleInputChange = (value: string) => {
-    setSearchValue(value);
-    setDropdownVisible(true);
-  };
-  const handleInputPriceChange = (value: string) => {
-    setPriceValue(value);
-    setDropdownVisible(true);
-  };
-  const handleInputPress = () => {
-    setDropdownVisible(!dropdownVisible);
-  };
-  const handleOptionSelect = (option: Option) => {
-    setSelectedOption(option);
-    setSearchValue(option.label);
-    setPriceValue(option.price);
-    setDropdownVisible(false);
+  function calculateSelectedTotalPrice(data: Option[], selected: string[]): number {
+    return data
+      .filter(data => selected.includes(data.value))
+      .reduce((total, data) => total + parseInt(data.price), 0);
+  }
+
+  const totalPrice = calculateSelectedTotalPrice(data, selected);
+
+  const handleChange = (item: string[]) => {
+    setSelected(item);
   };
 
-  const renderOptionItem = ({ item }: { item: Option }) => (
-    <TouchableOpacity
-      style={styles.optionItem}
-      onPress={() => handleOptionSelect(item)}
-      activeOpacity={0.8}
-    >
-      <View style={styles.labelPriceContainer}>
-        <Text style={styles.labelStyle}>{item.label}</Text>
-        <Text style={styles.priceStyle}>{item.price}</Text>
+  const renderItem = ({ label, price }: Option) => {
+    return (
+      <View style={styles.optionItem}>
+        <AppText style={styles.labelStyle}>{label}</AppText>
+        <AppText style={styles.priceStyle}>{price}</AppText>
       </View>
-    </TouchableOpacity>
-  );
+    );
+  };
+
+  const renderSelectedItem = ({ label, price }: Option) => {
+    return (
+      <View style={styles.selectedItem}>
+        <AppText>{`${label} - ${price}`}</AppText>
+      </View>
+    )
+  }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleInputPress} style={styles.inputBox} activeOpacity={0.8}>
-        <TextInput
-          style={styles.input}
-          value={searchValue}
-          onChangeText={handleInputChange}
-          placeholder="Shaving"
-          editable={false}
-        />
-        <View style={styles.rightArrowContainer}>
-          <TextInput
-            style={styles.priceShowBox}
-            onChangeText={handleInputPriceChange}
-            value={priceValue}
-            placeholder="80 000"
-            editable={false}
-          />
-          <GoBackIcon style={!dropdownVisible ? { transform: [{ rotate: "90deg" }], } : { transform: [{ rotate: "270deg" }], }} stroke={colors.appBlack} />
-        </View>
-      </TouchableOpacity>
-      {dropdownVisible && (
-        <View style={styles.dropdownContainer}>
-          <FlatList
-            data={options}
-            renderItem={renderOptionItem}
-            keyExtractor={(item) => item.value}
-            contentContainerStyle={styles.flatListContent}
-          />
-        </View>
-      )}
-    </View>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <MultiSelect
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        itemAccessibilityLabelField="label"
+        data={data}
+        labelField="label"
+        valueField="value"
+        placeholder="Select service"
+        value={selected}
+        onChange={handleChange}
+        selectedStyle={styles.selectedStyle}
+        renderItem={renderItem}
+        renderSelectedItem={renderSelectedItem}
+        showsVerticalScrollIndicator={false}
+        maxHeight={200}
+      />
+    </ScrollView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    zIndex: 1,
+    width: "100%",
+    maxHeight: 160
   },
-  input: {
-    width: 87,
-    height: 23,
-    textAlign: "left",
-    color: colors.appBlack,
+  dropdown: {
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: colors.white,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  placeholderStyle: {
     fontSize: 18,
     fontWeight: "500",
+    fontFamily: FONT_TYPES.MEDIUM,
   },
-  dropdownContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 2,
-    elevation: 2,
-    marginTop: 55
-  },
-  flatListContent: {
-    backgroundColor: colors.white,
-    borderRadius: 4,
-    marginTop: 2,
+
+  selectedStyle: {
+    borderRadius: 8,
   },
   optionItem: {
-    flexDirection: "column",
     paddingHorizontal: 10,
     marginVertical: 5,
-  },
-  selectedText: {
-    fontSize: 18,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'space-between',
+    height: 28,
+    borderRadius: 4,
   },
   labelStyle: {
     color: colors.appBlack,
@@ -141,39 +116,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.appBlack,
   },
-  labelPriceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: 'space-between',
-    height: 28,
-    borderRadius: 4,
-    paddingHorizontal: 10,
-  },
-  inputBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 25,
-    width: "100%",
-    height: 52,
-    borderRadius: 4,
-    backgroundColor: colors.white,
-  },
-  rightArrowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-
-  },
-  priceShowBox: {
-    width: 71,
-    height: 30,
-    borderRadius: 4,
-    backgroundColor: colors.appGray,
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    color: colors.appBlack,
-    fontSize: 14,
-    fontWeight: '400',
-  },
+  selectedItem: {
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.appGray,
+    marginRight: 5,
+    marginTop: 5
+  }
 });

@@ -1,12 +1,12 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { combineReducers } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { combineReducers } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
 import {
   barberLoginReducer,
   clientLoginReducer,
   internetStatusReducer,
   userTypeReducer,
-} from "./features";
+} from './features';
 
 const combinedReducer = combineReducers({
   userType: userTypeReducer,
@@ -16,9 +16,9 @@ const combinedReducer = combineReducers({
 });
 
 const rootPersistConfig = {
-  key: "root",
+  key: 'root',
   storage: AsyncStorage,
-  whitelist: ["userType", "internetStatus", "barberLogin"],
+  whitelist: ['userType', 'internetStatus', 'barberLogin', 'clientLogin'],
 };
 
 export const rootReducer = persistReducer(rootPersistConfig, combinedReducer);

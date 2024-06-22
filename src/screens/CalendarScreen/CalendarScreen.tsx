@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { AppText, MainTopTabNavigation, CalendarComponent } from "~components";
+import { AppText, MainTopTabNavigation, CalendarComponent, HistoryComponent } from "~components";
 import { SafeAreaTemplate } from "~templates";
 
 export const CalendarScreen: React.FC = () => {
@@ -32,9 +32,7 @@ export const CalendarScreen: React.FC = () => {
         <CalendarComponent />
       )}
       {showTable && (
-        <View>
-
-        </View>
+        <HistoryComponent />
       )}
     </SafeAreaTemplate>
   );

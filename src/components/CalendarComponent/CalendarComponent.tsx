@@ -99,18 +99,20 @@ export const CalendarComponent: React.FC = () => {
     format24h: true,
     onBackgroundLongPress: createNewEvent,
     onBackgroundLongPressOut: approveNewEvent,
-    // scrollToFirst: true,
-    // start: 0,
-    // end: 24,
-    unavailableHours: [{ start: 0, end: 6 }, { start: 22, end: 24 }],
+    scrollToFirst: true,
+    start: 8,
+    end: 24,
+    unavailableHours: [{ start: 0, end: 9 }, { start: 22, end: 24 }],
     overlapEventsSpacing: 8,
-    rightEdgeSpacing: 24,
+    rightEdgeSpacing: 8,
     onEventPress: () => Alert.alert("rrrrrrr"),
     styles: {
       textDayStyle: {
-        color: "red"
+        color: "red",
+        height: 10
       }
     }
+
   };
 
   const today = new Date();
@@ -138,7 +140,15 @@ export const CalendarComponent: React.FC = () => {
         timelineProps={timelineProps}
         showNowIndicator
         scrollToNow
-        scrollToFirst
+        scrollToFirst={false}
+        // renderItem={
+        //   (timelineProps, info) => (
+        //     <View>
+        //       <Text>{JSON.stringify(timelineProps)}</Text>
+        //       <Text>{JSON.stringify(info)}</Text>
+        //     </View>
+        //   )
+        // }
         initialTime={INITIAL_TIME}
       />
     </CalendarProvider>
@@ -147,6 +157,6 @@ export const CalendarComponent: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
   }
 })

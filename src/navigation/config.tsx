@@ -39,13 +39,15 @@ export const BarberNavigationRoutes: NavigationRoute<BarberStackParamsList>[] =
     { component: CalendarScreen, name: Routes.barberCalendarScreen },
     { component: ProfileScreen, name: Routes.profileScreen },
     { component: ProfileEditScreen, name: Routes.profileEditScreen },
-    { component: BookedScreen, name: Routes.bookedScreen, },
-    { component: BookAppointmentScreen, name: Routes.bookAppointmentScreen }
   ];
 
 // Client Stack
 export const ClientNavigationRoutes: NavigationRoute<ClientStackParamsList>[] =
   [
     { component: DashboardScreen, name: Routes.dashboardScreen },
-    { component: BookedScreen, name: Routes.bookedScreen, }
+    { component: BookedScreen, name: Routes.bookedScreen, },
+    { component: ProfileScreen, name: Routes.profileScreen },
+    { component: BookAppointmentScreen, name: Routes.bookAppointmentScreen },
+    { component: ProfileEditScreen, name: Routes.profileEditScreen },
+
   ];

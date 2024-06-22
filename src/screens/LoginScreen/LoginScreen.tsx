@@ -25,10 +25,9 @@ export const LoginScreen: React.FC = () => {
   const handleSubmitForm = useCallback((data: BarberLoginData | ClientLoginData) => {
     if (userType === UserTypesEnum.Barber) {
       dispatch(barberLogin(data as BarberLoginData));
-    } else if (userType === UserTypesEnum.Client) {
-      dispatch(clientLogin(data as ClientLoginData));
+    } else {
+      dispatch(clientLogin(data as ClientLoginData))
     }
-
   }, [dispatch, userType]);
 
 
@@ -37,7 +36,7 @@ export const LoginScreen: React.FC = () => {
       <BottomComponent bottomStyles={styles.container}>
         <Formik
           initialValues={{
-            username: "azim",
+            username: "azim-client",
             password: "12345",
           }}
           onSubmit={handleSubmitForm}

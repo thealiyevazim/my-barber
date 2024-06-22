@@ -1,6 +1,7 @@
-import { useAppSelector } from "~store/hooks";
+import { useAppSelector } from '~store/hooks';
 
 export const useIsAuthClient = () =>
-  useAppSelector((store) => !!store.clientLogin?.loginResponse?.data?.token);
+  useAppSelector(store => !!store.clientLogin?.loginResponse?.data?.token);
 
-export const useClientData = () => useAppSelector((store) => store.clientLogin.loginResponse.data.client)
+export const useClientData = () =>
+  useAppSelector(store => store.clientLogin.loginResponse.data.client);

@@ -16,12 +16,10 @@ export const SelectRoleScreen: React.FC = () => {
   const { navigate } = useTypedNavigation<"public">();
 
   const handleNavigate = useCallback(async () => {
-    if (userType === UserTypesEnum.Barber) {
-      navigate(Routes.loginScreen);
-    } else {
-      // navigate("ClientNavigator");
-    }
-  }, [userType]);
+
+    navigate(Routes.loginScreen);
+
+  }, []);
 
   return (
     <SafeAreaTemplate>

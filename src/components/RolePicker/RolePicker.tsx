@@ -32,7 +32,7 @@ export const RolePicker: React.FC = () => {
       style={{ width: "100%" }}
     >
       <Picker.Item label="Barber" value="barber" />
-      <Picker.Item label="Mijoz" value="mijoz" />
+      <Picker.Item label="Mijoz" value="client" />
     </Picker>
   );
 };

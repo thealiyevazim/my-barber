@@ -1,20 +1,20 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { colors } from '~utils';
 import { AppText } from '~components/AppText';
 
-export const SelectPeople: React.FC = () => {
-  const [addPerson, setAddperson] = useState<number>(1);
+interface SelectPeopleProps {
+  addPerson: number;
+  setAddPerson: (value: number) => void;
+}
+
+export const SelectPeople: React.FC<SelectPeopleProps> = ({ addPerson, setAddPerson }) => {
 
   const counterHandler = (value: string) => {
-    if (value === "add") {
-      if (addPerson < 5) {
-        setAddperson((a) => a + 1);
-      }
-    } else {
-      if (addPerson > 1) {
-        setAddperson((a) => a - 1);
-      }
+    if (value === "add" && addPerson < 1) {
+      setAddPerson(addPerson + 1);
+    } else if (value === "remove" && addPerson > 1) {
+      setAddPerson(addPerson - 1);
     }
   };
 
@@ -22,7 +22,7 @@ export const SelectPeople: React.FC = () => {
     <View style={styles.peopleStyleBox}>
       <View style={styles.personBox}>
         <AppText style={styles.personCount}>{addPerson}</AppText>
-        <AppText style={styles.personText}>person</AppText>
+        <AppText style={styles.personText}>person{addPerson > 1 ? 's' : ''}</AppText>
       </View>
       <View style={styles.calculationBox}>
         <TouchableOpacity

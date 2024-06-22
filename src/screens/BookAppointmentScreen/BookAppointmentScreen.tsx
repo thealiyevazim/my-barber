@@ -1,26 +1,83 @@
-import { StyleSheet, TouchableOpacity, View, Text, Button } from 'react-native';
 import React, { useCallback, useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaTemplate } from '~templates';
-import { AppButton, AppText, SelectDateComponent, SelectPeople, SelectService, SelectTime } from '~components';
+import { AppButton, AppText, SelectDateComponent, SelectPeople, SelectService, SelectTime, BookedConfirm } from '~components';
 import { GoBackIcon } from "~assets/icons";
 import { colors } from '~utils';
 import { useTypedNavigation } from '~shared';
-import Modal from 'react-native-modal';
+
+interface Option {
+  label: string;
+  value: string;
+  price: string;
+}
+
+const data: Option[] = [
+  { label: 'Shaving', price: "80000", value: '1' },
+  { label: 'Haircut', price: "50000", value: '2' },
+  { label: 'Styling', price: "100000", value: '3' },
+  { label: 'Coloring', price: "50000", value: '4' },
+  { label: 'Hairdryer', price: "25000", value: '5' },
+];
 
 export const BookAppointmentScreen: React.FC = () => {
   const { goBack } = useTypedNavigation();
-  const [openDay, setOpenDay] = useState<boolean>(false)
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectDate, setSelectDate] = useState(new Date().toISOString());
+  const [selected, setSelected] = useState<string[]>([]);
+  const [selectTime, setSelectTime] = useState<string>("");
 
   const handleGoBack = useCallback(() => {
     goBack();
   }, [goBack]);
 
-  const [selectDate, setSelectDate] = useState(new Date().toISOString());
-
   const handleSelectDate = (date: string) => {
     setSelectDate(date);
-    setOpenDay(true)
   };
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  // Formatting date
+  const formattedDate = new Date(selectDate).toLocaleDateString('uz-UZB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  // Calculate Total Price
+  function calculateSelectedTotalPrice(data: Option[], selected: string[]): number {
+    return data
+      .filter(data => selected.includes(data.value))
+      .reduce((total, data) => total + parseInt(data.price), 0);
+  }
+
+  // Get selected services
+  const getSelectedServices = (data: Option[], selected: string[]): string => {
+    return data
+      .filter(option => selected.includes(option.value))
+      .map(option => option.label)
+      .join(', ');
+  }
+
+  const generateTimeData = () => {
+    const times = [];
+    for (let i = 0; i < 24; i++) {
+      const label = i.toString().padStart(2, '0') + ':00';
+      times.push({ label, value: label });
+    }
+    return times;
+  };
+
+  const timeData = generateTimeData();
+  const totalPrice = calculateSelectedTotalPrice(data, selected);
+  const selectedServices = getSelectedServices(data, selected);
 
   return (
     <SafeAreaTemplate>
@@ -35,23 +92,28 @@ export const BookAppointmentScreen: React.FC = () => {
       <AppText style={styles.title}>Select Date</AppText>
       <SelectDateComponent selectDate={selectDate} onSelectDate={handleSelectDate} />
       <AppText style={styles.title}>Select Time</AppText>
-      <SelectTime />
+      <SelectTime selectTime={selectTime} setSelectTime={setSelectTime} data={timeData} />
       <AppText style={styles.title}>Service</AppText>
-      <SelectService />
-      <AppText style={styles.title}>How many person?</AppText>
-      <SelectPeople />
-      <View style={styles.buttonWrapper}>
-        <AppButton title='Next' />
+      <SelectService selected={selected} setSelected={setSelected} data={data} />
+      {/* <AppText style={styles.title}>How many person?</AppText> */}
+      {/* <SelectPeople addPerson={addPerson} setAddPerson={setAddPerson} /> */}
+      <View style={styles.totalWrapper}>
+        <AppText style={styles.total}>
+          Total price: {totalPrice} so'm
+        </AppText>
       </View>
-      <Modal isVisible={openDay} onBackdropPress={() => setOpenDay(false)}>
-        <View style={styles.bookedDayWrapper}>
-          <AppText>9:00 - 10: 00</AppText>
-          <AppText>
-            Item
-          </AppText>
-          <Button title='OK' onPress={() => setOpenDay(false)} />
-        </View>
-      </Modal>
+      <View style={styles.buttonWrapper}>
+        <AppButton title='Next' onPress={openModal} />
+      </View>
+      <BookedConfirm
+        isVisible={modalVisible}
+        onPress={closeModal}
+        handleSubmit={closeModal}
+        service={selectedServices}
+        address={'Uchtepa tumani, Mahorat 23'}
+        date={formattedDate}
+        time={selectTime}
+        total={totalPrice} />
     </SafeAreaTemplate>
   );
 };
@@ -71,16 +133,24 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    marginTop: 34,
+    marginTop: 15,
     marginBottom: 12
   },
   buttonWrapper: {
     flex: 1,
     justifyContent: "flex-end"
   },
-  bookedDayWrapper: {
-    width: "90%",
-    height: 100,
-    backgroundColor: colors.white
-  }
+  totalWrapper: {
+    marginTop: 20,
+    alignItems: "center",
+    paddingVertical: 14,
+    backgroundColor: colors.white,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  total: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: colors.appBlack,
+  },
 });

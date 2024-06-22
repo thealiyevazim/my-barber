@@ -22,3 +22,6 @@ export * from './SelectDateComponent';
 export * from './SelectTimeComponent';
 export * from './SelectService';
 export * from './SelectPeople';
+export * from './BookedConfirm';
+export * from './HistoryComponent';
+export * from './HistoryData';
