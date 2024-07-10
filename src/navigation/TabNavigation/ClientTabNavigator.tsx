@@ -1,14 +1,11 @@
-import { Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, { useCallback } from "react";
+import React from "react";
 import { PixelRatio, StyleSheet } from "react-native";
-import { CalendarScreen, DashboardScreen, ProfileScreen } from "~screens";
 import { colors } from "~utils";
 import { Routes } from "../navigationRoutes";
 import { ClientNavigationRoutes } from "~navigation/config";
 import { renderClientTabsBarContent } from "./ClientTabBarContent";
 
-const defaultIconSize = 28;
 const tabBarHeight = PixelRatio.roundToNearestPixel(28 * PixelRatio.get());
 
 const Tab = createBottomTabNavigator();

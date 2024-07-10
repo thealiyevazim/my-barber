@@ -32,7 +32,7 @@ export const clientLoginSlice = createSlice({
         clientLogin.fulfilled,
         (state, { payload }: PayloadAction<ClientLoginDataResponse>) => {
           state.loading = false;
-          console.warn(payload);
+          console.log(payload);
           state.loginResponse = payload;
         },
       )

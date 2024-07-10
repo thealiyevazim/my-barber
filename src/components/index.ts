@@ -25,3 +25,5 @@ export * from './SelectPeople';
 export * from './BookedConfirm';
 export * from './HistoryComponent';
 export * from './HistoryData';
+export * from './BookedHistoryComponent';
+export * from './ProfileCarousel';

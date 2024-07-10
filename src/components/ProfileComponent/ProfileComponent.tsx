@@ -5,8 +5,9 @@ import {
   View,
   Pressable,
   TouchableOpacity,
+  Platform,
 } from "react-native";
-import { AppText, BottomComponent } from "~components";
+import { AppText, BottomComponent, ProfileCarousel, SnapCarousel } from "~components";
 import { SafeAreaTemplate } from "~templates";
 import { colors, windowHeight } from "~utils";
 import {
@@ -15,12 +16,25 @@ import {
   HistoryIcon,
   LanguageIcon,
   LogOutIcon,
+  ServiceIcon,
 } from "~assets/icons";
 import Modal from "react-native-modal";
+import { tokenStorage, useUserType } from "~shared";
+import { UserTypesEnum } from "~enums";
+
+const carouselMockData = [
+  {
+    id: 1,
+    url: "https://bondsbarbershop.co.uk/images/home-hero.jpg",
+  },
+  {
+    id: 2,
+    url: "https://nationaltoday.com/wp-content/uploads/2022/02/Barbers-Day-1200x834.jpg",
+  },
+];
 
 interface ProfileComponentProps {
   name?: string;
-  avatar?: string;
   customerNumber?: string;
   logOutPress?: () => void;
   goEditPress?: () => void;
@@ -29,34 +43,25 @@ interface ProfileComponentProps {
 
 export const ProfileComponent: React.FC<ProfileComponentProps> = ({
   name,
-  avatar,
-  customerNumber,
   logOutPress,
   goEditPress,
   goToLanguage,
 }) => {
   const [openLogOut, setOpenLogOut] = useState<boolean>(false);
+  const userType = useUserType();
 
   return (
     <SafeAreaTemplate isDark>
-      <View style={styles.profileWrapper}>
-        <View style={styles.profileAvatarWrapper}>
-          <Image
-            style={styles.profileAvatar}
-            source={{
-              uri: avatar,
-            }}
-          />
-          <Pressable style={styles.editButton} onPress={goEditPress}>
-            <EditIcon />
-          </Pressable>
+      <View>
+        <ProfileCarousel carouselData={carouselMockData} />
+        <Pressable style={styles.editButton} onPress={goEditPress}>
+          <EditIcon />
+        </Pressable>
+        <View style={styles.accountWrapper}>
+          <AppText style={styles.name}>{name}</AppText>
         </View>
-        <AppText style={styles.name}>{name}</AppText>
-        <AppText style={styles.customerNumber}>
-          {customerNumber}
-        </AppText>
       </View>
-      <BottomComponent bottomStyles={styles.container}>
+      <BottomComponent bottomStyles={styles.container} bgImage={true}>
         <View style={styles.settingsWrapper}>
           <TouchableOpacity style={styles.buttonWrapper} onPress={goToLanguage}>
             <View style={styles.iconWrapper}>
@@ -72,17 +77,34 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
               <ArrowLeftIcon stroke={colors.appBlack} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonWrapper}>
-            <View style={styles.iconWrapper}>
-              <HistoryIcon />
-              <AppText style={styles.buttonTitle}>
-                History
-              </AppText>
-            </View>
-            <View style={styles.iconWrapper}>
-              <ArrowLeftIcon stroke={colors.appBlack} />
-            </View>
-          </TouchableOpacity>
+          {
+            userType === UserTypesEnum.Barber ? (
+              <>
+                <TouchableOpacity style={styles.buttonWrapper}>
+                  <View style={styles.iconWrapper}>
+                    <ServiceIcon />
+                    <AppText style={styles.buttonTitle}>
+                      Service
+                    </AppText>
+                  </View>
+                  <View style={styles.iconWrapper}>
+                    <ArrowLeftIcon stroke={colors.appBlack} />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonWrapper}>
+                  <View style={styles.iconWrapper}>
+                    <HistoryIcon />
+                    <AppText style={styles.buttonTitle}>
+                      History
+                    </AppText>
+                  </View>
+                  <View style={styles.iconWrapper}>
+                    <ArrowLeftIcon stroke={colors.appBlack} />
+                  </View>
+                </TouchableOpacity>
+              </>
+            ) : null
+          }
           <TouchableOpacity
             style={styles.logOutWrapper}
             onPress={() => setOpenLogOut(true)}
@@ -125,15 +147,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
     bottom: "-10%",
-    height: windowHeight / 2 + 60,
+    height: Platform.OS === "ios" ? windowHeight / 2 - 10 : windowHeight / 2 + 90,
   },
-  profileAvatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-  },
-  profileWrapper: {
-    marginTop: 40,
+  accountWrapper: {
+    position: "absolute",
+    bottom: 20,
+    zIndex: 2
   },
   name: {
     color: colors.white,
@@ -150,11 +169,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 30,
     height: 30,
-    zIndex: 3
-  },
-  profileAvatarWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    position: "absolute",
+    top: 30,
+    right: 0,
   },
   settingsWrapper: {
     rowGap: 24,

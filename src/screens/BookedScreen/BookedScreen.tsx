@@ -33,7 +33,7 @@ const serviceData = [
 ]
 
 export const BookedScreen: React.FC = () => {
-  const { navigate } = useTypedNavigation<"barber">();
+  const { navigate } = useTypedNavigation<"client">();
 
   const handleNextPage = () => {
     navigate(Routes.bookAppointmentScreen)

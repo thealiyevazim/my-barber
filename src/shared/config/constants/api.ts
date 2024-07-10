@@ -6,6 +6,6 @@ export const getApiPath = {
   },
   barber: {
     uploadAvatar: (id: string) => `/barber/upload-avatar/${id}`,
-    update: (id: string) => `/barber/update/${id}`,
+    update: () => `/barber/update`,
   },
 };

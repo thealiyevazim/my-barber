@@ -6,9 +6,9 @@ import { logout, useAppDispatch, useBarberData } from "~store";
 
 export const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { navigate } = useTypedNavigation<"barber">();
+  const { navigate } = useTypedNavigation<"barber" | "client">();
 
-  const barberData = useBarberData();
+  const barberData = useBarberData()
 
   const handleLogout = () => {
     dispatch(logout());
@@ -19,14 +19,12 @@ export const ProfileScreen: React.FC = () => {
   }, []);
 
   const handleLanguage = useCallback(() => {
+
   }, []);
 
   return (
     <ProfileComponent
-      name={"Jon Doe"}
-      avatar={
-        "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
-      }
+      name={barberData?.full_name}
       customerNumber={"92 customers"}
       logOutPress={handleLogout}
       goEditPress={handleGoEdit}

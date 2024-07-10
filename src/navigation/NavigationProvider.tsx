@@ -16,9 +16,6 @@ export function NavigationProvider(): ReactElement {
 
   const isClient = isClientAuth && userType === UserTypesEnum.Client;
 
-
-  console.warn(isPublic, isClientAuth, isBarberAuth)
-
   return (
     <NavigationContainer>
       {isPublic && <PublicNavigator />}

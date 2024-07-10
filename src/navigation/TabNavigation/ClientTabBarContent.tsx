@@ -6,7 +6,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { CalendarIcon, ProfileIcon } from "~assets/icons";
+import { CalendarIcon, HomeIcon, ProfileIcon } from "~assets/icons";
 import { Routes, RoutesType } from "~navigation/navigationRoutes";
 import { TABS_BAR_HEIGHT, colors } from "~utils";
 import { TabsBarItem } from "./TabBarItem";
@@ -14,6 +14,7 @@ import { TabsBarItem } from "./TabBarItem";
 const RoutesWithTabBar: RoutesType[] = [
   Routes.dashboardScreen,
   Routes.profileScreen,
+  Routes.bookedHistoryScreen
 ];
 
 function AppTabsBarContent({ navigation, state }: BottomTabBarProps) {
@@ -41,6 +42,12 @@ function AppTabsBarContent({ navigation, state }: BottomTabBarProps) {
     <Animated.View style={[styles.root, animatedStyle]}>
       <TabsBarItem
         icon={CalendarIcon}
+        onPress={handlePress(Routes.bookedHistoryScreen)}
+        active={currentRoute === Routes.bookedHistoryScreen}
+      />
+
+      <TabsBarItem
+        icon={HomeIcon}
         onPress={handlePress(Routes.dashboardScreen)}
         active={currentRoute === Routes.dashboardScreen}
       />

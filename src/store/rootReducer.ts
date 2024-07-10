@@ -3,6 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import {
   barberLoginReducer,
+  barberUpdateReducer,
   clientLoginReducer,
   internetStatusReducer,
   userTypeReducer,
@@ -13,12 +14,19 @@ const combinedReducer = combineReducers({
   internetStatus: internetStatusReducer,
   barberLogin: barberLoginReducer,
   clientLogin: clientLoginReducer,
+  barberUpdate: barberUpdateReducer,
 });
 
 const rootPersistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['userType', 'internetStatus', 'barberLogin', 'clientLogin'],
+  whitelist: [
+    'userType',
+    'internetStatus',
+    'barberLogin',
+    'clientLogin',
+    'barberUpdate',
+  ],
 };
 
 export const rootReducer = persistReducer(rootPersistConfig, combinedReducer);

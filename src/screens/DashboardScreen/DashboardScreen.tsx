@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import {
   MainInfoCard,
   MainSearch,
@@ -89,30 +89,29 @@ const mainInfoMockData: MainInfoCardType[] = [
 ];
 
 export const DashboardScreen: React.FC = () => {
-  const onUndefinedPress = () => undefined;
   const { navigate } = useTypedNavigation<"client">();
+
+  const onUndefinedPress = () => undefined;
 
   const handleBooked = () => {
     navigate(Routes.bookedScreen)
   }
 
   return (
-    <SafeAreaTemplate scrollable>
+    <SafeAreaTemplate>
       <MainSearch onNotificationPress={onUndefinedPress} />
-
-      <SnapCarousel carouselData={carouselMockData} />
-
-      <RecentPlaces
-        placesData={recentMockData}
-        handleCardPress={onUndefinedPress}
-      />
-
-      <MainInfoCard
-        mainCardInfoData={mainInfoMockData}
-        handleCardPress={handleBooked}
-      />
-
-      <View></View>
+      <ScrollView style={{ flex: 1, marginBottom: -30 }} showsVerticalScrollIndicator={false}>
+        <SnapCarousel carouselData={carouselMockData} />
+        <RecentPlaces
+          placesData={recentMockData}
+          handleCardPress={handleBooked}
+        />
+        <MainInfoCard
+          mainCardInfoData={mainInfoMockData}
+          handleCardPress={handleBooked}
+        />
+        <View></View>
+      </ScrollView>
     </SafeAreaTemplate>
   );
 };

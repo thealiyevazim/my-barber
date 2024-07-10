@@ -1,10 +1,9 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaTemplate } from '~templates'
 import { AppButton, AppInput, BottomComponent } from '~components'
 import * as ImagePicker from 'expo-image-picker';
 import { windowHeight } from '~utils';
-import LocationIcon from "~assets/images/location.png";
 
 export const ClientProfileEditForm: React.FC = () => {
 
@@ -24,7 +23,7 @@ export const ClientProfileEditForm: React.FC = () => {
   }
 
   return (
-    <SafeAreaTemplate isDark>
+    <SafeAreaTemplate isDark goBack>
       <BottomComponent bottomStyles={styles.container}>
         <TouchableOpacity style={styles.imagePickerWrapper} onPress={PickImage}>
           <Image
@@ -33,18 +32,11 @@ export const ClientProfileEditForm: React.FC = () => {
         </TouchableOpacity>
         <View style={styles.inputWrapper}>
           <AppInput
-            placeholder="Ism"
-          />
-          <AppInput
-            placeholder="Familiya"
+            placeholder="Full Name"
           />
           <AppInput
             placeholder="+998 "
             keyboardType="number-pad"
-          />
-          <AppInput
-            placeholder="E-mail"
-            textContentType="emailAddress"
           />
         </View>
         <View style={styles.button}>
@@ -60,6 +52,7 @@ export const ClientProfileEditForm: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
+    height: Platform.OS === "ios" ? windowHeight / 2 + 100 : windowHeight / 2 + 150,
   },
   imagePickerWrapper: {
     width: 81,

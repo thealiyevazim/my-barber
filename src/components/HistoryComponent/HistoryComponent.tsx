@@ -1,15 +1,24 @@
 import { FlatList, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { HistoryData } from '~components'
+import { useTypedNavigation } from '~shared'
+import { Routes } from '~navigation'
 
 const data = [
   1, 2, 3
 ]
 
-export const HistoryComponent: React.FC = () => {
+
+export const HistoryComponent: React.FC = ({ }) => {
+  const { navigate } = useTypedNavigation<"barber">();
+
+
+  const handleClientInfo = () => {
+    navigate(Routes.bookedInfoScreen)
+  }
 
   const renderItem = () => (
-    <HistoryData />
+    <HistoryData onPress={handleClientInfo} />
   )
 
   return (

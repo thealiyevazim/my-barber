@@ -10,3 +10,5 @@ export * from './ArrowLeftIcon';
 export * from './GoBackIcon';
 export * from './ClockIcon';
 export * from './ArrowIcon';
+export * from './HomeIcon';
+export * from './ServiceIcon';

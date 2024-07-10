@@ -22,7 +22,7 @@ export const RecentPlaces: React.FC<Props> = ({
   handleCardPress,
   placesData,
 }) => {
-  const handleShowAll = useCallback(() => {}, []);
+  const handleShowAll = useCallback(() => { }, []);
 
   const renderItem: ListRenderItem<RecentPlacesType> = useCallback(
     ({ item, index }) => {

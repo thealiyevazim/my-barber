@@ -4,9 +4,15 @@ import { colors } from '~utils'
 import { AppText } from '~components'
 import { GoBackIcon } from "~assets/icons";
 
-export const HistoryData: React.FC = () => {
+interface HistoryDataProps {
+  onPress: () => void;
+}
+
+export const HistoryData: React.FC<HistoryDataProps> = ({
+  onPress
+}) => {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={onPress}>
       <View style={styles.titleWrapper}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <AppText style={styles.name}>Nodir Aliyev</AppText>

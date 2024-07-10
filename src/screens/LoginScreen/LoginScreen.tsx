@@ -36,7 +36,7 @@ export const LoginScreen: React.FC = () => {
       <BottomComponent bottomStyles={styles.container}>
         <Formik
           initialValues={{
-            username: "azim-client",
+            username: "barber-1",
             password: "12345",
           }}
           onSubmit={handleSubmitForm}
