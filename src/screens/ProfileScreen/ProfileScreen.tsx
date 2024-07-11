@@ -1,14 +1,16 @@
 import React, { useCallback } from "react";
 import { ProfileComponent } from "~components";
+import { UserTypesEnum } from "~enums";
 import { Routes } from "~navigation";
-import { useTypedNavigation } from "~shared";
-import { logout, useAppDispatch, useBarberData } from "~store";
+import { useTypedNavigation, useUserType } from "~shared";
+import { logout, useAppDispatch, useBarberData, useClientData } from "~store";
 
 export const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const { navigate } = useTypedNavigation<"barber" | "client">();
+  const userType = useUserType();
 
-  const barberData = useBarberData()
+  const data = userType === UserTypesEnum.Barber ? useBarberData() : useClientData()
 
   const handleLogout = () => {
     dispatch(logout());
@@ -24,7 +26,7 @@ export const ProfileScreen: React.FC = () => {
 
   return (
     <ProfileComponent
-      name={barberData?.full_name}
+      name={data?.full_name}
       customerNumber={"92 customers"}
       logOutPress={handleLogout}
       goEditPress={handleGoEdit}

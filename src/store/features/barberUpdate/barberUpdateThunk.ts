@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { clientApi } from '~api';
-import {
-  BarberUpdateData,
-  BarberUpdateDataResponse,
-  tokenStorage,
-} from '~shared';
+import { BarberUpdateData, BarberUpdateDataResponse } from '~shared';
 import { AppThunkConfig } from '../../types';
 
 export const barberUpdate = createAsyncThunk<

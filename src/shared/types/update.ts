@@ -1,3 +1,4 @@
+import { Client } from './account';
 export interface BarberUpdateData {
   full_name: string;
   phone: string;
@@ -18,5 +19,22 @@ export interface BarberUpdate {
   location: string;
   birth_date: string;
   working_hours: string;
+  avatar: string;
+}
+
+export interface ClientUpdateData {
+  full_name: string;
+  phone: string;
+}
+
+export interface ClientUpdateDataResponse {
+  data: ClientUpdate;
+}
+
+export interface ClientUpdate {
+  id: string;
+  username: string;
+  full_name: string;
+  phone: string;
   avatar: string;
 }

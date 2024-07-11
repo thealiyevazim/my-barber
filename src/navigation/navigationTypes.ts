@@ -14,6 +14,7 @@ export type BarberStackParamsList = {
   [Routes.profileScreen]: { userType: UserTypesEnum };
   [Routes.profileEditScreen]: undefined;
   [Routes.bookedInfoScreen]: undefined;
+  [Routes.barberSelectService]: undefined;
 };
 
 export type ClientStackParamsList = {

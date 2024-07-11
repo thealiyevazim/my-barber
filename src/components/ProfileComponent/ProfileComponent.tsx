@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -19,8 +19,9 @@ import {
   ServiceIcon,
 } from "~assets/icons";
 import Modal from "react-native-modal";
-import { tokenStorage, useUserType } from "~shared";
+import { useTypedNavigation, useUserType } from "~shared";
 import { UserTypesEnum } from "~enums";
+import { Routes } from "~navigation";
 
 const carouselMockData = [
   {
@@ -49,6 +50,11 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
 }) => {
   const [openLogOut, setOpenLogOut] = useState<boolean>(false);
   const userType = useUserType();
+  const { navigate } = useTypedNavigation<"barber">();
+
+  const handleService = useCallback(() => {
+    navigate(Routes.barberSelectService);
+  }, []);
 
   return (
     <SafeAreaTemplate isDark>
@@ -80,7 +86,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           {
             userType === UserTypesEnum.Barber ? (
               <>
-                <TouchableOpacity style={styles.buttonWrapper}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={handleService}>
                   <View style={styles.iconWrapper}>
                     <ServiceIcon />
                     <AppText style={styles.buttonTitle}>

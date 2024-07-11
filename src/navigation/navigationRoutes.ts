@@ -13,6 +13,7 @@ export const Routes = {
   bookAppointmentScreen: 'bookAppointmentScreen',
   bookedInfoScreen: 'bookedInfoScreen',
   bookedHistoryScreen: 'bookedHistoryScreen',
+  barberSelectService: 'barberSelectService',
 } as const;
 
 export type RoutesType = (typeof Routes)[keyof typeof Routes];

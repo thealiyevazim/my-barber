@@ -5,7 +5,9 @@ import {
   barberLoginReducer,
   barberUpdateReducer,
   clientLoginReducer,
+  clientUpdateReducer,
   internetStatusReducer,
+  servicesSliceReducer,
   userTypeReducer,
 } from './features';
 
@@ -15,6 +17,8 @@ const combinedReducer = combineReducers({
   barberLogin: barberLoginReducer,
   clientLogin: clientLoginReducer,
   barberUpdate: barberUpdateReducer,
+  clientUpdate: clientUpdateReducer,
+  barberService: servicesSliceReducer,
 });
 
 const rootPersistConfig = {
@@ -26,6 +30,8 @@ const rootPersistConfig = {
     'barberLogin',
     'clientLogin',
     'barberUpdate',
+    'barberService',
+    'clientUpdate',
   ],
 };
 

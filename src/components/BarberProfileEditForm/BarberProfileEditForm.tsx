@@ -8,13 +8,14 @@ import LocationIcon from "~assets/images/location.png";
 import { barberUpdate, useAppDispatch, useBarberData } from "~store";
 import { Formik } from "formik";
 import { BarberUpdateData } from "~shared";
-import { date, object, string } from "yup";
+import { object, string } from "yup";
 
 const validationSchema = object().shape({
-  full_name: string().required('Full Name is required'),
-  phone: string().required('Phone is required'),
-  location: string().required('Location is required'),
-  birth_date: date().required('Birth date is required'),
+  full_name: string().required("Enter an full name"),
+  phone: string().required("Enter a phone"),
+  location: string().required("Enter a location"),
+  working_hours: string().required("Enter a working hours"),
+  birth_date: string().required("Enter a birth date"),
 });
 
 export const BarberProfileEditForm: React.FC = () => {
@@ -84,10 +85,7 @@ export const BarberProfileEditForm: React.FC = () => {
                 placeholder="Phone number"
                 keyboardType="number-pad"
                 value={values.phone}
-                onChangeText={(text) => {
-                  const formattedText = text.startsWith('+998') ? text : `+998${text.replace(/^\+998\s*/, '')}`;
-                  handleChange('phone')(formattedText);
-                }}
+                onChangeText={handleChange('phone')}
                 onBlur={handleBlur('phone')}
               />
               <AppInput
@@ -103,7 +101,9 @@ export const BarberProfileEditForm: React.FC = () => {
                   placeholder="Birthday date"
                   readOnly
                   editable={false}
+                  onChangeText={handleChange('birth_date')}
                   pointerEvents="none"
+                  onBlur={handleBlur('birth_date')}
                 />
               </TouchableOpacity>
               <TouchableOpacity>
@@ -113,6 +113,8 @@ export const BarberProfileEditForm: React.FC = () => {
                   readOnly
                   editable={false}
                   pointerEvents="none"
+                  onChangeText={handleChange('working_hours')}
+                  onBlur={handleBlur('working_hours')}
                 />
               </TouchableOpacity>
             </View>

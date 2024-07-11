@@ -3,7 +3,6 @@ import { clientApi } from '~api';
 import {
   BarberLoginData,
   BarberLoginDataResponse,
-  storage,
   tokenStorage,
 } from '~shared';
 import { AppThunkConfig } from '../../types';

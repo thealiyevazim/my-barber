@@ -7,5 +7,9 @@ export const getApiPath = {
   barber: {
     uploadAvatar: (id: string) => `/barber/upload-avatar/${id}`,
     update: () => `/barber/update`,
+    service: () => `/services`,
+  },
+  client: {
+    update: () => `/client/update`,
   },
 };

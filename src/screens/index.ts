@@ -15,3 +15,4 @@ export * from './BookedScreen';
 export * from './BookAppointmentScreen';
 export * from './BookedInfoScreen';
 export * from './BookedHistoryScreen';
+export * from './BarberSelectService';

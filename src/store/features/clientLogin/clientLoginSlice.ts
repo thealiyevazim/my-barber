@@ -1,6 +1,7 @@
 import { PayloadAction, SerializedError, createSlice } from '@reduxjs/toolkit';
-import { ClientLoginDataResponse } from '~shared';
+import { ClientLoginDataResponse, ClientUpdateDataResponse } from '~shared';
 import { clientLogin } from './clientLoginThunk';
+import { clientUpdate } from '../clientUpdate';
 
 interface ClientLoginState {
   loading: boolean;
@@ -39,7 +40,14 @@ export const clientLoginSlice = createSlice({
       .addCase(clientLogin.rejected, (state, action) => {
         state.loading = false;
         state.isRejected = action.error;
-      });
+      })
+      .addCase(
+        clientUpdate.fulfilled,
+        (state, { payload }: PayloadAction<ClientUpdateDataResponse>) => {
+          state.loginResponse.data.client.full_name = payload.data.full_name;
+          state.loginResponse.data.client.phone = payload.data.phone;
+        },
+      );
   },
 });
 

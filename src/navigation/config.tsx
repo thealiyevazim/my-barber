@@ -12,6 +12,7 @@ import {
   BookAppointmentScreen,
   BookedInfoScreen,
   BookedHistoryScreen,
+  BarberSelectService,
 } from "~screens";
 import { Routes } from "./navigationRoutes";
 import {
@@ -41,7 +42,8 @@ export const BarberNavigationRoutes: NavigationRoute<BarberStackParamsList>[] =
     { component: CalendarScreen, name: Routes.barberCalendarScreen },
     { component: ProfileScreen, name: Routes.profileScreen },
     { component: ProfileEditScreen, name: Routes.profileEditScreen },
-    { component: BookedInfoScreen, name: Routes.bookedInfoScreen }
+    { component: BookedInfoScreen, name: Routes.bookedInfoScreen },
+    { component: BarberSelectService, name: Routes.barberSelectService },
   ];
 
 // Client Stack
