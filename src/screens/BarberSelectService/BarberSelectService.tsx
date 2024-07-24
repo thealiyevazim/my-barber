@@ -5,7 +5,7 @@ import { AppButton, AppInput, AppText } from '~components';
 import { GoBackIcon } from '~assets/icons';
 import { colors } from '~utils';
 import { AddServiceData, useTypedNavigation } from '~shared';
-import { addServices, useAppDispatch, useBarberData, useBarberServices } from '~store';
+import { addServices, useAppDispatch, useBarberServices } from '~store';
 import { array, number, object, string } from 'yup';
 import { FieldArray, Formik } from "formik";
 import { FONT_TYPES } from '~assets/fonts/types';
@@ -22,7 +22,7 @@ const validationSchema = object().shape({
 export const BarberSelectService: React.FC = () => {
   const { goBack } = useTypedNavigation();
   const dispatch = useAppDispatch();
-  const barberServices = useBarberServices()
+  const barberServices = useBarberServices();
 
   const handleGoBack = useCallback(() => {
     goBack();
@@ -34,7 +34,7 @@ export const BarberSelectService: React.FC = () => {
     const body = data.items.map((item) => ({
       ...item,
       price: Number(item.price)
-    }))
+    }));
     dispatch(addServices(body));
     console.log(data.items);
   }, [dispatch]);
@@ -44,7 +44,7 @@ export const BarberSelectService: React.FC = () => {
       name: service.name,
       price: service.price
     }))
-  }
+  };
 
   return (
     <SafeAreaTemplate>
@@ -62,37 +62,41 @@ export const BarberSelectService: React.FC = () => {
         validationSchema={validationSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => {
-          return (<FieldArray name="items">
-            {() => {
-              return (
-                <View style={styles.container}>
-                  <View>
-                    {values.items.map((item, index) => (
-                      <View key={index} style={styles.serviceItem}>
-                        <TextInput
-                          style={[styles.serviceText]}
-                          value={item.name}
-                          editable={false}
-                          onChangeText={text => handleChange(`items.${index}.name`)(text)}
-                          onBlur={() => handleBlur(`items.${index}.name`)}
-                        />
-                        <AppInput
-                          style={styles.input}
-                          placeholder='Price'
-                          onChangeText={text => handleChange(`items.${index}.price`)(text)}
-                          onBlur={() => handleBlur(`items.${index}.price`)}
-                          keyboardType='numeric'
-                          value={item.price.toString()}
-                        />
-                      </View>
-                    ))}
+          return (
+            <FieldArray name="items">
+              {() => {
+                return (
+                  <View style={styles.container}>
+                    <View>
+                      {values.items.map((item, index) => (
+                        <View key={index} style={styles.serviceItem}>
+                          <TextInput
+                            style={[
+                              styles.serviceText,
+                              !item.price && styles.greyedOutText
+                            ]}
+                            value={item.name}
+                            editable={false}
+                            onChangeText={text => handleChange(`items.${index}.name`)(text)}
+                            onBlur={() => handleBlur(`items.${index}.name`)}
+                          />
+                          <AppInput
+                            style={styles.input}
+                            placeholder='Price'
+                            onChangeText={text => handleChange(`items.${index}.price`)(text)}
+                            onBlur={() => handleBlur(`items.${index}.price`)}
+                            keyboardType='numeric'
+                            value={item.price.toString()}
+                          />
+                        </View>
+                      ))}
+                    </View>
+                    <AppButton title='Tasdiqlash' onPress={handleSubmit} />
                   </View>
-                  <AppButton title='Tasdiqlash' onPress={handleSubmit} />
-                </View>
-              )
-            }}
-          </FieldArray>
-          )
+                );
+              }}
+            </FieldArray>
+          );
         }}
       </Formik>
     </SafeAreaTemplate>
