@@ -1,6 +1,9 @@
 import {
+  AddServiceData,
+  AddServiceResponse,
   BarberLoginData,
   BarberLoginDataResponse,
+  BarbersData,
   BarberUpdateData,
   BarberUpdateDataResponse,
   ClientLoginData,
@@ -42,6 +45,17 @@ class AccountApi extends BaseApi {
 
   async barberService() {
     return this.get<ServiceData>(getApiPath.barber.service());
+  }
+
+  async barbers() {
+    return this.get<BarbersData>(getApiPath.client.barbers());
+  }
+
+  async addService(data: AddServiceData[]) {
+    return this.post<any, AddServiceResponse>(
+      getApiPath.barber.addService(),
+      data,
+    );
   }
 }
 

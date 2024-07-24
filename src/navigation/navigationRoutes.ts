@@ -14,6 +14,7 @@ export const Routes = {
   bookedInfoScreen: 'bookedInfoScreen',
   bookedHistoryScreen: 'bookedHistoryScreen',
   barberSelectService: 'barberSelectService',
+  allBarberScreen: 'allBarberScreen',
 } as const;
 
 export type RoutesType = (typeof Routes)[keyof typeof Routes];

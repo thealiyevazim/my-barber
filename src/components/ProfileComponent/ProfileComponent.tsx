@@ -97,7 +97,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
                     <ArrowLeftIcon stroke={colors.appBlack} />
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonWrapper}>
+                {/* <TouchableOpacity style={styles.buttonWrapper}>
                   <View style={styles.iconWrapper}>
                     <HistoryIcon />
                     <AppText style={styles.buttonTitle}>
@@ -107,7 +107,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
                   <View style={styles.iconWrapper}>
                     <ArrowLeftIcon stroke={colors.appBlack} />
                   </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </>
             ) : null
           }

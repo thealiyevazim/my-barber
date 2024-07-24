@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { Shadow } from "react-native-shadow-2";
 import { AppText } from "~components/AppText";
+import { Routes } from "~navigation";
+import { useTypedNavigation } from "~shared";
 import { RecentPlacesType } from "~types";
 import { colors, windowWidth } from "~utils";
 
@@ -22,7 +24,11 @@ export const RecentPlaces: React.FC<Props> = ({
   handleCardPress,
   placesData,
 }) => {
-  const handleShowAll = useCallback(() => { }, []);
+  const { navigate } = useTypedNavigation<"client">();
+
+  const handleShowAll = useCallback(() => {
+    navigate(Routes.allBarberScreen)
+  }, []);
 
   const renderItem: ListRenderItem<RecentPlacesType> = useCallback(
     ({ item, index }) => {

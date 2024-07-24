@@ -16,9 +16,6 @@ export const HistoryData: React.FC<HistoryDataProps> = ({
       <View style={styles.titleWrapper}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <AppText style={styles.name}>Nodir Aliyev</AppText>
-          <View style={styles.labelWrapper}>
-            <AppText style={styles.label}>Yangi</AppText>
-          </View>
         </View>
         <GoBackIcon style={styles.icon} stroke={colors.appGray} />
       </View>
@@ -45,16 +42,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 17,
     fontWeight: "600"
-  },
-  labelWrapper: {
-    paddingVertical: 3,
-    paddingHorizontal: 6,
-    borderRadius: 10,
-    backgroundColor: colors.appGray,
-    marginLeft: 12
-  },
-  label: {
-    color: colors.appGreen
   },
   icon: {
     transform: [{ rotate: "0deg" }],

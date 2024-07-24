@@ -1,69 +1,70 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   FlatList,
   Image,
   ListRenderItem,
   Pressable,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Shadow } from "react-native-shadow-2";
+import { AppText } from "~components";
+import { SafeAreaTemplate } from "~templates";
 import { MainInfoCardType } from "~types";
 import { colors, windowHeight, windowWidth } from "~utils";
-import { AppText } from "../AppText";
-import { useTypedNavigation } from "~shared";
-import { Routes } from "~navigation";
+import { GoBackIcon } from '~assets/icons';
+import { Barber, Barbers, useTypedNavigation } from "~shared";
+import { barbersData, useAppDispatch, useBarbersData } from "~store";
 
-type Props = {
-  mainCardInfoData: MainInfoCardType[];
-  handleCardPress: (card: MainInfoCardType) => void;
-};
+export const AllBarberScreen: React.FC = () => {
+  const { goBack } = useTypedNavigation();
+  const dispatch = useAppDispatch();
+  const barbers = useBarbersData().map((barber) => ({
+    ...barber,
+    avatar: barber.avatar || "",
+  })) as Barber[];
 
-export const MainInfoCard: React.FC<Props> = ({
-  handleCardPress,
-  mainCardInfoData,
-}) => {
-  const { navigate } = useTypedNavigation<"client">();
+  useEffect(() => {
+    dispatch(barbersData());
+  }, [dispatch]);
 
-  const handleShowAll = useCallback(() => {
-    navigate(Routes.allBarberScreen)
-  }, []);
+  const handleGoBack = useCallback(() => {
+    goBack();
+  }, [goBack]);
 
-  const renderItem: ListRenderItem<MainInfoCardType> = useCallback(
+  const renderItem: ListRenderItem<Barber> = useCallback(
     ({ item, index }) => {
       return (
         <View style={styles.cardContainer} key={index}>
           <Shadow distance={6} startColor="#efefef">
             <View style={styles.cardInner}>
-              <Image source={{ uri: item.img }} style={styles.cardImage} />
+              <Image source={{ uri: item.avatar }} style={styles.cardImage} />
               <View style={styles.cardOpenRow}>
-                <AppText
+                {/* <AppText
                   style={[
                     styles.cardOpen,
                     { color: item.isOpen ? colors.appGreen : colors.appRed },
                   ]}
                 >
                   {item.isOpen ? "Ochiq" : "Yopiq"}
-                </AppText>
+                </AppText> */}
                 <View style={styles.dot} />
                 <AppText style={[styles.cardOpen, { color: colors.iconGray }]}>
-                  {item.timeRange}
+                  {item.working_hours}
                 </AppText>
               </View>
-              <AppText style={styles.cardName}>{item.name}</AppText>
+              <AppText style={styles.cardName}>{item.full_name}</AppText>
               <View style={styles.rating}>
                 <Ionicons
                   size={18}
                   name="location-outline"
                   color={colors.iconGray}
                 />
-                <AppText style={styles.ratingText}>{item.distance} km</AppText>
+                <AppText style={styles.ratingText}>{item.location} km</AppText>
               </View>
-              <Pressable
-                style={styles.bookNow}
-                onPress={() => handleCardPress(item)}
-              >
+              <Pressable style={styles.bookNow}>
                 <AppText style={{ color: colors.white }}>Book now</AppText>
               </Pressable>
             </View>
@@ -75,44 +76,44 @@ export const MainInfoCard: React.FC<Props> = ({
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerComp}>
-        <AppText bold style={styles.title}>
-          Eng yaqinlari
-        </AppText>
-        <Pressable onPress={handleShowAll}>
-          <AppText style={styles.showAll}>Barchasi</AppText>
-        </Pressable>
+    <SafeAreaTemplate style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity activeOpacity={0.7} onPress={handleGoBack}>
+          <GoBackIcon style={styles.icon} stroke={colors.appBlack} />
+        </TouchableOpacity>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <AppText semibold style={styles.headerTitle}>
+            Barbers
+          </AppText>
+        </View>
       </View>
       <FlatList
-        horizontal
-        data={mainCardInfoData}
+        data={barbers}
         renderItem={renderItem}
         persistentScrollbar={true}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        numColumns={2}
       />
-    </View>
+    </SafeAreaTemplate>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginVertical: 15,
+    // Styles for container
   },
-  headerComp: {
-    marginBottom: 10,
+  header: {
     flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+    alignItems: "center",
+    paddingRight: 30,
+    marginBottom: 20,
   },
-  title: {
-    fontSize: 18,
-    color: colors.appBlack,
+  headerTitle: {
+    alignSelf: "center",
+    fontSize: 22,
   },
-  showAll: {
-    fontSize: 14,
-    color: colors.iconGray,
+  icon: {
+    transform: [{ rotate: "180deg" }],
   },
   cardContainer: {
     padding: 5,
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
   cardInner: {
     padding: 8,
     borderRadius: 8,
-    width: windowWidth / 2.2,
+    width: windowWidth / 2.4,
     height: windowHeight / 3.5,
     backgroundColor: colors.white,
     justifyContent: "space-between",
@@ -165,3 +166,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.appBlack,
   },
 });
+
+export default AllBarberScreen;

@@ -2,7 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import {
+  addServicesReducer,
   barberLoginReducer,
+  barbersDataSliceReducer,
   barberUpdateReducer,
   clientLoginReducer,
   clientUpdateReducer,
@@ -19,6 +21,8 @@ const combinedReducer = combineReducers({
   barberUpdate: barberUpdateReducer,
   clientUpdate: clientUpdateReducer,
   barberService: servicesSliceReducer,
+  barbersData: barbersDataSliceReducer,
+  addServices: addServicesReducer,
 });
 
 const rootPersistConfig = {
@@ -32,6 +36,8 @@ const rootPersistConfig = {
     'barberUpdate',
     'barberService',
     'clientUpdate',
+    'barbersData',
+    'addServices',
   ],
 };
 

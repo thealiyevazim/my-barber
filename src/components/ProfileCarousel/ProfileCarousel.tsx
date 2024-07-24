@@ -15,9 +15,11 @@ export const ProfileCarousel: React.FC<ProfileCarouselProps> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const Pagination: React.FC<{ activeSlide: number; totalSlides: number }> = ({

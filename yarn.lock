@@ -4982,11 +4982,6 @@ expo-camera@~15.0.9:
   dependencies:
     invariant "^2.2.4"
 
-expo-checkbox@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/expo-checkbox/-/expo-checkbox-3.0.0.tgz#73a5d60678dd4a1d2971b48957b08acf1dd734f1"
-  integrity sha512-ZfNUawE0Bp/Xa5Gwtn04yfg6rCnKdqdmBXvEGbYg5U+IfRfLh+ocLiiBAcx760DfdYpzMGQOGpUtWQeEVmJwNw==
-
 expo-constants@~16.0.0, expo-constants@~16.0.1:
   version "16.0.2"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-16.0.2.tgz#eb5a1bddb7308fd8cadac8fc44decaf4784cac5e"
@@ -5031,7 +5026,7 @@ expo-keep-awake@~13.0.2:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-13.0.2.tgz#5ef31311a339671eec9921b934fdd90ab9652b0e"
   integrity sha512-kKiwkVg/bY0AJ5q1Pxnm/GvpeB6hbNJhcFsoOWDh2NlpibhCLaHL826KHUM+WsnJRbVRxJ+K9vbPRHEMvFpVyw==
 
-expo-location@~17.0.1:
+expo-location@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-17.0.1.tgz#3bdbf91066f1a40ec3468dc1807f3e106473f74c"
   integrity sha512-m+OzotzlAXO3ZZ1uqW5GC25nXW868zN+ROyBA1V4VF6jGay1ZEs4URPglCVUDzZby2F5wt24cMzqDKw2IX6nRw==
@@ -9050,10 +9045,10 @@ react-native-image-picker@^7.1.0:
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-7.1.2.tgz#383849d1953caf4578874a1f5e5dd11c737bd5cd"
   integrity sha512-b5y5nP60RIPxlAXlptn2QwlIuZWCUDWa/YPUVjgHc0Ih60mRiOg1PSzf0IjHSLeOZShCpirpvSPGnDExIpTRUg==
 
-react-native-maps@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.14.0.tgz#1e5cac8e88d80002c512dd4763a205493a1ae58d"
-  integrity sha512-ai7h4UdRLGPFCguz1fI8n4sKLEh35nZXHAH4nSWyAeHGrN8K9GjICu9Xd4Q5Ok4h+WwrM6Xz5pGbF3Qm1tO6iQ==
+react-native-maps@^1.17.1:
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.17.1.tgz#a16312ff7a4ecf7107d817faa11c9a5871cddf12"
+  integrity sha512-Fm91uAOJ2QURtKPhxRfmIW37zGSxZqbW5WkxSSEiuHg7k+z801GniyLo1qnCtFZ5zv3ie1vPg69Q8V93wZI9zQ==
   dependencies:
     "@types/geojson" "^7946.0.13"
 

@@ -1,37 +1,61 @@
-import { Image, Platform, StyleSheet, TouchableOpacity, View } from "react-native";
-import React, { useCallback, useState, useEffect } from "react";
+import { Image, Platform, StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { SafeAreaTemplate } from "~templates";
 import { AppButton, AppInput, BottomComponent } from "~components";
 import * as ImagePicker from "expo-image-picker";
+import * as Location from 'expo-location';
 import { colors, windowHeight } from "~utils";
 import LocationIcon from "~assets/images/location.png";
 import { barberUpdate, useAppDispatch, useBarberData } from "~store";
 import { Formik } from "formik";
 import { BarberUpdateData } from "~shared";
 import { object, string } from "yup";
+import Modal from "react-native-modal";
+import MapView, { Marker } from 'react-native-maps';
 
 const validationSchema = object().shape({
-  full_name: string().required("Enter an full name"),
+  full_name: string().required("Enter a full name"),
   phone: string().required("Enter a phone"),
   location: string().required("Enter a location"),
-  working_hours: string().required("Enter a working hours"),
+  working_hours: string().required("Enter working hours"),
   birth_date: string().required("Enter a birth date"),
 });
 
 export const BarberProfileEditForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const [image, setImage] = useState<string | null>(null);
-  const barberData = useBarberData()
+  const barberData = useBarberData();
+  const [openLocation, setOpenLocation] = useState(false);
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [address, setAddress] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const mapRef = useRef<MapView>(null);
 
   useEffect(() => {
-    const requestPermission = async () => {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+        setErrorMsg('Permission to access location was denied');
+        return;
       }
-    };
-    requestPermission();
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
   }, []);
+
+  const getAddressFromCoordinates = async (latitude: number, longitude: number) => {
+    try {
+      const [result] = await Location.reverseGeocodeAsync({ latitude, longitude });
+      if (result) {
+        return `${result.street}, ${result.city}, ${result.country}`;
+      }
+      return "Unknown address";
+    } catch (error) {
+      console.error(error);
+      return "Error fetching address";
+    }
+  };
 
   const PickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -49,11 +73,33 @@ export const BarberProfileEditForm: React.FC = () => {
     dispatch(barberUpdate(data));
   }, [dispatch]);
 
+  const handleMyLocationPress = async (handleChange: any) => {
+    if (location) {
+      const address = await getAddressFromCoordinates(location.coords.latitude, location.coords.longitude);
+      setAddress(address);
+      handleChange('location')(address);
+      setOpenLocation(false);
+    }
+  };
+
+  const myLocationNow = {
+    latitude: 41.217605339975904,
+    longitude: 69.1896892361171,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }
+
+  const myLocation = () => (
+    <View style={styles.myLocation}>
+      <View style={styles.location}></View>
+    </View>
+  )
+
   return (
     <SafeAreaTemplate isDark goBack>
       <Formik
         initialValues={{
-          full_name: barberData.full_name,
+          full_name: barberData?.full_name,
           phone: barberData.phone,
           location: barberData.location,
           working_hours: barberData.working_hours,
@@ -88,14 +134,19 @@ export const BarberProfileEditForm: React.FC = () => {
                 onChangeText={handleChange('phone')}
                 onBlur={handleBlur('phone')}
               />
-              <AppInput
-                placeholder="Location"
-                rightIcon={LocationIcon}
-                value={values.location}
-                onChangeText={handleChange('location')}
-                onBlur={handleBlur('location')}
-              />
-              <TouchableOpacity >
+              <TouchableOpacity onPress={() => setOpenLocation(true)}>
+                <AppInput
+                  placeholder="Location"
+                  rightIcon={LocationIcon}
+                  value={address || values.location} // Use address if available, otherwise fallback to Formik value
+                  onChangeText={handleChange('location')}
+                  onBlur={handleBlur('location')}
+                  readOnly
+                  editable={false}
+                  pointerEvents="none"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity>
                 <AppInput
                   value={values.birth_date}
                   placeholder="Birthday date"
@@ -121,6 +172,30 @@ export const BarberProfileEditForm: React.FC = () => {
             <View style={styles.button}>
               <AppButton title="Tasdiqlash" onPress={handleSubmit} />
             </View>
+            <Modal
+              isVisible={openLocation}
+              onBackdropPress={() => setOpenLocation(false)}
+              style={styles.modalView}
+            >
+              <View style={styles.containerLocation}>
+                {location ? (
+                  <MapView
+                    style={styles.map}
+                    initialRegion={myLocationNow}
+                  >
+                    <Marker
+                      coordinate={myLocationNow}
+                    />
+                    <Marker coordinate={{ latitude: myLocationNow.latitude, longitude: myLocationNow.longitude }}>
+                      {myLocation()}
+                    </Marker>
+                  </MapView>
+                ) : (
+                  <Text style={styles.paragraph}>Loading...</Text>
+                )}
+                <AppButton title="My location" onPress={() => handleMyLocationPress(handleChange)} />
+              </View>
+            </Modal>
           </BottomComponent>
         )}
       </Formik>
@@ -154,9 +229,39 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
   },
-  calendar: {
-    backgroundColor: colors.white,
-    borderRadius: 8,
-    padding: 20,
+  modalView: {
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center"
   },
+  containerLocation: {
+    backgroundColor: colors.white,
+    width: 350,
+    borderRadius: 20,
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  paragraph: {
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  map: {
+    width: '100%',
+    height: 500,
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    marginBottom: 20
+  },
+  myLocation: {
+    width: 20,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    padding: 5,
+  },
+  location: {
+    width: 10,
+    height: 10,
+    borderRadius: 100,
+    backgroundColor: 'red',
+  }
 });

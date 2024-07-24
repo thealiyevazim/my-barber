@@ -24,4 +24,5 @@ export type ClientStackParamsList = {
   [Routes.bookAppointmentScreen]: undefined;
   [Routes.profileEditScreen]: undefined;
   [Routes.bookedHistoryScreen]: undefined;
+  [Routes.allBarberScreen]: undefined;
 };

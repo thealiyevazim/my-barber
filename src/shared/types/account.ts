@@ -20,7 +20,12 @@ export interface Barber {
   location: string;
   birth_date: string;
   working_hours: string;
-  avatar: string;
+  avatar: any;
+  services?: Service[];
+}
+export interface Service {
+  name: string;
+  price: number;
 }
 
 export interface ClientLoginData {

@@ -16,3 +16,4 @@ export * from './BookAppointmentScreen';
 export * from './BookedInfoScreen';
 export * from './BookedHistoryScreen';
 export * from './BarberSelectService';
+export * from './AllBarberScreen';

@@ -50,8 +50,8 @@ export const ClientProfileEditForm: React.FC = () => {
     <SafeAreaTemplate isDark goBack>
       <Formik
         initialValues={{
-          full_name: clientData.full_name,
-          phone: clientData.phone,
+          full_name: clientData?.full_name,
+          phone: clientData?.phone,
         }}
         onSubmit={handleSubmitForm}
         validationSchema={validationSchema}

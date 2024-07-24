@@ -6,3 +6,5 @@ export * from './clientLogin';
 export * from './barberUpdate';
 export * from './barberServices';
 export * from './clientUpdate';
+export * from './barbersData';
+export * from './addService';

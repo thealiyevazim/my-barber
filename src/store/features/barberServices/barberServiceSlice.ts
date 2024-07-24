@@ -34,5 +34,4 @@ const servicesSlice = createSlice({
   },
 });
 
-export const { actions: servicesSliceAction } = servicesSlice;
 export const { reducer: servicesSliceReducer } = servicesSlice;

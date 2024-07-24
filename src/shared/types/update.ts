@@ -1,4 +1,3 @@
-import { Client } from './account';
 export interface BarberUpdateData {
   full_name: string;
   phone: string;
