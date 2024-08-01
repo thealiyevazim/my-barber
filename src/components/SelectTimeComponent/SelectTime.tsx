@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FONT_TYPES } from '~assets/fonts/types';
 import { AppText } from '~components';
@@ -14,12 +14,18 @@ interface SelectTimeProps {
   selectTime: string;
   setSelectTime: (selected: string) => void;
   data: Option[];
+  style?: StyleProp<ViewStyle>;
+  placeholderStyle?: StyleProp<TextStyle>;
+  selectedTextStyle?: StyleProp<TextStyle>;
 }
 
 export const SelectTime: React.FC<SelectTimeProps> = ({
   selectTime,
   setSelectTime,
-  data
+  data,
+  style,
+  placeholderStyle,
+  selectedTextStyle
 }) => {
 
   const handleChange = (item: Option) => {
@@ -37,11 +43,11 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Dropdown
         style={styles.dropdown}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
+        placeholderStyle={[styles.placeholderStyle, placeholderStyle]}
+        selectedTextStyle={[styles.selectedTextStyle, selectedTextStyle]}
         data={data}
         maxHeight={300}
         labelField="label"

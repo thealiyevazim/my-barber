@@ -43,12 +43,12 @@ export const barberLoginSlice = createSlice({
       .addCase(
         barberUpdate.fulfilled,
         (state, { payload }: PayloadAction<BarberUpdateDataResponse>) => {
-          state.loginResponse.data.barber.full_name = payload.data.full_name;
-          state.loginResponse.data.barber.phone = payload.data.phone;
-          state.loginResponse.data.barber.location = payload.data.location;
+          state.loginResponse.data.barber.full_name = payload.data?.full_name;
+          state.loginResponse.data.barber.phone = payload.data?.phone;
+          state.loginResponse.data.barber.location = payload.data?.location;
           state.loginResponse.data.barber.working_hours =
-            payload.data.working_hours;
-          state.loginResponse.data.barber.birth_date = payload.data.birth_date;
+            payload.data?.working_hours;
+          state.loginResponse.data.barber.birth_date = payload.data?.birth_date;
         },
       );
   },

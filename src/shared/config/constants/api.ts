@@ -9,6 +9,7 @@ export const getApiPath = {
     update: () => `/barber/update`,
     service: () => `/services`,
     addService: () => `/barber/add-service`,
+    barberGetMe: () => `/barber/getMe`,
   },
   client: {
     update: () => `/client/update`,

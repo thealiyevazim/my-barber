@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import {
-  Image,
   StyleSheet,
   View,
   Pressable,
@@ -13,7 +12,6 @@ import { colors, windowHeight } from "~utils";
 import {
   ArrowLeftIcon,
   EditIcon,
-  HistoryIcon,
   LanguageIcon,
   LogOutIcon,
   ServiceIcon,

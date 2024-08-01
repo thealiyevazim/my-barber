@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BarbersData, Barbers } from '~shared';
+import { Barbers } from '~shared';
 import { barbersData } from './barbersDataThunk';
 
 interface BarbersState {

@@ -8,3 +8,4 @@ export * from './barberServices';
 export * from './clientUpdate';
 export * from './barbersData';
 export * from './addService';
+export * from './barberGetMe';

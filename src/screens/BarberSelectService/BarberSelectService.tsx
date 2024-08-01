@@ -5,7 +5,7 @@ import { AppButton, AppInput, AppText } from '~components';
 import { GoBackIcon } from '~assets/icons';
 import { colors } from '~utils';
 import { AddServiceData, useTypedNavigation } from '~shared';
-import { addServices, useAppDispatch, useBarberServices } from '~store';
+import { addServices, useAppDispatch, useBarberGetMeService, useBarberServices } from '~store';
 import { array, number, object, string } from 'yup';
 import { FieldArray, Formik } from "formik";
 import { FONT_TYPES } from '~assets/fonts/types';
@@ -22,7 +22,7 @@ const validationSchema = object().shape({
 export const BarberSelectService: React.FC = () => {
   const { goBack } = useTypedNavigation();
   const dispatch = useAppDispatch();
-  const barberServices = useBarberServices();
+  const barberServices = useBarberGetMeService();
 
   const handleGoBack = useCallback(() => {
     goBack();
@@ -36,7 +36,7 @@ export const BarberSelectService: React.FC = () => {
       price: Number(item.price)
     }));
     dispatch(addServices(body));
-    console.log(data.items);
+    handleGoBack()
   }, [dispatch]);
 
   const initialValues = {
@@ -68,7 +68,7 @@ export const BarberSelectService: React.FC = () => {
                 return (
                   <View style={styles.container}>
                     <View>
-                      {values.items.map((item, index) => (
+                      {values.items?.map((item, index) => (
                         <View key={index} style={styles.serviceItem}>
                           <TextInput
                             style={[

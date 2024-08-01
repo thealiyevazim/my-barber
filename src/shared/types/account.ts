@@ -8,6 +8,7 @@ export interface BarberLoginData {
 export interface BarberLoginDataResponse {
   data: {
     barber: Barber;
+    services: Service[];
     token: string;
   };
 }
@@ -21,9 +22,10 @@ export interface Barber {
   birth_date: string;
   working_hours: string;
   avatar: any;
-  services?: Service[];
 }
 export interface Service {
+  id: string;
+  barber_id: string;
   name: string;
   price: number;
 }

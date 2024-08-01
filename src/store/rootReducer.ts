@@ -3,6 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import {
   addServicesReducer,
+  barberGetMeSliceReducer,
   barberLoginReducer,
   barbersDataSliceReducer,
   barberUpdateReducer,
@@ -23,6 +24,7 @@ const combinedReducer = combineReducers({
   barberService: servicesSliceReducer,
   barbersData: barbersDataSliceReducer,
   addServices: addServicesReducer,
+  barberGetMe: barberGetMeSliceReducer,
 });
 
 const rootPersistConfig = {
@@ -38,6 +40,7 @@ const rootPersistConfig = {
     'clientUpdate',
     'barbersData',
     'addServices',
+    'barberGetMe',
   ],
 };
 

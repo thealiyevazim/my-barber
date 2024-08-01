@@ -1,17 +1,19 @@
 import { Image, Platform, StyleSheet, TouchableOpacity, View, Text } from "react-native";
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { SafeAreaTemplate } from "~templates";
-import { AppButton, AppInput, BottomComponent } from "~components";
+import { AppButton, AppInput, AppText, BottomComponent, SelectTime } from "~components";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from 'expo-location';
 import { colors, windowHeight } from "~utils";
 import LocationIcon from "~assets/images/location.png";
-import { barberUpdate, useAppDispatch, useBarberData } from "~store";
+import { barberGetMeData, barberUpdate, useAppDispatch, logout, useBarberGetMe } from "~store";
 import { Formik } from "formik";
-import { BarberUpdateData } from "~shared";
+import { BarberUpdateData, useTypedNavigation } from "~shared";
 import { object, string } from "yup";
 import Modal from "react-native-modal";
 import MapView, { Marker } from 'react-native-maps';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment';
 
 const validationSchema = object().shape({
   full_name: string().required("Enter a full name"),
@@ -24,12 +26,35 @@ const validationSchema = object().shape({
 export const BarberProfileEditForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const [image, setImage] = useState<string | null>(null);
-  const barberData = useBarberData();
   const [openLocation, setOpenLocation] = useState(false);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [address, setAddress] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const mapRef = useRef<MapView>(null);
+  const [openHour, setOpenHour] = useState(false);
+  const [selectFromTime, setSelectFromTime] = useState<string>("");
+  const [selectToTime, setSelectToTime] = useState<string>("");
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const barberData = useBarberGetMe();
+  const { goBack } = useTypedNavigation();
+
+  const generateTimeData = () => {
+    const times = [];
+    for (let i = 0; i < 24; i++) {
+      const label = i.toString().padStart(2, '0') + ':00';
+      times.push({ label, value: label });
+    }
+    return times;
+  };
+
+  const timeData = generateTimeData();
+
+  const handleGoBack = useCallback(() => {
+    goBack();
+  }, [goBack]);
+
+  useEffect(() => {
+    dispatch(barberGetMeData());
+  }, [dispatch]);
 
   useEffect(() => {
     (async () => {
@@ -69,9 +94,19 @@ export const BarberProfileEditForm: React.FC = () => {
     }
   };
 
-  const handleSubmitForm = useCallback((data: BarberUpdateData) => {
-    dispatch(barberUpdate(data));
-  }, [dispatch]);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date: Date, setFieldValue: (field: string, value: any) => void) => {
+    const formattedDate = moment(date).format("DD.MM.YYYY");
+    setFieldValue('birth_date', formattedDate);
+    hideDatePicker();
+  };
 
   const handleMyLocationPress = async (handleChange: any) => {
     if (location) {
@@ -82,33 +117,38 @@ export const BarberProfileEditForm: React.FC = () => {
     }
   };
 
+  const handleSubmitForm = useCallback((data: BarberUpdateData) => {
+    dispatch(barberUpdate(data));
+    handleGoBack();
+  }, [dispatch, handleGoBack]);
+
   const myLocationNow = {
     latitude: 41.217605339975904,
     longitude: 69.1896892361171,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
-  }
+  };
 
   const myLocation = () => (
     <View style={styles.myLocation}>
       <View style={styles.location}></View>
     </View>
-  )
+  );
 
   return (
     <SafeAreaTemplate isDark goBack>
       <Formik
         initialValues={{
           full_name: barberData?.full_name,
-          phone: barberData.phone,
-          location: barberData.location,
-          working_hours: barberData.working_hours,
-          birth_date: barberData.birth_date
+          phone: barberData?.phone,
+          location: barberData?.location,
+          working_hours: barberData?.working_hours,
+          birth_date: barberData?.birth_date,
         }}
         onSubmit={handleSubmitForm}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+        {({ handleChange, handleBlur, handleSubmit, setFieldValue, values }) => (
           <BottomComponent bottomStyles={styles.container}>
             <TouchableOpacity style={styles.imagePickerWrapper} onPress={PickImage}>
               <Image
@@ -138,7 +178,7 @@ export const BarberProfileEditForm: React.FC = () => {
                 <AppInput
                   placeholder="Location"
                   rightIcon={LocationIcon}
-                  value={address || values.location} // Use address if available, otherwise fallback to Formik value
+                  value={address || values.location}
                   onChangeText={handleChange('location')}
                   onBlur={handleBlur('location')}
                   readOnly
@@ -146,18 +186,16 @@ export const BarberProfileEditForm: React.FC = () => {
                   pointerEvents="none"
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={showDatePicker}>
                 <AppInput
                   value={values.birth_date}
                   placeholder="Birthday date"
                   readOnly
                   editable={false}
-                  onChangeText={handleChange('birth_date')}
                   pointerEvents="none"
-                  onBlur={handleBlur('birth_date')}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => setOpenHour(true)}>
                 <AppInput
                   value={values.working_hours}
                   placeholder="Working hour"
@@ -196,6 +234,54 @@ export const BarberProfileEditForm: React.FC = () => {
                 <AppButton title="My location" onPress={() => handleMyLocationPress(handleChange)} />
               </View>
             </Modal>
+            <Modal
+              isVisible={openHour}
+              onBackdropPress={() => setOpenHour(false)}
+              style={styles.modalView}
+            >
+              <View style={{
+                backgroundColor: colors.lightGray,
+                alignItems: "center",
+                padding: 20,
+                borderRadius: 8,
+              }}>
+                <View style={styles.workHourDiv}>
+                  <View style={styles.timeWrapper}>
+                    <AppText>From:</AppText>
+                    <SelectTime
+                      style={{ width: 120 }}
+                      selectTime={selectFromTime}
+                      setSelectTime={setSelectFromTime}
+                      data={timeData}
+                      selectedTextStyle={{ fontSize: 14 }}
+                      placeholderStyle={{ fontSize: 14 }}
+                    />
+                  </View>
+                  <View style={styles.timeWrapper}>
+                    <AppText>To:</AppText>
+                    <SelectTime
+                      style={{ width: 120 }}
+                      selectTime={selectToTime}
+                      setSelectTime={setSelectToTime}
+                      data={timeData}
+                      selectedTextStyle={{ fontSize: 14 }}
+                      placeholderStyle={{ fontSize: 14 }}
+                    />
+                  </View>
+                </View>
+                <TouchableOpacity style={styles.modalButtonTime} onPress={() => setOpenHour(false)}>
+                  <AppText style={{
+                    color: colors.white,
+                  }}>OK</AppText>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={(date) => handleConfirm(date, setFieldValue)}
+              onCancel={hideDatePicker}
+            />
           </BottomComponent>
         )}
       </Formik>
@@ -232,14 +318,14 @@ const styles = StyleSheet.create({
   modalView: {
     borderRadius: 20,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   containerLocation: {
     backgroundColor: colors.white,
     width: 350,
     borderRadius: 20,
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   paragraph: {
     fontSize: 18,
@@ -250,7 +336,7 @@ const styles = StyleSheet.create({
     height: 500,
     backgroundColor: colors.white,
     borderRadius: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   myLocation: {
     width: 20,
@@ -263,5 +349,21 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 100,
     backgroundColor: 'red',
-  }
+  },
+  workHourDiv: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+  },
+  timeWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  modalButtonTime: {
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    backgroundColor: colors.appBlack,
+    borderRadius: 8,
+    marginTop: 20,
+  },
 });
