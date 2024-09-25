@@ -4,17 +4,21 @@ import { ProfileComponent } from "~components";
 import { UserTypesEnum } from "~enums";
 import { Routes } from "~navigation";
 import { useTypedNavigation, useUserType } from "~shared";
-import { barberGetMeData, logout, useAppDispatch, useBarberGetMe, useClientData } from "~store";
+import { barberGetMeData, logout, useAppDispatch, useBarberGetMe, useClientGetMe, clientGetMeData } from "~store";
 
 export const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const { navigate } = useTypedNavigation<"barber" | "client">();
   const userType = useUserType();
 
-  const data = userType === UserTypesEnum.Barber ? useBarberGetMe() : useClientData()
+  const data = userType === UserTypesEnum.Barber ? useBarberGetMe() : useClientGetMe()
 
   useFocusEffect(() => {
-    dispatch(barberGetMeData());
+    if (userType === UserTypesEnum.Barber) {
+      dispatch(barberGetMeData());
+    } else {
+      dispatch(clientGetMeData())
+    }
   },);
 
   const handleLogout = () => {

@@ -1,9 +1,9 @@
-import { NavigationContainer } from "@react-navigation/native";
-import React, { ReactElement } from "react";
-import { UserTypesEnum } from "~enums";
-import { useIsAuthBarber, useIsAuthClient, useUserTypeSelector } from "~store";
-import PublicNavigator from "./PublicNavigator";
-import { BarberTabNavigator, ClientTabNavigator } from "./TabNavigation";
+import { NavigationContainer } from '@react-navigation/native';
+import React, { ReactElement } from 'react';
+import { UserTypesEnum } from '~enums';
+import { useIsAuthBarber, useIsAuthClient, useUserTypeSelector } from '~store';
+import PublicNavigator from './PublicNavigator';
+import { BarberTabNavigator, ClientTabNavigator } from './TabNavigation';
 
 export function NavigationProvider(): ReactElement {
   const userType = useUserTypeSelector();
@@ -22,7 +22,7 @@ export function NavigationProvider(): ReactElement {
 
       {isBarber && <BarberTabNavigator />}
 
-      {isClient && < ClientTabNavigator />}
+      {isClient && <ClientTabNavigator />}
     </NavigationContainer>
   );
 }

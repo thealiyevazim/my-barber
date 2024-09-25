@@ -5,3 +5,6 @@ export const useBarberGetMe = () =>
 
 export const useBarberGetMeService = () =>
   useAppSelector(store => store.barberGetMe?.barberGetMeData?.services);
+
+export const useBarberGetMeImages = () =>
+  useAppSelector(store => store.barberGetMe?.barberGetMeData?.barber?.images);

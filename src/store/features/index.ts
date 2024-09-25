@@ -9,3 +9,5 @@ export * from './clientUpdate';
 export * from './barbersData';
 export * from './addService';
 export * from './barberGetMe';
+export * from './clientGetMe';
+export * from './barberAddImage';

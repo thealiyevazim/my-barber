@@ -2,22 +2,26 @@ import { ActivityIndicator, StyleSheet, Image, View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { colors, windowHeight, windowWidth } from '~utils';
+import { barberGetMeData, useAppDispatch, useBarberGetMeImages } from '~store';
+import { imageUrl } from '~api';
 
-type ProfileCarouselProps = {
-  carouselData: { id: number; url: string }[];
-};
+export const ProfileCarousel: React.FC = ({
 
-export const ProfileCarousel: React.FC<ProfileCarouselProps> = ({
-  carouselData,
 }) => {
   const carouselRef = useRef<ICarouselInstance>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const images = useBarberGetMeImages()
+  const dispatch = useAppDispatch() || [];
+
+  useEffect(() => {
+    dispatch(barberGetMeData());
+  }, [dispatch]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -47,16 +51,16 @@ export const ProfileCarousel: React.FC<ProfileCarouselProps> = ({
         <ActivityIndicator size={"large"} color={colors.appBlack} />
       ) : (
         <>
-          <Pagination activeSlide={activeSlide} totalSlides={carouselData.length} />
+          <Pagination activeSlide={activeSlide} totalSlides={images?.length} />
           <Carousel
-            data={carouselData}
+            data={images}
             vertical={false}
             ref={carouselRef}
             width={windowWidth}
             onSnapToItem={(index) => setActiveSlide(index)}
-            renderItem={({ item }) => (
+            renderItem={() => (
               <View style={styles.imageContainer}>
-                <Image source={{ uri: item.url }} style={styles.image} />
+                <Image source={{ uri: imageUrl + images }} style={styles.image} />
               </View>
             )}
           />

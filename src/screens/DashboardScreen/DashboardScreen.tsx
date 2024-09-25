@@ -9,7 +9,6 @@ import {
 import { Routes } from "~navigation";
 import { useTypedNavigation } from "~shared";
 import { SafeAreaTemplate } from "~templates";
-import { MainInfoCardType } from "~types";
 
 const carouselMockData = [
   {
@@ -19,72 +18,6 @@ const carouselMockData = [
   {
     id: 2,
     url: "https://heyjoe-7efd.kxcdn.com/wp-content/uploads/barberia-destacada-does-barbershop.jpg",
-  },
-];
-
-const recentMockData = [
-  {
-    id: 1,
-    rating: 4,
-    distance: 1.2,
-    name: "Power Barber",
-    img: "https://media.timeout.com/images/102436129/750/562/image.jpg",
-  },
-  {
-    id: 2,
-    rating: 2,
-    distance: 4.2,
-    name: "Mister Barber",
-    img: "https://www.themailroombarberco.com/cdn/shop/articles/MailroomBarberCo_TeachingSession-7_2048x.jpg?v=1642018666",
-  },
-  {
-    id: 3,
-    rating: 4.5,
-    distance: 1.2,
-    name: "Pro Style",
-    img: "https://nationalbarbers.b-cdn.net/wp-content/uploads/2020/09/barber-services-1-768x432.png",
-  },
-  {
-    id: 4,
-    rating: 5,
-    distance: 1.2,
-    name: "Barbershop",
-    img: "https://cdn.shopify.com/s/files/1/0001/9211/8835/files/Happy_Barber_and_Customer_Men_s_Hairstyle_480x480.png?v=1621594670",
-  },
-];
-
-const mainInfoMockData: MainInfoCardType[] = [
-  {
-    id: 1,
-    distance: 1.2,
-    timeRange: "10:00 - 20:00",
-    isOpen: false,
-    name: "Power Barber",
-    img: "https://media.timeout.com/images/102436129/750/562/image.jpg",
-  },
-  {
-    id: 2,
-    distance: 4.2,
-    timeRange: "10:00 - 20:00",
-    isOpen: true,
-    name: "Mister Barber",
-    img: "https://www.themailroombarberco.com/cdn/shop/articles/MailroomBarberCo_TeachingSession-7_2048x.jpg?v=1642018666",
-  },
-  {
-    id: 3,
-    distance: 1.2,
-    timeRange: "10:00 - 20:00",
-    isOpen: false,
-    name: "Pro Style",
-    img: "https://nationalbarbers.b-cdn.net/wp-content/uploads/2020/09/barber-services-1-768x432.png",
-  },
-  {
-    id: 4,
-    timeRange: "10:00 - 20:00",
-    isOpen: true,
-    distance: 1.2,
-    name: "Barbershop",
-    img: "https://cdn.shopify.com/s/files/1/0001/9211/8835/files/Happy_Barber_and_Customer_Men_s_Hairstyle_480x480.png?v=1621594670",
   },
 ];
 
@@ -103,11 +36,9 @@ export const DashboardScreen: React.FC = () => {
       <ScrollView style={{ flex: 1, marginBottom: -30 }} showsVerticalScrollIndicator={false}>
         <SnapCarousel carouselData={carouselMockData} />
         <RecentPlaces
-          placesData={recentMockData}
           handleCardPress={handleBooked}
         />
         <MainInfoCard
-          mainCardInfoData={mainInfoMockData}
           handleCardPress={handleBooked}
         />
         <View></View>

@@ -14,6 +14,7 @@ export interface BarberLoginDataResponse {
 }
 
 export interface Barber {
+  services: [];
   id: string;
   username: string;
   full_name: string;

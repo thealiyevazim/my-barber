@@ -19,6 +19,7 @@ export interface GetParams {
 export interface PostParams extends Omit<RequestParams, 'body'> {}
 
 export const baseUrl = 'https://barber-api.fapp.uz';
+export const imageUrl = 'https://barber-api.fapp.uz/files/';
 
 export class BaseApi {
   private async request<T>(url: string, params: RequestParams): Promise<T> {

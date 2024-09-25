@@ -11,43 +11,46 @@ import {
 import { Shadow } from "react-native-shadow-2";
 import { AppText } from "~components/AppText";
 import { Routes } from "~navigation";
-import { useTypedNavigation } from "~shared";
-import { RecentPlacesType } from "~types";
+import { Barber, useTypedNavigation } from "~shared";
+import { useBarbersData } from "~store";
 import { colors, windowWidth } from "~utils";
 
 type Props = {
   handleCardPress: () => void;
-  placesData: RecentPlacesType[];
+
 };
 
 export const RecentPlaces: React.FC<Props> = ({
   handleCardPress,
-  placesData,
 }) => {
   const { navigate } = useTypedNavigation<"client">();
+  const barbers = useBarbersData().map((barber) => ({
+    ...barber,
+    avatar: barber.avatar || "",
+  })) as Barber[];
 
   const handleShowAll = useCallback(() => {
     navigate(Routes.allBarberScreen)
   }, []);
 
-  const renderItem: ListRenderItem<RecentPlacesType> = useCallback(
+  const renderItem: ListRenderItem<Barber> = useCallback(
     ({ item, index }) => {
       return (
         <Pressable onPress={handleCardPress}>
           <Shadow distance={6} startColor="#efefef">
             <View style={styles.cardContainer}>
-              <Image source={{ uri: item.img }} style={styles.cardImage} />
+              <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
               <View style={styles.cardDetails}>
                 <AppText semibold style={styles.cardName}>
-                  {item.name}
+                  {item.full_name}
                 </AppText>
                 <View style={styles.rating}>
                   <AntDesign name="star" size={18} color="gold" />
-                  <AppText> {item.rating}/5</AppText>
+                  {/* <AppText> {item.rating}/5</AppText> */}
                 </View>
                 <View style={styles.rating}>
                   <Ionicons name="location-outline" size={18} color="gray" />
-                  <AppText>{item.distance} km</AppText>
+                  <AppText>{item.location} km</AppText>
                 </View>
               </View>
             </View>
@@ -70,7 +73,7 @@ export const RecentPlaces: React.FC<Props> = ({
       </View>
       <FlatList
         horizontal
-        data={placesData}
+        data={barbers.slice(-10).reverse()}
         style={{ padding: 4 }}
         renderItem={renderItem}
         persistentScrollbar={true}

@@ -1,13 +1,14 @@
 import { FlatList, Image, Platform, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaTemplate } from '~templates'
 import { AppButton, AppText, BottomComponent, GalleryComponent, ServicesComponent } from '~components'
 import BookedSplash from "~assets/images/bookedSplash.png";
 import { colors, windowHeight } from '~utils';
 import { ClockIcon, LocationIcon } from '~assets/icons';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
-import { useTypedNavigation } from '~shared';
+import { Barber, useTypedNavigation } from '~shared';
 import { Routes } from '~navigation';
+import { barbersData, useAppDispatch, useBarbersData } from '~store';
 
 const serviceData = [
   {
@@ -32,12 +33,21 @@ const serviceData = [
   }
 ]
 
-export const BookedScreen: React.FC = () => {
+export const BookedScreen: React.FC<Barber> = ({
+  full_name,
+  location,
+  working_hours,
+}) => {
   const { navigate } = useTypedNavigation<"client">();
+  const dispatch = useAppDispatch();
 
   const handleNextPage = () => {
     navigate(Routes.bookAppointmentScreen)
   }
+
+  useEffect(() => {
+    dispatch(barbersData());
+  }, [dispatch]);
 
   return (
     <SafeAreaTemplate isDark goBack>
@@ -45,7 +55,7 @@ export const BookedScreen: React.FC = () => {
       <BottomComponent bgImage bottomStyles={styles.bottomStyles}>
         <View>
           <AppText semibold style={styles.title}>
-            The Face Factory
+            {full_name}
           </AppText>
           <View style={styles.wrapperBox}>
             <StarRatingDisplay
@@ -59,13 +69,13 @@ export const BookedScreen: React.FC = () => {
           <View style={styles.wrapperBox}>
             <LocationIcon />
             <AppText style={styles.location}>
-              Uchtepa tumani, Mahorat 23
+              {location}
             </AppText>
           </View>
           <View style={styles.wrapperBox}>
             <ClockIcon />
             <AppText style={styles.location}>
-              10:00 - 23:00
+              {working_hours}
             </AppText>
           </View>
           <View style={styles.line} />

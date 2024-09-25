@@ -12,11 +12,11 @@ import {
 import { Shadow } from "react-native-shadow-2";
 import { AppText } from "~components";
 import { SafeAreaTemplate } from "~templates";
-import { MainInfoCardType } from "~types";
 import { colors, windowHeight, windowWidth } from "~utils";
 import { GoBackIcon } from '~assets/icons';
-import { Barber, Barbers, useTypedNavigation } from "~shared";
+import { Barber, useTypedNavigation } from "~shared";
 import { barbersData, useAppDispatch, useBarbersData } from "~store";
+import { Routes } from "~navigation";
 
 export const AllBarberScreen: React.FC = () => {
   const { goBack } = useTypedNavigation();
@@ -25,6 +25,8 @@ export const AllBarberScreen: React.FC = () => {
     ...barber,
     avatar: barber.avatar || "",
   })) as Barber[];
+  const { navigate } = useTypedNavigation<"client">();
+
 
   useEffect(() => {
     dispatch(barbersData());
@@ -36,11 +38,16 @@ export const AllBarberScreen: React.FC = () => {
 
   const renderItem: ListRenderItem<Barber> = useCallback(
     ({ item, index }) => {
+
+      const handleBooked = () => {
+        navigate(Routes.bookedScreen)
+      }
+
       return (
         <View style={styles.cardContainer} key={index}>
           <Shadow distance={6} startColor="#efefef">
             <View style={styles.cardInner}>
-              <Image source={{ uri: item.avatar }} style={styles.cardImage} />
+              <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
               <View style={styles.cardOpenRow}>
                 {/* <AppText
                   style={[
@@ -64,7 +71,7 @@ export const AllBarberScreen: React.FC = () => {
                 />
                 <AppText style={styles.ratingText}>{item.location} km</AppText>
               </View>
-              <Pressable style={styles.bookNow}>
+              <Pressable style={styles.bookNow} onPress={handleBooked}>
                 <AppText style={{ color: colors.white }}>Book now</AppText>
               </Pressable>
             </View>

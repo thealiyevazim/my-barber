@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -20,6 +20,7 @@ import Modal from "react-native-modal";
 import { useTypedNavigation, useUserType } from "~shared";
 import { UserTypesEnum } from "~enums";
 import { Routes } from "~navigation";
+import { barberGetMeData, useAppDispatch, useBarberGetMeImages } from "~store";
 
 const carouselMockData = [
   {
@@ -49,6 +50,12 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
   const [openLogOut, setOpenLogOut] = useState<boolean>(false);
   const userType = useUserType();
   const { navigate } = useTypedNavigation<"barber">();
+  const images = useBarberGetMeImages()
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(barberGetMeData());
+  }, []);
 
   const handleService = useCallback(() => {
     navigate(Routes.barberSelectService);
@@ -57,7 +64,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
   return (
     <SafeAreaTemplate isDark>
       <View>
-        <ProfileCarousel carouselData={carouselMockData} />
+        <ProfileCarousel />
         <Pressable style={styles.editButton} onPress={goEditPress}>
           <EditIcon />
         </Pressable>

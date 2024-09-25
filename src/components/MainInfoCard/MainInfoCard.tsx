@@ -12,53 +12,56 @@ import { Shadow } from "react-native-shadow-2";
 import { MainInfoCardType } from "~types";
 import { colors, windowHeight, windowWidth } from "~utils";
 import { AppText } from "../AppText";
-import { useTypedNavigation } from "~shared";
+import { Barber, useTypedNavigation } from "~shared";
 import { Routes } from "~navigation";
+import { useBarbersData } from "~store";
 
 type Props = {
-  mainCardInfoData: MainInfoCardType[];
-  handleCardPress: (card: MainInfoCardType) => void;
+  handleCardPress: (card: Barber) => void;
 };
 
 export const MainInfoCard: React.FC<Props> = ({
   handleCardPress,
-  mainCardInfoData,
 }) => {
   const { navigate } = useTypedNavigation<"client">();
+  const barbers = useBarbersData().map((barber) => ({
+    ...barber,
+    avatar: barber.avatar || "",
+  })) as Barber[];
 
   const handleShowAll = useCallback(() => {
     navigate(Routes.allBarberScreen)
   }, []);
 
-  const renderItem: ListRenderItem<MainInfoCardType> = useCallback(
+  const renderItem: ListRenderItem<Barber> = useCallback(
     ({ item, index }) => {
       return (
         <View style={styles.cardContainer} key={index}>
           <Shadow distance={6} startColor="#efefef">
             <View style={styles.cardInner}>
-              <Image source={{ uri: item.img }} style={styles.cardImage} />
+              <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
               <View style={styles.cardOpenRow}>
                 <AppText
                   style={[
                     styles.cardOpen,
-                    { color: item.isOpen ? colors.appGreen : colors.appRed },
+                    // { color: item.isOpen ? colors.appGreen : colors.appRed },
                   ]}
                 >
-                  {item.isOpen ? "Ochiq" : "Yopiq"}
+                  {/* {item.isOpen ? "Ochiq" : "Yopiq"} */}
                 </AppText>
                 <View style={styles.dot} />
                 <AppText style={[styles.cardOpen, { color: colors.iconGray }]}>
-                  {item.timeRange}
+                  {/* {item.timeRange} */}
                 </AppText>
               </View>
-              <AppText style={styles.cardName}>{item.name}</AppText>
+              <AppText style={styles.cardName}>{item.full_name}</AppText>
               <View style={styles.rating}>
                 <Ionicons
                   size={18}
                   name="location-outline"
                   color={colors.iconGray}
                 />
-                <AppText style={styles.ratingText}>{item.distance} km</AppText>
+                <AppText style={styles.ratingText}>{item.location} km</AppText>
               </View>
               <Pressable
                 style={styles.bookNow}
@@ -86,7 +89,7 @@ export const MainInfoCard: React.FC<Props> = ({
       </View>
       <FlatList
         horizontal
-        data={mainCardInfoData}
+        data={barbers}
         renderItem={renderItem}
         persistentScrollbar={true}
         showsHorizontalScrollIndicator={false}

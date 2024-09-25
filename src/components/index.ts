@@ -27,3 +27,4 @@ export * from './HistoryComponent';
 export * from './HistoryData';
 export * from './BookedHistoryComponent';
 export * from './ProfileCarousel';
+export * from './MapComponent';

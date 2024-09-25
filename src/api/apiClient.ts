@@ -1,4 +1,6 @@
 import {
+  AddImagesData,
+  AddImagesResponse,
   AddServiceData,
   AddServiceResponse,
   BarberGetMeData,
@@ -7,6 +9,7 @@ import {
   BarbersData,
   BarberUpdateData,
   BarberUpdateDataResponse,
+  ClientGetMeData,
   ClientLoginData,
   ClientLoginDataResponse,
   ClientUpdateData,
@@ -57,6 +60,17 @@ class AccountApi extends BaseApi {
 
   async barberGetMe() {
     return this.get<BarberGetMeData>(getApiPath.barber.barberGetMe());
+  }
+
+  async clientGetMe() {
+    return this.get<ClientGetMeData>(getApiPath.client.clientGetMe());
+  }
+
+  async barberAddImage(data: AddImagesData) {
+    return this.post<any, AddImagesResponse>(
+      getApiPath.barber.barberAddImage(),
+      data,
+    );
   }
 }
 

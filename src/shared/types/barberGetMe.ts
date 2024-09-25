@@ -16,7 +16,7 @@ export interface BarberGet {
   location: string;
   birth_date: string;
   working_hours: string;
-  avatar: any;
+  images: string[];
 }
 
 export interface Service {

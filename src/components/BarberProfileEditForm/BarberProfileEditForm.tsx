@@ -270,9 +270,7 @@ export const BarberProfileEditForm: React.FC = () => {
                   </View>
                 </View>
                 <TouchableOpacity style={styles.modalButtonTime} onPress={() => setOpenHour(false)}>
-                  <AppText style={{
-                    color: colors.white,
-                  }}>OK</AppText>
+                  <AppText style={{ color: colors.white }}>OK</AppText>
                 </TouchableOpacity>
               </View>
             </Modal>
