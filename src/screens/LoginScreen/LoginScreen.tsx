@@ -1,12 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { object, string } from "yup";
 import { AppButton, AppInput, BottomComponent } from "~components";
-import { BarberNavigationProp } from "~navigation";
-import { BarberLoginData } from "~shared";
-import { barberLogin, useAppDispatch, useAppSelector } from "~store";
+import { UserTypesEnum } from "~enums";
+import { BarberLoginData, ClientLoginData, useUserType } from "~shared";
+import { barberLogin, clientLogin, useAppDispatch, useAppSelector } from "~store";
 import { SafeAreaTemplate } from "~templates";
 
 const validationSchema = object().shape({
@@ -16,24 +15,28 @@ const validationSchema = object().shape({
 
 export const LoginScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((store) => store.barberLogin.loading);
-
-  const navigation = useNavigation<BarberNavigationProp<"LoginScreen">>();
+  const isLoading = useAppSelector((store) => store.barberLogin.loading || store.clientLogin.loading);
+  const userType = useUserType();
 
   const handleNextPage = useCallback(() => {
-    navigation.navigate("SignupScreen");
+
   }, []);
 
-  const handleSubmitForm = useCallback((data: BarberLoginData) => {
-    dispatch(barberLogin(data));
-  }, []);
+  const handleSubmitForm = useCallback((data: BarberLoginData | ClientLoginData) => {
+    if (userType === UserTypesEnum.Barber) {
+      dispatch(barberLogin(data as BarberLoginData));
+    } else {
+      dispatch(clientLogin(data as ClientLoginData))
+    }
+  }, [dispatch, userType]);
+
 
   return (
     <SafeAreaTemplate isDark>
       <BottomComponent bottomStyles={styles.container}>
         <Formik
           initialValues={{
-            username: "azim",
+            username: "barber-1",
             password: "12345",
           }}
           onSubmit={handleSubmitForm}

@@ -1,18 +1,17 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { clientApi } from "~api";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { clientApi } from '~api';
 import {
   BarberLoginData,
   BarberLoginDataResponse,
-  storage,
   tokenStorage,
-} from "~shared";
-import { AppThunkConfig } from "../../types";
+} from '~shared';
+import { AppThunkConfig } from '../../types';
 
 export const barberLogin = createAsyncThunk<
   BarberLoginDataResponse,
   BarberLoginData,
   AppThunkConfig
->("auth/barberLogin", async ({ password, username }, thunkAPI) => {
+>('auth/barberLogin', async ({ password, username }, thunkAPI) => {
   const { dispatch, getState, rejectWithValue } = thunkAPI;
 
   try {

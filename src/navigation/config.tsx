@@ -7,6 +7,13 @@ import {
   ProfileScreen,
   SelectLanguageScreen,
   SelectRoleScreen,
+  ProfileEditScreen,
+  BookedScreen,
+  BookAppointmentScreen,
+  BookedInfoScreen,
+  BookedHistoryScreen,
+  BarberSelectService,
+  AllBarberScreen,
 } from "~screens";
 import { Routes } from "./navigationRoutes";
 import {
@@ -15,7 +22,7 @@ import {
   PublicStackParamsList,
 } from "./navigationTypes";
 
-interface NavigationRoute<Stack> {
+export interface NavigationRoute<Stack> {
   component: ComponentType;
   name: keyof Stack;
 }
@@ -35,8 +42,19 @@ export const BarberNavigationRoutes: NavigationRoute<BarberStackParamsList>[] =
   [
     { component: CalendarScreen, name: Routes.barberCalendarScreen },
     { component: ProfileScreen, name: Routes.profileScreen },
+    { component: ProfileEditScreen, name: Routes.profileEditScreen },
+    { component: BookedInfoScreen, name: Routes.bookedInfoScreen },
+    { component: BarberSelectService, name: Routes.barberSelectService },
   ];
 
 // Client Stack
 export const ClientNavigationRoutes: NavigationRoute<ClientStackParamsList>[] =
-  [{ component: DashboardScreen, name: Routes.dashboardScreen }];
+  [
+    { component: DashboardScreen, name: Routes.dashboardScreen },
+    { component: BookedScreen, name: Routes.bookedScreen, },
+    { component: ProfileScreen, name: Routes.profileScreen },
+    { component: ProfileEditScreen, name: Routes.profileEditScreen },
+    { component: BookAppointmentScreen, name: Routes.bookAppointmentScreen },
+    { component: BookedHistoryScreen, name: Routes.bookedHistoryScreen },
+    { component: AllBarberScreen, name: Routes.allBarberScreen }
+  ];

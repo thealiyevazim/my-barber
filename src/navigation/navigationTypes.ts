@@ -1,5 +1,5 @@
-import { UserTypesEnum } from "~enums";
-import { Routes } from "./navigationRoutes";
+import { UserTypesEnum } from '~enums';
+import { Routes } from './navigationRoutes';
 
 export type PublicStackParamsList = {
   [Routes.onboardingScreen]: undefined;
@@ -12,9 +12,17 @@ export type PublicStackParamsList = {
 export type BarberStackParamsList = {
   [Routes.barberCalendarScreen]: undefined;
   [Routes.profileScreen]: { userType: UserTypesEnum };
+  [Routes.profileEditScreen]: undefined;
+  [Routes.bookedInfoScreen]: undefined;
+  [Routes.barberSelectService]: undefined;
 };
 
 export type ClientStackParamsList = {
   [Routes.dashboardScreen]: undefined;
   [Routes.profileScreen]: { userType: UserTypesEnum };
+  [Routes.bookedScreen]: undefined;
+  [Routes.bookAppointmentScreen]: undefined;
+  [Routes.profileEditScreen]: undefined;
+  [Routes.bookedHistoryScreen]: undefined;
+  [Routes.allBarberScreen]: undefined;
 };
