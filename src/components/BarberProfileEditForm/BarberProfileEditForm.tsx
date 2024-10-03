@@ -26,6 +26,7 @@ import {
   logout,
   useBarberGetMe,
   clientGetMeData,
+  useBarberGetMeImages,
 } from '~store';
 import { Formik } from 'formik';
 import { BarberUpdateData, useTypedNavigation, useUserType } from '~shared';
@@ -35,6 +36,7 @@ import MapView, { Marker } from 'react-native-maps';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import { UserTypesEnum } from '~enums';
+import { imageUrl } from '~api';
 
 const validationSchema = object().shape({
   full_name: string().required('Enter a full name'),
@@ -58,6 +60,7 @@ export const BarberProfileEditForm: React.FC = () => {
   const [selectToTime, setSelectToTime] = useState<string>('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const barberData = useBarberGetMe();
+  const barberImages = useBarberGetMeImages();
   const { goBack } = useTypedNavigation();
 
   const userType = useUserType();
@@ -207,7 +210,7 @@ export const BarberProfileEditForm: React.FC = () => {
                 style={styles.imagePicker}
                 source={{
                   uri:
-                    image ||
+                    barberImages[0] ||
                     'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
                 }}
               />
