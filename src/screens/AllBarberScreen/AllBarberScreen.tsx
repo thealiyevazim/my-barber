@@ -1,62 +1,45 @@
-import { Ionicons } from "@expo/vector-icons";
-import React, { useCallback, useEffect } from "react";
+import { Ionicons } from '@expo/vector-icons';
+import React, { useCallback } from 'react';
 import {
   FlatList,
   Image,
-  ListRenderItem,
+  ListRenderItemInfo,
   Pressable,
   StyleSheet,
   TouchableOpacity,
   View,
-} from "react-native";
-import { Shadow } from "react-native-shadow-2";
-import { AppText } from "~components";
-import { SafeAreaTemplate } from "~templates";
-import { colors, windowHeight, windowWidth } from "~utils";
+} from 'react-native';
+import { Shadow } from 'react-native-shadow-2';
 import { GoBackIcon } from '~assets/icons';
-import { Barber, useTypedNavigation } from "~shared";
-import { barbersData, useAppDispatch, useBarbersData } from "~store";
-import { Routes } from "~navigation";
+import { AppText } from '~components';
+import { Routes } from '~navigation';
+import { Barbers, useTypedNavigation } from '~shared';
+import { useBarbersData } from '~store';
+import { SafeAreaTemplate } from '~templates';
+import { colors, windowHeight, windowWidth } from '~utils';
 
 export const AllBarberScreen: React.FC = () => {
   const { goBack } = useTypedNavigation();
-  const dispatch = useAppDispatch();
-  const barbers = useBarbersData().map((barber) => ({
-    ...barber,
-    avatar: barber.avatar || "",
-  })) as Barber[];
-  const { navigate } = useTypedNavigation<"client">();
 
-
-  useEffect(() => {
-    dispatch(barbersData());
-  }, [dispatch]);
+  const barbers = useBarbersData();
+  const { navigate } = useTypedNavigation<'client'>();
 
   const handleGoBack = useCallback(() => {
     goBack();
   }, [goBack]);
 
-  const renderItem: ListRenderItem<Barber> = useCallback(
-    ({ item, index }) => {
+  const handleBooked = () => {
+    navigate(Routes.bookedScreen);
+  };
 
-      const handleBooked = () => {
-        navigate(Routes.bookedScreen)
-      }
-
+  const renderItem = useCallback(
+    ({ item, index }: ListRenderItemInfo<Barbers>) => {
       return (
         <View style={styles.cardContainer} key={index}>
           <Shadow distance={6} startColor="#efefef">
             <View style={styles.cardInner}>
               <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
               <View style={styles.cardOpenRow}>
-                {/* <AppText
-                  style={[
-                    styles.cardOpen,
-                    { color: item.isOpen ? colors.appGreen : colors.appRed },
-                  ]}
-                >
-                  {item.isOpen ? "Ochiq" : "Yopiq"}
-                </AppText> */}
                 <View style={styles.dot} />
                 <AppText style={[styles.cardOpen, { color: colors.iconGray }]}>
                   {item.working_hours}
@@ -79,7 +62,7 @@ export const AllBarberScreen: React.FC = () => {
         </View>
       );
     },
-    []
+    [],
   );
 
   return (
@@ -88,7 +71,7 @@ export const AllBarberScreen: React.FC = () => {
         <TouchableOpacity activeOpacity={0.7} onPress={handleGoBack}>
           <GoBackIcon style={styles.icon} stroke={colors.appBlack} />
         </TouchableOpacity>
-        <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
           <AppText semibold style={styles.headerTitle}>
             Barbers
           </AppText>
@@ -110,17 +93,17 @@ const styles = StyleSheet.create({
     // Styles for container
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingRight: 30,
     marginBottom: 20,
   },
   headerTitle: {
-    alignSelf: "center",
+    alignSelf: 'center',
     fontSize: 22,
   },
   icon: {
-    transform: [{ rotate: "180deg" }],
+    transform: [{ rotate: '180deg' }],
   },
   cardContainer: {
     padding: 5,
@@ -132,18 +115,18 @@ const styles = StyleSheet.create({
     width: windowWidth / 2.4,
     height: windowHeight / 3.5,
     backgroundColor: colors.white,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   cardImage: {
-    height: "50%",
+    height: '50%',
     borderRadius: 6,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   cardOpenRow: {
-    width: "75%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    width: '75%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   cardOpen: {
     fontSize: 12,
@@ -158,18 +141,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   rating: {
-    flexDirection: "row",
-    alignItems: "flex-end",
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   ratingText: {
     fontSize: 12,
     color: colors.iconGray,
   },
   bookNow: {
-    height: "15%",
+    height: '15%',
     borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.appBlack,
   },
 });

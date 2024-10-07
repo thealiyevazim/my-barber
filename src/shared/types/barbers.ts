@@ -11,10 +11,14 @@ export interface Barbers {
   location: string;
   birth_date: string;
   working_hours: string;
-  avatar: any;
+  images: string[];
   services?: Service[];
 }
 export interface Service {
   name: string;
   price: number;
+}
+
+export interface GetBarbersPayload {
+  page: number;
 }

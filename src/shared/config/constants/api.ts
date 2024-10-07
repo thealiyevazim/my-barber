@@ -14,7 +14,7 @@ export const getApiPath = {
   },
   client: {
     update: () => `/client/update`,
-    barbers: () => `/barbers`,
+    barbers: (page: number) => `/barbers?page=${page}`,
     clientGetMe: () => `/client/getMe`,
   },
 };

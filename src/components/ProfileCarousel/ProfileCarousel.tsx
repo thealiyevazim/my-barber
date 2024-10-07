@@ -13,10 +13,6 @@ export const ProfileCarousel: React.FC = ({}) => {
   const dispatch = useAppDispatch() || [];
 
   useEffect(() => {
-    dispatch(barberGetMeData());
-  }, [dispatch]);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);

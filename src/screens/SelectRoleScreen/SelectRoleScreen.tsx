@@ -1,24 +1,22 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useCallback } from "react";
-import { Image, StyleSheet, View } from "react-native";
-import LogoIcon from "~assets/images/onboarding-logo.png";
-import { AppButton, AppText, RolePicker } from "~components";
-import { UserTypesEnum } from "~enums";
-import { Routes } from "~navigation";
-import { useTypedNavigation, useUserType } from "~shared";
-import { useAppDispatch } from "~store";
-import { SafeAreaTemplate } from "~templates";
-import { colors } from "~utils";
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import LogoIcon from '~assets/images/onboarding-logo.png';
+import { AppButton, AppText, RolePicker } from '~components';
+import { UserTypesEnum } from '~enums';
+import { Routes } from '~navigation';
+import { useTypedNavigation, useUserType } from '~shared';
+import { useAppDispatch } from '~store';
+import { SafeAreaTemplate } from '~templates';
+import { colors } from '~utils';
 
 export const SelectRoleScreen: React.FC = () => {
   const userType = useUserType();
   const dispatch = useAppDispatch();
-  const { navigate } = useTypedNavigation<"public">();
+  const { navigate } = useTypedNavigation<'public'>();
 
   const handleNavigate = useCallback(async () => {
-
     navigate(Routes.loginScreen);
-
   }, []);
 
   return (
@@ -34,8 +32,8 @@ export const SelectRoleScreen: React.FC = () => {
           </AppText>
         </View>
         <RolePicker />
-        <AppButton title={"Davom etish"} onPress={handleNavigate} />
       </View>
+      <AppButton title={'Davom etish'} onPress={handleNavigate} />
     </SafeAreaTemplate>
   );
 };
@@ -43,20 +41,20 @@ export const SelectRoleScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-end",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   textView: {
-    marginVertical: "10%",
+    marginVertical: '10%',
   },
   title: {
     fontSize: 42,
     color: colors.appBlack,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
   },
   description: {
     fontSize: 20,
     color: colors.appBlack,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
   },
 });

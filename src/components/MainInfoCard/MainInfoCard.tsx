@@ -1,81 +1,35 @@
-import { Ionicons } from "@expo/vector-icons";
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 import {
   FlatList,
-  Image,
-  ListRenderItem,
+  ListRenderItemInfo,
   Pressable,
   StyleSheet,
   View,
-} from "react-native";
-import { Shadow } from "react-native-shadow-2";
-import { MainInfoCardType } from "~types";
-import { colors, windowHeight, windowWidth } from "~utils";
-import { AppText } from "../AppText";
-import { Barber, useTypedNavigation } from "~shared";
-import { Routes } from "~navigation";
-import { useBarbersData } from "~store";
+} from 'react-native';
+import { Routes } from '~navigation';
+import { Barbers, useTypedNavigation } from '~shared';
+import { useBarbersData, useBarbersDataLoading } from '~store';
+import { colors } from '~utils';
+import { AppText } from '../AppText';
+import { BarberInfoCard } from '../BarberInfoCard/BarberInfoCard';
+import { MainInfoCardLoader } from './MainInfoCardLoader';
 
 type Props = {
-  handleCardPress: (card: Barber) => void;
+  handleCardPress: (card: Barbers) => void;
 };
 
-export const MainInfoCard: React.FC<Props> = ({
-  handleCardPress,
-}) => {
-  const { navigate } = useTypedNavigation<"client">();
-  const barbers = useBarbersData().map((barber) => ({
-    ...barber,
-    avatar: barber.avatar || "",
-  })) as Barber[];
+export const MainInfoCard: React.FC<Props> = ({ handleCardPress }) => {
+  const { navigate } = useTypedNavigation<'client'>();
+  const barbers = useBarbersData();
+  const barbersLoading = useBarbersDataLoading();
 
   const handleShowAll = useCallback(() => {
-    navigate(Routes.allBarberScreen)
+    navigate(Routes.allBarberScreen);
   }, []);
 
-  const renderItem: ListRenderItem<Barber> = useCallback(
-    ({ item, index }) => {
-      return (
-        <View style={styles.cardContainer} key={index}>
-          <Shadow distance={6} startColor="#efefef">
-            <View style={styles.cardInner}>
-              <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
-              <View style={styles.cardOpenRow}>
-                <AppText
-                  style={[
-                    styles.cardOpen,
-                    // { color: item.isOpen ? colors.appGreen : colors.appRed },
-                  ]}
-                >
-                  {/* {item.isOpen ? "Ochiq" : "Yopiq"} */}
-                </AppText>
-                <View style={styles.dot} />
-                <AppText style={[styles.cardOpen, { color: colors.iconGray }]}>
-                  {/* {item.timeRange} */}
-                </AppText>
-              </View>
-              <AppText style={styles.cardName}>{item.full_name}</AppText>
-              <View style={styles.rating}>
-                <Ionicons
-                  size={18}
-                  name="location-outline"
-                  color={colors.iconGray}
-                />
-                <AppText style={styles.ratingText}>{item.location} km</AppText>
-              </View>
-              <Pressable
-                style={styles.bookNow}
-                onPress={() => handleCardPress(item)}
-              >
-                <AppText style={{ color: colors.white }}>Book now</AppText>
-              </Pressable>
-            </View>
-          </Shadow>
-        </View>
-      );
-    },
-    []
-  );
+  const renderItem = useCallback(({ item }: ListRenderItemInfo<Barbers>) => {
+    return <BarberInfoCard handleCardPress={handleShowAll} item={item} />;
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -87,13 +41,17 @@ export const MainInfoCard: React.FC<Props> = ({
           <AppText style={styles.showAll}>Barchasi</AppText>
         </Pressable>
       </View>
-      <FlatList
-        horizontal
-        data={barbers}
-        renderItem={renderItem}
-        persistentScrollbar={true}
-        showsHorizontalScrollIndicator={false}
-      />
+      {barbersLoading ? (
+        <MainInfoCardLoader />
+      ) : (
+        <FlatList
+          horizontal
+          data={barbers}
+          renderItem={renderItem}
+          persistentScrollbar={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 };
@@ -105,9 +63,9 @@ const styles = StyleSheet.create({
   },
   headerComp: {
     marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 18,
@@ -116,55 +74,5 @@ const styles = StyleSheet.create({
   showAll: {
     fontSize: 14,
     color: colors.iconGray,
-  },
-  cardContainer: {
-    padding: 5,
-    marginRight: 15,
-  },
-  cardInner: {
-    padding: 8,
-    borderRadius: 8,
-    width: windowWidth / 2.2,
-    height: windowHeight / 3.5,
-    backgroundColor: colors.white,
-    justifyContent: "space-between",
-  },
-  cardImage: {
-    height: "50%",
-    borderRadius: 6,
-    resizeMode: "cover",
-  },
-  cardOpenRow: {
-    width: "75%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  cardOpen: {
-    fontSize: 12,
-  },
-  dot: {
-    width: 4,
-    height: 4,
-    borderRadius: 100,
-    backgroundColor: colors.appBlack,
-  },
-  cardName: {
-    fontSize: 16,
-  },
-  rating: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-  },
-  ratingText: {
-    fontSize: 12,
-    color: colors.iconGray,
-  },
-  bookNow: {
-    height: "15%",
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.appBlack,
   },
 });

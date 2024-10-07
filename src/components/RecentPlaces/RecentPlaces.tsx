@@ -1,47 +1,58 @@
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-import React, { useCallback } from "react";
+import { AntDesign } from '@expo/vector-icons';
+import React, { useCallback } from 'react';
 import {
   FlatList,
   Image,
-  ListRenderItem,
+  ListRenderItemInfo,
   Pressable,
   StyleSheet,
   View,
-} from "react-native";
-import { Shadow } from "react-native-shadow-2";
-import { AppText } from "~components/AppText";
-import { Routes } from "~navigation";
-import { Barber, useTypedNavigation } from "~shared";
-import { useBarbersData } from "~store";
-import { colors, windowWidth } from "~utils";
+} from 'react-native';
+import { Shadow } from 'react-native-shadow-2';
+import { ProfileIcon } from '~assets/icons';
+import { AppText } from '~components/AppText';
+import { Routes } from '~navigation';
+import { Barbers, useTypedNavigation } from '~shared';
+import { useBarbersData, useBarbersDataLoading } from '~store';
+import { colors, windowWidth } from '~utils';
+import { RecentPlacesLoader } from './RecentPlacesLoader';
 
 type Props = {
   handleCardPress: () => void;
-
 };
 
-export const RecentPlaces: React.FC<Props> = ({
-  handleCardPress,
-}) => {
-  const { navigate } = useTypedNavigation<"client">();
-  const barbers = useBarbersData().map((barber) => ({
-    ...barber,
-    avatar: barber.avatar || "",
-  })) as Barber[];
+export const RecentPlaces: React.FC<Props> = ({ handleCardPress }) => {
+  const { navigate } = useTypedNavigation<'client'>();
+  const barbers = useBarbersData();
+  const barbersLoading = useBarbersDataLoading();
 
   const handleShowAll = useCallback(() => {
-    navigate(Routes.allBarberScreen)
+    navigate(Routes.allBarberScreen);
   }, []);
 
-  const renderItem: ListRenderItem<Barber> = useCallback(
-    ({ item, index }) => {
+  const renderItem = useCallback(
+    ({ item, index }: ListRenderItemInfo<Barbers>) => {
       return (
         <Pressable onPress={handleCardPress}>
           <Shadow distance={6} startColor="#efefef">
             <View style={styles.cardContainer}>
-              <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
+              {item.images[0] ? (
+                <Image
+                  source={{ uri: item.images[0] }}
+                  style={styles.cardImage}
+                />
+              ) : (
+                <View
+                  style={[
+                    styles.cardImage,
+                    { justifyContent: 'center', alignItems: 'center' },
+                  ]}>
+                  <ProfileIcon active size={50} />
+                </View>
+              )}
+
               <View style={styles.cardDetails}>
-                <AppText semibold style={styles.cardName}>
+                <AppText semibold style={styles.cardName} numberOfLines={1}>
                   {item.full_name}
                 </AppText>
                 <View style={styles.rating}>
@@ -49,8 +60,7 @@ export const RecentPlaces: React.FC<Props> = ({
                   {/* <AppText> {item.rating}/5</AppText> */}
                 </View>
                 <View style={styles.rating}>
-                  <Ionicons name="location-outline" size={18} color="gray" />
-                  <AppText>{item.location} km</AppText>
+                  <AppText numberOfLines={1}>{item.location}</AppText>
                 </View>
               </View>
             </View>
@@ -58,7 +68,7 @@ export const RecentPlaces: React.FC<Props> = ({
         </Pressable>
       );
     },
-    []
+    [],
   );
 
   return (
@@ -71,14 +81,18 @@ export const RecentPlaces: React.FC<Props> = ({
           <AppText style={styles.showAll}>Barchasi</AppText>
         </Pressable>
       </View>
-      <FlatList
-        horizontal
-        data={barbers.slice(-10).reverse()}
-        style={{ padding: 4 }}
-        renderItem={renderItem}
-        persistentScrollbar={true}
-        showsHorizontalScrollIndicator={false}
-      />
+      {barbersLoading ? (
+        <RecentPlacesLoader />
+      ) : (
+        <FlatList
+          horizontal
+          data={barbers}
+          style={{ padding: 4 }}
+          renderItem={renderItem}
+          persistentScrollbar={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 };
@@ -90,9 +104,9 @@ const styles = StyleSheet.create({
   },
   headerComp: {
     marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 18,
@@ -106,26 +120,28 @@ const styles = StyleSheet.create({
     marginRight: 15,
     padding: 8,
     borderRadius: 6,
-    width: windowWidth / 1.6,
+    width: windowWidth / 1.4,
     backgroundColor: colors.white,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   cardImage: {
-    width: "30%",
+    width: '25%',
     height: 80,
     borderRadius: 6,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   cardName: {
     fontSize: 16,
     color: colors.appBlack,
   },
   rating: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   cardDetails: {
+    flex: 1,
     marginLeft: 10,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
 });

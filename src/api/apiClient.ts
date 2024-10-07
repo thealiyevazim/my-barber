@@ -47,8 +47,8 @@ class AccountApi extends BaseApi {
     );
   }
 
-  async barbers() {
-    return this.get<BarbersData>(getApiPath.client.barbers());
+  async barbers(page: number) {
+    return this.get<BarbersData>(getApiPath.client.barbers(page));
   }
 
   async addService(data: AddServiceData[]) {

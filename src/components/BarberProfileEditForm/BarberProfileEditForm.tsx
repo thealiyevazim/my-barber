@@ -48,7 +48,6 @@ const validationSchema = object().shape({
 
 export const BarberProfileEditForm: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [image, setImage] = useState<string | null>(null);
   const [openLocation, setOpenLocation] = useState(false);
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null,
@@ -61,6 +60,7 @@ export const BarberProfileEditForm: React.FC = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const barberData = useBarberGetMe();
   const barberImages = useBarberGetMeImages();
+  const [image, setImage] = useState<string | null>(barberImages[0]);
   const { goBack } = useTypedNavigation();
 
   const userType = useUserType();
@@ -210,7 +210,7 @@ export const BarberProfileEditForm: React.FC = () => {
                 style={styles.imagePicker}
                 source={{
                   uri:
-                    barberImages[0] ||
+                    image ||
                     'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
                 }}
               />

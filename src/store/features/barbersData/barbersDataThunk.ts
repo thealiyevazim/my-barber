@@ -1,15 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { clientApi } from '~api';
-import { BarbersData } from '~shared';
+import { BarbersData, GetBarbersPayload } from '~shared';
+import { sleep } from '~utils';
 
-export const barbersData = createAsyncThunk<BarbersData, void>(
+export const getBarbers = createAsyncThunk<BarbersData, GetBarbersPayload>(
   'client/barbersData',
-  async (_, thunkAPI) => {
+  async ({ page = 1 }, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
 
     try {
-      const response = await clientApi.barbers();
-
+      await sleep(500);
+      const response = await clientApi.barbers(page);
       return response as BarbersData;
     } catch (e: any) {
       return rejectWithValue(e.response?.data || e.message);

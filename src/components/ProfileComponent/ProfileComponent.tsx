@@ -1,35 +1,40 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
   Pressable,
   TouchableOpacity,
   Platform,
-} from "react-native";
-import { AppText, BottomComponent, ProfileCarousel, SnapCarousel } from "~components";
-import { SafeAreaTemplate } from "~templates";
-import { colors, windowHeight } from "~utils";
+} from 'react-native';
+import {
+  AppText,
+  BottomComponent,
+  ProfileCarousel,
+  SnapCarousel,
+} from '~components';
+import { SafeAreaTemplate } from '~templates';
+import { colors, windowHeight } from '~utils';
 import {
   ArrowLeftIcon,
   EditIcon,
   LanguageIcon,
   LogOutIcon,
   ServiceIcon,
-} from "~assets/icons";
-import Modal from "react-native-modal";
-import { useTypedNavigation, useUserType } from "~shared";
-import { UserTypesEnum } from "~enums";
-import { Routes } from "~navigation";
-import { barberGetMeData, useAppDispatch, useBarberGetMeImages } from "~store";
+} from '~assets/icons';
+import Modal from 'react-native-modal';
+import { useTypedNavigation, useUserType } from '~shared';
+import { UserTypesEnum } from '~enums';
+import { Routes } from '~navigation';
+import { barberGetMeData, useAppDispatch, useBarberGetMeImages } from '~store';
 
 const carouselMockData = [
   {
     id: 1,
-    url: "https://bondsbarbershop.co.uk/images/home-hero.jpg",
+    url: 'https://bondsbarbershop.co.uk/images/home-hero.jpg',
   },
   {
     id: 2,
-    url: "https://nationaltoday.com/wp-content/uploads/2022/02/Barbers-Day-1200x834.jpg",
+    url: 'https://nationaltoday.com/wp-content/uploads/2022/02/Barbers-Day-1200x834.jpg',
   },
 ];
 
@@ -49,13 +54,9 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
 }) => {
   const [openLogOut, setOpenLogOut] = useState<boolean>(false);
   const userType = useUserType();
-  const { navigate } = useTypedNavigation<"barber">();
-  const images = useBarberGetMeImages()
+  const { navigate } = useTypedNavigation<'barber'>();
+  const images = useBarberGetMeImages();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(barberGetMeData());
-  }, []);
 
   const handleService = useCallback(() => {
     navigate(Routes.barberSelectService);
@@ -77,32 +78,27 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           <TouchableOpacity style={styles.buttonWrapper} onPress={goToLanguage}>
             <View style={styles.iconWrapper}>
               <LanguageIcon />
-              <AppText style={styles.buttonTitle}>
-                Language
-              </AppText>
+              <AppText style={styles.buttonTitle}>Language</AppText>
             </View>
             <View style={styles.iconWrapper}>
-              <AppText style={styles.value}>
-                English
-              </AppText>
+              <AppText style={styles.value}>English</AppText>
               <ArrowLeftIcon stroke={colors.appBlack} />
             </View>
           </TouchableOpacity>
-          {
-            userType === UserTypesEnum.Barber ? (
-              <>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={handleService}>
-                  <View style={styles.iconWrapper}>
-                    <ServiceIcon />
-                    <AppText style={styles.buttonTitle}>
-                      Service
-                    </AppText>
-                  </View>
-                  <View style={styles.iconWrapper}>
-                    <ArrowLeftIcon stroke={colors.appBlack} />
-                  </View>
-                </TouchableOpacity>
-                {/* <TouchableOpacity style={styles.buttonWrapper}>
+          {userType === UserTypesEnum.Barber ? (
+            <>
+              <TouchableOpacity
+                style={styles.buttonWrapper}
+                onPress={handleService}>
+                <View style={styles.iconWrapper}>
+                  <ServiceIcon />
+                  <AppText style={styles.buttonTitle}>Service</AppText>
+                </View>
+                <View style={styles.iconWrapper}>
+                  <ArrowLeftIcon stroke={colors.appBlack} />
+                </View>
+              </TouchableOpacity>
+              {/* <TouchableOpacity style={styles.buttonWrapper}>
                   <View style={styles.iconWrapper}>
                     <HistoryIcon />
                     <AppText style={styles.buttonTitle}>
@@ -113,25 +109,20 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
                     <ArrowLeftIcon stroke={colors.appBlack} />
                   </View>
                 </TouchableOpacity> */}
-              </>
-            ) : null
-          }
+            </>
+          ) : null}
           <TouchableOpacity
             style={styles.logOutWrapper}
-            onPress={() => setOpenLogOut(true)}
-          >
+            onPress={() => setOpenLogOut(true)}>
             <LogOutIcon />
-            <AppText style={styles.buttonTitle}>
-              Log out
-            </AppText>
+            <AppText style={styles.buttonTitle}>Log out</AppText>
           </TouchableOpacity>
         </View>
       </BottomComponent>
       <Modal
         isVisible={openLogOut}
         onBackdropPress={() => setOpenLogOut(false)}
-        style={styles.modalView}
-      >
+        style={styles.modalView}>
         <View style={styles.modalBox}>
           <AppText style={styles.modalTitle}>Ilovadan chiqish</AppText>
           <AppText style={styles.description}>
@@ -140,8 +131,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           <View style={styles.buttonBox}>
             <TouchableOpacity
               style={styles.noButton}
-              onPress={() => setOpenLogOut(false)}
-            >
+              onPress={() => setOpenLogOut(false)}>
               <AppText style={{ color: colors.white }}>Yo'q</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.yesButton} onPress={logOutPress}>
@@ -156,14 +146,15 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-between",
-    bottom: "-10%",
-    height: Platform.OS === "ios" ? windowHeight / 2 - 10 : windowHeight / 2 + 90,
+    justifyContent: 'space-between',
+    bottom: '-10%',
+    height:
+      Platform.OS === 'ios' ? windowHeight / 2 - 10 : windowHeight / 2 + 90,
   },
   accountWrapper: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
-    zIndex: 2
+    zIndex: 2,
   },
   name: {
     color: colors.white,
@@ -176,11 +167,11 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   editButton: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 30,
     height: 30,
-    position: "absolute",
+    position: 'absolute',
     top: 30,
     right: 0,
   },
@@ -188,13 +179,13 @@ const styles = StyleSheet.create({
     rowGap: 24,
   },
   buttonWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   iconWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   buttonTitle: {
     fontSize: 20,
@@ -206,37 +197,37 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   logOutWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "35%",
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '35%',
   },
   modalBox: {
     paddingVertical: 20,
-    width: "100%",
+    width: '100%',
     borderRadius: 8,
     backgroundColor: colors.white,
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingHorizontal: 10,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   modalTitle: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 18,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginBottom: 15,
   },
   description: {
-    alignSelf: "center",
-    textAlign: "center",
-    fontWeight: "400",
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontWeight: '400',
     color: colors.appGray,
     width: 250,
   },
   buttonBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 60,
     marginTop: 40,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   noButton: {
     paddingHorizontal: 20,
@@ -252,7 +243,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

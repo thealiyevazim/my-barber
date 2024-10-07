@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Barbers } from '~shared';
-import { barbersData } from './barbersDataThunk';
+import { getBarbers } from './barbersDataThunk';
 
 interface BarbersState {
   barbers: Barbers[];
@@ -9,7 +9,7 @@ interface BarbersState {
 }
 
 const initialState: BarbersState = {
-  barbers: [] as Barbers[],
+  barbers: [],
   loading: false,
   error: null,
 };
@@ -20,15 +20,15 @@ const barbersDataSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(barbersData.pending, state => {
+      .addCase(getBarbers.pending, state => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(barbersData.fulfilled, (state, action) => {
+      .addCase(getBarbers.fulfilled, (state, action) => {
         state.barbers = action.payload.data;
         state.loading = false;
       })
-      .addCase(barbersData.rejected, (state, action) => {
+      .addCase(getBarbers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

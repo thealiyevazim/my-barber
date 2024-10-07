@@ -29,6 +29,8 @@ export const ProfileScreen: React.FC = () => {
   //   }
   // });
 
+  console.log(userType);
+
   useEffect(() => {
     if (userType === UserTypesEnum.Barber) {
       dispatch(barberGetMeData());
