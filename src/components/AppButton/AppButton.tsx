@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import {
   ActivityIndicator,
   StyleProp,
   StyleSheet,
   TouchableOpacity,
   ViewStyle,
-} from "react-native";
-import { AppText } from "~components/AppText";
-import { colors, windowWidth } from "~utils";
+} from 'react-native';
+import { AppText } from '../AppText/AppText';
+import { colors, windowWidth } from '~utils';
 
 type Props = {
   isLoading?: boolean;
@@ -54,8 +54,7 @@ export const AppButton: React.FC<Props> = ({
       disabled={disabled}
       style={[style, { backgroundColor: buttonColor }, styles.container]}
       onPress={handlePress}
-      activeOpacity={isLoading || disabled ? 1 : 0.8}
-    >
+      activeOpacity={isLoading || disabled ? 1 : 0.8}>
       {buttonContext}
     </TouchableOpacity>
   );
@@ -66,8 +65,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 8,
     width: windowWidth - 32,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 15,
   },
   title: { color: colors.white, fontSize: 20 },

@@ -1,10 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useCallback } from "react";
-import { StyleSheet, View } from "react-native";
-import { OnboardingPagerView } from "~components";
-import { Routes } from "~navigation";
-import { useTypedNavigation } from "~shared";
-import { SafeAreaTemplate } from "~templates";
+import React, { useCallback } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { OnboardingPagerView } from '~components';
+import { Routes } from '~navigation';
+import { useTypedNavigation } from '~shared';
+import { SafeAreaTemplate } from '~templates';
 
 export const OnboardingScreen: React.FC = () => {
   const { navigate } = useTypedNavigation();
@@ -25,6 +24,6 @@ export const OnboardingScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: "10%",
+    marginVertical: '10%',
   },
 });

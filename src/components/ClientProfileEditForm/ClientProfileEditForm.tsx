@@ -1,17 +1,25 @@
-import { Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
-import { SafeAreaTemplate } from '~templates'
-import { AppButton, AppInput, BottomComponent } from '~components'
 import * as ImagePicker from 'expo-image-picker';
-import { windowHeight } from '~utils';
-import { Formik } from "formik";
+import { Formik } from 'formik';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { object, string } from 'yup';
-import { clientUpdate, useAppDispatch, useClientData } from '~store';
 import { ClientUpdateData } from '~shared';
+import { clientUpdate, useAppDispatch, useClientData } from '~store';
+import { SafeAreaTemplate } from '~templates';
+import { windowHeight } from '~utils';
+import { AppButton } from '../AppButton/AppButton';
+import { AppInput } from '../AppInput/AppInput';
+import { BottomComponent } from '../BottomComponent/BottomComponent';
 
 const validationSchema = object().shape({
-  full_name: string().required("Enter an full name"),
-  phone: string().required("Enter a phone"),
+  full_name: string().required('Enter an full name'),
+  phone: string().required('Enter a phone'),
 });
 
 export const ClientProfileEditForm: React.FC = () => {
@@ -21,7 +29,8 @@ export const ClientProfileEditForm: React.FC = () => {
 
   useEffect(() => {
     const requestPermission = async () => {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
@@ -34,17 +43,20 @@ export const ClientProfileEditForm: React.FC = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1
-    })
-    console.log(result)
+      quality: 1,
+    });
+    console.log(result);
     if (!result.canceled) {
-      setImage(result.assets[0].uri)
+      setImage(result.assets[0].uri);
     }
-  }
+  };
 
-  const handleSubmitForm = useCallback((data: ClientUpdateData) => {
-    dispatch(clientUpdate(data));
-  }, [dispatch]);
+  const handleSubmitForm = useCallback(
+    (data: ClientUpdateData) => {
+      dispatch(clientUpdate(data));
+    },
+    [dispatch],
+  );
 
   return (
     <SafeAreaTemplate isDark goBack>
@@ -54,17 +66,18 @@ export const ClientProfileEditForm: React.FC = () => {
           phone: clientData?.phone,
         }}
         onSubmit={handleSubmitForm}
-        validationSchema={validationSchema}
-      >
+        validationSchema={validationSchema}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <BottomComponent bottomStyles={styles.container}>
-            <TouchableOpacity style={styles.imagePickerWrapper} onPress={PickImage}>
+            <TouchableOpacity
+              style={styles.imagePickerWrapper}
+              onPress={PickImage}>
               <Image
                 style={styles.imagePicker}
                 source={{
                   uri:
                     image ||
-                    "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
+                    'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
                 }}
               />
             </TouchableOpacity>
@@ -90,23 +103,24 @@ export const ClientProfileEditForm: React.FC = () => {
         )}
       </Formik>
     </SafeAreaTemplate>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-between",
-    height: Platform.OS === "ios" ? windowHeight / 2 + 100 : windowHeight / 2 + 150,
+    justifyContent: 'space-between',
+    height:
+      Platform.OS === 'ios' ? windowHeight / 2 + 100 : windowHeight / 2 + 150,
   },
   imagePickerWrapper: {
     width: 81,
     height: 81,
-    position: "absolute",
-    alignSelf: "center",
+    position: 'absolute',
+    alignSelf: 'center',
     borderRadius: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    top: -40
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: -40,
   },
   imagePicker: {
     width: 80,
@@ -118,5 +132,5 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-  }
-})
+  },
+});

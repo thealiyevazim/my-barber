@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FONT_TYPES } from '~assets/fonts/types';
-import { AppText } from '~components';
+import { AppText } from '../AppText/AppText';
 import { colors } from '~utils';
 
 interface Option {
-  label: string,
-  value: string,
+  label: string;
+  value: string;
 }
 
 interface SelectTimeProps {
@@ -25,9 +31,8 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
   data,
   style,
   placeholderStyle,
-  selectedTextStyle
+  selectedTextStyle,
 }) => {
-
   const handleChange = (item: Option) => {
     if (item.value) {
       setSelectTime(item.value);
@@ -52,7 +57,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={"Select time"}
+        placeholder={'Select time'}
         value={selectTime}
         onChange={handleChange}
         renderItem={renderItem}
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   dropdown: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 10,
     backgroundColor: colors.white,
     paddingHorizontal: 24,
@@ -78,21 +83,21 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: FONT_TYPES.MEDIUM,
   },
   selectedTextStyle: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: FONT_TYPES.MEDIUM,
   },
   item: {
     paddingHorizontal: 10,
-    paddingVertical: 4
+    paddingVertical: 4,
   },
   textStyle: {
     fontSize: 16,
-    fontWeight: "400"
+    fontWeight: '400',
   },
   itemContainerStyle: {
     paddingVertical: 5,

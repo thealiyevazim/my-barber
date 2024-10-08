@@ -1,4 +1,4 @@
-import { useAppSelector } from '~store/hooks';
+import { useAppSelector } from '../../hooks';
 
 export const useBarberGetMe = () =>
   useAppSelector(store => store.barberGetMe?.barberGetMeData?.barber);

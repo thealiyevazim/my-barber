@@ -1,16 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { UserTypesEnum } from "~enums";
-import { UserType } from "./types";
+import { createSlice } from '@reduxjs/toolkit';
+import { UserType } from './types';
 
 const initialState: UserType = {
   userType: undefined,
 };
 
 export const userTypeSlice = createSlice({
-  name: "userType",
+  name: 'userType',
   initialState,
   reducers: {
-    clear: (state) => {
+    clear: state => {
       state.userType = initialState.userType;
     },
     setUserType: (state, { payload }) => {

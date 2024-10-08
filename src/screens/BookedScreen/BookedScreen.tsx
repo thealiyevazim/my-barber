@@ -38,11 +38,11 @@ const serviceData = [
   },
 ];
 
-export const BookedScreen: React.FC<Barber> = ({
-  full_name,
-  location,
-  working_hours,
-}) => {
+type Props = {
+  barber: Barber;
+};
+
+export const BookedScreen: React.FC = () => {
   const { navigate } = useTypedNavigation<'client'>();
 
   const handleNextPage = () => {
@@ -55,7 +55,7 @@ export const BookedScreen: React.FC<Barber> = ({
       <BottomComponent bgImage bottomStyles={styles.bottomStyles}>
         <View>
           <AppText semibold style={styles.title}>
-            {full_name}
+            {/* {barber.full_name} */}
           </AppText>
           <View style={styles.wrapperBox}>
             <StarRatingDisplay rating={4} starSize={18} maxStars={5} />
@@ -64,11 +64,11 @@ export const BookedScreen: React.FC<Barber> = ({
           </View>
           <View style={styles.wrapperBox}>
             <LocationIcon />
-            <AppText style={styles.location}>{location}</AppText>
+            {/* <AppText style={styles.location}>{barber.location}</AppText> */}
           </View>
           <View style={styles.wrapperBox}>
             <ClockIcon />
-            <AppText style={styles.location}>{working_hours}</AppText>
+            {/* <AppText style={styles.location}>{barber.working_hours}</AppText> */}
           </View>
           <View style={styles.line} />
           <AppText style={styles.itemTitle}>Services</AppText>

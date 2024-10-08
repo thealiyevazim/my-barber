@@ -1,10 +1,10 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
-import { PixelRatio, StyleSheet } from "react-native";
-import { BarberNavigationRoutes } from "~navigation/config";
-import { colors } from "~utils";
-import { Routes } from "../navigationRoutes";
-import { renderTabsBarContent } from "./BarberTabBarContent";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
+import { PixelRatio, StyleSheet } from 'react-native';
+import { BarberNavigationRoutes } from '../config';
+import { colors } from '~utils';
+import { Routes } from '../navigationRoutes';
+import { renderTabsBarContent } from './BarberTabBarContent';
 
 const tabBarHeight = PixelRatio.roundToNearestPixel(28 * PixelRatio.get());
 
@@ -21,8 +21,7 @@ export const BarberTabNavigator: React.FC = () => {
         tabBarActiveTintColor: colors.appBlack,
         tabBarInactiveTintColor: colors.appGray,
         tabBarStyle: styles.container,
-      }}
-    >
+      }}>
       {BarberNavigationRoutes.map(({ component, name }) => {
         return <Tab.Screen key={name} name={name} component={component} />;
       })}
@@ -32,7 +31,7 @@ export const BarberTabNavigator: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
     height: tabBarHeight,
     borderTopColor: colors.appGray,
   },

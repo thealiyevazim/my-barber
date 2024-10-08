@@ -1,21 +1,20 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useCallback } from 'react'
-import Modal from "react-native-modal";
-import { colors, windowWidth } from '~utils';
-import { AppButton, AppHeader, AppText } from '~components';
-import { GoBackIcon } from "~assets/icons";
-import { useTypedNavigation } from '~shared';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import Modal from 'react-native-modal';
+import { colors } from '~utils';
+import { AppText } from '../AppText/AppText';
+import { GoBackIcon } from '~assets/icons';
 
 interface Props {
-  isVisible: boolean,
-  onPress?: () => void,
-  handleSubmit: () => void,
-  person?: number,
-  service: string,
-  address: string,
-  date: string,
-  time: string,
-  total: number
+  isVisible: boolean;
+  onPress?: () => void;
+  handleSubmit: () => void;
+  person?: number;
+  service: string;
+  address: string;
+  date: string;
+  time: string;
+  total: number;
 }
 
 export const BookedConfirm: React.FC<Props> = ({
@@ -27,12 +26,10 @@ export const BookedConfirm: React.FC<Props> = ({
   address,
   date,
   time,
-  total
+  total,
 }) => {
   return (
-    <Modal
-      isVisible={isVisible}
-    >
+    <Modal isVisible={isVisible}>
       <View style={styles.modalBody}>
         <TouchableOpacity activeOpacity={0.7} onPress={handleSubmit}>
           <GoBackIcon style={styles.icon} stroke={colors.appBlack} />
@@ -72,12 +69,12 @@ export const BookedConfirm: React.FC<Props> = ({
         </View>
       </View>
     </Modal>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   modalBody: {
-    width: "100%",
+    width: '100%',
     borderRadius: 8,
     backgroundColor: colors.white,
     flexDirection: 'column',
@@ -127,13 +124,13 @@ const styles = StyleSheet.create({
   },
   confirmButtonDiv: {
     marginTop: 100,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
   },
   confirmButton: {
-    width: "90%",
+    width: '90%',
     height: 52,
     borderRadius: 8,
     backgroundColor: colors.appBlack,
@@ -147,7 +144,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   icon: {
-    transform: [{ rotate: "180deg" }],
-    marginBottom: 20
-  }
-})
+    transform: [{ rotate: '180deg' }],
+    marginBottom: 20,
+  },
+});

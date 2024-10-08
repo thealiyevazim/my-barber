@@ -1,2 +1,2 @@
-export * from "./ClientTabNavigator";
-export * from "./BarberTabNavigation";
+export * from './ClientTabNavigator';
+export * from './BarberTabNavigation';

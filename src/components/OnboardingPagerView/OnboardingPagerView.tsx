@@ -1,12 +1,13 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
-import PagerView from "react-native-pager-view";
-import BarberWelcoming from "~assets/images/barber-welcoming.png";
-import BarbershopTeam from "~assets/images/barbershop-team.png";
-import BarberWorking from "~assets/images/barbershop-working.png";
-import { AppButton, CircleButon } from "~components/AppButton";
-import { AppText } from "~components/AppText";
-import { colors } from "~utils";
+import React, { useCallback, useRef, useState } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import PagerView from 'react-native-pager-view';
+import BarberWelcoming from '~assets/images/barber-welcoming.png';
+import BarbershopTeam from '~assets/images/barbershop-team.png';
+import BarberWorking from '~assets/images/barbershop-working.png';
+import { AppButton } from '../AppButton/AppButton';
+import { CircleButon } from '../AppButton/CircleButton';
+import { AppText } from '../AppText/AppText';
+import { colors } from '~utils';
 
 type Props = {
   onPress: () => void;
@@ -18,7 +19,7 @@ export const OnboardingPagerView: React.FC<Props> = ({ onPress }) => {
 
   const handleNextPage = useCallback(() => {
     pagerRef.current?.setPage(page + 1);
-    setPage((prev) => prev + 1);
+    setPage(prev => prev + 1);
   }, [page]);
 
   return (
@@ -26,8 +27,7 @@ export const OnboardingPagerView: React.FC<Props> = ({ onPress }) => {
       ref={pagerRef}
       initialPage={page}
       scrollEnabled={false}
-      style={styles.pagerView}
-    >
+      style={styles.pagerView}>
       <View style={styles.page} key="1">
         <View>
           <Image source={BarbershopTeam} />
@@ -71,25 +71,25 @@ export const OnboardingPagerView: React.FC<Props> = ({ onPress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: "10%",
+    marginVertical: '10%',
   },
   pagerView: {
     flex: 1,
   },
   title: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     fontSize: 20,
     marginTop: 15,
     color: colors.appBlack,
   },
   description: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     fontSize: 14,
     color: colors.appBlack,
   },
   page: {
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  button: { alignSelf: "flex-end" },
+  button: { alignSelf: 'flex-end' },
 });

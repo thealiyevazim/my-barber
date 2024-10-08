@@ -1,23 +1,20 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import {
   BarberStackParamsList,
   ClientStackParamsList,
   PublicStackParamsList,
-  StartStackParamsList,
-} from "~navigation/navigationTypes";
+} from '~navigation/navigationTypes';
 
-type NavigationStack = "public" | "start" | "barber" | "client";
+type NavigationStack = 'public' | 'barber' | 'client';
 
-type ParamsList<T> = T extends "public"
+type ParamsList<T> = T extends 'public'
   ? PublicStackParamsList
-  : T extends "start"
-  ? StartStackParamsList
-  : T extends "barber"
+  : T extends 'barber'
   ? BarberStackParamsList
-  : T extends "client"
+  : T extends 'client'
   ? ClientStackParamsList
   : never;
 
-export const useTypedNavigation = <T extends NavigationStack = "public">() => {
+export const useTypedNavigation = <T extends NavigationStack = 'public'>() => {
   return useNavigation<NavigationProp<ParamsList<T>, keyof ParamsList<T>>>();
 };

@@ -1,17 +1,14 @@
-import { Ionicons } from '@expo/vector-icons';
 import React, { useCallback } from 'react';
 import {
   FlatList,
-  Image,
   ListRenderItemInfo,
-  Pressable,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Shadow } from 'react-native-shadow-2';
 import { GoBackIcon } from '~assets/icons';
 import { AppText } from '~components';
+import { BarberInfoCard } from '~components/BarberInfoCard';
 import { Routes } from '~navigation';
 import { Barbers, useTypedNavigation } from '~shared';
 import { useBarbersData } from '~store';
@@ -34,33 +31,7 @@ export const AllBarberScreen: React.FC = () => {
 
   const renderItem = useCallback(
     ({ item, index }: ListRenderItemInfo<Barbers>) => {
-      return (
-        <View style={styles.cardContainer} key={index}>
-          <Shadow distance={6} startColor="#efefef">
-            <View style={styles.cardInner}>
-              <Image source={{ uri: item?.avatar }} style={styles.cardImage} />
-              <View style={styles.cardOpenRow}>
-                <View style={styles.dot} />
-                <AppText style={[styles.cardOpen, { color: colors.iconGray }]}>
-                  {item.working_hours}
-                </AppText>
-              </View>
-              <AppText style={styles.cardName}>{item.full_name}</AppText>
-              <View style={styles.rating}>
-                <Ionicons
-                  size={18}
-                  name="location-outline"
-                  color={colors.iconGray}
-                />
-                <AppText style={styles.ratingText}>{item.location} km</AppText>
-              </View>
-              <Pressable style={styles.bookNow} onPress={handleBooked}>
-                <AppText style={{ color: colors.white }}>Book now</AppText>
-              </Pressable>
-            </View>
-          </Shadow>
-        </View>
-      );
+      return <BarberInfoCard handleCardPress={handleBooked} item={item} />;
     },
     [],
   );

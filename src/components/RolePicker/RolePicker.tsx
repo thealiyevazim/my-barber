@@ -1,9 +1,9 @@
-import { Picker } from "@react-native-picker/picker";
-import { useFocusEffect } from "@react-navigation/native";
-import React, { useCallback, useEffect, useState } from "react";
-import { UserTypesEnum } from "~enums";
-import { storage } from "~shared";
-import { useAppDispatch, userTypeActions } from "~store";
+import { Picker } from '@react-native-picker/picker';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
+import { UserTypesEnum } from '~enums';
+import { storage } from '~shared';
+import { useAppDispatch, userTypeActions } from '~store';
 
 export const RolePicker: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,15 +22,14 @@ export const RolePicker: React.FC = () => {
       };
 
       updateUserType();
-    }, [selectedRole])
+    }, [selectedRole]),
   );
 
   return (
     <Picker
       selectedValue={selectedRole}
-      onValueChange={(itemValue) => setSelectedRole(itemValue)}
-      style={{ width: "100%" }}
-    >
+      onValueChange={itemValue => setSelectedRole(itemValue)}
+      style={{ width: '100%' }}>
       <Picker.Item label="Barber" value="barber" />
       <Picker.Item label="Mijoz" value="client" />
     </Picker>

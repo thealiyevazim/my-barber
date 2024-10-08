@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { clientApi } from '~api';
 import { AddImagesData, AddImagesResponse } from '~shared';
-import { AppThunkConfig } from '~store';
+import { AppThunkConfig } from '../../types';
 
 export const barberAddImage = createAsyncThunk<
   AddImagesResponse,

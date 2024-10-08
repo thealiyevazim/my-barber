@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
-import {
-  MainInfoCard,
-  MainSearch,
-  RecentPlaces,
-  SnapCarousel,
-} from '~components';
+import { MainInfoCard } from '../../components/MainInfoCard';
+import { MainSearch } from '../../components/MainSearch';
+import { RecentPlaces } from '../../components/RecentPlaces';
+import { SnapCarousel } from '../../components/SnapCarousel';
 import { Routes } from '~navigation';
 import { useTypedNavigation } from '~shared';
 import {

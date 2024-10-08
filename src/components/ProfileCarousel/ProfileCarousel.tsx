@@ -1,9 +1,8 @@
-import { ActivityIndicator, StyleSheet, Image, View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
+import { useAppDispatch, useBarberGetMeImages } from '~store';
 import { colors, windowHeight, windowWidth } from '~utils';
-import { barberGetMeData, useAppDispatch, useBarberGetMeImages } from '~store';
-import { imageUrl } from '~api';
 
 export const ProfileCarousel: React.FC = ({}) => {
   const carouselRef = useRef<ICarouselInstance>(null);

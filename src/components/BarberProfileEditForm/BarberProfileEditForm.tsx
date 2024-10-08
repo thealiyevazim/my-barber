@@ -8,13 +8,11 @@ import {
 } from 'react-native';
 import React, { useCallback, useState, useEffect } from 'react';
 import { SafeAreaTemplate } from '~templates';
-import {
-  AppButton,
-  AppInput,
-  AppText,
-  BottomComponent,
-  SelectTime,
-} from '~components';
+import { AppButton } from '../AppButton/AppButton';
+import { AppInput } from '../AppInput/AppInput';
+import { AppText } from '../AppText/AppText';
+import { BottomComponent } from '../BottomComponent/BottomComponent';
+import { SelectTime } from '../SelectTimeComponent/SelectTime';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { colors, windowHeight } from '~utils';
@@ -23,7 +21,6 @@ import {
   barberGetMeData,
   barberUpdate,
   useAppDispatch,
-  logout,
   useBarberGetMe,
   clientGetMeData,
   useBarberGetMeImages,
@@ -36,7 +33,6 @@ import MapView, { Marker } from 'react-native-maps';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import { UserTypesEnum } from '~enums';
-import { imageUrl } from '~api';
 
 const validationSchema = object().shape({
   full_name: string().required('Enter a full name'),

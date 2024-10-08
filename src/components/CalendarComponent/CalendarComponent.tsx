@@ -1,18 +1,15 @@
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { filter, find, groupBy } from 'lodash';
 import {
   CalendarProvider,
   CalendarUtils,
-  ExpandableCalendar,
   TimelineEventProps,
   TimelineList,
   TimelineProps,
   WeekCalendar,
 } from 'react-native-calendars';
 import { getDate, timelineEvents } from '~utils';
-import RightIcon from '~assets/images/arrow-right.png';
-import LeftIcon from '~assets/images/arrow-left.png';
 
 const INITIAL_TIME = { hour: 9, minutes: 0 };
 

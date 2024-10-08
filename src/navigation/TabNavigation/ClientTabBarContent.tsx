@@ -1,20 +1,20 @@
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import React, { useCallback, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import React, { useCallback, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
-import { CalendarIcon, HomeIcon, ProfileIcon } from "~assets/icons";
-import { Routes, RoutesType } from "~navigation/navigationRoutes";
-import { TABS_BAR_HEIGHT, colors } from "~utils";
-import { TabsBarItem } from "./TabBarItem";
+} from 'react-native-reanimated';
+import { CalendarIcon, HomeIcon, ProfileIcon } from '~assets/icons';
+import { Routes, RoutesType } from '../navigationRoutes';
+import { TABS_BAR_HEIGHT, colors } from '~utils';
+import { TabsBarItem } from './TabBarItem';
 
 const RoutesWithTabBar: RoutesType[] = [
   Routes.dashboardScreen,
   Routes.profileScreen,
-  Routes.bookedHistoryScreen
+  Routes.bookedHistoryScreen,
 ];
 
 function AppTabsBarContent({ navigation, state }: BottomTabBarProps) {
@@ -25,7 +25,7 @@ function AppTabsBarContent({ navigation, state }: BottomTabBarProps) {
 
   const handlePress = useCallback(
     (route: string) => () => navigation.navigate(route),
-    [navigation]
+    [navigation],
   );
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -67,13 +67,13 @@ export const renderClientTabsBarContent = (props: BottomTabBarProps) => (
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
     backgroundColor: colors.white,
     borderTopColor: colors.lightGray,
     borderTopWidth: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    overflow: "hidden",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
     paddingBottom: 10,
     paddingTop: 10,
   },

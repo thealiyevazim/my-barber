@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { clientApi } from '~api';
 import { AddServiceData, AddServiceResponse } from '~shared';
-import { AppThunkConfig } from '~store/types';
+import { AppThunkConfig } from '../../types';
 import { addServicesAction } from './addServiceSlice';
 
 export const addServices = createAsyncThunk<

@@ -42,7 +42,7 @@ class AccountApi extends BaseApi {
   }
   async clientUpdate(data: ClientUpdateData) {
     return this.put<any, ClientUpdateDataResponse>(
-      getApiPath.barber.update(),
+      getApiPath.client.update(),
       data,
     );
   }

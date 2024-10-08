@@ -1,4 +1,4 @@
-import { ComponentType } from "react";
+import { ComponentType } from 'react';
 import {
   CalendarScreen,
   DashboardScreen,
@@ -14,13 +14,13 @@ import {
   BookedHistoryScreen,
   BarberSelectService,
   AllBarberScreen,
-} from "~screens";
-import { Routes } from "./navigationRoutes";
+} from '~screens';
+import { Routes } from './navigationRoutes';
 import {
   BarberStackParamsList,
   ClientStackParamsList,
   PublicStackParamsList,
-} from "./navigationTypes";
+} from './navigationTypes';
 
 export interface NavigationRoute<Stack> {
   component: ComponentType;
@@ -51,10 +51,10 @@ export const BarberNavigationRoutes: NavigationRoute<BarberStackParamsList>[] =
 export const ClientNavigationRoutes: NavigationRoute<ClientStackParamsList>[] =
   [
     { component: DashboardScreen, name: Routes.dashboardScreen },
-    { component: BookedScreen, name: Routes.bookedScreen, },
+    { component: BookedScreen, name: Routes.bookedScreen },
     { component: ProfileScreen, name: Routes.profileScreen },
     { component: ProfileEditScreen, name: Routes.profileEditScreen },
     { component: BookAppointmentScreen, name: Routes.bookAppointmentScreen },
     { component: BookedHistoryScreen, name: Routes.bookedHistoryScreen },
-    { component: AllBarberScreen, name: Routes.allBarberScreen }
+    { component: AllBarberScreen, name: Routes.allBarberScreen },
   ];

@@ -28,7 +28,7 @@ export const MainInfoCard: React.FC<Props> = ({ handleCardPress }) => {
   }, []);
 
   const renderItem = useCallback(({ item }: ListRenderItemInfo<Barbers>) => {
-    return <BarberInfoCard handleCardPress={handleShowAll} item={item} />;
+    return <BarberInfoCard handleCardPress={handleCardPress} item={item} />;
   }, []);
 
   return (

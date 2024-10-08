@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
-import { AppText } from "~components";
-import { colors } from "~utils";
-import { FONT_TYPES } from "~assets/fonts/types";
+import { AppText } from '../AppText/AppText';
+import { colors } from '~utils';
+import { FONT_TYPES } from '~assets/fonts/types';
 
 interface Option {
   label: string;
@@ -20,11 +20,14 @@ interface SelectServiceProps {
 export const SelectService: React.FC<SelectServiceProps> = ({
   selected,
   setSelected,
-  data
+  data,
 }) => {
   // const [selected, setSelected] = useState<string[]>([]);
 
-  function calculateSelectedTotalPrice(data: Option[], selected: string[]): number {
+  function calculateSelectedTotalPrice(
+    data: Option[],
+    selected: string[],
+  ): number {
     return data
       .filter(data => selected.includes(data.value))
       .reduce((total, data) => total + parseInt(data.price), 0);
@@ -50,8 +53,8 @@ export const SelectService: React.FC<SelectServiceProps> = ({
       <View style={styles.selectedItem}>
         <AppText>{`${label} - ${price}`}</AppText>
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -77,11 +80,11 @@ export const SelectService: React.FC<SelectServiceProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    maxHeight: 160
+    width: '100%',
+    maxHeight: 160,
   },
   dropdown: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 10,
     backgroundColor: colors.white,
     paddingHorizontal: 24,
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: FONT_TYPES.MEDIUM,
   },
 
@@ -99,17 +102,17 @@ const styles = StyleSheet.create({
   optionItem: {
     paddingHorizontal: 10,
     marginVertical: 5,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     height: 28,
     borderRadius: 4,
   },
   labelStyle: {
     color: colors.appBlack,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   priceStyle: {
     fontSize: 14,
@@ -123,6 +126,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.appGray,
     marginRight: 5,
-    marginTop: 5
-  }
+    marginTop: 5,
+  },
 });

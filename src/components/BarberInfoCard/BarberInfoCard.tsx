@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import { ProfileIcon } from '~assets/icons';
-import { AppText } from '~components/AppText';
+import { AppText } from '../AppText/AppText';
 import { Barbers } from '~shared';
 import { colors, windowHeight, windowWidth } from '~utils';
 

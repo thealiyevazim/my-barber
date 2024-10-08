@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,12 +6,9 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import {
-  AppText,
-  BottomComponent,
-  ProfileCarousel,
-  SnapCarousel,
-} from '~components';
+import { AppText } from '../AppText/AppText';
+import { BottomComponent } from '../BottomComponent/BottomComponent';
+import { ProfileCarousel } from '../ProfileCarousel/ProfileCarousel';
 import { SafeAreaTemplate } from '~templates';
 import { colors, windowHeight } from '~utils';
 import {
@@ -25,7 +22,7 @@ import Modal from 'react-native-modal';
 import { useTypedNavigation, useUserType } from '~shared';
 import { UserTypesEnum } from '~enums';
 import { Routes } from '~navigation';
-import { barberGetMeData, useAppDispatch, useBarberGetMeImages } from '~store';
+import { useAppDispatch, useBarberGetMeImages } from '~store';
 
 const carouselMockData = [
   {

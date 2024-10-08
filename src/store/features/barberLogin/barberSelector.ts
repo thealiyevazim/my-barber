@@ -1,4 +1,4 @@
-import { useAppSelector } from '~store/hooks';
+import { useAppSelector } from '../../hooks';
 
 export const useIsAuthBarber = () =>
   useAppSelector(store => !!store.barberLogin?.loginResponse?.data?.token);

@@ -1,8 +1,7 @@
 import React from 'react';
-import ContentLoader, { Rect, Circle } from 'react-content-loader/native';
-import { View, StyleSheet } from 'react-native';
-import { Shadow } from 'react-native-shadow-2';
-import { windowWidth, colors } from '~utils';
+import ContentLoader, { Rect } from 'react-content-loader/native';
+import { StyleSheet, View } from 'react-native';
+import { colors, windowWidth } from '~utils';
 
 export const RecentPlacesLoader: React.FC = () => (
   <View style={styles.loaderContainer}>

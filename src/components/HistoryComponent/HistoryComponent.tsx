@@ -1,25 +1,19 @@
-import { FlatList, StyleSheet, View } from 'react-native'
-import React from 'react'
-import { HistoryData } from '~components'
-import { useTypedNavigation } from '~shared'
-import { Routes } from '~navigation'
+import { FlatList, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { HistoryData } from '../HistoryData/HistoryData';
+import { useTypedNavigation } from '~shared';
+import { Routes } from '~navigation';
 
-const data = [
-  1, 2, 3
-]
+const data = [1, 2, 3];
 
-
-export const HistoryComponent: React.FC = ({ }) => {
-  const { navigate } = useTypedNavigation<"barber">();
-
+export const HistoryComponent: React.FC = ({}) => {
+  const { navigate } = useTypedNavigation<'barber'>();
 
   const handleClientInfo = () => {
-    navigate(Routes.bookedInfoScreen)
-  }
+    navigate(Routes.bookedInfoScreen);
+  };
 
-  const renderItem = () => (
-    <HistoryData onPress={handleClientInfo} />
-  )
+  const renderItem = () => <HistoryData onPress={handleClientInfo} />;
 
   return (
     <View style={styles.container}>
@@ -29,11 +23,11 @@ export const HistoryComponent: React.FC = ({ }) => {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-  }
-})
+  },
+});
