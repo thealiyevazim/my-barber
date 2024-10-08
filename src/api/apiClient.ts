@@ -9,9 +9,11 @@ import {
   BarbersData,
   BarberUpdateData,
   BarberUpdateDataResponse,
+  ClientAvatarUpdateData,
   ClientGetMeData,
   ClientLoginData,
   ClientLoginDataResponse,
+  ClientUpdateAvatarDataResponse,
   ClientUpdateData,
   ClientUpdateDataResponse,
   getApiPath,
@@ -43,6 +45,13 @@ class AccountApi extends BaseApi {
   async clientUpdate(data: ClientUpdateData) {
     return this.put<any, ClientUpdateDataResponse>(
       getApiPath.client.update(),
+      data,
+    );
+  }
+
+  async clientAvatarUpdate(data: ClientAvatarUpdateData) {
+    return this.post<any, ClientUpdateAvatarDataResponse>(
+      getApiPath.client.updateAvatar(data.avatar),
       data,
     );
   }

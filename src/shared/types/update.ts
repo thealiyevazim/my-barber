@@ -25,9 +25,17 @@ export interface ClientUpdateData {
   full_name: string;
   phone: string;
 }
+export interface ClientAvatarUpdateData {
+  avatar: string;
+}
 
 export interface ClientUpdateDataResponse {
   data: ClientUpdate;
+}
+export interface ClientUpdateAvatarDataResponse {
+  data: {
+    url: string;
+  };
 }
 
 export interface ClientUpdate {

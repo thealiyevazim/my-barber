@@ -27,6 +27,7 @@ export const clientLogin = createAsyncThunk<
     return response;
   } catch (e: any) {
     // toast.fail({ title: e as string });
+    console.log(e);
     return rejectWithValue(true);
   }
 });

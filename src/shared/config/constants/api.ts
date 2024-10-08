@@ -14,6 +14,7 @@ export const getApiPath = {
   },
   client: {
     update: () => `/client/update`,
+    updateAvatar: (avatar: string) => `/client/upload-avatar?avatar=${avatar}`,
     barbers: (page: number) => `/barbers?page=${page}`,
     clientGetMe: () => `/client/getMe`,
   },

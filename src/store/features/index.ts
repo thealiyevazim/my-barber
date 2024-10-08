@@ -11,3 +11,4 @@ export * from './addService';
 export * from './barberGetMe';
 export * from './clientGetMe';
 export * from './barberAddImage';
+export * from './clientAvatarUpdate';

@@ -2,6 +2,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Image,
   Platform,
   StyleSheet,
@@ -9,13 +10,19 @@ import {
   View,
 } from 'react-native';
 import { object, string } from 'yup';
-import { ClientUpdateData } from '~shared';
-import { clientUpdate, useAppDispatch, useClientData } from '~store';
+import { AppButton, AppInput, BottomComponent } from '~components';
+import { ClientUpdateData, useTypedNavigation } from '~shared';
+import {
+  clientAvatarUpdate,
+  clientGetMeData,
+  clientUpdate,
+  useAppDispatch,
+  useClientAvatarUpdateLoading,
+  useClientGetMe,
+  useClientUpdateDataLoading,
+} from '~store';
 import { SafeAreaTemplate } from '~templates';
 import { windowHeight } from '~utils';
-import { AppButton } from '../AppButton/AppButton';
-import { AppInput } from '../AppInput/AppInput';
-import { BottomComponent } from '../BottomComponent/BottomComponent';
 
 const validationSchema = object().shape({
   full_name: string().required('Enter an full name'),
@@ -23,9 +30,16 @@ const validationSchema = object().shape({
 });
 
 export const ClientProfileEditForm: React.FC = () => {
-  const [image, setImage] = useState<string | null>(null);
-  const clientData = useClientData();
+  const clientData = useClientGetMe();
+  const cliendDataLoading = useClientUpdateDataLoading();
+  const clientAvatarLoading = useClientAvatarUpdateLoading();
+
+  console.log(clientAvatarLoading);
+
   const dispatch = useAppDispatch();
+  const { goBack } = useTypedNavigation();
+
+  const [profileImage, setProfileImage] = useState<string>(clientData.avatar);
 
   useEffect(() => {
     const requestPermission = async () => {
@@ -38,22 +52,27 @@ export const ClientProfileEditForm: React.FC = () => {
     requestPermission();
   }, []);
 
-  const PickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+  const handlePickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setProfileImage(result.assets[0].uri);
+    }
+    if (profileImage) {
+      dispatch(clientAvatarUpdate({ avatar: profileImage }));
     }
   };
 
   const handleSubmitForm = useCallback(
     (data: ClientUpdateData) => {
-      dispatch(clientUpdate(data));
+      dispatch(clientUpdate(data)).then(() => {
+        dispatch(clientGetMeData());
+        goBack();
+      });
     },
     [dispatch],
   );
@@ -71,15 +90,17 @@ export const ClientProfileEditForm: React.FC = () => {
           <BottomComponent bottomStyles={styles.container}>
             <TouchableOpacity
               style={styles.imagePickerWrapper}
-              onPress={PickImage}>
-              <Image
-                style={styles.imagePicker}
-                source={{
-                  uri:
-                    image ||
-                    'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
-                }}
-              />
+              onPress={handlePickImage}>
+              {clientAvatarLoading ? (
+                <ActivityIndicator size={'small'} />
+              ) : (
+                <Image
+                  style={styles.imagePicker}
+                  source={{
+                    uri: profileImage,
+                  }}
+                />
+              )}
             </TouchableOpacity>
             <View style={styles.inputWrapper}>
               <AppInput
@@ -97,7 +118,11 @@ export const ClientProfileEditForm: React.FC = () => {
               />
             </View>
             <View style={styles.button}>
-              <AppButton title="Tasdiqlash" onPress={handleSubmit} />
+              <AppButton
+                title="Tasdiqlash"
+                onPress={handleSubmit}
+                isLoading={cliendDataLoading}
+              />
             </View>
           </BottomComponent>
         )}
