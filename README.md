@@ -13,41 +13,9 @@
 
 ## Technologies Used
 
-- **Frontend**: React Native
+- **Frontend**: React Native Expo
 - **State Management**: Redux
 - **Notifications**: Expo Notifications
-
-## Installation
-
-To run the project locally, follow these steps:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/thealiyevazim/my-barber.git
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   cd my-barber
-   yarn install
-   ```
-
-3. Run the app:
-
-   For iOS:
-
-   ```bash
-   npx expo start --ios
-   ```
-
-   For Android:
-
-   ```bash
-   npx expo start --android
-   ```
-
 
 ## License
 
