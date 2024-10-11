@@ -10,15 +10,12 @@
 - **User Profiles**: Manage your profile, view booking history, and track upcoming appointments.
 - **Barber Profiles**: Barbers can manage their services, availability, and appointments in real-time.
 - **Push Notifications**: Stay updated with appointment reminders and special offers.
-- **Secure Payments**: Integrated payment system for seamless transactions.
 
 ## Technologies Used
 
 - **Frontend**: React Native
-- **Backend**: Firebase (or your backend technology)
 - **State Management**: Redux
-- **Notifications**: Firebase Cloud Messaging (or any other service)
-- **Payments**: Stripe (or other payment gateway)
+- **Notifications**: Expo Notifications
 
 ## Installation
 
@@ -34,7 +31,7 @@ To run the project locally, follow these steps:
 
    ```bash
    cd my-barber
-   npm install
+   yarn install
    ```
 
 3. Run the app:
@@ -42,20 +39,15 @@ To run the project locally, follow these steps:
    For iOS:
 
    ```bash
-   npx react-native run-ios
+   npx expo start --ios
    ```
 
    For Android:
 
    ```bash
-   npx react-native run-android
+   npx expo start --android
    ```
 
-4. Set up the backend (Firebase/Node.js) and configure API keys.
-
-## Contributing
-
-If you'd like to contribute to **MyBarber**, feel free to fork the repository and submit a pull request. Your contributions are highly appreciated!
 
 ## License
 
