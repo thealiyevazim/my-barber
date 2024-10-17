@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
-import { useAppDispatch, useBarberGetMeImages } from '~store';
+import { UserTypesEnum } from '~enums';
+import { useUserType } from '~shared';
+import { useAppDispatch, useBarberGetMeImages, useClientGetMe } from '~store';
 import { colors, windowHeight, windowWidth } from '~utils';
 
 export const ProfileCarousel: React.FC = ({}) => {
@@ -9,7 +11,9 @@ export const ProfileCarousel: React.FC = ({}) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const images = useBarberGetMeImages();
+  const clientAvatar = useClientGetMe();
   const dispatch = useAppDispatch() || [];
+  const userType = useUserType();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -45,7 +49,7 @@ export const ProfileCarousel: React.FC = ({}) => {
     <View style={styles.container}>
       {isLoading ? (
         <ActivityIndicator size={'large'} color={colors.appBlack} />
-      ) : (
+      ) : userType === UserTypesEnum.Barber ? (
         <>
           <Pagination activeSlide={activeSlide} totalSlides={images?.length} />
           <Carousel
@@ -61,6 +65,10 @@ export const ProfileCarousel: React.FC = ({}) => {
             )}
           />
         </>
+      ) : (
+        <View style={styles.avatarWrapper}>
+          <Image source={{ uri: clientAvatar?.avatar }} style={styles.avatar} />
+        </View>
       )}
     </View>
   );
@@ -89,5 +97,14 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 2,
+  },
+  avatarWrapper: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  avatar: {
+    width: '100%',
+    height: '100%',
   },
 });
