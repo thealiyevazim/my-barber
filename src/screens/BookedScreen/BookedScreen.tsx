@@ -38,10 +38,6 @@ const serviceData = [
   },
 ];
 
-type Props = {
-  barber: Barber;
-};
-
 export const BookedScreen: React.FC = () => {
   const { navigate } = useTypedNavigation<'client'>();
 
@@ -75,7 +71,7 @@ export const BookedScreen: React.FC = () => {
           <FlatList
             data={serviceData}
             renderItem={({ item, index }) => (
-              <ServicesComponent title={item.title} />
+              <ServicesComponent title={item.title} key={index} />
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
