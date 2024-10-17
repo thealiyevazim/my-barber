@@ -6,7 +6,7 @@ export * from './OnboardingScreen';
 export * from './SelectRoleScreen';
 export * from './AuthLoadingScreen';
 export * from './EnterFullNameScreen';
-export * from './SelectLanguageScreen';
+// export * from './SelectLanguageScreen';
 export * from './EnterPhoneNumberScreen';
 export * from './SignupScreen';
 export * from './ProfileScreen';

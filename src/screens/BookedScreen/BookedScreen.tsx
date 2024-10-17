@@ -18,23 +18,23 @@ import { colors, windowHeight } from '~utils';
 const serviceData = [
   {
     id: 0,
-    title: 'Haircut',
+    title: 'Soch olish',
   },
   {
     id: 1,
-    title: 'Shaving',
+    title: 'Soqol olish',
   },
   {
     id: 2,
-    title: 'Styling',
+    title: 'Turmaklash',
   },
   {
     id: 3,
-    title: 'Hairdryer',
+    title: 'Soch quritish',
   },
   {
     id: 4,
-    title: 'Coloring',
+    title: 'Bo`yash',
   },
 ];
 
@@ -60,7 +60,7 @@ export const BookedScreen: React.FC = () => {
           <View style={styles.wrapperBox}>
             <StarRatingDisplay rating={4} starSize={18} maxStars={5} />
             <AppText style={styles.viewers}>4/5</AppText>
-            <AppText style={styles.viewers}>(265 reviews)</AppText>
+            <AppText style={styles.viewers}>(265 marotaba ko'rilgan)</AppText>
           </View>
           <View style={styles.wrapperBox}>
             <LocationIcon />
@@ -81,12 +81,12 @@ export const BookedScreen: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.serviceWrapper}
           />
-          <AppText style={styles.itemTitle}>Gallery</AppText>
+          <AppText style={styles.itemTitle}>Rasmlar galereyasi</AppText>
           <GalleryComponent />
           <AppButton
             onPress={handleNextPage}
             style={styles.button}
-            title="Next"
+            title="Keyingisi"
           />
         </View>
       </BottomComponent>

@@ -36,7 +36,7 @@ export const BookedConfirm: React.FC<Props> = ({
         </TouchableOpacity>
         <View style={styles.confirmTopDiv}>
           <View style={styles.textCenter}>
-            <AppText style={styles.leftGrayText}>Service</AppText>
+            <AppText style={styles.leftGrayText}>Xizmat</AppText>
             <AppText style={styles.rightBlackText}>{service}</AppText>
           </View>
           {/* <View style={styles.textCenter}>
@@ -44,27 +44,27 @@ export const BookedConfirm: React.FC<Props> = ({
             <AppText style={styles.rightBlackText}>{person} person</AppText>
           </View> */}
           <View style={styles.textCenter}>
-            <AppText style={styles.leftGrayText}>Address</AppText>
+            <AppText style={styles.leftGrayText}>Manzil</AppText>
             <AppText style={styles.rightBlackText}>{address}</AppText>
           </View>
           <View style={styles.textCenter}>
-            <AppText style={styles.leftGrayText}>Booking date</AppText>
+            <AppText style={styles.leftGrayText}>Buyurtma sanasi</AppText>
             <AppText style={styles.rightBlackText}>{date}</AppText>
           </View>
           <View style={styles.textCenter}>
-            <AppText style={styles.leftGrayText}>Booking time</AppText>
+            <AppText style={styles.leftGrayText}>Buyurtma vaqti</AppText>
             <AppText style={styles.rightBlackText}>{time}</AppText>
           </View>
         </View>
         <View style={styles.confirmBottomDiv}>
           <View style={styles.totalStyle}>
-            <AppText style={styles.totalText}>Total</AppText>
+            <AppText style={styles.totalText}>Umumiy</AppText>
             <AppText style={styles.totalSum}>{total} so'm</AppText>
           </View>
         </View>
         <View style={styles.confirmButtonDiv}>
           <TouchableOpacity style={styles.confirmButton} onPress={handleSubmit}>
-            <Text style={styles.confirmText}>Confrim</Text>
+            <Text style={styles.confirmText}>Tasdiqlash</Text>
           </TouchableOpacity>
         </View>
       </View>

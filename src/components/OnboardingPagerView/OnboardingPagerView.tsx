@@ -32,10 +32,10 @@ export const OnboardingPagerView: React.FC<Props> = ({ onPress }) => {
         <View>
           <Image source={BarbershopTeam} />
           <AppText semibold style={styles.title}>
-            Hobby and business
+            Xobbi va Biznes
           </AppText>
           <AppText style={styles.description}>
-            Your hobby can turn into a profitable business
+            Xobbi daromadli biznesga aylanishi mumkin
           </AppText>
         </View>
         <CircleButon style={styles.button} onPress={handleNextPage} />
@@ -44,10 +44,10 @@ export const OnboardingPagerView: React.FC<Props> = ({ onPress }) => {
         <View>
           <Image source={BarberWelcoming} />
           <AppText semibold style={styles.title}>
-            Skilled masters
+            Mohir ustalar
           </AppText>
           <AppText style={styles.description}>
-            Trust the trusted masters to show yourself off without a doubt
+            Ishonchli xo‘jayinlarga ishoning va shubhasiz o‘zingizni ko‘rsating
           </AppText>
         </View>
         <CircleButon style={styles.button} onPress={handleNextPage} />
@@ -56,13 +56,13 @@ export const OnboardingPagerView: React.FC<Props> = ({ onPress }) => {
         <View>
           <Image source={BarberWorking} />
           <AppText semibold style={styles.title}>
-            Hobby and business
+            Xobbi va biznes
           </AppText>
           <AppText style={styles.description}>
-            Your hobby can turn into a profitable business
+            Xobbi daromadli biznesga aylanishi mumkin
           </AppText>
         </View>
-        <AppButton title="Next" onPress={onPress} />
+        <AppButton title="Keyingisi" onPress={onPress} />
       </View>
     </PagerView>
   );

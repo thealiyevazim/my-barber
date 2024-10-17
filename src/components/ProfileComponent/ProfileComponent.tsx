@@ -75,7 +75,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
           <TouchableOpacity style={styles.buttonWrapper} onPress={goToLanguage}>
             <View style={styles.iconWrapper}>
               <LanguageIcon />
-              <AppText style={styles.buttonTitle}>Language</AppText>
+              <AppText style={styles.buttonTitle}>Tilni o'zgartirish</AppText>
             </View>
             <View style={styles.iconWrapper}>
               <AppText style={styles.value}>English</AppText>
@@ -89,7 +89,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
                 onPress={handleService}>
                 <View style={styles.iconWrapper}>
                   <ServiceIcon />
-                  <AppText style={styles.buttonTitle}>Service</AppText>
+                  <AppText style={styles.buttonTitle}>Xizmat</AppText>
                 </View>
                 <View style={styles.iconWrapper}>
                   <ArrowLeftIcon stroke={colors.appBlack} />
@@ -112,7 +112,7 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = ({
             style={styles.logOutWrapper}
             onPress={() => setOpenLogOut(true)}>
             <LogOutIcon />
-            <AppText style={styles.buttonTitle}>Log out</AppText>
+            <AppText style={styles.buttonTitle}>Tizimdan chiqish</AppText>
           </TouchableOpacity>
         </View>
       </BottomComponent>
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   logOutWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '35%',
+    width: '100%',
   },
   modalBox: {
     paddingVertical: 20,

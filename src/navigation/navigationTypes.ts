@@ -3,7 +3,7 @@ import { Routes } from './navigationRoutes';
 
 export type PublicStackParamsList = {
   [Routes.onboardingScreen]: undefined;
-  [Routes.selectLanguageScreen]: undefined;
+  // [Routes.selectLanguageScreen]: undefined;
   [Routes.selectRoleScreen]: undefined;
   [Routes.loginScreen]: undefined;
   [Routes.registerScreen]: undefined;
