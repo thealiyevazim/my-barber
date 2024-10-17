@@ -5,7 +5,7 @@ import {
   LoginScreen,
   OnboardingScreen,
   ProfileScreen,
-  SelectLanguageScreen,
+  // SelectLanguageScreen,
   SelectRoleScreen,
   ProfileEditScreen,
   BookedScreen,
@@ -30,7 +30,7 @@ export interface NavigationRoute<Stack> {
 // Public Stack
 export const PublicNavigationRoutes: NavigationRoute<PublicStackParamsList>[] =
   [
-    { component: SelectLanguageScreen, name: Routes.selectLanguageScreen },
+    // { component: SelectLanguageScreen, name: Routes.selectLanguageScreen },
     { component: OnboardingScreen, name: Routes.onboardingScreen },
     { component: SelectRoleScreen, name: Routes.selectRoleScreen },
     { component: LoginScreen, name: Routes.loginScreen },

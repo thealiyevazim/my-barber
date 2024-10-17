@@ -20,11 +20,11 @@ interface Option {
 }
 
 const data: Option[] = [
-  { label: 'Shaving', price: '80000', value: '1' },
-  { label: 'Haircut', price: '50000', value: '2' },
-  { label: 'Styling', price: '100000', value: '3' },
-  { label: 'Coloring', price: '50000', value: '4' },
-  { label: 'Hairdryer', price: '25000', value: '5' },
+  { label: 'Soqol olish', price: '80000', value: '1' },
+  { label: 'Soch Olish', price: '50000', value: '2' },
+  { label: 'Turmaklash', price: '100000', value: '3' },
+  { label: 'Bo‘yash', price: '50000', value: '4' },
+  { label: 'Soch quritish', price: '25000', value: '5' },
 ];
 
 export const BookAppointmentScreen: React.FC = () => {
@@ -97,22 +97,22 @@ export const BookAppointmentScreen: React.FC = () => {
         </TouchableOpacity>
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <AppText semibold style={styles.headerTitle}>
-            Book Appointment
+            Bron Qilish
           </AppText>
         </View>
       </View>
-      <AppText style={styles.title}>Select Date</AppText>
+      <AppText style={styles.title}>Kunni tanlash</AppText>
       <SelectDateComponent
         selectDate={selectDate}
         onSelectDate={handleSelectDate}
       />
-      <AppText style={styles.title}>Select Time</AppText>
+      <AppText style={styles.title}>Vaqtni tanlash</AppText>
       <SelectTime
         selectTime={selectTime}
         setSelectTime={setSelectTime}
         data={timeData}
       />
-      <AppText style={styles.title}>Service</AppText>
+      <AppText style={styles.title}>Xizmat</AppText>
       <SelectService
         selected={selected}
         setSelected={setSelected}
@@ -121,10 +121,10 @@ export const BookAppointmentScreen: React.FC = () => {
       {/* <AppText style={styles.title}>How many person?</AppText> */}
       {/* <SelectPeople addPerson={addPerson} setAddPerson={setAddPerson} /> */}
       <View style={styles.totalWrapper}>
-        <AppText style={styles.total}>Total price: {totalPrice} so'm</AppText>
+        <AppText style={styles.total}>Umumiy narx: {totalPrice} so'm</AppText>
       </View>
       <View style={styles.buttonWrapper}>
-        <AppButton title="Next" onPress={openModal} />
+        <AppButton title="Keyingisi" onPress={openModal} />
       </View>
       <BookedConfirm
         isVisible={modalVisible}

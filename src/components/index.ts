@@ -7,7 +7,7 @@ export * from './MainSearch';
 export * from './RecentPlaces';
 export * from './MainInfoCard';
 export * from './SnapCarousel';
-export * from './LanguagePicker';
+// export * from './LanguagePicker';
 export * from './BottomComponent';
 export * from './OnboardingPagerView';
 export * from './MainTopTabNavigation';

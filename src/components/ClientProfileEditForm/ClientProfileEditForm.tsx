@@ -91,16 +91,12 @@ export const ClientProfileEditForm: React.FC = () => {
             <TouchableOpacity
               style={styles.imagePickerWrapper}
               onPress={handlePickImage}>
-              {clientAvatarLoading ? (
-                <ActivityIndicator size={'small'} />
-              ) : (
-                <Image
-                  style={styles.imagePicker}
-                  source={{
-                    uri: profileImage,
-                  }}
-                />
-              )}
+              <Image
+                style={styles.imagePicker}
+                source={{
+                  uri: profileImage,
+                }}
+              />
             </TouchableOpacity>
             <View style={styles.inputWrapper}>
               <AppInput

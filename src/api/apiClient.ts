@@ -51,7 +51,7 @@ class AccountApi extends BaseApi {
 
   async clientAvatarUpdate(data: ClientAvatarUpdateData) {
     return this.post<any, ClientUpdateAvatarDataResponse>(
-      getApiPath.client.updateAvatar(data.avatar),
+      getApiPath.client.updateAvatar(),
       data,
     );
   }
