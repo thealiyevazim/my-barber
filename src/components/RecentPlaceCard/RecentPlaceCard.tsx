@@ -17,8 +17,11 @@ export const RecentPlaceCard: React.FC<Props> = ({ item, handleCardPress }) => {
     <Pressable onPress={() => handleCardPress(item)}>
       <Shadow distance={6} startColor="#efefef">
         <View style={styles.cardContainer}>
-          {item.images[0] ? (
-            <Image source={{ uri: item.images[0] }} style={styles.cardImage} />
+          {item.images?.[0] ? (
+            <Image
+              source={{ uri: item.images?.[0] }}
+              style={styles.cardImage}
+            />
           ) : (
             <View
               style={[

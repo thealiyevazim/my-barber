@@ -12,6 +12,7 @@ import {
   clientGetMeSliceReducer,
   clientLoginReducer,
   clientUpdateReducer,
+  getBarbersIdSliceReducer,
   internetStatusReducer,
   servicesSliceReducer,
   userTypeReducer,
@@ -31,6 +32,7 @@ const combinedReducer = combineReducers({
   clientGetMe: clientGetMeSliceReducer,
   barberAddImage: barberAddImagesReducer,
   clientAvatarUpdate: clientAvatarUpdateReducer,
+  barbersId: getBarbersIdSliceReducer,
 });
 
 const rootPersistConfig = {
@@ -50,6 +52,7 @@ const rootPersistConfig = {
     'clientGetMe',
     'barberAddImage',
     'clientAvatarUpdate',
+    'barbersId',
   ],
 };
 

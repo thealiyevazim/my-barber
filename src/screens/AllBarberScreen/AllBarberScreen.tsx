@@ -11,7 +11,7 @@ import { AppText } from '~components';
 import { BarberInfoCard } from '~components/BarberInfoCard';
 import { Routes } from '~navigation';
 import { Barbers, useTypedNavigation } from '~shared';
-import { useBarbersData } from '~store';
+import { getBarbersId, useAppDispatch, useBarbersData } from '~store';
 import { SafeAreaTemplate } from '~templates';
 import { colors, windowHeight, windowWidth } from '~utils';
 
@@ -20,13 +20,15 @@ export const AllBarberScreen: React.FC = () => {
 
   const barbers = useBarbersData();
   const { navigate } = useTypedNavigation<'client'>();
+  const dispatch = useAppDispatch();
 
   const handleGoBack = useCallback(() => {
     goBack();
   }, [goBack]);
 
-  const handleBooked = () => {
-    navigate(Routes.bookedScreen);
+  const handleBooked = (barber: Barbers) => {
+    dispatch(getBarbersId(barber));
+    navigate(Routes.bookedScreen, { barberId: barber.id });
   };
 
   const renderItem = useCallback(

@@ -16,8 +16,11 @@ export const BarberInfoCard: React.FC<Props> = ({ item, handleCardPress }) => {
     <View style={styles.cardContainer}>
       <Shadow distance={6} startColor="#efefef">
         <View style={styles.cardInner}>
-          {item.images[0] ? (
-            <Image source={{ uri: item.images[0] }} style={styles.cardImage} />
+          {item.images?.[0] ? (
+            <Image
+              source={{ uri: item.images?.[0] }}
+              style={styles.cardImage}
+            />
           ) : (
             <View
               style={[
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
   },
   cardInner: {
     borderRadius: 8,
-    width: windowWidth / 2.2,
+    width: windowWidth / 2.3,
     height: windowHeight / 3,
     backgroundColor: colors.white,
   },

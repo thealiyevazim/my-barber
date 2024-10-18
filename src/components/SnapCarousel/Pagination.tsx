@@ -12,9 +12,16 @@ import { colors } from '~utils';
 interface PaginationProps {
   data: Array<any>;
   progressValue: SharedValue<number>;
+  activeColor?: string;
+  inactiveColor?: string;
 }
 
-const Pagination = ({ data, progressValue }: PaginationProps) => {
+const Pagination = ({
+  data,
+  progressValue,
+  activeColor = colors.appBlack,
+  inactiveColor = colors.iconGray,
+}: PaginationProps) => {
   return (
     <View
       style={{
@@ -28,6 +35,8 @@ const Pagination = ({ data, progressValue }: PaginationProps) => {
           key={index}
           index={index}
           progressValue={progressValue}
+          activeColor={activeColor}
+          inactiveColor={inactiveColor}
         />
       ))}
     </View>
@@ -37,9 +46,13 @@ const Pagination = ({ data, progressValue }: PaginationProps) => {
 const PaginationDot = ({
   index,
   progressValue,
+  activeColor,
+  inactiveColor,
 }: {
   index: number;
   progressValue: SharedValue<number>;
+  activeColor: string;
+  inactiveColor: string;
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
@@ -52,7 +65,7 @@ const PaginationDot = ({
     const backgroundColor = interpolateColor(
       progressValue.value,
       [index - 1, index, index + 1],
-      [colors.iconGray, colors.appBlack, colors.iconGray],
+      [inactiveColor, activeColor, inactiveColor],
     );
 
     const width = interpolate(
