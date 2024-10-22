@@ -8,7 +8,7 @@ import {
   WEEKDAYS,
   dateToISO,
   genDaysOfTheWeek,
-} from "~utils";
+} from '~utils';
 import { addAlpha } from '~utils';
 import { ArrowIcon } from '~assets/icons';
 
@@ -24,17 +24,17 @@ export const HIT_SLOP = {
   left: 20,
 };
 
-export const SelectDateComponent: FC<CalendarProps> = ({ selectDate, onSelectDate }) => {
+export const SelectDateComponent: FC<CalendarProps> = ({
+  selectDate,
+  onSelectDate,
+}) => {
   const [currentDate, setCurrentDate] = useState(() => {
     const date = ISOToDate(selectDate);
     date.setHours(0, 0, 0, 0);
     return date;
   });
 
-  const days = useMemo(
-    () => genDaysOfTheWeek(currentDate),
-    [currentDate],
-  );
+  const days = useMemo(() => genDaysOfTheWeek(currentDate), [currentDate]);
 
   const onNextPress = useCallback(() => {
     const newDate = new Date(currentDate.getTime() + DAY * 7);
@@ -109,7 +109,8 @@ const Day = ({
             styles.noActiveDate,
             isSelected && styles.activeDate,
             isToday(day) && styles.today,
-            !(getMonth(day) === getMonth(ISOToDate(selectDate))) && styles.disabledDate,
+            !(getMonth(day) === getMonth(ISOToDate(selectDate))) &&
+              styles.disabledDate,
             isPast && styles.pastDate,
           ]}>
           <Text style={[styles.day, isSelected && styles.activeDay]}>
@@ -130,7 +131,10 @@ const Header = ({
   onPrevPress: () => void;
   currentDate: Date;
 }) => {
-  const key = useMemo(() => format(currentDate, MONTH_WITH_YEAR), [currentDate]);
+  const key = useMemo(
+    () => format(currentDate, MONTH_WITH_YEAR),
+    [currentDate],
+  );
   return (
     <View style={styles.header}>
       <View style={[styles.flexRow, styles.arrowButtonGroup]}>
@@ -138,7 +142,9 @@ const Header = ({
       </View>
       <View>
         <View key={key}>
-          <Text style={styles.date}>{format(currentDate, MONTH_WITH_YEAR)}</Text>
+          <Text style={styles.date}>
+            {format(currentDate, MONTH_WITH_YEAR)}
+          </Text>
         </View>
       </View>
       <View style={[styles.flexRow, styles.arrowButtonGroup]}>
@@ -150,8 +156,8 @@ const Header = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    borderRadius: 8
+    backgroundColor: '#fff',
+    borderRadius: 8,
   },
   header: {
     paddingLeft: 20,
@@ -159,20 +165,20 @@ const styles = StyleSheet.create({
     paddingVertical: 17,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: "center",
+    alignItems: 'center',
   },
   date: {
     fontSize: 18,
-    color: "#000",
-    fontWeight: "600",
+    color: '#000',
+    fontWeight: '600',
   },
   selectDate: {
     fontSize: 12,
-    color: addAlpha("#fff", 0.6),
+    color: addAlpha('#fff', 0.6),
   },
   selectDataBold: {
     fontSize: 12,
-    color: "#fff",
+    color: '#fff',
   },
   flexRow: {
     flexDirection: 'row',
@@ -204,14 +210,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   weekName: {
-    color: "#9CA3AF",
+    color: '#9CA3AF',
     paddingBottom: 3,
-    fontWeight: "400",
-    fontSize: 16
+    fontWeight: '400',
+    fontSize: 16,
   },
   day: {
     fontSize: 16,
-    color: "#000",
+    color: '#000',
   },
   noActiveDate: {
     width: 35,
@@ -228,14 +234,14 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   activeDate: {
-    backgroundColor: "#000",
-    borderColor: "#000",
+    backgroundColor: '#000',
+    borderColor: '#000',
   },
   today: {
-    borderColor: "#000",
+    borderColor: '#000',
   },
   activeDay: {
-    color: "#fff",
+    color: '#fff',
   },
   pastDate: {
     opacity: 0.3,

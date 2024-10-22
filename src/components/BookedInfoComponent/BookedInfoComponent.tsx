@@ -36,32 +36,34 @@ export const BookedInfoComponent: React.FC = () => {
         <AppText semibold style={styles.title}>
           {barbers?.full_name}
         </AppText>
-        <View style={styles.wrapperBox}>
+        {/* <View style={styles.wrapperBox}>
           <StarRatingDisplay rating={4} starSize={18} maxStars={5} />
           <AppText style={styles.viewers}>4/5</AppText>
           <AppText style={styles.viewers}>(265 reviews)</AppText>
-        </View>
+        </View> */}
         <View style={styles.wrapperBox}>
           <LocationIcon />
-          <AppText style={styles.location}>
-            {barbers?.location || 'No location provided'}
-          </AppText>
+          <AppText style={styles.location}>{barbers?.location || ''}</AppText>
         </View>
         <View style={styles.wrapperBox}>
           <ClockIcon />
           <AppText style={styles.location}>
-            {barbers?.working_hours || 'No working hours provided'}
+            Ish vaqti: {barbers?.working_hours || ''}
           </AppText>
         </View>
         <View style={styles.line} />
-        <AppText style={styles.itemTitle}>Services</AppText>
-        <FlatList
-          data={serviceData}
-          renderItem={({ item }) => <ServicesComponent title={item.title} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.serviceWrapper}
-        />
+        {barbers?.services?.length && (
+          <>
+            <AppText style={styles.itemTitle}>Services</AppText>
+            <FlatList
+              data={barbers?.services}
+              renderItem={({ item }) => <ServicesComponent title={item.name} />}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.serviceWrapper}
+            />
+          </>
+        )}
         <AppText style={styles.itemTitle}>Gallery</AppText>
         <GalleryComponent
           gallery={barbers?.images}

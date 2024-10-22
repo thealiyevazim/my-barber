@@ -1,10 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity, View, Linking } from 'react-native'
-import React, { useCallback } from 'react'
-import { SafeAreaTemplate } from '~templates'
-import { AppText } from '~components'
-import { useTypedNavigation } from '~shared'
-import { colors } from '~utils'
-import { GoBackIcon } from "~assets/icons";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Linking,
+} from 'react-native';
+import React, { useCallback } from 'react';
+import { SafeAreaTemplate } from '~templates';
+import { AppText } from '~components';
+import { useTypedNavigation } from '~shared';
+import { colors } from '~utils';
+import { GoBackIcon } from '~assets/icons';
 
 export const BookedInfoScreen: React.FC = () => {
   const { goBack } = useTypedNavigation();
@@ -16,7 +22,7 @@ export const BookedInfoScreen: React.FC = () => {
   const handleGoCall = () => {
     const phoneNumber = '+998901234567';
     Linking.openURL(`tel:${phoneNumber}`);
-  }
+  };
 
   return (
     <SafeAreaTemplate>
@@ -24,8 +30,10 @@ export const BookedInfoScreen: React.FC = () => {
         <TouchableOpacity activeOpacity={0.7} onPress={handleGoBack}>
           <GoBackIcon style={styles.icon} stroke={colors.appBlack} />
         </TouchableOpacity>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <AppText semibold style={styles.headerTitle}>Bron qilingan</AppText>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <AppText semibold style={styles.headerTitle}>
+            Bron qilingan
+          </AppText>
         </View>
       </View>
       <View style={styles.container}>
@@ -44,7 +52,10 @@ export const BookedInfoScreen: React.FC = () => {
         </View>
         <View style={styles.wrapper}>
           <AppText style={styles.label}>Mijoz</AppText>
-          <TouchableOpacity activeOpacity={0.8} style={styles.callButton} onPress={handleGoCall}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.callButton}
+            onPress={handleGoCall}>
             <View>
               <AppText style={styles.value}>Ozod Norbekov </AppText>
               <AppText style={styles.value}>+998 90 123 45 67 </AppText>
@@ -54,58 +65,57 @@ export const BookedInfoScreen: React.FC = () => {
         </View>
       </View>
     </SafeAreaTemplate>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingRight: 30,
   },
   headerTitle: {
-    alignSelf: "center",
-    fontSize: 22
+    alignSelf: 'center',
+    fontSize: 22,
   },
   icon: {
-    transform: [{ rotate: "180deg" }],
+    transform: [{ rotate: '180deg' }],
   },
   title: {
     fontSize: 16,
     marginTop: 15,
-    marginBottom: 12
+    marginBottom: 12,
   },
   container: {
-    width: "100%",
+    width: '100%',
     marginTop: 12,
   },
   bookedTime: {
     fontSize: 18,
-    alignSelf: "center",
-    marginBottom: 32
-
+    alignSelf: 'center',
+    marginBottom: 32,
   },
   wrapper: {
     paddingVertical: 18,
     borderBottomWidth: 1,
-    borderColor: colors.iconGray
+    borderColor: colors.iconGray,
   },
   label: {
     fontSize: 20,
-    marginBottom: 5
+    marginBottom: 5,
   },
   value: {
     fontSize: 18,
     color: colors.iconGray,
-    marginBottom: 5
+    marginBottom: 5,
   },
   callButton: {
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
-    alignItems: "center"
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   iconCall: {
-    transform: [{ rotate: "0deg" }],
-  }
-})
+    transform: [{ rotate: '0deg' }],
+  },
+});
