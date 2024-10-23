@@ -15,6 +15,8 @@ export interface Barbers {
   services?: Service[];
 }
 export interface Service {
+  id: string;
+  barber_id: string;
   name: string;
   price: number;
 }

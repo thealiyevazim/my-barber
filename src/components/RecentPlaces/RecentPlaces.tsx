@@ -15,7 +15,7 @@ import { RecentPlacesLoader } from './RecentPlacesLoader';
 import { RecentPlaceCard } from '../RecentPlaceCard/RecentPlaceCard';
 
 type Props = {
-  handleCardPress: () => void;
+  handleCardPress: (card: Barbers) => void;
 };
 
 export const RecentPlaces: React.FC<Props> = ({ handleCardPress }) => {

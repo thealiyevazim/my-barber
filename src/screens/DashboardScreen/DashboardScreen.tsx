@@ -5,10 +5,11 @@ import { MainSearch } from '../../components/MainSearch';
 import { RecentPlaces } from '../../components/RecentPlaces';
 import { SnapCarousel } from '../../components/SnapCarousel';
 import { Routes } from '~navigation';
-import { useTypedNavigation } from '~shared';
+import { Barbers, useTypedNavigation } from '~shared';
 import {
   clientGetMeData,
   getBarbers,
+  getBarbersId,
   useAppDispatch,
   useBarbersDataLoading,
   useClientGetMeLoading,
@@ -38,8 +39,14 @@ export const DashboardScreen: React.FC = () => {
 
   const onUndefinedPress = () => undefined;
 
-  const handleBooked = () => {
-    navigate(Routes.bookedScreen);
+  const handleBooked = (barber: Barbers) => {
+    dispatch(getBarbersId(barber));
+    navigate(Routes.bookedScreen, { barberId: barber.id });
+  };
+
+  const handleRecentBooked = (barber: Barbers) => {
+    dispatch(getBarbersId(barber));
+    navigate(Routes.bookedScreen, { barberId: barber.id });
   };
 
   const fetchMainData = useCallback(() => {
@@ -66,7 +73,7 @@ export const DashboardScreen: React.FC = () => {
           />
         }>
         <SnapCarousel carouselData={carouselMockData} />
-        <RecentPlaces handleCardPress={handleBooked} />
+        <RecentPlaces handleCardPress={handleRecentBooked} />
         <MainInfoCard handleCardPress={handleBooked} />
       </ScrollView>
     </SafeAreaTemplate>

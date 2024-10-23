@@ -20,7 +20,7 @@ export type BarberStackParamsList = {
 export type ClientStackParamsList = {
   [Routes.dashboardScreen]: undefined;
   [Routes.profileScreen]: { userType: UserTypesEnum };
-  [Routes.bookedScreen]: undefined;
+  [Routes.bookedScreen]: { barberId: string };
   [Routes.bookAppointmentScreen]: undefined;
   [Routes.profileEditScreen]: undefined;
   [Routes.bookedHistoryScreen]: undefined;
