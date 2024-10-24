@@ -14,14 +14,6 @@ import { useTypedNavigation } from '~shared';
 import { useBarbersId } from '~store';
 import { colors, windowHeight } from '~utils';
 
-const serviceData = [
-  { id: 0, title: 'Haircut' },
-  { id: 1, title: 'Shaving' },
-  { id: 2, title: 'Styling' },
-  { id: 3, title: 'Hairdryer' },
-  { id: 4, title: 'Coloring' },
-];
-
 export const BookedInfoComponent: React.FC = () => {
   const { navigate } = useTypedNavigation<'client'>();
   const barbers = useBarbersId();
@@ -52,18 +44,14 @@ export const BookedInfoComponent: React.FC = () => {
           </AppText>
         </View>
         <View style={styles.line} />
-        {barbers?.services?.length && (
-          <>
-            <AppText style={styles.itemTitle}>Services</AppText>
-            <FlatList
-              data={barbers?.services}
-              renderItem={({ item }) => <ServicesComponent title={item.name} />}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.serviceWrapper}
-            />
-          </>
-        )}
+        <AppText style={styles.itemTitle}>Services</AppText>
+        <FlatList
+          data={barbers?.services}
+          renderItem={({ item }) => <ServicesComponent title={item.name} />}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.serviceWrapper}
+        />
         <AppText style={styles.itemTitle}>Gallery</AppText>
         <GalleryComponent
           gallery={barbers?.images}

@@ -13,3 +13,4 @@ export * from './clientGetMe';
 export * from './barberAddImage';
 export * from './clientAvatarUpdate';
 export * from './barbersId';
+export * from './barberDate';

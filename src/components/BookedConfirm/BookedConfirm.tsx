@@ -10,7 +10,7 @@ interface Props {
   onPress?: () => void;
   handleSubmit: () => void;
   person?: number;
-  service: string;
+  service: any;
   address: string;
   date: string;
   time: string;

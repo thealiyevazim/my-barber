@@ -7,6 +7,7 @@ import {
   BarberLoginData,
   BarberLoginDataResponse,
   BarbersData,
+  BarbersEmptyDate,
   BarberUpdateData,
   BarberUpdateDataResponse,
   ClientAvatarUpdateData,
@@ -79,6 +80,12 @@ class AccountApi extends BaseApi {
     return this.post<any, AddImagesResponse>(
       getApiPath.barber.barberAddImage(),
       data,
+    );
+  }
+
+  async getBarberEmptyDate(date: string, id: string) {
+    return this.get<BarbersEmptyDate>(
+      getApiPath.client.getBarberEmptyDate(date, id),
     );
   }
 }

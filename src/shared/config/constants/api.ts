@@ -17,5 +17,7 @@ export const getApiPath = {
     updateAvatar: (avatar: string) => `/client/upload-avatar?avatar=${avatar}`,
     barbers: (page: number) => `/barbers?page=${page}`,
     clientGetMe: () => `/client/getMe`,
+    getBarberEmptyDate: (date: string, id: string) =>
+      `/client/barber-orders?date=${date}&barber_id=${id}`,
   },
 };

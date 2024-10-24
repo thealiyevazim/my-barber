@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { GoBackIcon } from '~assets/icons';
 import {
@@ -10,6 +10,12 @@ import {
   SelectTime,
 } from '~components';
 import { useTypedNavigation } from '~shared';
+import {
+  getBarberDate,
+  getBarberDateData,
+  useAppDispatch,
+  useBarbersId,
+} from '~store';
 import { SafeAreaTemplate } from '~templates';
 import { colors } from '~utils';
 
@@ -19,20 +25,18 @@ interface Option {
   price: string;
 }
 
-const data: Option[] = [
-  { label: 'Shaving', price: '80000', value: '1' },
-  { label: 'Haircut', price: '50000', value: '2' },
-  { label: 'Styling', price: '100000', value: '3' },
-  { label: 'Coloring', price: '50000', value: '4' },
-  { label: 'Hairdryer', price: '25000', value: '5' },
-];
-
 export const BookAppointment: React.FC = () => {
   const { goBack } = useTypedNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectDate, setSelectDate] = useState(new Date().toISOString());
+  const [selectDate, setSelectDate] = useState<string>(
+    new Date().toISOString(),
+  );
   const [selected, setSelected] = useState<string[]>([]);
   const [selectTime, setSelectTime] = useState<string>('');
+  const barberId = useBarbersId();
+  const barberEmptyDate = getBarberDateData();
+  const dispatch = useAppDispatch();
+  const [services, setServices] = useState<Option[]>([]);
 
   const handleGoBack = useCallback(() => {
     goBack();
@@ -40,6 +44,10 @@ export const BookAppointment: React.FC = () => {
 
   const handleSelectDate = (date: string) => {
     setSelectDate(date);
+
+    if (barberId?.id) {
+      dispatch(getBarberDate({ date: date, id: barberId?.id }));
+    }
   };
 
   const openModal = () => {
@@ -47,6 +55,10 @@ export const BookAppointment: React.FC = () => {
   };
 
   const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const handleBooked = () => {
     setModalVisible(false);
   };
 
@@ -76,18 +88,37 @@ export const BookAppointment: React.FC = () => {
       .join(', ');
   };
 
-  const generateTimeData = () => {
-    const times = [];
-    for (let i = 0; i < 24; i++) {
-      const label = i.toString().padStart(2, '0') + ':00';
-      times.push({ label, value: label });
-    }
-    return times;
-  };
+  // Extract available times
+  const availableTimes =
+    barberEmptyDate && Array.isArray(barberEmptyDate)
+      ? barberEmptyDate.map(item => {
+          const date = new Date(item.timestamp);
+          const timeString = date.toLocaleTimeString('uz-UZb', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+          });
 
-  const timeData = generateTimeData();
-  const totalPrice = calculateSelectedTotalPrice(data, selected);
-  const selectedServices = getSelectedServices(data, selected);
+          return {
+            label: timeString,
+            value: timeString,
+          };
+        })
+      : [];
+
+  const totalPrice = calculateSelectedTotalPrice(services, selected);
+  const selectedServices = getSelectedServices(services, selected);
+
+  useEffect(() => {
+    if (barberId?.services) {
+      const formattedServices: Option[] = barberId.services.map(service => ({
+        label: service.name,
+        value: service.id,
+        price: service.price.toString(),
+      }));
+      setServices(formattedServices);
+    }
+  }, [barberId]);
 
   return (
     <SafeAreaTemplate>
@@ -110,13 +141,13 @@ export const BookAppointment: React.FC = () => {
       <SelectTime
         selectTime={selectTime}
         setSelectTime={setSelectTime}
-        data={timeData}
+        data={availableTimes}
       />
       <AppText style={styles.title}>Service</AppText>
       <SelectService
         selected={selected}
         setSelected={setSelected}
-        data={data}
+        data={services}
       />
       {/* <AppText style={styles.title}>How many person?</AppText> */}
       {/* <SelectPeople addPerson={addPerson} setAddPerson={setAddPerson} /> */}
@@ -129,7 +160,7 @@ export const BookAppointment: React.FC = () => {
       <BookedConfirm
         isVisible={modalVisible}
         onPress={closeModal}
-        handleSubmit={closeModal}
+        handleSubmit={handleBooked}
         service={selectedServices}
         address={'Uchtepa tumani, Mahorat 23'}
         date={formattedDate}

@@ -1,4 +1,11 @@
-import { format, getDate, getMonth, isEqual, isToday } from 'date-fns';
+import {
+  format,
+  getMonth,
+  isEqual,
+  isSameDay,
+  isToday,
+  weeksToDays,
+} from 'date-fns';
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
@@ -57,6 +64,7 @@ export const SelectDateComponent: FC<CalendarProps> = ({
         days={days}
         selectDate={selectDate}
         onSelectDate={onSelectDate}
+        currentDate={currentDate}
       />
     </View>
   );
@@ -66,7 +74,8 @@ const DayList = ({
   days,
   selectDate,
   onSelectDate,
-}: { days: Date[] } & CalendarProps) => {
+  currentDate,
+}: { days: Date[]; currentDate: Date } & CalendarProps) => {
   return (
     <View style={styles.dayList}>
       {days.map((day, key) => (
@@ -75,6 +84,7 @@ const DayList = ({
           key={key.toString()}
           selectDate={selectDate}
           onSelectDate={onSelectDate}
+          currentDate={currentDate}
         />
       ))}
     </View>
@@ -85,10 +95,11 @@ const Day = ({
   day,
   selectDate,
   onSelectDate,
-}: { day: Date } & CalendarProps) => {
+  currentDate,
+}: { day: Date; currentDate: Date } & CalendarProps) => {
   const dayIndex = useMemo(() => (day.getDay() - 1 + 7) % 7, [day]);
 
-  const isSelected = isEqual(ISOToDate(selectDate), day);
+  const isSelected = isSameDay(ISOToDate(selectDate), day);
   const key = useMemo(() => day.toISOString(), [day]);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -103,14 +114,18 @@ const Day = ({
       <View>
         <TouchableOpacity
           hitSlop={HIT_SLOP}
-          onPress={!isPast ? () => onSelectDate(dateToISO(day)) : undefined}
+          onPress={
+            !isPast ? () => onSelectDate(format(day, 'yyyy-MM-dd')) : undefined
+          }
           disabled={isPast}
           style={[
             styles.noActiveDate,
             isSelected && styles.activeDate,
             isToday(day) && styles.today,
-            !(getMonth(day) === getMonth(ISOToDate(selectDate))) &&
-              styles.disabledDate,
+            !(
+              getMonth(day) === getMonth(currentDate) &&
+              day.getFullYear() === currentDate.getFullYear()
+            ) && styles.disabledDate,
             isPast && styles.pastDate,
           ]}>
           <Text style={[styles.day, isSelected && styles.activeDay]}>
